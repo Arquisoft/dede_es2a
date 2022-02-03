@@ -53,3 +53,4 @@ You can get more information about the respository in the other README files:
 
 ## Miembros del equipo
 - Jorge López Peláez - UO276514
+- Alejandro Galán Freire - UO277346
