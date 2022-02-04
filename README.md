@@ -56,3 +56,4 @@ You can get more information about the respository in the other README files:
 - Alejandro Galán Freire - UO277346
 - Aarón García García - UO277819
 - Mario Lada Martínez - UO275874
+- Rafael Muñiz Reguera - UO271728
