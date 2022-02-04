@@ -55,3 +55,4 @@ You can get more information about the respository in the other README files:
 - Jorge López Peláez - UO276514
 - Alejandro Galán Freire - UO277346
 - Aarón García García - UO277819
+- Mario Lada Martínez - UO275874
