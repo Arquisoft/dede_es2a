@@ -16,6 +16,12 @@ They can include many different topics, such as
 * principal, often technical decisions of overall decisions
 * implementation rules
 
+.Interfaz de Usuario
+La interfaz de Usuario de _DeDe_ estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño, 
+si no que se imponía en los requisitos de alto nivel de la aplicación.
+
+
+
 .Motivation
 Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
 of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
