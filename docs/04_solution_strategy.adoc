@@ -9,6 +9,25 @@ para la creación de sitios web.
 nada que decidir.
 * Node JS: Es un entorno de ejecución de JavaScript que permite ejecutar JavaScript del lado del servidor y no en un navegador.
 
+En un principio, tenemos pensado utilizar el patrón de Modelo Vista Controlador (MVC), así como otros patrones que puedan ser de utilidad a priori como por ejemplo
+Command o Factorías. Es un punto que aclararemos más adelante.
+
+Para alcanzar la mayor usabilidad posible de nuestra web, intentaremos cumplir con todos los criterios de usabilidad que sabemos hasta el momento y la comprobaremos
+en diferentes validadores de internet. Intentaremos disponer el contenido de la manera más intuitiva posible, haciendo pruebas con usuarios a medida que vamos desarollando la
+aplicación para intentar sacarle el máximo partido.
+
+Para la comprensibilidad. No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible
+ 
+Garantizamos la seguridad del usuario mediante el uso de PODs, citados en los requisitos del sistema. 
+
+Testabilidad, la arquitectura permitirá probar fácilmente todos los componentes principales del sistema.
+
+
+
+
+El sistema va a ser desarrollado completamente por el equipo (utilizando debidamente los recursos mencionados) dividiendo el trabajo en dos partes claras: Front-End y Back-End. En cualquier caso, se irán compartiendo 
+todos los avances y cualquier duda intentando seguir una metodología ágil.
+
 
 [role="arc42help"]
 ****
