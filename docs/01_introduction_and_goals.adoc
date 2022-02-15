@@ -9,6 +9,12 @@ Describe los requisitos relevantes y las fuerzas impulsoras que los arquitectos 
 * objetivos de calidad para la arquitectura
 * partes interesadas relevantes y sus expectativas
 ****
+****
+En este punto se desrrollarán los requisitos y los temas más importantes a tener en cuenta:
+    * Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema
+    * Objetivos de calidad
+    * Stakeholders (partes interesadas y expectativas)
+****
 
 === Descripción general de los requisitos
 
@@ -67,7 +73,13 @@ Estas partes interesadas determinan la extensión y el nivel de detalle de su tr
 Tabla con nombres de roles, nombres de personas y sus expectativas con respecto a la arquitectura y su documentación.
 ****
 
-Añadir tabla aquí :)
+[options="header",cols="1,2,2"]
+|===
+|Rol/Nombre|Contacto|Expectativas
+| _<Rol-1>_ | _<Contacto-1>_ | _<Expectativa-1>_
+| _<Rol-2>_ | _<Contacto-2>_ | _<Expectativa-2>_
+|===
+
 
 
 
@@ -121,7 +133,7 @@ The top three (max five) quality goals for the architecture whose fulfillment is
 
 .Motivation
 You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
+If you as an architect do not know how the quality of your work will be judged…
 
 .Form
 A table with quality goals and concrete scenarios, ordered by priorities
