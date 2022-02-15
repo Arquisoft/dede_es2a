@@ -8,12 +8,12 @@ Describe los requisitos relevantes y las fuerzas impulsoras que los arquitectos 
 * objetivos comerciales subyacentes, características esenciales y requisitos funcionales para el sistema
 * objetivos de calidad para la arquitectura
 * partes interesadas relevantes y sus expectativas
-****
-****
+
 En este punto se desrrollarán los requisitos y los temas más importantes a tener en cuenta:
-    * Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema
-    * Objetivos de calidad
-    * Stakeholders (partes interesadas y expectativas)
+
+* Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema
+* Objetivos de calidad
+* Stakeholders (partes interesadas y expectativas)
 ****
 
 === Descripción general de los requisitos
