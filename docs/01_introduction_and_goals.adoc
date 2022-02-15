@@ -1,4 +1,86 @@
 [[section-introduction-and-goals]]
+== Introducción y objetivos
+
+[role="arc42help"]
+****
+Describe los requisitos relevantes y las fuerzas impulsoras que los arquitectos de software y el equipo de desarrollo deben considerar. Éstas incluyen
+
+* objetivos comerciales subyacentes, características esenciales y requisitos funcionales para el sistema
+* objetivos de calidad para la arquitectura
+* partes interesadas relevantes y sus expectativas
+****
+
+=== Descripción general de los requisitos
+
+[role="arc42help"]
+****
+.Contenidos
+Breve descripción de los requisitos funcionales, fuerzas motrices, extracto (o resumen)
+de requisitos Enlace a documentos de requisitos (con suerte existentes)
+(con número de versión e información donde encontrarlo).
+
+.Motivación
+Desde el punto de vista de los usuarios finales, se crea o modifica un sistema para
+mejorar el apoyo de una actividad empresarial y/o mejorar la calidad.
+
+.Formulario
+Breve descripción textual, probablemente en formato de caso de uso tabular.
+Si existen documentos de requisitos, este resumen debe hacer referencia a estos documentos.
+
+Mantenga estos extractos lo más cortos posible. Equilibre la legibilidad de este documento con la posible redundancia en relación con los documentos de requisitos.
+****
+
+=== Objetivos de calidad
+
+[role="arc42help"]
+****
+.Contenido
+Los tres (máximo cinco) objetivos de calidad para la arquitectura cuyo cumplimiento es de suma importancia para las principales partes interesadas. Realmente nos referimos a objetivos de calidad para la arquitectura. No los confunda con los objetivos del proyecto. No son necesariamente idénticos.
+
+.Motivación
+Debe conocer los objetivos de calidad de sus partes interesadas más importantes, ya que influirán en las decisiones arquitectónicas fundamentales. Asegúrese de ser muy concreto acerca de estas cualidades, evite las palabras de moda.
+Si usted como arquitecto no sabe cómo se juzgará la calidad de su trabajo…
+
+.Formulario
+Una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades
+****
+
+=== Stakeholders
+
+[role="arc42help"]
+****
+.Contenido
+Resumen explícito de las partes interesadas del sistema, es decir, todas las personas, roles u organizaciones que
+
+* debe conocer la arquitectura
+* hay que estar convencido de la arquitectura
+* tiene que trabajar con la arquitectura o con código
+* necesitan la documentación de la arquitectura para su trabajo
+* tener que llegar a decisiones sobre el sistema o su desarrollo
+
+.Motivación
+Debe conocer a todas las partes involucradas en el desarrollo del sistema o afectadas por el sistema.
+De lo contrario, puede recibir sorpresas desagradables más adelante en el proceso de desarrollo.
+Estas partes interesadas determinan la extensión y el nivel de detalle de su trabajo y sus resultados.
+
+.Formulario
+Tabla con nombres de roles, nombres de personas y sus expectativas con respecto a la arquitectura y su documentación.
+****
+
+Añadir tabla aquí :)
+
+
+
+
+
+
+
+
+
+
+
+
+[[section-introduction-and-goals]]
 == Introduction and Goals
 
 [role="arc42help"]
