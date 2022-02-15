@@ -26,15 +26,15 @@ de requisitos Enlace a documentos de requisitos (con suerte existentes)
 (con número de versión e información donde encontrarlo).
 
 Los requisitos más importantes son:
-* Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
-* Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los 
+- Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
+- Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los 
 costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo
 se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.
-* Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida
+- Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida
 comprarlos, se registrará la venta como realizada y se pasará a su envío.
-* Los clientes podrán en todo momento ver sus pedidos realizados.
-* El desarrollo de la aplicación será mediante React y TypeScript
-* La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua.
+- Los clientes podrán en todo momento ver sus pedidos realizados.
+- El desarrollo de la aplicación será mediante React y TypeScript
+- La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua.
 La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
 
 .Motivación
@@ -64,13 +64,36 @@ Mantenga estos extractos lo más cortos posible. Equilibre la legibilidad de est
 .Contenido
 Los tres (máximo cinco) objetivos de calidad para la arquitectura cuyo cumplimiento es de suma importancia para las principales partes interesadas. Realmente nos referimos a objetivos de calidad para la arquitectura. No los confunda con los objetivos del proyecto. No son necesariamente idénticos.
 
+- Usabilidad
+- Comprensibilidad
+- Seguridad
+- Atractivo
+- Testabilidad
+
 .Motivación
 Debe conocer los objetivos de calidad de sus partes interesadas más importantes, ya que influirán en las decisiones arquitectónicas fundamentales. Asegúrese de ser muy concreto acerca de estas cualidades, evite las palabras de moda.
 Si usted como arquitecto no sabe cómo se juzgará la calidad de su trabajo…
 
+- Usabilidad: el sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.
+- Comprensibilidad: el sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.
+- Seguridad: el sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.
+- Atractivo: el sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o Comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios.
+- Testabilidad: el sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.
+
 .Formulario
 Una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades
 ****
+
+La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos, tiene 3 valores (Bajo, Medio, Alto)
+[options="header",cols="1,2,2,2"]
+|===
+|Ref|Objetivo de calidad|Escenario|Prioridad (Cliente/Arquitecto)
+| _1_ | _Usabilidad_ | _Las opciones de añadir al carrito un producto, comprar y ver pedidos realizados deben estar muy claras y fácilmente accesibles_ | _Alto/Bajo_
+| _2_ | _Comprensibilidad_ | _En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara_ | _Alto/Medio_
+| _3_ | _Seguridad_ | _Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva_ | _Alto/Alto_
+| _4_ | _Testabilidad_ | _Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue_ | _Medio/Medio_
+| _5_ | _Atractivo_ | _Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles_ | _Medio/Bajo_
+|===
 
 === Stakeholders
 
