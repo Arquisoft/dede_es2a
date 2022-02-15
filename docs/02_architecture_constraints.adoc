@@ -33,5 +33,5 @@ Restriciones organizacionales
 Convenciones
 
 - Documentacion de la arquitectura	Estructura basada en la plantilla arc42.
-- Convenciones de codificacion      El proyecto utiliza las convenciones de codigo para el lenguaje de typescript y de
+- Convenciones de codificacion      El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript.
 - Idioma				            Español. 
