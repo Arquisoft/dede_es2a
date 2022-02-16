@@ -36,24 +36,14 @@ La tienda online desarrollada se encargará de vender juguetes infantiles.
 
 [role="arc42help"]
 ****
-.Contenido
-Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes:
+Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos:
 
-- Usabilidad
-- Comprensibilidad
-- Seguridad
-- Atractivo
-- Testabilidad
-
-.Motivación
-Descripción de lo que buscamos con cada objetivo de calidad:
 - Usabilidad: el sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.
 - Comprensibilidad: el sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.
 - Seguridad: el sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.
 - Atractivo: el sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o Comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios.
 - Testabilidad: el sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.
 
-.Formulario
 A continuación se muestra una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades.
 La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos, tiene 3 valores (Bajo, Medio, Alto)
 ****
@@ -72,19 +62,8 @@ La prioridad de los escenarios viene dada por la importancia para el cliente y p
 
 [role="arc42help"]
 ****
-.Contenido
 Las partes interesadas en el sistema serán:
-* Los arquitectos del software, en este caso:
-** Mario Lada Martínez
-** Alejandro Galán Freire
-** Aarón García García
-** Rafael Muñiz Reguera
-** Jorge López Peláez
-* Los desarrolladores, que en este caso coinciden con los arquitectos del software.
-* La empresa de venta de productos que nos quiere contratar para crear el sistema de venta online, que en este caso actúan como tal los profesores de la asignatura.
-* Los compradores o usuarios finales que usarán el servicio online.
-
-
+****
 [options="header",cols="1,2,2"]
 |===
 |Rol/Nombre|Contacto|Expectativas
