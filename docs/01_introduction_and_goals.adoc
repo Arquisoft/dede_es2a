@@ -14,29 +14,20 @@ En este punto se desrrollarán los requisitos y los temas más importantes a ten
 
 [role="arc42help"]
 ****
-.Contenidos
+El objetivo final de la aplicación es crear un sistema de venta online que respete la privacidad de los clientes siguiendo los principios SOLID, para ello se usarán los PODs de los usuarios siempre que den los permisos necesarios.
+
 Los requisitos más importantes son:
 - Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
-- Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los 
-costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo
-se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.
-- Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida
-comprarlos, se registrará la venta como realizada y se pasará a su envío.
+- Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.
+- Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y se pasará a su envío.
 - Los clientes podrán en todo momento ver sus pedidos realizados.
 - El desarrollo de la aplicación será mediante React y TypeScript
-- La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua.
-La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
+- La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
 
-.Motivación
-El objetivo final de la aplicación es crear un sistema de venta online
-que respete la privacidad de los clientes siguiendo los principios SOLID, para ello
-se usarán los PODs de los usuarios siempre que den los permisos necesarios.
-
-.Formulario
 La tienda online desarrollada se encargará de vender juguetes infantiles.
-En el siguiente enlace se puede observar de manera más exhaustiva los requisitos e introducción a la aplicación a desarrollar: https://arquisoft.github.io/course2122/labEnunciadoPractica.html
-Para acceder directamente a la página principal de SOLID usar el siguiente enlace: https://solidproject.org/
-Para el desarrollo en React o TypeScript se puede consultar: https://reactjs.org/ o https://www.typescriptlang.org/ respectivamente.
+* En el siguiente enlace se puede observar de manera más exhaustiva los requisitos e introducción a la aplicación a desarrollar: https://arquisoft.github.io/course2122/labEnunciadoPractica.html
+* Para acceder directamente a la página principal de SOLID usar el siguiente enlace: https://solidproject.org/
+* Para el desarrollo en React o TypeScript se puede consultar: https://reactjs.org/ o https://www.typescriptlang.org/ respectivamente.
 ****
 
 === Objetivos de calidad
