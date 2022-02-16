@@ -3,12 +3,6 @@
 
 [role="arc42help"]
 ****
-Describe los requisitos relevantes y las fuerzas impulsoras que los arquitectos de software y el equipo de desarrollo deben considerar. Éstas incluyen
-
-* objetivos comerciales subyacentes, características esenciales y requisitos funcionales para el sistema
-* objetivos de calidad para la arquitectura
-* partes interesadas relevantes y sus expectativas
-
 En este punto se desrrollarán los requisitos y los temas más importantes a tener en cuenta:
 
 * Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema
@@ -21,10 +15,6 @@ En este punto se desrrollarán los requisitos y los temas más importantes a ten
 [role="arc42help"]
 ****
 .Contenidos
-Breve descripción de los requisitos funcionales, fuerzas motrices, extracto (o resumen)
-de requisitos Enlace a documentos de requisitos (con suerte existentes)
-(con número de versión e información donde encontrarlo).
-
 Los requisitos más importantes son:
 - Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
 - Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los 
@@ -38,23 +28,15 @@ comprarlos, se registrará la venta como realizada y se pasará a su envío.
 La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
 
 .Motivación
-Desde el punto de vista de los usuarios finales, se crea o modifica un sistema para
-mejorar el apoyo de una actividad empresarial y/o mejorar la calidad.
-
 El objetivo final de la aplicación es crear un sistema de venta online
 que respete la privacidad de los clientes siguiendo los principios SOLID, para ello
 se usarán los PODs de los usuarios siempre que den los permisos necesarios.
 
 .Formulario
-Breve descripción textual, probablemente en formato de caso de uso tabular.
-Si existen documentos de requisitos, este resumen debe hacer referencia a estos documentos.
-
 La tienda online desarrollada se encargará de vender juguetes infantiles.
 En el siguiente enlace se puede observar de manera más exhaustiva los requisitos e introducción a la aplicación a desarrollar: https://arquisoft.github.io/course2122/labEnunciadoPractica.html
 Para acceder directamente a la página principal de SOLID usar el siguiente enlace: https://solidproject.org/
 Para el desarrollo en React o TypeScript se puede consultar: https://reactjs.org/ o https://www.typescriptlang.org/ respectivamente.
-
-Mantenga estos extractos lo más cortos posible. Equilibre la legibilidad de este documento con la posible redundancia en relación con los documentos de requisitos.
 ****
 
 === Objetivos de calidad
@@ -62,8 +44,7 @@ Mantenga estos extractos lo más cortos posible. Equilibre la legibilidad de est
 [role="arc42help"]
 ****
 .Contenido
-Los tres (máximo cinco) objetivos de calidad para la arquitectura cuyo cumplimiento es de suma importancia para las principales partes interesadas. Realmente nos referimos a objetivos de calidad para la arquitectura. No los confunda con los objetivos del proyecto. No son necesariamente idénticos.
-
+Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes:
 - Usabilidad
 - Comprensibilidad
 - Seguridad
@@ -71,9 +52,7 @@ Los tres (máximo cinco) objetivos de calidad para la arquitectura cuyo cumplimi
 - Testabilidad
 
 .Motivación
-Debe conocer los objetivos de calidad de sus partes interesadas más importantes, ya que influirán en las decisiones arquitectónicas fundamentales. Asegúrese de ser muy concreto acerca de estas cualidades, evite las palabras de moda.
-Si usted como arquitecto no sabe cómo se juzgará la calidad de su trabajo…
-
+Descripción de lo que buscamos con cada objetivo de calidad:
 - Usabilidad: el sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.
 - Comprensibilidad: el sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.
 - Seguridad: el sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.
@@ -81,10 +60,9 @@ Si usted como arquitecto no sabe cómo se juzgará la calidad de su trabajo…
 - Testabilidad: el sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.
 
 .Formulario
-Una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades
-****
-
+A continuación se muestra una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades.
 La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos, tiene 3 valores (Bajo, Medio, Alto)
+****
 [options="header",cols="1,2,2,2"]
 |===
 |Ref|Objetivo de calidad|Escenario|Prioridad (Cliente/Arquitecto)
@@ -95,33 +73,31 @@ La prioridad de los escenarios viene dada por la importancia para el cliente y p
 | _5_ | _Atractivo_ | _Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles_ | _Medio/Bajo_
 |===
 
+
 === Stakeholders
 
 [role="arc42help"]
 ****
 .Contenido
-Resumen explícito de las partes interesadas del sistema, es decir, todas las personas, roles u organizaciones que
+Las partes interesadas en el sistema serán:
+* Los arquitectos del software, en este caso:
+** Mario Lada Martínez
+** Alejandro Galán Freire
+** Aarón García García
+** Rafael Muñiz Reguera
+** Jorge López Peláez
+* Los desarrolladores, que en este caso coinciden con los arquitectos del software.
+* La empresa de venta de productos que nos quiere contratar para crear el sistema de venta online, que en este caso actúan como tal los profesores de la asignatura.
+* Los compradores o usuarios finales que usarán el servicio online.
 
-* debe conocer la arquitectura
-* hay que estar convencido de la arquitectura
-* tiene que trabajar con la arquitectura o con código
-* necesitan la documentación de la arquitectura para su trabajo
-* tener que llegar a decisiones sobre el sistema o su desarrollo
-
-.Motivación
-Debe conocer a todas las partes involucradas en el desarrollo del sistema o afectadas por el sistema.
-De lo contrario, puede recibir sorpresas desagradables más adelante en el proceso de desarrollo.
-Estas partes interesadas determinan la extensión y el nivel de detalle de su trabajo y sus resultados.
-
-.Formulario
-Tabla con nombres de roles, nombres de personas y sus expectativas con respecto a la arquitectura y su documentación.
-****
 
 [options="header",cols="1,2,2"]
 |===
 |Rol/Nombre|Contacto|Expectativas
-| _<Rol-1>_ | _<Contacto-1>_ | _<Expectativa-1>_
-| _<Rol-2>_ | _<Contacto-2>_ | _<Expectativa-2>_
+| _Arquitectos del software_ | _Mario Lada Martínez, Alejandro Galán Freire, Aarón García García, Rafael Muñiz Reguera y Jorge López Peláez._ | _Deben conocer la arquitectura y trabajar en ella, además, deberán tomar decisiones importantes._
+| _Desarrolladores_ | _En este caso coinciden con los arquitectos del software._ | _Deberán desarrollar el código de la aplicación. Necesitarán la documentación para orientarse en algunos aspectos._
+| _Cliente_ | _La empresa de venta de productos que nos contrata para crear el sistema de venta online. En este caso se corresponde con el conjunto de profesores de la asignatura._ | _Deberán dar los requisitos funcionales más importantes para el desarrollo de la aplicación y un conjunto de restricciones. Además, esperan una aplicación que cumpla con los objetivos._
+| _Compradores_ | _Son los usuarios finales que utilizarán el servicio de compra online._ | _Esperan como mínimo que la aplicación sea fácil de usar y de comprender._
 |===
 
 
