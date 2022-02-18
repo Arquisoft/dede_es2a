@@ -1,4 +1,91 @@
 [[section-introduction-and-goals]]
+== Introducción y objetivos
+
+[role="arc42help"]
+****
+En este punto se desrrollarán los requisitos y los temas más importantes a tener en cuenta:
+
+* Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema
+* Objetivos de calidad
+* Stakeholders (partes interesadas y expectativas)
+****
+
+=== Descripción general de los requisitos, características esenciales y objetivos comerciales
+
+[role="arc42help"]
+****
+El objetivo final de la aplicación es crear un sistema de venta online que respete la privacidad de los clientes siguiendo los principios SOLID, para ello se usarán los PODs de los usuarios siempre que den los permisos necesarios. 
+
+Los requisitos más importantes son:
+
+* Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
+* Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.
+* Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y se pasará a su envío.
+* Los clientes podrán en todo momento ver sus pedidos realizados.
+* El desarrollo de la aplicación será mediante React y TypeScript
+* La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
+
+La tienda online desarrollada se encargará de vender juguetes infantiles.
+
+* En el siguiente enlace se puede observar de manera más exhaustiva los requisitos e introducción a la aplicación a desarrollar: https://arquisoft.github.io/course2122/labEnunciadoPractica.html
+* Para acceder directamente a la página principal de SOLID usar el siguiente enlace: https://solidproject.org/
+* Para el desarrollo en React o TypeScript se puede consultar: https://reactjs.org/ o https://www.typescriptlang.org/ respectivamente.
+****
+
+=== Objetivos de calidad
+
+[role="arc42help"]
+****
+Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos:
+
+- Usabilidad: el sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.
+- Comprensibilidad: el sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.
+- Seguridad: el sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.
+- Atractivo: el sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o Comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios.
+- Testabilidad: el sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.
+
+A continuación se muestra una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades.
+La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos, tiene 3 valores (Bajo, Medio, Alto)
+****
+[options="header",cols="1,2,2,2"]
+|===
+|Ref|Objetivo de calidad|Escenario|Prioridad (Cliente/Arquitecto)
+| _1_ | _Usabilidad_ | _Las opciones de añadir al carrito un producto, comprar y ver pedidos realizados deben estar muy claras y fácilmente accesibles_ | _Alto/Bajo_
+| _2_ | _Comprensibilidad_ | _En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara_ | _Alto/Medio_
+| _3_ | _Seguridad_ | _Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva_ | _Alto/Alto_
+| _4_ | _Testabilidad_ | _Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue_ | _Medio/Medio_
+| _5_ | _Atractivo_ | _Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles_ | _Medio/Bajo_
+|===
+
+
+=== Stakeholders
+
+[role="arc42help"]
+****
+Las partes interesadas en el sistema serán:
+****
+[options="header",cols="1,2,2"]
+|===
+|Rol/Nombre|Contacto|Expectativas
+| _Arquitectos del software_ | _Mario Lada Martínez, Alejandro Galán Freire, Aarón García García, Rafael Muñiz Reguera y Jorge López Peláez._ | _Deben conocer la arquitectura y trabajar en ella, además, deberán tomar decisiones importantes._
+| _Desarrolladores_ | _En este caso coinciden con los arquitectos del software._ | _Deberán desarrollar el código de la aplicación. Necesitarán la documentación para orientarse en algunos aspectos._
+| _Cliente_ | _La empresa de venta de productos que nos contrata para crear el sistema de venta online. En este caso se corresponde con el conjunto de profesores de la asignatura._ | _Deberán dar los requisitos funcionales más importantes para el desarrollo de la aplicación y un conjunto de restricciones. Además, esperan una aplicación que cumpla con los objetivos._
+| _Compradores_ | _Son los usuarios finales que utilizarán el servicio de compra online._ | _Esperan como mínimo que la aplicación sea fácil de usar y de comprender._
+|===
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[section-introduction-and-goals]]
 == Introduction and Goals
 
 [role="arc42help"]
@@ -39,7 +126,7 @@ The top three (max five) quality goals for the architecture whose fulfillment is
 
 .Motivation
 You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
+If you as an architect do not know how the quality of your work will be judged…
 
 .Form
 A table with quality goals and concrete scenarios, ordered by priorities
