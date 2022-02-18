@@ -19,19 +19,27 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 ****
 
 Restricciones tecnicas
+[options="header",cols="1,2"]
+|===
+|Restriccion|Explicacion
+|Implementacion| La aplicacion estará formada por un front-end utilizando React  con TypeScript y un back-end utilizando NodeJS con Express
+|Seguridad| Se seguirán los principios SOLID a la hora de almacenar la informacion del login del usuario para poder asegurar la privacidad de este.
+|Despliegue| La aplicacion será accesible de manera continua y utilizará un sistema de integracion continuo.
+|===
 
-- Implementacion	La aplicacion estará formada por un front-end utilizando React  con TypeScript y un back-end utilizando NodeJS con Express
-- Seguridad		    Se seguirán los principios SOLID a la hora de almacenar la informacion del login del usuario para poder asegurar la privacidad de este.
-- Despliegue		La aplicacion será accesible de manera continua y utilizará un sistema de integracion continuo.
-
-Restriciones organizacionales
-
-- Equipo	                                Alejandro Galán Freire, Aarón García García, Mario Lada Martínez, Jorge López Peláez y Rafael Muñiz Reguera.
-- Configuracion y control del repositorio 	Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona
-                                            del equipo trabajará desde una rama propia.
+Restricciones organizacionales
+[options="header",cols="1,2"]
+|===
+|Restriccion|Explicacion
+|Equipo|  -Alejandro Galán Freire - Aarón García García - Mario Lada Martínez - Jorge López Peláez - Rafael Muñiz Reguera.
+|Configuracion y control del repositorio| Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona del equipo trabajará desde una rama propia.
+|===
 
 Convenciones
-
-- Documentacion de la arquitectura	Estructura basada en la plantilla arc42.
-- Convenciones de codificacion      El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript.
-- Idioma				            Español. 
+[options="header",cols="1,2"]
+|===
+|Convencion|Explicacion
+|Documentacion de la arquitectura| Estructura basada en la plantilla arc42.
+|Convenciones de codificacion| El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript.
+|Idioma| Español.
+|===
