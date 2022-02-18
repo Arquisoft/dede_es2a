@@ -60,6 +60,10 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 
 .Form
 Tabular or free form text.
+
+***
+=== Arbol de calidad
+image:arbol_calidad.PNG["Arbol de calidad"]
 ****
 === Escenarios de calidad
 Los siguientes atributos estan descritos en el epigrafe 1.2
