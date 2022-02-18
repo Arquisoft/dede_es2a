@@ -19,7 +19,7 @@ Los requisitos más importantes son:
 * Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y se pasará a su envío.
 * Los clientes podrán en todo momento ver sus pedidos realizados.
 * El desarrollo de la aplicación será mediante React y TypeScript
-* La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en otra parte de la documentación. ¡¡¡¡¡¡¡!!!!!!!
+* La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en el punto 4.
 
 La tienda online desarrollada se encargará de vender juguetes infantiles.
 
