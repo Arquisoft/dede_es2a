@@ -60,7 +60,10 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 
 .Form
 Tabular or free form text.
-
+=== Arbol de calidad
+***
+image:arbol_calidad.PNG["Arbol de calidad"]
+****
 === Escenarios de calidad
 Los siguientes atributos estan descritos en el epigrafe 1.2
 
@@ -68,9 +71,9 @@ Los siguientes atributos estan descritos en el epigrafe 1.2
 [options="header",cols="1,2,2"]
 |===
 |Atributo de calidad|Escenario de calidad|Prioridad
-| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | _Alta_ |
-| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | _Alta_ |
-| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | _Alta_ |
-| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | _Media_ |
-| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | _Media_ |
+| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | Alta
+| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | Alta
+| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | Alta
+| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | Media
+| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | Media
 |===
