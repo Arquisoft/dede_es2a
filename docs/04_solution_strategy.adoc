@@ -10,36 +10,36 @@ para la creación de sitios web.
 nada que decidir.
 - Node JS: Es un entorno de ejecución de JavaScript que permite ejecutar JavaScript del lado del servidor y no en un navegador.
 
-## Diseño
+.Diseño
 En un principio, tenemos pensado utilizar el patrón de Modelo Vista Controlador (MVC), así como otros patrones que puedan ser de utilidad a priori como por ejemplo
 Command o Factorías. Es un punto que aclararemos más adelante.
 
 
-## Usabilidad
+.Usabilidad
 Para alcanzar la mayor usabilidad posible de nuestra web, intentaremos cumplir con todos los criterios de usabilidad que sabemos hasta el momento y la comprobaremos
 en diferentes validadores de internet. Intentaremos disponer el contenido de la manera más intuitiva posible, haciendo pruebas con usuarios a medida que vamos desarollando la
 aplicación para intentar sacarle el máximo partido.
 
-## Comprensibilidad
+.Comprensibilidad
 Para la comprensibilidad. No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible
  
-## Seguridad
+.Seguridad
 Garantizamos la seguridad del usuario mediante el uso de PODs, citados en los requisitos del sistema. 
 
 
-## Testabilidad
+.Testabilidad
 Testabilidad, la arquitectura permitirá probar fácilmente todos los componentes principales del sistema.
 
-## Desarrollo
+.Desarrollo
 El sistema va a ser desarrollado completamente por el equipo (utilizando debidamente los recursos mencionados) dividiendo el trabajo en dos partes claras: Front-End y Back-End. En cualquier caso, se irán compartiendo 
 todos los avances y cualquier duda intentando seguir una metodología ágil.
 
-## Estructura
+.Estructura
 El sistema de ventas se compondrá de diversas páginas web implementadas mediante TypeScript y React principalmente. La página principal desplegará diferentes categorías de 
 juguetes y un conjunto de juguetes destacados. Tendremos acceso a nuestro carrito y a nuestra cuenta, con lo que también podemos ver pedidos realizados anteriormente. Una vez 
 entras en una categoría de juguetes se desplegarán todos aquellos que estén presentes en la base de datos. También es posible utilizar el buscador para encontrar un determinado juguete.
 
-## Interfaz
+.Interfaz
 La interfaz gráfica se implementará desde el Front-End y se intentará cumplir la máxima usabilidad posible, teniendo en cuenta cualquier tipo de usuario
 
 
