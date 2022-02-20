@@ -1,5 +1,5 @@
 [[section-solution-strategy]]
-== Solution Strategy
+== Estrategia de solución
 Como base, vamos a utilizar el lenguaje de programación TypeScript, impuesto en los requisitos de diseño. Es, en esencia, un superconjunto de JavaScript que añade tipado. 
 Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. Esto incluye los siguientes elementos:
 

@@ -14,7 +14,7 @@ decisions you should know for every stakeholder what is really important to them
 concrete and measurable.
 ****
 
-== Quality Requirements
+== Requisitos de calidad
 
 [role="arc42help"]
 ****

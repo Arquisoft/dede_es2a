@@ -29,4 +29,3 @@ Various options:
 * more detailed in form of separate sections per decision
 * ADR (architecture decision record) for every important decision
 ****
-qawsQA<WSDWE

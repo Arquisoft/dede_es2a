@@ -1,5 +1,5 @@
 [[section-architecture-constraints]]
-== Architecture Constraints
+== Restricciones de la arquitectura
 
 
 [role="arc42help"]
@@ -40,6 +40,6 @@ Convenciones
 |===
 |Convencion|Explicacion
 |Documentacion de la arquitectura| Estructura basada en la plantilla arc42.
-|Convenciones de codificacion| El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript.
+|Convenciones de codificacion| El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript y utilizará la guía de estilo de Node.
 |Idioma| Español.
 |===
