@@ -1,5 +1,5 @@
 [[section-design-decisions]]
-== Design Decisions
+== Decisiones de diseño
 Utilizaremos las tecnologías ya mencionadas anteriormente, la pila MERN, ya que por experiencia de muchos desarrolladores son herramientas
 que se coordinan muy bien. 
 No podemos decir con precisión decisiones de diseño definitivas a estas alturas del desarrollo, pero tenemos pensado
