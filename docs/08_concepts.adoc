@@ -16,29 +16,6 @@ They can include many different topics, such as
 * principal, often technical decisions of overall decisions
 * implementation rules
 
-.Persistencia
-Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará en una carpeta adjuntada
-con el proyecto. 
-
-.Interfaz de Usuario
-La interfaz de Usuario de _DeDe_ estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño, 
-si no que se imponía en los requisitos de alto nivel de la aplicación.
-
-.Manejo de Sesion
-Los usuarios podrán iniciar sesión a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad.
-
-.Seguridad y privacidad
-Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo
-los principios SOLID.
-
-.Internacionalización
-La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.
-
-.Build-Management
-La web se despliega una vez se pone en marcha el servidor. 
-
-
-
 .Motivation
 Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
 of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
@@ -69,8 +46,35 @@ A potential (but not mandatory) structure for this section could be:
 Note: it might be difficult to assign individual concepts to one specific topic
 on this list.
 
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 ****
+
+.Persistencia
+Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará en una carpeta adjuntada
+con el proyecto. 
+
+.Interfaz de Usuario
+La interfaz de Usuario de _DeDe_ estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño, 
+si no que se imponía en los requisitos de alto nivel de la aplicación.
+
+.Manejo de Sesion
+Los usuarios podrán iniciar sesión a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad.
+
+.Seguridad y privacidad
+Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo
+los principios SOLID.
+
+.Internacionalización
+La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.
+
+.Build-Management
+La web se despliega una vez se pone en marcha el servidor. 
+
+
+
+
+
+image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
+
 
 
 === Domain model
