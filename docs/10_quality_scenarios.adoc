@@ -1,7 +1,4 @@
 [[section-quality-scenarios]]
-== Quality Requirements
-
-
 [role="arc42help"]
 ****
 
@@ -17,7 +14,7 @@ decisions you should know for every stakeholder what is really important to them
 concrete and measurable.
 ****
 
-=== Quality Tree
+== Requisitos de calidad
 
 [role="arc42help"]
 ****
@@ -35,8 +32,9 @@ The quality tree is a high-level overview of the quality goals and requirements:
 
 In any case the tree should include links to the scenarios of the following section.
 ****
+=== Arbol de calidad
 
-=== Quality Scenarios
+image:arbol_calidad.PNG["Arbol de calidad"]
 
 [role="arc42help"]
 ****
@@ -61,3 +59,17 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 .Form
 Tabular or free form text.
 ****
+=== Escenarios de calidad
+
+Los siguientes atributos estan descritos en el epigrafe 1.2
+
+
+[options="header",cols="1,2,2"]
+|===
+|Atributo de calidad|Escenario de calidad|Prioridad
+| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | Alta
+| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | Alta
+| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | Alta
+| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | Media
+| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | Media
+|===

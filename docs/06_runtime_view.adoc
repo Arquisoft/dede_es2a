@@ -1,5 +1,5 @@
 [[section-runtime-view]]
-== Runtime View
+== Vista de tiempo de ejecución
 
 
 [role="arc42help"]

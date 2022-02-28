@@ -1,5 +1,5 @@
 [[section-system-scope-and-context]]
-== System Scope and Context
+== Alcance y contexto del sistema
 
 
 [role="arc42help"]
@@ -20,8 +20,26 @@ Various options:
 * Lists of communication partners and their interfaces.
 ****
 
+=== Contexto empresarial
 
-=== Business Context
+Dede es una aplicación que tiene como objetivo vender de manera online juguetes infantiles. Los usuarios podrán hacer compras de
+estos productos con la mayor privacidad posible debido a que nuestra aplicación estará integrada con SOLID, de tal manera que todos
+los datos de los clientes utilizados por la misma estarán almacenados en los POD de los usuarios permitiendo así un mayor control de 
+los datos personales.
+
+DIAGRAMA DE CONTEXTO EMPRESARIAL
+image:03_system_scope_and_context_BusinessDiagram.png["Hierarchy of building blocks"]
+
+TABLA DE CONTEXTO EMPRESARIAL
+[options="header",cols="1,2,2"]
+|===
+|Entidad|Entrada|Salida
+| _Cliente_ | _Información acerca de los productos de la tienda._ | _Pedidos o visitas a las distintas páginas de la app web._
+| _DeDe (juguetes)_ | _Solicitudes clientes/Direcciones clientes/ Información base de datos_ | _Respuesta peticiones/ Solicitud información cliente/ Solicitud o envío de información a la base de datos_ 
+| _POD_ | _Solicitud de datos del cliente por parte de la app._ | _Respuesta a solicitud._
+| _Base de datos_ | _Solicitud o envío de información desde la app._ | _respuesta con productos o datos solicitados._
+|===
+
 
 [role="arc42help"]
 ****
@@ -43,7 +61,23 @@ The title of the table is the name of your system, the three columns contain the
 
 **<optionally: Explanation of external domain interfaces>**
 
-=== Technical Context
+=== Contexto tecnico
+
+DIAGRAMA DEL CONTEXTO TECNICO
+image:03_system_scope_and_context_TechnicalDiagram.png["Hierarchy of building blocks"]
+
+TABLA DEL CONTEXTO TÉCNICO
+[options="header",cols="1,2"]
+|===
+|Elemento|Funcionalidad/Canal
+| _Cliente_ | _Usuario que interactuará con la app web a través de internet (http)._ 
+| _Servidor DeDe_ | _Aplicación web con la que interactuarán y comunicarán los usuarios utilizando PODs._ 
+| _SOLID_ | _Descentralizado/externo a la aplicación. Proveedor de los PODs._ 
+| _POD_ | _Almacena los datos del cliente. Buena privacidad para los usuarios._ 
+| _HTTP_ | _Protocolo de peticiones y respuestas con el servidor._ 
+| _MERN_ | _M-> MongoDB (persistencia) / E-> Express (peticiones) / R-> React (Front-End) / N-> Node (Back-End)._ 
+|===
+
 
 [role="arc42help"]
 ****
