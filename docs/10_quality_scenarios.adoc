@@ -61,15 +61,21 @@ Tabular or free form text.
 ****
 === Escenarios de calidad
 
-Los siguientes atributos estan descritos en el epigrafe 1.2
+Los siguientes atributos estan descritos en el epigrafe 1.2.
 
+La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos (respectivamente), tiene 3 valores (Bajo, Medio, Alto)
 
 [options="header",cols="1,2,2"]
 |===
-|Atributo de calidad|Escenario de calidad|Prioridad
-| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | Alta
-| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | Alta
-| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | Alta
-| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | Media
-| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | Media
+|Atributo de calidad|Escenario de calidad|Prioridad (Cliente/Arquitecto)
+| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | _Alto/Bajo_
+| _Usabilidad_ | _La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible_ | _Alto/Bajo_
+| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | _Alto/Medio_
+| _Comprensibilidad_ | _En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara_ | _Alto/Medio_
+| _Seguridad_ | _Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva_ | _Alto/Alto_
+| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | _Alto/Alto_
+| _Testabilidad_ | _Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue_ | _Medio/Medio_
+| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | _Medio/Medio_
+| _Atractivo_ | _Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles_ | _Medio/Bajo_
+| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | _Bajo/Bajo_
 |===
