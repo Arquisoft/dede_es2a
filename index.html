@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>DeDe_0</title>
+<title>DeDe_es2a</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1><span class="image"><img src="./images/LogoASW.png" alt="arc42"></span> DeDe_0</h1>
+<h1><span class="image"><img src="./images/LogoASW.png" alt="arc42"></span> DeDe_es2a</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -459,30 +459,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-solution-strategy">4. Estrategia de solución</a></li>
 <li><a href="#section-building-block-view">5. Vista de bloques de construcción</a>
 <ul class="sectlevel2">
-<li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_sistema_general_de_casa_blanca">5.1. Sistema General de Casa Blanca</a></li>
+<li><a href="#_nivel_2">5.2. Nivel 2</a></li>
+<li><a href="#_nivel_3">5.3. Nivel 3</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Vista de tiempo de ejecución</a>
 <ul class="sectlevel2">
-<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
+<li><a href="#_diagrama_de_secuencia_1">6.1. &lt;Diagrama de secuencia 1&gt;</a></li>
+<li><a href="#_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</a></li>
 <li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_diagrama_de_secuencia_n">6.4. &lt;Diagrama de secuencia n&gt;</a></li>
+<li><a href="#_2">6.5. &#8230;&#8203;</a></li>
+<li><a href="#_runtime_scenario_n">6.6. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Vista de implementación</a>
 <ul class="sectlevel2">
-<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
+<li><a href="#_infraestrutura_nivel_1">7.1. Infraestrutura Nivel 1</a></li>
+<li><a href="#_infraestrutura_nivel_2">7.2. Infraestrutura Nivel 2</a></li>
 </ul>
 </li>
 <li><a href="#section-concepts">8. Conceptos transversales</a>
 <ul class="sectlevel2">
-<li><a href="#_domain_model">8.1. Domain model</a></li>
-<li><a href="#_concept_2">8.2. <em>&lt;Concept 2&gt;</em></a></li>
-<li><a href="#_concept_n">8.3. <em>&lt;Concept n&gt;</em></a></li>
+<li><a href="#_modelo_de_dominio">8.1. Modelo de Dominio</a></li>
+<li><a href="#_concepto_2">8.2. <em>&lt;Concepto 2&gt;</em></a></li>
+<li><a href="#_concepto_n">8.3. <em>&lt;Concepto n&gt;</em></a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Decisiones de diseño</a></li>
@@ -537,20 +539,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introducción y objetivos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>En este punto se desrrollarán los requisitos y los temas más importantes a tener en cuenta:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Objetivos comerciales, características esenciales de la aplicación y requisitos funcionales para el sistema</p>
-</li>
-<li>
-<p>Objetivos de calidad</p>
-</li>
-<li>
-<p>Stakeholders (partes interesadas y expectativas)</p>
-</li>
-</ul>
+<p>El objetivo final del proyecto es desarrollar una tienda online, en este caso venderemos juguetes.</p>
 </div>
 <div class="sect2">
 <h3 id="_descripción_general_de_los_requisitos_características_esenciales_y_objetivos_comerciales">1.1. Descripción general de los requisitos, características esenciales y objetivos comerciales</h3>
@@ -575,7 +564,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <p>Los clientes podrán en todo momento ver sus pedidos realizados.</p>
 </li>
 <li>
-<p>El desarrollo de la aplicación será mediante React y TypeScript</p>
+<p>El desarrollo de la aplicación será mediante React y TypeScript para el Front-end y Node.js y Express para el Back-end.</p>
 </li>
 <li>
 <p>La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en el punto 4.</p>
@@ -602,76 +591,46 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect2">
 <h3 id="_objetivos_de_calidad">1.2. Objetivos de calidad</h3>
 <div class="paragraph">
-<p>Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usabilidad: el sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.</p>
-</li>
-<li>
-<p>Comprensibilidad: el sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.</p>
-</li>
-<li>
-<p>Seguridad: el sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.</p>
-</li>
-<li>
-<p>Atractivo: el sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o Comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios.</p>
-</li>
-<li>
-<p>Testabilidad: el sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>A continuación se muestra una tabla con objetivos de calidad y escenarios concretos, ordenados por prioridades.
-La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos, tiene 3 valores (Bajo, Medio, Alto)</p>
+<p>Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos y la prioridad que le damos:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5715%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Ref</th>
+<th class="tableblock halign-left valign-top">Prioridad</th>
 <th class="tableblock halign-left valign-top">Objetivo de calidad</th>
-<th class="tableblock halign-left valign-top">Escenario</th>
-<th class="tableblock halign-left valign-top">Prioridad (Cliente/Arquitecto)</th>
+<th class="tableblock halign-left valign-top">Descripción del objetivo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Las opciones de añadir al carrito un producto, comprar y ver pedidos realizados deben estar muy claras y fácilmente accesibles</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>3</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Alto</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>4</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>5</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Atractivo</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Bajo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -709,6 +668,11 @@ La prioridad de los escenarios viene dada por la importancia para el cliente y p
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cliente</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La empresa de venta de productos que nos contrata para crear el sistema de venta online. En este caso se corresponde con el conjunto de profesores de la asignatura.</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Deberán dar los requisitos funcionales más importantes para el desarrollo de la aplicación y un conjunto de restricciones. Además, esperan una aplicación que cumpla con los objetivos.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Administrador BD</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es el que nos asministra la base de datos.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Espera que el trabajo con la base de datos sea lo más fácil posible.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Compradores</em></p></td>
@@ -935,12 +899,6 @@ The title of the table is the name of your system, the three columns contain the
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><strong>&lt;Diagram or Table&gt;</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>&lt;optionally: Explanation of external domain interfaces&gt;</strong></p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_contexto_tecnico">3.2. Contexto tecnico</h3>
@@ -1005,15 +963,6 @@ The title of the table is the name of your system, the three columns contain the
 together with a mapping table showing the relationships between channels and input/output.</p>
 </div>
 </div>
-</div>
-<div class="paragraph">
-<p><strong>&lt;Diagram or Table&gt;</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>&lt;optionally: Explanation of technical interfaces&gt;</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>&lt;Mapping Input/Output to Channels&gt;</strong></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1167,7 +1116,7 @@ Thus it contains the white box description of selected building blocks of level 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
+<h3 id="_sistema_general_de_casa_blanca">5.1. Sistema General de Casa Blanca</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1205,25 +1154,6 @@ In the best case you will get away with examples or simple signatures.</p>
 </ul>
 </div>
 </div>
-</div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Motivation</dt>
-<dd>
-<p><em>&lt;text explanation&gt;</em></p>
-</dd>
-<dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
-</dd>
-<dt class="hdlist1">Important Interfaces</dt>
-<dd>
-<p><em>&lt;Description of important interfaces&gt;</em></p>
-</dd>
-</dl>
 </div>
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1263,7 +1193,7 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
+<h4 id="_nombre_caja_negra_1">5.1.1. &lt;Nombre caja negra 1&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1294,50 +1224,32 @@ according the the following black box template:</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em>&lt;Purpose/Responsibility&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Interface(s)&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
+<h4 id="_nombre_caja_negra_2">5.1.2. &lt;Nombre caja negra 2&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
+<h4 id="_nombre_caja_negra_n">5.1.3. &lt;Nombre caja negra n&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
+<h4 id="_nombre_interfaz_1">5.1.4. &lt;Nombre interfaz 1&gt;</h4>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
+<h4 id="_nombre_interfaz_m">5.1.5. &lt;Nombre interfaz m&gt;</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
+<h3 id="_nivel_2">5.2. Nivel 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1351,7 +1263,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
+<h4 id="_caja_blanca_bloque_de_construcción_1">5.2.1. Caja Blanca <em>&lt;bloque de construcción 1&gt;</em></h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1359,28 +1271,20 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<h4 id="_caja_blanca_bloque_de_construcción_2">5.2.2. Caja Blanca <em>&lt;bloque de construcción 2&gt;</em></h4>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<h4 id="_caja_blanca_bloque_de_construcción_m">5.2.3. Caja Blanca <em>&lt;bloque de construcción m&gt;</em></h4>
+
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
+<h3 id="_nivel_3">5.3. Nivel 3</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1393,7 +1297,7 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
+<h4 id="_caja_blanca_bloque_de_construcción_x_1">5.3.1. Caja Blanca <em>&lt;bloque de construcción x.1</em>&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1401,21 +1305,13 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<h4 id="_caja_blanca_bloque_de_construcción_x_2">5.3.2. Caja Blanca <em>&lt;bloque de construcción x.2</em>&gt;</h4>
+
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<h4 id="_caja_blanca_bloque_de_construcción_y_1">5.3.3. Caja Blanca <em>&lt;bloque de construcción y.1</em>&gt;</h4>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1480,21 +1376,6 @@ You will mainly capture scenarios in your documentation to communicate your arch
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><em>&lt;insert runtime diagram or textual description of the scenario&gt;</em></p>
-</li>
-<li>
-<p><em>&lt;insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.&gt;</em></p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>It is possible to use a sequence diagram:</p>
 </div>
@@ -1504,8 +1385,13 @@ building block instances depicted in this diagram.&gt;</em></p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
+<h3 id="_diagrama_de_secuencia_1">6.1. &lt;Diagrama de secuencia 1&gt;</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</h3>
 
 </div>
 <div class="sect2">
@@ -1513,7 +1399,15 @@ building block instances depicted in this diagram.&gt;</em></p>
 
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
+<h3 id="_diagrama_de_secuencia_n">6.4. &lt;Diagrama de secuencia n&gt;</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_2">6.5. &#8230;&#8203;</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_runtime_scenario_n">6.6. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1572,7 +1466,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
+<h3 id="_infraestrutura_nivel_1">7.1. Infraestrutura Nivel 1</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1599,28 +1493,9 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Motivation</dt>
-<dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
-</dd>
-<dt class="hdlist1">Quality and/or Performance Features</dt>
-<dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
-</dd>
-<dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
-<dd>
-<p><em>&lt;description of the mapping&gt;</em></p>
-</dd>
-</dl>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
+<h3 id="_infraestrutura_nivel_2">7.2. Infraestrutura Nivel 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1632,25 +1507,11 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
-</div>
+<h4 id="_elemento_de_infraestructura_1">7.2.1. <em>&lt;Elemento de infraestructura 1&gt;</em></h4>
+
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
-</div>
+<h4 id="_elemento_de_infraestructura_n">7.2.2. <em>&lt;Elemento de infraestructura n&gt;</em></h4>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1783,25 +1644,15 @@ los principios SOLID.</p>
 <p><span class="image"><img src="./images/08-Crosscutting-Concepts-Structure-EN.png" alt="Possible topics for crosscutting concepts"></span></p>
 </div>
 <div class="sect2">
-<h3 id="_domain_model">8.1. Domain model</h3>
-<div class="paragraph">
-<p><span class="image"><img src="./images/UmlDiagram.png" alt="Example UML Diagram"></span></p>
-</div>
+<h3 id="_modelo_de_dominio">8.1. Modelo de Dominio</h3>
+
 </div>
 <div class="sect2">
-<h3 id="_concept_2">8.2. <em>&lt;Concept 2&gt;</em></h3>
-<div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
+<h3 id="_concepto_2">8.2. <em>&lt;Concepto 2&gt;</em></h3>
+
 </div>
 <div class="sect2">
-<h3 id="_concept_n">8.3. <em>&lt;Concept n&gt;</em></h3>
-<div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
-</div>
+<h3 id="_concepto_n">8.3. <em>&lt;Concepto n&gt;</em></h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1955,7 +1806,10 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div class="sect2">
 <h3 id="_escenarios_de_calidad">10.2. Escenarios de calidad</h3>
 <div class="paragraph">
-<p>Los siguientes atributos estan descritos en el epigrafe 1.2</p>
+<p>Los siguientes atributos estan descritos en el epigrafe 1.2.</p>
+</div>
+<div class="paragraph">
+<p>La prioridad de los escenarios viene dada por la importancia para el cliente y por la dificultad de desarrollo por los arquitectos (respectivamente), tiene 3 valores (Bajo, Medio, Alto)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1967,34 +1821,59 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <tr>
 <th class="tableblock halign-left valign-top">Atributo de calidad</th>
 <th class="tableblock halign-left valign-top">Escenario de calidad</th>
-<th class="tableblock halign-left valign-top">Prioridad</th>
+<th class="tableblock halign-left valign-top">Prioridad (Cliente/Arquitecto)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Alto</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Todos los datos de los usuarios no pueden ser expuestos a terceros</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Alto</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Atractivo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Bajo</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Atractivo</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bajo/Bajo</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -2088,18 +1967,26 @@ acerca de esa tecnología.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Term</th>
-<th class="tableblock halign-left valign-top">Definition</th>
+<th class="tableblock halign-left valign-top">Término</th>
+<th class="tableblock halign-left valign-top">Definición</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;Term-1&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;definition-1&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SOLID</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SOLID es una especificación que permite a las personas almacenar sus datos de forma segura en almacenes de datos descentralizados llamados PODs.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;Term-2&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;definition-2&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>POD</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Los PODs son como servidores web personales seguros para datos. Cuando los datos se almacenan en el POD de alguien, controlan qué personas y aplicaciones pueden acceder a ellos.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>REACT</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React es una biblioteca de JavaScript para construir interfaces de usuario interactivas. Además, se encarga de actualizar y renderizar de manera eficiente los componentes correctos cuando los datos cambien.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>NODE.js</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Node.js es un entorno de tiempo de ejecución de JavaScript. Incluye todo lo que se necesita para ejecutar un programa escrito en JavaScript. También aporta muchos beneficios y soluciona gran cantidad de problemas.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -2128,7 +2015,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-15 17:54:19 +0100
+Last updated 2022-03-01 20:21:05 +0100
 </div>
 </div>
 </body>
