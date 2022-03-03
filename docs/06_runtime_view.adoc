@@ -47,6 +47,8 @@ Alice <-- Bob: another authentication Response
 ****
 
 === Compra de productos
+[plantuml,"Sequence diagram",png]
+----
 actor Usuario
 database BaseDeDatos as 'Base de datos' #blue
 database Pod as 'Pod del usuario' #yellow
@@ -58,8 +60,8 @@ DeDe -> Pod: Se solicita la dirección del usuario
 DeDe <-- Pod: Devuelve la dirección del usuario
 DeDe -> DeDe: Crea el pedido con el coste y dirección asociados.
 Usuario <-- DeDe: Muestra el precio y la dirección.
-Usuairo -> DeDe: Confirma el pedido.
-
+Usuario -> DeDe: Confirma el pedido.
+----
 
 === <Diagrama de secuencia 2>
 
