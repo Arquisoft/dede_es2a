@@ -66,6 +66,7 @@ los principios SOLID.
 .Internacionalización
 La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.
 
+
 .Build-Management
 La web se despliega una vez se pone en marcha el servidor. 
 
@@ -77,18 +78,13 @@ image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscuttin
 
 
 
-=== Domain model
-
-image:UmlDiagram.png["Example UML Diagram"]
+=== Modelo de Dominio
 
 
 
-=== _<Concept 2>_
 
-_<explanation>_
+=== _<Concepto 2>_
 
-...
 
-=== _<Concept n>_
+=== _<Concepto n>_
 
-_<explanation>_
