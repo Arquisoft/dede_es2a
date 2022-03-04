@@ -1,10 +1,9 @@
 [[section-technical-risks]]
-== Riegos y Deudas Técnicas
+== Risks and Technical Debts
 
 .Falta de conocimiento de React
 Es la primera vez que trabajamos con este framework, por lo que no tenemos ni idea de como funciona. 
 Sí que es cierto que la documentación es muy buena y tiene una gran cantidad de ejemplos, por lo que podemos aprender bastante en poco tiempo.
-
 
 .Tiempo
 Estamos limitados a una fecha para entregar el proyecto, por lo que debemos optimizar el trabajo lo máximo posible.
@@ -16,6 +15,27 @@ nuestro trabajo al día y avanzar uniformemente.
 .Desconocimiento de SOLID
 SOLID es una nueva tecnología y su documentación es muy escasa. No tiene muchos ejemplos por lo que deberemos informarnos por cuenta propia por cualquier medio posible
 acerca de esa tecnología.
+
+
+
+[options="header",cols="1,2,2"]
+|===
+|Riesgo|Explicación|Solución
+| _Falta de conocimiento de React_ | _Es la primera vez que trabajamos con este framework, así no tenemos experiencia con él._ | _La documentación de React es muy buena y cuenta con una gran cantidad de ejemplos y facilidades, por lo que aprenderemos a desenvolvernos rápido._
+| _Tiempo_ | _Estamos condicionados por una fecha de entrega_ | _Debemos optimizar tanto el trabajo individual como colectivo lo máximo posible_
+| Desconocimiento de SOLID | _Es una tecnología muy nueva, su documentación es muy escasa y se han reportado varios bugs_ | _Intentaremos informarnos de cualquier manera posible
+sobre esta tecnología, ya que tampoco tiene muchos ejemplos_
+|===
+
+[options="header",cols="1,2"]
+|===
+|Deuda técnica|Explicación|Solución
+| _Errores del POD_| _Esta nueva tecnología puede ocasionar errores repentinos o algunos bugs._ 
+| _Errores de conexión_ | _Puede ocurrir que la conexión a la red sea muy débil y que en consecuencia la aplicación trabaje más lento_ 
+|===
+
+
+
 
 [role="arc42help"]
 ****

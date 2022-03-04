@@ -1,10 +1,10 @@
 [[section-solution-strategy]]
 == Estrategia de solución
 Como base, vamos a utilizar el lenguaje de programación TypeScript, impuesto en los requisitos de diseño. Es, en esencia, un superconjunto de JavaScript que añade tipado. 
-Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. Esto incluye los siguientes elementos:
+Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. Esto incluye los siguientes tecnologías:
 
 - MongoDB: Es una base de datos NoSQL que facilita el trabajo con el Back-End. Es una decisión de diseño propia
-- Express js: Es un marco que se ah superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado
+- Express js: Es un marco que se ha superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado
 para la creación de sitios web.
 - React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Es un requisito de diseño por lo que no tenemos
 nada que decidir.
