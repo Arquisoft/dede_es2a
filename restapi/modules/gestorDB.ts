@@ -1,28 +1,16 @@
-import { Console } from "console";
-import express, { Application, RequestHandler } from "express";
-import express_prom_bundle from "express-prom-bundle/types";
-import { appendFile } from "fs";
-import { MongoClient } from "mongodb";
-
-module.exports = {
-    mongo : null,
-    app : null,
-    init : function(app:Application, mongo:any){
-        this.mongo = mongo;
-        this.app = app;
-    },
-
-    añadirJuguete : function(juguete:any){
-        this.mongo.MongoClient.connect(this.app.get('db'), function(err:any,db:any){
-            let collection = db.collection('juguetes');
-            collection.insert(juguete, function (err:any,result:any){
-                console.log("Añadío");
-                db.close();    
-            });
-
-        });
-    }
 
 
+let mongo = require('mongoose');
+
+const url = 'mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+function iniciar(){ // aprender a hacer llamadas a funciones desde fuera
+    mongo.connect(url).then(() => {
+        console.log('Database connected');
     
+    }).catch(() => {
+    
+        console.error();
+    })
 }
+

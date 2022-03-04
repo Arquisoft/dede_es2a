@@ -10,9 +10,8 @@ const port: number = 5000;
 //BASE DE DATOS
 let mongoose = require('mongoose');
 let mongo = require('mongodb');
-app.set ('db','mongodb://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+app.set ('db','mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 let gestorDB = require("./modules/gestorDB.ts");
-gestorDB.init(app,mongo);
 
 
 const options: cors.CorsOptions = {
@@ -31,25 +30,25 @@ app.use("/api", api)
 
 
 app.get("/juguete", function(req,res){
-    let juguete ={
-      nombre: "Pepe"
+  let juguete ={
+    nombre: "Pepe"
+  }
+  mongoose.connect(app.get('db'), function(err:any,db:any){
+    if(err){
+      res.send("Error de conexión:" + err);
+    } else {
+        let collection = db.createCollection('juguetes2');
+        collection.save(juguete, function (err:any,result:any){
+            if(err){
+                res.send("Error al insertar" + err);
+            } else{
+                res.send("Añadío");
+            } 
+            db.close();
+      });
     }
-    mongo.MongoClient.connect(app.get('db'), function(err:any,db:any){
-      if(err){
-        res.send("Error de conexión:" + err);
-      } else {
-          let collection = db.collection('juguetes');
-          collection.insertOne(juguete, function (err:any,result:any){
-              if(err){
-                  res.send("Error al insertar" + err);
-              } else{
-                  res.send("Añadío");
-              } 
-              db.close();    
-        });
-      }
-      
-  });
+
+});
 });
 
 app.listen(port, ():void => {
