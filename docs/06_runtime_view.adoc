@@ -50,8 +50,8 @@ Alice <-- Bob: another authentication Response
 [plantuml,"Sequence diagram",png]
 ----
 actor Usuario
-database BaseDeDatos as 'Base de datos' #blue
-database Pod as 'Pod del usuario' #yellow
+database BaseDeDatos as "Base de datos" #blue
+database Pod as "Pod del usuario" #yellow
 Usuario -> DeDe: Abre el carrito
 DeDe <-- BaseDeDatos: Devuelve contenido del carrito del usuario
 Usuario <-- DeDe: Muestra lista de juguetes del carrito
