@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 let mongo = require('mongoose');
@@ -14,3 +15,6 @@ function iniciar(){ // aprender a hacer llamadas a funciones desde fuera
     })
 }
 
+=======
+let mongodb = required('mongodb');
+>>>>>>> Stashed changes
