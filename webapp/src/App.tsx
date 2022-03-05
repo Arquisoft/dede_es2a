@@ -95,7 +95,7 @@ return (
     </Drawer>
     <StyledButton onClick={()=> setCartOpen(true)}>
       <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-        <AddShoppingCartIcon/>
+        <AddShoppingCartIcon fontSize="large"/>
       </Badge>
     </StyledButton>
     <Grid container spacing = {3}>
