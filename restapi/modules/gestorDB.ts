@@ -1,20 +1,23 @@
-<<<<<<< Updated upstream
+import express, { Application, RequestHandler } from "express";
+import express_prom_bundle from "express-prom-bundle/types";
+import { appendFile } from "fs";
+import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
+import * as mongo from "mongodb";
 
 
-let mongo = require('mongoose');
+export const collections: {juguetes?: mongo.Collection } = {}
 
-const url = 'mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+export async function connectToDataBase () {
+    const client: mongo.MongoClient = new mongo.MongoClient('mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
-function iniciar(){ // aprender a hacer llamadas a funciones desde fuera
-    mongo.connect(url).then(() => {
-        console.log('Database connected');
-    
-    }).catch(() => {
-    
-        console.error();
-    })
+    await client.connect();
+
+    const db: mongo.Db = client.db('juguetesDB');
+
+    const juguetesCollection: mongo.Collection = db.collection('juguetes')
+
+    collections.juguetes = juguetesCollection;
+
+    console.log('Conexion satisfactoria');
 }
-
-=======
-let mongodb = required('mongodb');
->>>>>>> Stashed changes

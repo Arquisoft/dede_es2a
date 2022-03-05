@@ -3,6 +3,7 @@ import cors from 'cors';
 import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
 import api from "./api"; 
+import { jugueteRouter } from "./routes/juguete.router";
 
 const app: Application = express();
 const port: number = 5000;
@@ -11,7 +12,7 @@ const port: number = 5000;
 let mongoose = require('mongoose');
 let mongo = require('mongodb');
 app.set ('db','mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
-let gestorDB = require("./modules/gestorDB.ts");
+//let gestorDB = require("./modules/gestorDB.js");
 
 
 const options: cors.CorsOptions = {
@@ -28,28 +29,11 @@ app.use(bp.json());
 
 app.use("/api", api)
 
-
-app.get("/juguete", function(req,res){
-  let juguete ={
-    nombre: "Pepe"
-  }
-  mongoose.connect(app.get('db'), function(err:any,db:any){
-    if(err){
-      res.send("Error de conexión:" + err);
-    } else {
-        let collection = db.createCollection('juguetes2');
-        collection.save(juguete, function (err:any,result:any){
-            if(err){
-                res.send("Error al insertar" + err);
-            } else{
-                res.send("Añadío");
-            } 
-            db.close();
-      });
-    }
-
+app.get("/", function(req,res){
+    res.send("Por aqui no, dale a /juguete");
 });
-});
+
+app.use("/juguete", jugueteRouter);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
