@@ -13,10 +13,6 @@ let mongoose = require('mongoose');
 let mongo = require('mongodb');
 app.set ('db','mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 
-interface Juguete {
-    nombre: string,
-    descripcion: string
-}
 
 
 const options: cors.CorsOptions = {
