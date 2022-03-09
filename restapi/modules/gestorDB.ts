@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
-const dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config()
 
 const database_uri = process.env.DB_CONNECT
 
-mongoose.connect('mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(() => {
-    console.log('database connected')
-}).catch((err)=>{
+mongoose.connect(database_uri!)
+.then(() =>{
+    console.log("Database connected")
+})
+.catch((err)=>{
     console.error(err);
 })
 
