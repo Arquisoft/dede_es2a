@@ -1,5 +1,19 @@
-import {ObjectId} from "mongodb";
+const mongoose = require('mongoose')
 
-export default class Juguete {
-    constructor(public name: string, public description: string, public id?: ObjectId){}
-}
+const jugueteSchema = new mongoose.Schema({
+    name: String,
+    description: String
+})
+
+jugueteSchema.set('toJSON', {
+    
+    transform: (document:any, returnedObject:any) =>{
+        returnedObject.id = returnedObject._id
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
+})
+
+const Juguete = mongoose.model('Juguete',jugueteSchema)
+
+module.exports = Juguete

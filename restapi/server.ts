@@ -8,12 +8,8 @@ import { jugueteRouter } from "./routes/juguete.router";
 const app: Application = express();
 const port: number = 5000;
 
-//BASE DE DATOS
-let mongoose = require('mongoose');
-let mongo = require('mongodb');
-app.set ('db','mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
-
-
+require('dotenv').config()
+let bd = require('./modules/gestorDB')
 
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
