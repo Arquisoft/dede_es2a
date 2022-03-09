@@ -1,30 +1,23 @@
-import express, {Request,Response} from "express";
-import {ObjectId} from "mongodb";
-import {collections} from "../modules/gestorDB";
-import Juguete from "../models/Juguete";
-import exp from "constants";
+import express, {Request,response,Response} from "express"
 
+export const jugueteRouter = express.Router()
 
-export const jugueteRouter = express.Router();
-let gestorDB = require("../modules/gestorDB.ts");
-
+let gestorDB = require("../modules/gestorDB.ts")
+const Juguete = require('../models/Juguete')
 
 jugueteRouter.use(express.json());
 
+
 jugueteRouter.get("/", async (req:Request,res:Response) =>{
-    try{
-        gestorDB.connectToDataBase();
-        const result = await collections.juguetes?.find({
-        })
-        res.send(result);
-    } catch (error){
-        res.status(400).send(error.message);
-    }
+    Juguete.find({}).then((juguetes: typeof Juguete) =>{
+        res.json(juguetes)
+    })
 })
 
+/*
 jugueteRouter.put("/", async (req:Request,res:Response) =>{
     try{
-        gestorDB.connectToDataBase();
+       await gestorDB.connectToDataBase();
         const newJuguete = req.body as Juguete;
         const result = await collections.juguetes?.updateOne({
             "id": newJuguete.id,
@@ -38,7 +31,7 @@ jugueteRouter.put("/", async (req:Request,res:Response) =>{
 
 jugueteRouter.delete("/", async(req:Request,res:Response) =>{
     try{
-        gestorDB.connectToDataBase();
+        await gestorDB.connectToDataBase();
         const result = await collections.juguetes?.deleteOne({
             "nombre": "Juan"
         })
@@ -51,13 +44,14 @@ jugueteRouter.delete("/", async(req:Request,res:Response) =>{
 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     try{
-        gestorDB.connectToDataBase();
+        await gestorDB.connectToDataBase();
         const newJuguete = req.body as Juguete;
-        const result = await collections.juguetes?.insertOne(newJuguete);
+        const result = collections.juguetes?.insertOne(newJuguete);
         result
-            ? res.status(200).send('Creado')
+            ? res.status(200).send("Creado")
             : res.status(500).send("No entró donde debía");
     } catch (error){
         res.status(400).send(error.message);
     }
 })
+*/
