@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
-    name: String,
-    description: String,
+    nombre: String,
+    descripcion: String,
     precio:Number,
     imagen:String,
     categoria:String
