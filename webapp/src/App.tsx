@@ -4,7 +4,7 @@ import {useQuery} from 'react-query';
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
-
+import Navbar from './componentes/Navbar/Navbar';
 import Drawer from '@material-ui/core/Drawer';
 import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -85,6 +85,10 @@ const App = () => {
 
 
 return (
+ <div className="App">
+      <Navbar />
+    </div>
+ 
   <Wrapper>
     <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
       <Cart 
