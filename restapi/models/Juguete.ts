@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
-    name: String,
-    description: String,
+    id:Number,
+    nombre: String,
+    descripcion: String,
     precio:Number,
     imagen:String,
-    categoria:String
+    categoria:String,
+    cantidad:Number
 })
 
 jugueteSchema.set('toJSON', {

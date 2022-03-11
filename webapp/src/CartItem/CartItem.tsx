@@ -2,23 +2,32 @@ import Button from '@material-ui/core/Button';
 //types
 import {CartItemType} from '../App';
 import Item from '../Item/Item';
+import {Juguete} from '../shared/sharedJuguete';
+
 
 //Styles
 import {Wrapper} from './CartItem.styles';
 
-type Props = {
+/*type Props = {
     item: CartItemType;
     addToCart: (clickedItem: CartItemType) => void;
     removeFromCart: (id:number) => void;
+}*/
+
+type Props = {
+    item: Juguete;
+    addToCart: (clickedItem: Juguete) => void;
+    removeFromCart: (id:number) => void;
 }
+
 
 const CartItem: React.FC<Props> = ({item, addToCart, removeFromCart}) => (
     <Wrapper>
         <div>
-            <h3>{item.title}</h3>
+            <h3>{item.nombre}</h3>
             <div className="information">
-                <p>Price: €{item.price} </p>
-                <p>Total: €{(item.amount * item.price).toFixed(2)}</p>
+                <p>Price: €{item.precio} </p>
+                <p>Total: €{(item.cantidad * item.precio).toFixed(2)}</p>
             </div>
             <div className="buttons">
                 <Button
@@ -29,7 +38,7 @@ const CartItem: React.FC<Props> = ({item, addToCart, removeFromCart}) => (
                     >
                     -
                 </Button>
-                <p>{item.amount}</p>
+                <p>{item.cantidad}</p>
                 <Button
                     size = 'small'
                     disableElevation
@@ -41,7 +50,7 @@ const CartItem: React.FC<Props> = ({item, addToCart, removeFromCart}) => (
 
             </div>
         </div>
-        <img src={item.image} alt={item.title}/>
+        <img src={item.imagen} alt={item.nombre}/>
     </Wrapper>
 )
 
