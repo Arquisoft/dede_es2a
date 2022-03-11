@@ -1,7 +1,7 @@
 [[section-building-block-view]]
 
 
-== Building Block View
+== Vista de bloques de construcción
 
 [role="arc42help"]
 ****
@@ -34,7 +34,7 @@ Thus it contains the white box description of selected building blocks of level 
 *Level 3* zooms into selected building blocks of level 2, and so on.
 ****
 
-=== Whitebox Overall System
+=== Sistema General de Casa Blanca
 
 [role="arc42help"]
 ****
@@ -57,18 +57,6 @@ In the best case you will get away with examples or simple signatures.
 
 ****
 
-_**<Overview Diagram>**_
-
-Motivation::
-
-_<text explanation>_
-
-
-Contained Building Blocks::
-_<Description of contained building block (black boxes)>_
-
-Important Interfaces::
-_<Description of important interfaces>_
 
 [role="arc42help"]
 ****
@@ -91,7 +79,7 @@ Its headline is the name of the black box.
 ****
 
 
-==== <Name black box 1>
+==== <Nombre caja negra 1>
 
 [role="arc42help"]
 ****
@@ -107,39 +95,25 @@ according the the following black box template:
 
 ****
 
-_<Purpose/Responsibility>_
 
-_<Interface(s)>_
-
-_<(Optional) Quality/Performance Characteristics>_
-
-_<(Optional) Directory/File Location>_
-
-_<(Optional) Fulfilled Requirements>_
-
-_<(optional) Open Issues/Problems/Risks>_
-
-
-
-
-==== <Name black box 2>
+==== <Nombre caja negra 2>
 
 _<black box template>_
 
-==== <Name black box n>
+==== <Nombre caja negra n>
 
 _<black box template>_
 
 
-==== <Name interface 1>
+==== <Nombre interfaz 1>
 
 ...
 
-==== <Name interface m>
+==== <Nombre interfaz m>
 
 
 
-=== Level 2
+=== Nivel 2
 
 [role="arc42help"]
 ****
@@ -150,30 +124,26 @@ Please prefer relevance over completeness. Specify important, surprising, risky,
 Leave out normal, simple, boring or standardized parts of your system
 ****
 
-==== White Box _<building block 1>_
+==== Caja Blanca _<bloque de construcción 1>_
 
 [role="arc42help"]
 ****
 ...describes the internal structure of _building block 1_.
 ****
 
-_<white box template>_
 
-==== White Box _<building block 2>_
+==== Caja Blanca _<bloque de construcción 2>_
 
-
-_<white box template>_
 
 ...
 
-==== White Box _<building block m>_
-
-
-_<white box template>_
+==== Caja Blanca _<bloque de construcción m>_
 
 
 
-=== Level 3
+
+=== Nivel 3
+
 
 [role="arc42help"]
 ****
@@ -184,7 +154,7 @@ part of arc42 for additional levels.
 ****
 
 
-==== White Box <_building block x.1_>
+==== Caja Blanca _<bloque de construcción x.1_>
 
 [role="arc42help"]
 ****
@@ -192,15 +162,11 @@ Specifies the internal structure of _building block x.1_.
 ****
 
 
-_<white box template>_
 
-
-==== White Box <_building block x.2_>
-
-_<white box template>_
+==== Caja Blanca _<bloque de construcción x.2_>
 
 
 
-==== White Box <_building block y.1_>
 
-_<white box template>_
+==== Caja Blanca _<bloque de construcción y.1_>
+

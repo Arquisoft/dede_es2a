@@ -1,6 +1,21 @@
 [[section-technical-risks]]
-== Risks and Technical Debts
+== Riegos y Deudas Técnicas
 
+.Falta de conocimiento de React
+Es la primera vez que trabajamos con este framework, por lo que no tenemos ni idea de como funciona. 
+Sí que es cierto que la documentación es muy buena y tiene una gran cantidad de ejemplos, por lo que podemos aprender bastante en poco tiempo.
+
+
+.Tiempo
+Estamos limitados a una fecha para entregar el proyecto, por lo que debemos optimizar el trabajo lo máximo posible.
+
+.Equipos
+No tenemos mucha experiencia trabajando en equipo, y en ocasiones no es fácil coordinarse. Haremos reuniones cada poco tiempo con el fin de poner
+nuestro trabajo al día y avanzar uniformemente.
+
+.Desconocimiento de SOLID
+SOLID es una nueva tecnología y su documentación es muy escasa. No tiene muchos ejemplos por lo que deberemos informarnos por cuenta propia por cualquier medio posible
+acerca de esa tecnología.
 
 [role="arc42help"]
 ****
