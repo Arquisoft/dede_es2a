@@ -79,18 +79,22 @@ const App = () => {
 
   };
 
+
   //Coloca una barra de carga cuando la página está cargando
   if(isLoading) return <LinearProgess/>;
   if(error) return <div>Algo ha fallado</div>
 
 
 return (
- <div className="App">
-      <Navbar />
-    </div>
- 
+
+   
+
   <Wrapper>
+     
+    
+     <Navbar state ={false} handleClick={handleClickk} />
     <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
+      
       <Cart 
         cartItems= {cartItems} 
         addToCart={handleAddToCart} 
@@ -99,7 +103,7 @@ return (
     </Drawer>
     <StyledButton onClick={()=> setCartOpen(true)}>
       <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-        <AddShoppingCartIcon fontSize="large"/>
+        <AddShoppingCartIcon fontSize="large" htmlColor='#000000'/>
       </Badge>
     </StyledButton>
     <Grid container spacing = {3}>
