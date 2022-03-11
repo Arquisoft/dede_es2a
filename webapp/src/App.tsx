@@ -1,37 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Container from '@mui/material/Container';
-import EmailForm from './components/EmailForm';
-import Welcome from './components/Welcome';
-import UserList from './components/UserList';
-import  {getUsers} from './api/api';
-import {User} from './shared/shareddtypes';
-import './App.css';
+import {useState} from 'react';
+import {useQuery} from 'react-query';
 
-function App(): JSX.Element {
+//Components
+import Item from './Item/Item';
+import Cart from './Cart/Cart';
 
-  const [users,setUsers] = useState<User[]>([]);
+import Drawer from '@material-ui/core/Drawer';
+import LinearProgess from '@material-ui/core/LinearProgress';
+import Grid from '@material-ui/core/Grid';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Badge from '@material-ui/core/Badge';
 
-  const refreshUserList = async () => {
-    setUsers(await getUsers());
-  }
-
-  useEffect(()=>{
-    refreshUserList();
-  },[]);
-
-  return (
-    <>
-      <Container maxWidth="sm">
-        <Welcome message="ASW students"/>
-        <Box component="div" sx={{ py: 2}}>This is a basic example of a React application using Typescript. You can add your email to the list filling the form below.</Box>
-        <EmailForm OnUserListChange={refreshUserList}/>        
-        <UserList users={users}/>
-        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link>
-      </Container>
-    </>
-  );
+//Styles
+import {Wrapper, StyledButton} from './App.styles';
+//Types
+export type CartItemType = {
+  id: number;
+  category:string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  amount: number;
 }
+
+
+const getProducts = async ():Promise<CartItemType[]> => 
+  await(await fetch('https://fakestoreapi.com/products')).json();
+
+const App = () => {
+
+  //Esto nos va adecir si el carrito esta abierto, va a ser un booleano (cartOpen) que se inicia en false y que se puede modificar con la funcion  "setCartOpen"
+  const [cartOpen, setCartOpen] = useState(false);
+
+  //Inicialmente vamos a tener un array vacio de CartItemType que va a ser cartItems
+  const[cartItems, setCartItems] = useState([] as CartItemType[]);
+
+
+  const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
+
+  console.log(data);
+
+
+  const getTotalItems = (items: CartItemType[]) => 
+    items.reduce((ack: number, item)=>ack+item.amount,0);
+
+
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    //"prev" es el estado previo del carrito, justo antes de añadir un producto
+    setCartItems(prev => {
+      //1. Teniamos ya el producto en el carrito
+      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
+      if(isItemInCart) {
+        return prev.map(item=>(
+          item.id===clickedItem.id
+          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
+            ? {...item, amount: item.amount+1}
+            : item
+        ))
+      }
+      //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
+      //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
+      return [...prev, {...clickedItem, amount:1}];
+    })
+  };
+
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems(prev=>(
+      prev.reduce((ack, item)=> {
+        if(item.id===id){
+          if(item.amount===1) return ack;
+          return [...ack, {...item, amount:item.amount - 1}]
+        } else {
+          return [...ack, item];
+        }
+      },[] as CartItemType[]) 
+    ))
+
+  };
+
+  //Coloca una barra de carga cuando la página está cargando
+  if(isLoading) return <LinearProgess/>;
+  if(error) return <div>Algo ha fallado</div>
+
+
+return (
+  <Wrapper>
+    <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
+      <Cart 
+        cartItems= {cartItems} 
+        addToCart={handleAddToCart} 
+        removeFromCart={handleRemoveFromCart}
+      />
+    </Drawer>
+    <StyledButton onClick={()=> setCartOpen(true)}>
+      <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+        <AddShoppingCartIcon fontSize="large"/>
+      </Badge>
+    </StyledButton>
+    <Grid container spacing = {3}>
+      {data?.map(item => (
+        <Grid item key = {item.id} xs={12} sm={4}>
+          <Item item={item} handleAddToCart={handleAddToCart}/>
+        </Grid>
+      ))}
+    </Grid>
+  </Wrapper>
+);
+  
+};
 
 export default App;
