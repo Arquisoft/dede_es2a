@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
     name: String,
-    description: String
+    description: String,
+    precio:Number,
+    imagen:String,
+    categoria:String
 })
 
 jugueteSchema.set('toJSON', {
