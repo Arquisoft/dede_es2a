@@ -83,35 +83,34 @@ const App = () => {
   if(isLoading) return <LinearProgess/>;
   if(error) return <div>Algo ha fallado</div>
 
+  return (
 
-return (
- <div className="App">
-      <Navbar />
-    </div>
- 
-  <Wrapper>
-    <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
-      <Cart 
-        cartItems= {cartItems} 
-        addToCart={handleAddToCart} 
-        removeFromCart={handleRemoveFromCart}
-      />
-    </Drawer>
-    <StyledButton onClick={()=> setCartOpen(true)}>
-      <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-        <AddShoppingCartIcon fontSize="large"/>
-      </Badge>
-    </StyledButton>
-    <Grid container spacing = {3}>
-      {data?.map(item => (
-        <Grid item key = {item.id} xs={12} sm={4}>
-          <Item item={item} handleAddToCart={handleAddToCart}/>
-        </Grid>
-      ))}
-    </Grid>
-  </Wrapper>
-);
-  
-};
+   
+
+    <Wrapper>
+      <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
+        
+        <Cart 
+          cartItems= {cartItems} 
+          addToCart={handleAddToCart} 
+          removeFromCart={handleRemoveFromCart}
+        />
+      </Drawer>
+      <StyledButton onClick={()=> setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+          <AddShoppingCartIcon fontSize="large" htmlColor='#000000'/>
+        </Badge>
+      </StyledButton>
+      <Grid container spacing = {3}>
+        {data?.map(item => (
+          <Grid item key = {item.id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart}/>
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
+  );
+    
+  };
 
 export default App;
