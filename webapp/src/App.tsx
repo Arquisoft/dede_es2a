@@ -88,8 +88,8 @@ const App = () => {
    
 
     <Wrapper>
+      <Navbar/>
       <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
-        
         <Cart 
           cartItems= {cartItems} 
           addToCart={handleAddToCart} 
