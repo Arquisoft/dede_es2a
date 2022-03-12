@@ -35,11 +35,11 @@ jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     let nuevoJuguete = new Juguete({
-        name : req.body.name,
-        description: req.body.description,
+        nombre : req.body.nombre,
+        descripcion: req.body.descripcion,
         precio: req.body.precio,
         imagen: req.body.imagen,
-        categoria: req.body.categoria
+        categoria: req.body.categoria,
     });
     console.log(nuevoJuguete)
     nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{

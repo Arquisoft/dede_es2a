@@ -14,6 +14,7 @@ jugueteSchema.set('toJSON', {
     
     transform: (document:any, returnedObject:any) =>{
         returnedObject.id = returnedObject._id
+        returnedObject.cantidad = 0
         delete returnedObject._id
         delete returnedObject.__v
     }
