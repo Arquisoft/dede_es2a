@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@auth0/auth0-react": "^1.9.0"
+    "react-json-pretty": "^2.2.0"
   }
 }
