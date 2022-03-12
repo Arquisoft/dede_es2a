@@ -14,12 +14,6 @@ import Badge from '@material-ui/core/Badge';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
 
-import LoginButton from './componentes/Login/LoginButton';
-import Profile from './componentes/Login/Profile';
-import LogoutButton from './componentes/Login/LogoutButton';
-import { useAuth0 } from '@auth0/auth0-react';
-
-
 
 //Types
 export type CartItemType = {
@@ -89,21 +83,12 @@ const App = () => {
 
   };
 
-  const { isAuthenticated } = useAuth0();
-  //console.log(isAuthenticated);
-
   //Coloca una barra de carga cuando la página está cargando
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
 
   return (
     <Wrapper>
-      <div>
-        {
-          isAuthenticated ? <div><LogoutButton /><Profile /></div> : <LoginButton />
-        }
-        
-      </div>
       <Navbar />
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
