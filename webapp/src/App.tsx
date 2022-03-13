@@ -6,7 +6,7 @@ import Item from './Item/Item';
 import Cart from './Cart/Cart';
 import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
-//import { Juguete } from './shared/sharedJuguete';
+import { Juguete } from './shared/sharedJuguete';
 
 import Drawer from '@material-ui/core/Drawer';
 import LinearProgess from '@material-ui/core/LinearProgress';
@@ -29,15 +29,17 @@ export type CartItemType = {
   amount: number;
 }
 
+/*
 export type Juguete = {
   id:number;
-  nombre: string;
-  descripcion: string;
+  name: string;
+  description: string;
   precio:number;
   imagen:string;
   categoria:string;
   cantidad:number;
 }
+*/
 
 // AÑADIDO---------------------------------------------------------------------------------------------
 // Petición para obtener todos los juguetes de la base de datos
@@ -46,7 +48,7 @@ export async function getJuguetes():Promise<Juguete[]>{
   let response = await fetch(apiEndPoint+'juguete');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
-  return response.json()
+  return response.json();
 }
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/
@@ -67,6 +69,7 @@ const App = () => {
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
   const {data, isLoading, error} =useQuery<Juguete[]>('juguetes', getJuguetes);
+  
   //--------------------------------------------------------------------------------
   console.log(data);
 
@@ -88,13 +91,13 @@ const App = () => {
         return prev.map(item=>(
           item.id===clickedItem.id
           //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
-            ? {...item, amount: item.cantidad+1}
+            ? {...item, cantidad: item.cantidad+1}
             : item
         ))
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, { ...clickedItem, amount: 1 }];
+      return [...prev, {...clickedItem, cantidad:1}];
     })
   };
 

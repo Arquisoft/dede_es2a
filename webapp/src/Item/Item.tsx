@@ -17,10 +17,10 @@ type Props = {
 }
 
 //Así creamos un elemento reactivo con las propiedades especificadas
-//<img src={item.imagen} alt={item.nombre}/>
 const Item: React.FC<Props> = ({item, handleAddToCart})=>(
     <Wrapper>
         <div>
+            <img src={"http://localhost:5000/images/"+item.imagen} alt={item.nombre}/>
             <h3>{item.nombre}</h3>
             <p>{item.descripcion}</p>
             <h3>€{item.precio}</h3>

@@ -1,3 +1,4 @@
+import { Console } from "console";
 import express, {Request,response,Response} from "express"
 
 export const jugueteRouter = express.Router()
@@ -14,44 +15,39 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
     })
 })
 
-/*
-jugueteRouter.put("/", async (req:Request,res:Response) =>{
-    try{
-       await gestorDB.connectToDataBase();
-        const newJuguete = req.body as Juguete;
-        const result = await collections.juguetes?.updateOne({
-            "id": newJuguete.id,
-        }, newJuguete)
-        res.send(result);
-    } catch (error){
-        res.status(400).send(error.message);
-    }
+
+jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
+    let _id = req.params._id
+    Juguete.find({_id}).then((juguetes: typeof Juguete) =>{
+        if(juguetes.length == 0){
+            res.send("No se encuentra disponible");
+        }
+        res.json(juguetes)
+    })
 })
 
-
-jugueteRouter.delete("/", async(req:Request,res:Response) =>{
-    try{
-        await gestorDB.connectToDataBase();
-        const result = await collections.juguetes?.deleteOne({
-            "nombre": "Juan"
-        })
-        res.send("Eliminau");
-    } catch (error){
-        res.status(400).send(error.message);
-    }
+jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
+    let id = req.params._id
+    Juguete.deleteOne({_id : id}).then((juguetes: typeof Juguete) =>{
+        res.send("Eliminado")
+    })
 })
-
 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
-    try{
-        await gestorDB.connectToDataBase();
-        const newJuguete = req.body as Juguete;
-        const result = collections.juguetes?.insertOne(newJuguete);
-        result
-            ? res.status(200).send("Creado")
-            : res.status(500).send("No entró donde debía");
-    } catch (error){
-        res.status(400).send(error.message);
-    }
+    let nuevoJuguete = new Juguete({
+        nombre : req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        imagen: req.body.imagen,
+        categoria: req.body.categoria,
+    });
+    console.log(nuevoJuguete)
+    nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
+        if(err){
+            res.send("Ha ocurrido un erro")
+        }
+        res.send("Añadido nuevo juguete");
+    })
+    
 })
-*/
+
