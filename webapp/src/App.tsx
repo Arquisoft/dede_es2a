@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
 import Navbar from './componentes/Navbar/Navbar';
+import Footer from './componentes/Footer/Footer';
 import Drawer from '@material-ui/core/Drawer';
 import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -88,28 +89,33 @@ const App = () => {
   if (error) return <div>Algo ha fallado</div>;
 
   return (
+    <div className='page-container'>
     <Wrapper>
-      <Navbar />
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-        />
-      </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-          <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
-        </Badge>
-      </StyledButton>
-      <Grid container spacing={3}>
-        {data?.map(item => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={handleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
+      <div className='content-wrap'>
+        <Navbar />
+        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        </Drawer>
+        <StyledButton onClick={() => setCartOpen(true)}>
+          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+          </Badge>
+        </StyledButton>
+        <Grid container spacing={3}>
+          {data?.map(item => (
+            <Grid item key={item.id} xs={12} sm={4}>
+              <Item item={item} handleAddToCart={handleAddToCart} />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+      <Footer />
     </Wrapper>
+    </div>
   );
 
 };
