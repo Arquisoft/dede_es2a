@@ -9,6 +9,8 @@ export const StyledButton = styled(IconButton)`
     z-index: 100;
     right: 20px;
     top: 20px;
+    margin-top: 1.2em;
+    margin-right: 1.3em;
 
 `
 

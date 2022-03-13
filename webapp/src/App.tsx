@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {useQuery} from 'react-query';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 //Components
 import Item from './Item/Item';
@@ -12,11 +12,13 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 
 //Styles
-import {Wrapper, StyledButton} from './App.styles';
+import { Wrapper, StyledButton } from './App.styles';
+
+
 //Types
 export type CartItemType = {
   id: number;
-  category:string;
+  category: string;
   description: string;
   image: string;
   price: number;
@@ -25,8 +27,9 @@ export type CartItemType = {
 }
 
 
-const getProducts = async ():Promise<CartItemType[]> => 
-  await(await fetch('https://fakestoreapi.com/products')).json();
+
+const getProducts = async (): Promise<CartItemType[]> =>
+  await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
 
@@ -34,84 +37,81 @@ const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
 
   //Inicialmente vamos a tener un array vacio de CartItemType que va a ser cartItems
-  const[cartItems, setCartItems] = useState([] as CartItemType[]);
+  const [cartItems, setCartItems] = useState([] as CartItemType[]);
 
 
-  const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
+  const { data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts);
 
-  console.log(data);
+  //console.log(data);
 
 
-  const getTotalItems = (items: CartItemType[]) => 
-    items.reduce((ack: number, item)=>ack+item.amount,0);
+  const getTotalItems = (items: CartItemType[]) =>
+    items.reduce((ack: number, item) => ack + item.amount, 0);
+
 
 
   const handleAddToCart = (clickedItem: CartItemType) => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
-      if(isItemInCart) {
-        return prev.map(item=>(
-          item.id===clickedItem.id
-          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
-            ? {...item, amount: item.amount+1}
+      const isItemInCart = prev.find(item => item.id === clickedItem.id)
+      if (isItemInCart) {
+        return prev.map(item => (
+          item.id === clickedItem.id
+            //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
+            ? { ...item, amount: item.amount + 1 }
             : item
         ))
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, {...clickedItem, amount:1}];
+      return [...prev, { ...clickedItem, amount: 1 }];
     })
   };
 
   const handleRemoveFromCart = (id: number) => {
-    setCartItems(prev=>(
-      prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.amount===1) return ack;
-          return [...ack, {...item, amount:item.amount - 1}]
+    setCartItems(prev => (
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }]
         } else {
           return [...ack, item];
         }
-      },[] as CartItemType[]) 
+      }, [] as CartItemType[])
     ))
 
   };
 
   //Coloca una barra de carga cuando la página está cargando
-  if(isLoading) return <LinearProgess/>;
-  if(error) return <div>Algo ha fallado</div>
+  if (isLoading) return <LinearProgess />;
+  if (error) return <div>Algo ha fallado</div>;
 
-
-return (
- <div className="App">
+  return (
+    <Wrapper>
       <Navbar />
-    </div>
- 
-  <Wrapper>
-    <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
-      <Cart 
-        cartItems= {cartItems} 
-        addToCart={handleAddToCart} 
-        removeFromCart={handleRemoveFromCart}
-      />
-    </Drawer>
-    <StyledButton onClick={()=> setCartOpen(true)}>
-      <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-        <AddShoppingCartIcon fontSize="large"/>
-      </Badge>
-    </StyledButton>
-    <Grid container spacing = {3}>
-      {data?.map(item => (
-        <Grid item key = {item.id} xs={12} sm={4}>
-          <Item item={item} handleAddToCart={handleAddToCart}/>
-        </Grid>
-      ))}
-    </Grid>
-  </Wrapper>
-);
-  
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+        <Cart
+          cartItems={cartItems}
+          addToCart={handleAddToCart}
+          removeFromCart={handleRemoveFromCart}
+        />
+      </Drawer>
+      <StyledButton onClick={() => setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+          <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+        </Badge>
+      </StyledButton>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
+  );
+
 };
 
 export default App;
