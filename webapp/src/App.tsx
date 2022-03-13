@@ -114,4 +114,26 @@ const App = () => {
 
 };
 
-export default App;
+const Enlace =()=>{
+  //const [page,setPage]=useState('home')
+   
+   const getContent = (page:string) =>{
+     if(page == 'home'){
+       return <App />
+     }else if(page =='login'){
+       return <Navbar />
+     }
+     else
+       return <Navbar />
+     }
+     /*const toPage = (pagetx : string) =>{
+         setPage(pagetx)
+     }*/
+ 
+ return (
+   <div>
+     {getContent('home')}
+   </div>
+ )
+ }
+export default Enlace;
