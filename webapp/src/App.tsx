@@ -86,7 +86,6 @@ const App = () => {
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
       const isItemInCart = prev.find(item => item.id ===clickedItem.id)
-      console.log(clickedItem)
       if(isItemInCart) {
         return prev.map(item=>(
           item.id===clickedItem.id

@@ -7,6 +7,7 @@ import {Wrapper} from './Item.styles';
 import {Juguete} from '../shared/sharedJuguete';
 
 
+
 /*type Props = {
     item: CartItemType;
     handleAddToCart: (clickedItem: CartItemType) => void;
