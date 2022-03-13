@@ -29,7 +29,7 @@ sobre esta tecnología, ya que tampoco tiene muchos ejemplos_
 
 [options="header",cols="1,2"]
 |===
-|Deuda técnica|Explicación|Solución
+|Deuda técnica|Explicación
 | _Errores del POD_| _Esta nueva tecnología puede ocasionar errores repentinos o algunos bugs._ 
 | _Errores de conexión_ | _Puede ocurrir que la conexión a la red sea muy débil y que en consecuencia la aplicación trabaje más lento_ 
 |===
