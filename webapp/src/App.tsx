@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {useQuery} from 'react-query';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 //Components
 import Item from './Item/Item';
@@ -14,11 +14,13 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 
 //Styles
-import {Wrapper, StyledButton} from './App.styles';
+import { Wrapper, StyledButton } from './App.styles';
+
+
 //Types
 export type CartItemType = {
   id: number;
-  category:string;
+  category: string;
   description: string;
   image: string;
   price: number;
@@ -51,6 +53,9 @@ en la BD y exportando para poder usarlo desde fuera*/
 
 const getProducts = async ():Promise<CartItemType[]> => 
   await(await fetch('https://fakestoreapi.com/products')).json();
+
+const getProducts = async (): Promise<CartItemType[]> =>
+  await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
 
@@ -91,7 +96,7 @@ const App = () => {
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, {...clickedItem, amount:1}];
+      return [...prev, { ...clickedItem, amount: 1 }];
     })
   };
 
@@ -137,40 +142,40 @@ const App = () => {
         } else {
           return [...ack, item];
         }
-      },[] as CartItemType[]) 
+      }, [] as CartItemType[])
     ))
 
   };*/
 
   //Coloca una barra de carga cuando la página está cargando
-  if(isLoading) return <LinearProgess/>;
-  if(error) return <div>Algo ha fallado</div>
+  if (isLoading) return <LinearProgess />;
+  if (error) return <div>Algo ha fallado</div>;
 
+  return (
+    <Wrapper>
+      <Navbar />
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+        <Cart
+          cartItems={cartItems}
+          addToCart={handleAddToCart}
+          removeFromCart={handleRemoveFromCart}
+        />
+      </Drawer>
+      <StyledButton onClick={() => setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+          <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+        </Badge>
+      </StyledButton>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
+  );
 
-return (
-  <Wrapper>
-    <Drawer anchor = 'right' open ={cartOpen} onClose={() => setCartOpen(false)}>
-      <Cart 
-        cartItems= {cartItems} 
-        addToCart={handleAddToCart} 
-        removeFromCart={handleRemoveFromCart}
-      />
-    </Drawer>
-    <StyledButton onClick={()=> setCartOpen(true)}>
-      <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-        <AddShoppingCartIcon fontSize="large"/>
-      </Badge>
-    </StyledButton>
-    <Grid container spacing = {3}>
-      {data?.map(item => (
-        <Grid item key = {item.id} xs={12} sm={4}>
-          <Item item={item} handleAddToCart={handleAddToCart}/>
-        </Grid>
-      ))}
-    </Grid>
-  </Wrapper>
-);
-  
 };
 
 export default App;
