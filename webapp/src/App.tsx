@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
 //import { Juguete } from './shared/sharedJuguete';
 
@@ -50,9 +51,6 @@ export async function getJuguetes():Promise<Juguete[]>{
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
-
-const getProducts = async ():Promise<CartItemType[]> => 
-  await(await fetch('https://fakestoreapi.com/products')).json();
 
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('https://fakestoreapi.com/products')).json();
