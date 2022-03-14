@@ -466,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-runtime-view">6. Vista de tiempo de ejecución</a>
 <ul class="sectlevel2">
-<li><a href="#_diagrama_de_secuencia_1">6.1. &lt;Diagrama de secuencia 1&gt;</a></li>
+<li><a href="#_compra_de_productos">6.1. Compra de productos</a></li>
 <li><a href="#_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</a></li>
 <li><a href="#">6.3. &#8230;&#8203;</a></li>
 <li><a href="#_diagrama_de_secuencia_n">6.4. &lt;Diagrama de secuencia n&gt;</a></li>
@@ -494,7 +494,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_escenarios_de_calidad">10.2. Escenarios de calidad</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Riegos y Deudas Técnicas</a></li>
+<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
 <li><a href="#section-glossary">12. Glosario</a></li>
 </ul>
 </div>
@@ -973,7 +973,7 @@ together with a mapping table showing the relationships between channels and inp
 <div class="sectionbody">
 <div class="paragraph">
 <p>Como base, vamos a utilizar el lenguaje de programación TypeScript, impuesto en los requisitos de diseño. Es, en esencia, un superconjunto de JavaScript que añade tipado.
-Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. Esto incluye los siguientes elementos:</p>
+Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. Esto incluye los siguientes tecnologías:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -981,7 +981,7 @@ Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. E
 <p>MongoDB: Es una base de datos NoSQL que facilita el trabajo con el Back-End. Es una decisión de diseño propia</p>
 </li>
 <li>
-<p>Express js: Es un marco que se ah superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado
+<p>Express js: Es un marco que se ha superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado
 para la creación de sitios web.</p>
 </li>
 <li>
@@ -1387,8 +1387,12 @@ You will mainly capture scenarios in your documentation to communicate your arch
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagrama_de_secuencia_1">6.1. &lt;Diagrama de secuencia 1&gt;</h3>
-
+<h3 id="_compra_de_productos">6.1. Compra de productos</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="755" height="478">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</h3>
@@ -1813,12 +1817,14 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3335%;">
 </colgroup>
 <thead>
 <tr>
+<th class="tableblock halign-left valign-top">Id</th>
 <th class="tableblock halign-left valign-top">Atributo de calidad</th>
 <th class="tableblock halign-left valign-top">Escenario de calidad</th>
 <th class="tableblock halign-left valign-top">Prioridad (Cliente/Arquitecto)</th>
@@ -1826,51 +1832,61 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>US1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>US2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>COM1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>COM2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SEG1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Alto</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SEG2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Todos los datos de los usuarios no pueden ser expuestos a terceros</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Alto</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>TEST1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>TEST2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ATRA1</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Atractivo</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Bajo</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ATRA2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Atractivo</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bajo/Bajo</em></p></td>
@@ -1882,7 +1898,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-technical-risks">11. Riegos y Deudas Técnicas</h2>
+<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <div class="title">Falta de conocimiento de React</div>
@@ -1903,6 +1919,60 @@ nuestro trabajo al día y avanzar uniformemente.</p>
 <p>SOLID es una nueva tecnología y su documentación es muy escasa. No tiene muchos ejemplos por lo que deberemos informarnos por cuenta propia por cualquier medio posible
 acerca de esa tecnología.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Riesgo</th>
+<th class="tableblock halign-left valign-top">Explicación</th>
+<th class="tableblock halign-left valign-top">Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Falta de conocimiento de React</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es la primera vez que trabajamos con este framework, así no tenemos experiencia con él.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La documentación de React es muy buena y cuenta con una gran cantidad de ejemplos y facilidades, por lo que aprenderemos a desenvolvernos rápido.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Tiempo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Estamos condicionados por una fecha de entrega</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Debemos optimizar tanto el trabajo individual como colectivo lo máximo posible</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desconocimiento de SOLID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es una tecnología muy nueva, su documentación es muy escasa y se han reportado varios bugs</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Intentaremos informarnos de cualquier manera posible
+sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Deuda técnica</th>
+<th class="tableblock halign-left valign-top">Explicación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Errores del POD</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Esta nueva tecnología puede ocasionar errores repentinos o algunos bugs.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Errores de conexión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Puede ocurrir que la conexión a la red sea muy débil y que en consecuencia la aplicación trabaje más lento</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -2015,7 +2085,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-03-01 20:21:05 +0100
+Last updated 2022-03-04 10:46:35 +0100
 </div>
 </div>
 </body>
