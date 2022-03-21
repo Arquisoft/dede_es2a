@@ -1,5 +1,5 @@
 [[section-runtime-view]]
-== Runtime View
+== Vista de tiempo de ejecución
 
 
 [role="arc42help"]
@@ -26,16 +26,9 @@ There are many notations for describing scenarios, e.g.
 * sequence diagrams
 * BPMN or EPCs (event process chains)
 * state machines
+
+
 * ...
-
-****
-
-=== <Runtime Scenario 1>
-
-
-* _<insert runtime diagram or textual description of the scenario>_
-* _<insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.>_
 
 It is possible to use a sequence diagram:
 
@@ -50,7 +43,31 @@ Alice  --> Pod: Store route
 Alice -> Bob: Another authentication Request
 Alice <-- Bob: another authentication Response
 ----
-=== <Runtime Scenario 2>
+
+****
+
+=== Compra de productos
+[plantuml,"Sequence diagram",png]
+----
+actor Usuario
+database BaseDeDatos as "Base de datos" #blue
+database Pod as "Pod del usuario" #yellow
+Usuario -> DeDe: Abre el carrito
+DeDe <-- BaseDeDatos: Devuelve contenido del carrito del usuario
+Usuario <-- DeDe: Muestra lista de juguetes del carrito
+Usuario -> DeDe: Confirma la compra de los productos
+DeDe -> Pod: Se solicita la dirección del usuario
+DeDe <-- Pod: Devuelve la dirección del usuario
+DeDe -> DeDe: Crea el pedido con el coste y dirección asociados.
+Usuario <-- DeDe: Muestra el precio y la dirección.
+Usuario -> DeDe: Confirma el pedido.
+----
+
+=== <Diagrama de secuencia 2>
+
+=== ...
+
+=== <Diagrama de secuencia n>
 
 === ...
 

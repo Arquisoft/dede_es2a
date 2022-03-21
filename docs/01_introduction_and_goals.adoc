@@ -1,75 +1,55 @@
 [[section-introduction-and-goals]]
-== Introduction and Goals
+== Introducción y objetivos
 
-[role="arc42help"]
-****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
+El objetivo final del proyecto es desarrollar una tienda online, en este caso venderemos juguetes.
 
-* underlying business goals, essential features and functional requirements for the system
-* quality goals for the architecture
-* relevant stakeholders and their expectations
-****
+=== Descripción general de los requisitos, características esenciales y objetivos comerciales
 
-=== Requirements Overview
+El objetivo final de la aplicación es crear un sistema de venta online que respete la privacidad de los clientes siguiendo los principios SOLID, para ello se usarán los PODs de los usuarios siempre que den los permisos necesarios. 
 
-[role="arc42help"]
-****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+Los requisitos más importantes son:
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+* Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.
+* Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.
+* Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y se pasará a su envío.
+* Los clientes podrán en todo momento ver sus pedidos realizados.
+* El desarrollo de la aplicación será mediante React y TypeScript para el Front-end y Node.js y Express para el Back-end.
+* La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en el punto 4.
 
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
+La tienda online desarrollada se encargará de vender juguetes infantiles.
 
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-****
+* En el siguiente enlace se puede observar de manera más exhaustiva los requisitos e introducción a la aplicación a desarrollar: https://arquisoft.github.io/course2122/labEnunciadoPractica.html
+* Para acceder directamente a la página principal de SOLID usar el siguiente enlace: https://solidproject.org/
+* Para el desarrollo en React o TypeScript se puede consultar: https://reactjs.org/ o https://www.typescriptlang.org/ respectivamente.
 
-=== Quality Goals
 
-[role="arc42help"]
-****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
+=== Objetivos de calidad
 
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …
 
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-****
-
-=== Stakeholders
-
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
+Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos y la prioridad que le damos:
 
 [options="header",cols="1,2,2"]
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+|Prioridad|Objetivo de calidad|Descripción del objetivo
+| _1_ | _Usabilidad_ | _El sistema deberá ser fácil de usar y no requerir de conocimientos específicos o complejos para poder realizar compras. Se debería poder añadir a un encargo, comprar y ver pedidos realizados sin mayor complicación._
+| _2_ | _Comprensibilidad_ | _El sistema deberá ser fácil de entender por los usuarios, en todo momento deben saber cómo funciona la aplicación con poco esfuerzo. Los elementos gráficos ayudarán a la Comprensibilidad._
+| _3_ | _Seguridad_ | _El sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación._
+| _4_ | _Testabilidad_ | _El sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad._
+| _5_ | _Atractivo_ | _El sistema tendrá una interfaz atractiva, es decir, la interfaz ayudará en aspectos como la usabilidad o comprensibilidad y no entorpecerá el uso de la aplicación por parte de los usuarios._
 |===
+
+
+=== Stakeholders
+
+Las partes interesadas en el sistema serán:
+
+[options="header",cols="1,2,2"]
+|===
+|Rol/Nombre|Contacto|Expectativas
+| _Arquitectos del software_ | _Mario Lada Martínez, Alejandro Galán Freire, Aarón García García, Rafael Muñiz Reguera y Jorge López Peláez._ | _Deben conocer la arquitectura y trabajar en ella, además, deberán tomar decisiones importantes._
+| _Desarrolladores_ | _En este caso coinciden con los arquitectos del software._ | _Deberán desarrollar el código de la aplicación. Necesitarán la documentación para orientarse en algunos aspectos._
+| _Cliente_ | _La empresa de venta de productos que nos contrata para crear el sistema de venta online. En este caso se corresponde con el conjunto de profesores de la asignatura._ | _Deberán dar los requisitos funcionales más importantes para el desarrollo de la aplicación y un conjunto de restricciones. Además, esperan una aplicación que cumpla con los objetivos._
+| _Administrador BD_ | _Es el que nos asministra la base de datos._ | _Espera que el trabajo con la base de datos sea lo más fácil posible._
+| _Compradores_ | _Son los usuarios finales que utilizarán el servicio de compra online._ | _Esperan como mínimo que la aplicación sea fácil de usar y de comprender._
+|===
+
