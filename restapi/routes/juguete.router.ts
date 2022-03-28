@@ -48,6 +48,7 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         }
         res.send("Añadido nuevo juguete");
     })
-    
 })
+
+ 
 
