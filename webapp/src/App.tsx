@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
 import { Juguete } from './shared/sharedJuguete';
@@ -13,7 +14,8 @@ import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
-
+import Home from './paginas/Home';
+import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
 
@@ -183,26 +185,34 @@ const App = () => {
 
 };
 
-const Enlace =()=>{
-  //const [page,setPage]=useState('home')
-   
-   const getContent = (page:string) =>{
-     if(page == 'home'){
-       return <App />
-     }else if(page =='login'){
-       return <Navbar />
-     }
-     else
-       return <Navbar />
-     }
-     /*const toPage = (pagetx : string) =>{
-         setPage(pagetx)
-     }*/
- 
- return (
-   <div>
-     {getContent('home')}
-   </div>
- )
+
+
+ const vista =()=>{
+   return(
+     <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+
+        <Route path="/productos" element={<App/>}/>
+
+        <Route path="/contactanos" element={
+           <Wrapper>
+            <Navbar/>
+            <ContactUs/>
+            <Footer/>
+         </Wrapper>
+        }/>
+      </Routes>
+    </BrowserRouter>
+   </>)
  }
-export default Enlace;
+
+export default vista;
