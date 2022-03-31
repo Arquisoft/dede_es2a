@@ -13,7 +13,7 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
     Juguete.find({}).then((juguetes: typeof Juguete) =>{
         res.json(juguetes)
     })
-})
+});
 
 
 jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
@@ -24,14 +24,14 @@ jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
         }
         res.json(juguetes)
     })
-})
+});
 
 jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
     let id = req.params._id
     Juguete.deleteOne({_id : id}).then((juguetes: typeof Juguete) =>{
         res.send("Eliminado")
     })
-})
+});
 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     let nuevoJuguete = new Juguete({
@@ -41,7 +41,6 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         imagen: req.body.imagen,
         categoria: req.body.categoria,
     });
-    console.log(nuevoJuguete)
     nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
         if(err){
             res.send("Ha ocurrido un erro")
@@ -50,4 +49,6 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
     })
     
 })
+
+export default jugueteRouter
 
