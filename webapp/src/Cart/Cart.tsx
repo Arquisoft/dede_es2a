@@ -6,17 +6,25 @@ import {Wrapper} from './Cart.styles';
 //Types
 import { CartItemType } from '../App';
 
+import {Juguete} from '../shared/sharedJuguete';
 
 
-type Props = {
+
+/*type Props = {
     cartItems: CartItemType[];
     addToCart: (clickedItem:CartItemType)=> void;
+    removeFromCart: (id:number) => void;
+};*/
+
+type Props = {
+    cartItems: Juguete[];
+    addToCart: (clickedItem:Juguete)=> void;
     removeFromCart: (id:number) => void;
 };
 
 const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
-    const calculateTotal = (items:CartItemType[]) =>
-    items.reduce((ack:number, item) => ack + item.amount*item.price,0);
+    const calculateTotal = (items:Juguete[]) =>
+    items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
 
     return (
         <Wrapper>
@@ -30,7 +38,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                     removeFromCart={removeFromCart}
                 />
             ))}
-            <h2>Total: €{calculateTotal(cartItems).toFixed(2)}</h2>
+            <h2>Total: {calculateTotal(cartItems).toFixed(2)}€</h2>
         </Wrapper>
     )
 };
