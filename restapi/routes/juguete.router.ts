@@ -1,5 +1,6 @@
 import { Console } from "console";
 import express, {Request,response,Response} from "express"
+import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
 
@@ -15,6 +16,13 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
     })
 })
 
+// petición que solo muestra los productos con stock
+jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
+    Juguete.find({ __v: { $gt: 0 } }).then((juguetes: typeof Juguete) =>{ // __v deberia ser cantidad
+        //console.log(juguetes)
+        res.json(juguetes)
+    })
+})
 
 jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
     let _id = req.params._id
@@ -41,7 +49,6 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         imagen: req.body.imagen,
         categoria: req.body.categoria,
     });
-    console.log(nuevoJuguete)
     nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
         if(err){
             res.send("Ha ocurrido un erro")
