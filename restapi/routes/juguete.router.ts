@@ -14,7 +14,7 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
     Juguete.find({}).then((juguetes: typeof Juguete) =>{
         res.json(juguetes)
     })
-})
+});
 
 // petición que solo muestra los productos con stock
 jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
@@ -32,14 +32,14 @@ jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
         }
         res.json(juguetes)
     })
-})
+});
 
 jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
     let id = req.params._id
     Juguete.deleteOne({_id : id}).then((juguetes: typeof Juguete) =>{
         res.send("Eliminado")
     })
-})
+});
 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     let nuevoJuguete = new Juguete({
