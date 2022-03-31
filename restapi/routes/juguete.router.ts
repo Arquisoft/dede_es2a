@@ -33,8 +33,11 @@ jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
     })
 });
 
+// encuentra un juguete por la id identificativa del juguete, no por la generada por la bd
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
+
     let nuevoJuguete = new Juguete({
+        id: req.body.id, 
         nombre : req.body.nombre,
         descripcion: req.body.descripcion,
         precio: req.body.precio,
@@ -43,7 +46,7 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
     });
     nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
         if(err){
-            res.send("Ha ocurrido un erro")
+            res.send("Ha ocurrido un error al añadir el juguete")
         }
         res.send("Añadido nuevo juguete");
     })
