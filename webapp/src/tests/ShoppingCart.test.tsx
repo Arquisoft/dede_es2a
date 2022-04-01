@@ -112,9 +112,7 @@ test('clicking the + button on the shopping cart',() =>{
   //const[cartItems, setCartItems] = useState([] as CartItemType[]);
   const[cartItems, setCartItems] = useState([] as Juguete[]);
 
-  
-  //--------------------------------------------------------------------------------
-  console.log(data);
+
 
 
   /*const getTotalItems = (items: CartItemType[]) => 
