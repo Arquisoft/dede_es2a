@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import { BrowserRouter, Routes,Route} from "react-router-dom"; 
 
 //Components
 import Item from './Item/Item';
@@ -16,6 +17,12 @@ import Badge from '@material-ui/core/Badge';
 
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
+
+
+const inlineStyles= {
+  padding:5
+}
+
 
 
 //Types
@@ -58,6 +65,8 @@ const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
+
+ 
 
   //Esto nos va adecir si el carrito esta abierto, va a ser un booleano (cartOpen) que se inicia en false y que se puede modificar con la funcion  "setCartOpen"
   const [cartOpen, setCartOpen] = useState(false);
@@ -151,11 +160,13 @@ const App = () => {
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
 
+  
+
   return (
     <div className='page-container'>
+      
     <Wrapper>
       <div className='content-wrap'>
-        <Navbar />
         <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
           <Cart
             cartItems={cartItems}
