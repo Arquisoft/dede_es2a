@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
     id:Number,
-    nombre: String,
+    nombre: {
+        type: String,
+        required: true
+    },
     descripcion: String,
     precio:Number,
     imagen:String,
