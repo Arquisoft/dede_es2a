@@ -75,10 +75,8 @@ BaseDeDatos -> Dede: Devuelve la nueva lista de productos
 Dede -> Admin: Muestra todos los productos
 ----
 
-=== ...
+
 
 === <Diagrama de secuencia n>
 
-=== ...
 
-=== <Runtime Scenario n>
