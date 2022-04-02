@@ -3,13 +3,16 @@ require('dotenv').config()
 
 const database_uri = process.env.DB_CONNECT
 
-mongoose.connect('mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-.then(() =>{
-    console.log("Database connected")
-})
-.catch((err)=>{
-    console.error(err);
-})
+export function connect(){
+    mongoose.connect('mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    .then(() =>{
+        console.log("Database connected")
+    })
+    .catch((err)=>{
+        console.error(err);
+    });
+}
+
 
 /*
 juguete.save()
