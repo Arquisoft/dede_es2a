@@ -44,6 +44,8 @@ export type Juguete = {
 }
 */
 
+
+
 // AÑADIDO---------------------------------------------------------------------------------------------
 // Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes():Promise<Juguete[]>{
@@ -62,12 +64,11 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
 const App = () => {
 
-  //Esto nos va adecir si el carrito esta abierto, va a ser un booleano (cartOpen) que se inicia en false y que se puede modificar con la funcion  "setCartOpen"
   const [cartOpen, setCartOpen] = useState(false);
-
   //Inicialmente vamos a tener un array vacio de CartItemType que va a ser cartItems
   //const[cartItems, setCartItems] = useState([] as CartItemType[]);
   const[cartItems, setCartItems] = useState([] as Juguete[]);
+  const elementosCarrito = cartItems;
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
@@ -154,6 +155,8 @@ const App = () => {
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
 
+  console.log(cartItems)
+
   return (
     <>
     <BrowserRouter>
@@ -185,7 +188,9 @@ const App = () => {
                    addToCart={handleAddToCart}
                    removeFromCart={handleRemoveFromCart}
                  />
-
+            <PayForm
+             cartItems={cartItems}
+             />
                </Drawer>
                <StyledButton onClick={() => setCartOpen(true)}>
                  <Badge badgeContent={getTotalItems(cartItems)} color='error'>
@@ -215,7 +220,8 @@ const App = () => {
           <Wrapper>
             <Navbar/>
             <PayForm
-            cartItems={cartItems}/>
+             cartItems={elementosCarrito}
+             />
             <Footer/>
           </Wrapper>
         }/>
