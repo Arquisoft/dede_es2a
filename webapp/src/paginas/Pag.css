@@ -1,0 +1,13 @@
+h1{
+    color:rgb(18, 118, 175);
+    display: flex;
+    justify-content: center;
+    align-items: center  ;
+}
+
+p{
+    font-size: 1.3rem;
+    margin-left: 2em;
+    margin-top: 1em;
+    margin-block-end: 1em;
+}

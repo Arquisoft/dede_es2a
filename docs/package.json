@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Npm project just for the docs",
   "main": "index.js",
+  "homepage": ".",
   "scripts": {
     "build": "shx rm -rf build && asciidoctor -D build -a imagesdir=./images -r asciidoctor-diagram index.adoc && shx cp -R images build",
     "deploy": "gh-pages -d build"
