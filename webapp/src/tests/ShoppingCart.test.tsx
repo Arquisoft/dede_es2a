@@ -141,12 +141,12 @@ test('clicking the + button on the shopping cart',() =>{
     })
   };
 
-  const handleRemoveFromCart = (id: number) => {
+  const handleRemoveFromCart = (nombre: string) => {
     setCartItems(prev=>(
       prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.cantidad===1) return ack;
-          return [...ack, {...item, amount:item.cantidad - 1}]
+        if(item.nombre===nombre ){
+          if(item.cantidad===1)return ack;
+          return [...ack, {...item, cantidad:item.cantidad - 1}]
         } else {
           return [...ack, item];
         }
