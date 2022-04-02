@@ -87,10 +87,10 @@ const App = () => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
+      const isItemInCart = prev.find(item => item.nombre ===clickedItem.nombre)
       if(isItemInCart) {
         return prev.map(item=>(
-          item.id===clickedItem.id
+          item.nombre===clickedItem.nombre
           //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
             ? {...item, cantidad: item.cantidad+1}
             : item
@@ -102,12 +102,12 @@ const App = () => {
     })
   };
 
-  const handleRemoveFromCart = (id: number) => {
+  const handleRemoveFromCart = (nombre: string) => {
     setCartItems(prev=>(
       prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.cantidad===1) return ack;
-          return [...ack, {...item, amount:item.cantidad - 1}]
+        if(item.nombre===nombre ){
+          if(item.cantidad===1)return ack;
+          return [...ack, {...item, cantidad:item.cantidad - 1}]
         } else {
           return [...ack, item];
         }
