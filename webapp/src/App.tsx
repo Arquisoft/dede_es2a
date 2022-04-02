@@ -1,5 +1,7 @@
-import { useState } from 'react';
 import { useQuery } from 'react-query';
+
+
+import React, { useEffect, useState } from "react"
 
 //Components
 import Item from './Item/Item';
@@ -18,6 +20,7 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
+import PayForm from './PayForm/PayForm';
 
 
 //Types
@@ -43,6 +46,8 @@ export type Juguete = {
 }
 */
 
+
+
 // AÑADIDO---------------------------------------------------------------------------------------------
 // Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes():Promise<Juguete[]>{
@@ -56,66 +61,76 @@ export async function getJuguetes():Promise<Juguete[]>{
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
 
-const getProducts = async (): Promise<CartItemType[]> =>
-  await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
 
-  //Esto nos va adecir si el carrito esta abierto, va a ser un booleano (cartOpen) que se inicia en false y que se puede modificar con la funcion  "setCartOpen"
   const [cartOpen, setCartOpen] = useState(false);
-
   //Inicialmente vamos a tener un array vacio de CartItemType que va a ser cartItems
   //const[cartItems, setCartItems] = useState([] as CartItemType[]);
   const[cartItems, setCartItems] = useState([] as Juguete[]);
+
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
   const {data, isLoading, error} =useQuery<Juguete[]>('juguetes', getJuguetes);
   
-  //--------------------------------------------------------------------------------
-  console.log(data);
 
 
-  /*const getTotalItems = (items: CartItemType[]) => 
-    items.reduce((ack: number, item)=>ack+item.amount,0);*/ 
+  useEffect(() => {
+    //Aqui meter tambien las cosas de usuario
+    const localCart = localStorage.getItem("cart");
+    if (localCart) {
+      let cart: Juguete[] = JSON.parse(localCart);
+      setCartItems(cart); 
+    } else {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+  }, []);
+
 
   const getTotalItems = (items: Juguete[]) => 
   items.reduce((ack: number, item)=>ack+item.cantidad,0);
 
 
   const handleAddToCart = (clickedItem: Juguete) => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
       const isItemInCart = prev.find(item => item.nombre ===clickedItem.nombre)
       if(isItemInCart) {
-        return prev.map(item=>(
+        var mapeadoCarrito= prev.map(item=>(
           item.nombre===clickedItem.nombre
           //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
             ? {...item, cantidad: item.cantidad+1}
             : item
         ))
+        return mapeadoCarrito;
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, {...clickedItem, cantidad:1}];
+      var mapeadoCarrito= [...prev, {...clickedItem, cantidad:1}];
+      return mapeadoCarrito;
     })
+
   };
 
   const handleRemoveFromCart = (nombre: string) => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
     setCartItems(prev=>(
       prev.reduce((ack, item)=> {
         if(item.nombre===nombre ){
           if(item.cantidad===1)return ack;
-          return [...ack, {...item, cantidad:item.cantidad - 1}]
+           var mc= [...ack, {...item, cantidad:item.cantidad - 1}]
+           return mc;
         } else {
-          return [...ack, item];
+          var mc= [...ack, item];
+          return mc;
         }
       },[] as Juguete[]) 
     ))
-
   };
-
+ 
   /*const handleAddToCart = (clickedItem: CartItemType) => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
@@ -152,6 +167,8 @@ const App = () => {
   //Coloca una barra de carga cuando la página está cargando
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
+
+
 
   return (
     <>
@@ -209,13 +226,19 @@ const App = () => {
                 <Footer/>
             </Wrapper>
             }/>
-         <Route path="/confirmar-pedido" element={
-          <Wrapper>
-            <Navbar/>
-            <Home/>
-            <Footer/>
-          </Wrapper>
-        }/>
+         <Route
+                path="confirmar-pedido"
+                element={
+                  <Wrapper>
+                  <Navbar/>
+                  
+                  <PayForm
+                    cartItems={cartItems.slice()}
+                  />
+                  <Footer/>
+                  </Wrapper>
+                }
+              />
       </Routes>
     </BrowserRouter>
    </>
@@ -223,34 +246,5 @@ const App = () => {
 
 };
 
-
-/*
- const vista =()=>{
-   return(
-     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={
-          <Wrapper>
-            <Navbar/>
-            <Home/>
-            <Footer/>
-          </Wrapper>
-        }
-        />
-
-        <Route path="/productos" element={<App/>}/>
-
-        <Route path="/contactanos" element={
-           <Wrapper>
-            <Navbar/>
-            <ContactUs/>
-            <Footer/>
-         </Wrapper>
-        }/>
-      </Routes>
-    </BrowserRouter>
-   </>)
- }*/
 
 export default App;
