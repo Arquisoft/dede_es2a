@@ -27,7 +27,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
     const { isAuthenticated } = useAuth0();
-    const href=!isAuthenticated?"login":"confirmar-pedido";
+    const href=!isAuthenticated?"confirmar-pedido":"confirmar-pedido";
     return (
         <Wrapper>
             <h2>Tu Carrito</h2>
