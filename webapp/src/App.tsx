@@ -1,5 +1,7 @@
-import { useState } from 'react';
 import { useQuery } from 'react-query';
+
+
+import React, { useEffect, useState } from "react"
 
 //Components
 import Item from './Item/Item';
@@ -72,8 +74,10 @@ const App = () => {
   //AÑADIDO----------------------------------------------------------------------
   const {data, isLoading, error} =useQuery<Juguete[]>('juguetes', getJuguetes);
   
-  //--------------------------------------------------------------------------------
-  console.log(data);
+  const setCurrentItems = (cartItems: Juguete[]) => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  
+  };
 
 
   /*const getTotalItems = (items: CartItemType[]) => 
@@ -186,7 +190,6 @@ const App = () => {
                    addToCart={handleAddToCart}
                    removeFromCart={handleRemoveFromCart}
                  />
-
                </Drawer>
                <StyledButton onClick={() => setCartOpen(true)}>
                  <Badge badgeContent={getTotalItems(cartItems)} color='error'>
@@ -212,15 +215,19 @@ const App = () => {
                 <Footer/>
             </Wrapper>
             }/>
-         <Route path="/confirmar-pedido" element={
-          <Wrapper>
-            <Navbar/>
-            <PayForm
-             cartItems={cartItems.slice()}
-             />
-            <Footer/>
-          </Wrapper>
-        }/>
+         <Route
+                path="confirmar-pedido"
+                element={
+                  <Wrapper>
+                  <Navbar/>
+                  
+                  <PayForm
+                    cartItems={cartItems.slice()}
+                  />
+                  <Footer/>
+                  </Wrapper>
+                }
+              />
       </Routes>
     </BrowserRouter>
    </>

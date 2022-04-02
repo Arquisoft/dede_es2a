@@ -40,7 +40,7 @@ const PayForm:React.FC<Props> = ({cartItems})=> {
             <h2>Va a pagar: {calculateTotal(cartItems).toFixed(2)}€</h2>
 
             <button type="button" className="btn btn-primary">
-
+                Permisos de POD
             </button>
         </Wrapper>
     )
