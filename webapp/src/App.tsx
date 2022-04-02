@@ -52,7 +52,7 @@ export type Juguete = {
 // Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes():Promise<Juguete[]>{
   const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  let response = await fetch(apiEndPoint+'juguete');
+  let response = await fetch(apiEndPoint+'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
   return response.json();
