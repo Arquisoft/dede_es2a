@@ -1,5 +1,6 @@
 import { Console } from "console";
 import express, {Request,response,Response} from "express"
+import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
 
@@ -15,6 +16,13 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
     })
 });
 
+// petición que solo muestra los productos con stock
+jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
+    Juguete.find({ __v: { $gt: 0 } }).then((juguetes: typeof Juguete) =>{ // __v deberia ser cantidad
+        //console.log(juguetes)
+        res.json(juguetes)
+    })
+})
 
 jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
     let _id = req.params._id
@@ -43,6 +51,7 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         precio: req.body.precio,
         imagen: req.body.imagen,
         categoria: req.body.categoria,
+        cantidad: req.body.cantidad
     });
     nuevoJuguete.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
         if(err){
@@ -51,6 +60,40 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         res.send("Añadido nuevo juguete");
     })
     
+})
+
+jugueteRouter.post("/update/:id", async (req:Request,res:Response) =>{
+    const filter = { _id : req.params.id }
+    const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
+                precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
+                cantidad : req.body.cantidad}
+
+    let doc = await Juguete.findOneAndUpdate(filter, update, { new:true}).then((jugueteActualizado:typeof Juguete,err:Error) =>{
+        if(err){
+            res.send("Ha ocurrido un error con la actualización")
+        }
+        res.send("El juguete se ha actualizo correctamente");
+    });
+
+    /*let jugueteActualizado = new Juguete({
+        _id : req.params.id,
+        nombre : req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        imagen: req.body.imagen,
+        categoria: req.body.categoria,
+    });
+    jugueteActualizado.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
+        if(err){
+            res.send("Ha ocurrido un error en la actualización")
+        }
+        res.send("Se ha actualizado correctamente");
+    })*/
+
+    /*Juguete.findOneAndUpdate({ _id: req.params._id },
+        jugueteActualizado,
+        { new: true })
+    */
 })
 
 export default jugueteRouter
