@@ -1,0 +1,32 @@
+.main-footer{
+    color:rgb(18, 118, 175);
+    background-color: #aac9f8;
+    padding-top: 2em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    border-radius: 2em;
+    margin-top: 1em;
+}
+
+.list-unstyled{
+    margin-left: 1em;
+}
+
+.col-sm{
+    display: grid;
+}
+
+h1{
+    color:rgb(18, 118, 175);
+    display: flex;
+    justify-content: center;
+    align-items: center  ;
+}
+
+p{
+    font-size: 1.3rem;
+    margin-left: 2em;
+    margin-top: 1em;
+    margin-block-end: 1em;
+}

@@ -51,6 +51,7 @@ jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
     }
 });
 
+// encuentra un juguete por la id identificativa del juguete, no por la generada por la bd
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     try{
         let nuevoJuguete = new Juguete({

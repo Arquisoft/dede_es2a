@@ -3,8 +3,8 @@ let mongoose = require('mongoose')
 const jugueteSchema = new mongoose.Schema({
     id:Number,
     nombre: {
-        type: String,
-        required: true
+        type : String,
+        unique : true
     },
     descripcion: String,
     precio:Number,
@@ -17,9 +17,9 @@ const jugueteSchema = new mongoose.Schema({
 jugueteSchema.set('toJSON', {
     
     transform: (document:any, returnedObject:any) =>{
-        returnedObject.id = returnedObject._id
+        returnedObject.id = returnedObject.id
         returnedObject.cantidad = 0
-        delete returnedObject._id
+        delete returnedObject.id
         delete returnedObject.__v
     }
 })

@@ -32,10 +32,10 @@ afterAll(async () => {
     server.close() //close the server
 })
 
-describe('user ', () => {
+/*describe('user ', () => {
     /**
      * Test that we can list users without any error.
-     */
+     
     it('can be listed',async () => {
         const response:Response = await request(app).get("/api/users/list");
         expect(response.statusCode).toBe(200);
@@ -43,7 +43,7 @@ describe('user ', () => {
 
     /**
      * Tests that a user can be created through the productService without throwing any errors.
-     */
+     
     it('can be created correctly', async () => {
         let username:string = 'Pablo'
         let email:string = 'gonzalezgpablo@uniovi.es'
@@ -83,4 +83,33 @@ describe('user ', () => {
             cantidad: 0,
         });
     });
+});
+*/
+
+describe('juguete ', () => {
+    /**
+     * Test que puede listar los juguetes sin errores.
+     
+    it('pueden ser listados',async () => {
+        const result = await request(app).get("/juguete");
+        expect(result).toBe(400);
+    });*/
+
+    /**
+     * Tests that a user can be created through the productService without throwing any errors.
+     */
+    /*it('can be created correctly', async () => {
+        let username:string = 'Pablo'
+        let email:string = 'gonzalezgpablo@uniovi.es'
+        const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
+        expect(response.statusCode).toBe(200);
+    });*/
+
+    /**
+   * test que prueba a obtener un producto inexistente
+   */
+   it("No se puede obtener un producto inexistente", async () => {
+    const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7h');
+    expect(response.statusCode).toBe(204);
+  });
 });

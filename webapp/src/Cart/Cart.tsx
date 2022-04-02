@@ -19,7 +19,7 @@ import {Juguete} from '../shared/sharedJuguete';
 type Props = {
     cartItems: Juguete[];
     addToCart: (clickedItem:Juguete)=> void;
-    removeFromCart: (id:number) => void;
+    removeFromCart: (nombre:string) => void;
 };
 
 const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
@@ -38,7 +38,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                     removeFromCart={removeFromCart}
                 />
             ))}
-            <h2>Total: €{calculateTotal(cartItems).toFixed(2)}</h2>
+            <h2>Total: {calculateTotal(cartItems).toFixed(2)}€</h2>
         </Wrapper>
     )
 };
