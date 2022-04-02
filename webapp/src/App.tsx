@@ -18,6 +18,7 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
+import PayForm from './PayForm/PayForm';
 
 
 //Types
@@ -184,6 +185,7 @@ const App = () => {
                    addToCart={handleAddToCart}
                    removeFromCart={handleRemoveFromCart}
                  />
+
                </Drawer>
                <StyledButton onClick={() => setCartOpen(true)}>
                  <Badge badgeContent={getTotalItems(cartItems)} color='error'>
@@ -212,7 +214,8 @@ const App = () => {
          <Route path="/confirmar-pedido" element={
           <Wrapper>
             <Navbar/>
-            <Home/>
+            <PayForm
+            cartItems={cartItems}/>
             <Footer/>
           </Wrapper>
         }/>
