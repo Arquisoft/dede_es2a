@@ -47,7 +47,6 @@ describe('juguete ', () => {
 
     it('find one by id', async () => {
         const response: Response = await request(app).get("juguete/622c7f956016f025f28e9b7d");
-        console.log(response)
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual(expect.objectContaining({
             nombre: "Juguete1",

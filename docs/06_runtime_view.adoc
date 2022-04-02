@@ -75,6 +75,18 @@ BaseDeDatos -> Dede: Devuelve la nueva lista de productos
 Dede -> Admin: Muestra todos los productos
 ----
 
+=== Eliminar productos
+[plantuml,"Sequence diagram",png]
+----
+actor Admin
+database BaseDeDatos as "Base de datos" #blue
+Admin -> Dede: Accede  a la página para eliminar productos
+Admin -> Dede: Escoge el producto a eliminar
+Dede -> BaseDeDatos: Elimina el producto
+BaseDeDatos -> Dede: Devuelve la lista actualizada de productos
+Dede -> Admin: Muestra todos los productos
+----
+
 === ...
 
 === <Diagrama de secuencia n>

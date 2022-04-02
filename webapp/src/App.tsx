@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { BrowserRouter, Routes,Route} from "react-router-dom"; 
 
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
 import { Juguete } from './shared/sharedJuguete';
@@ -14,16 +14,10 @@ import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
-
+import Home from './paginas/Home';
+import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import PayForm from './PayForm/PayForm';
-
-
-const inlineStyles= {
-  padding:5
-}
-
 
 
 //Types
@@ -62,12 +56,10 @@ export async function getJuguetes():Promise<Juguete[]>{
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
 
-
-
+const getProducts = async (): Promise<CartItemType[]> =>
+  await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
-
- 
 
   //Esto nos va adecir si el carrito esta abierto, va a ser un booleano (cartOpen) que se inicia en false y que se puede modificar con la funcion  "setCartOpen"
   const [cartOpen, setCartOpen] = useState(false);
@@ -95,10 +87,10 @@ const App = () => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
+      const isItemInCart = prev.find(item => item.nombre ===clickedItem.nombre)
       if(isItemInCart) {
         return prev.map(item=>(
-          item.id===clickedItem.id
+          item.nombre===clickedItem.nombre
           //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
             ? {...item, cantidad: item.cantidad+1}
             : item
@@ -110,12 +102,12 @@ const App = () => {
     })
   };
 
-  const handleRemoveFromCart = (id: number) => {
+  const handleRemoveFromCart = (nombre: string) => {
     setCartItems(prev=>(
       prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.cantidad===1) return ack;
-          return [...ack, {...item, amount:item.cantidad - 1}]
+        if(item.nombre===nombre ){
+          if(item.cantidad===1)return ack;
+          return [...ack, {...item, cantidad:item.cantidad - 1}]
         } else {
           return [...ack, item];
         }
@@ -124,67 +116,141 @@ const App = () => {
 
   };
 
+  /*const handleAddToCart = (clickedItem: CartItemType) => {
+    //"prev" es el estado previo del carrito, justo antes de añadir un producto
+    setCartItems(prev => {
+      //1. Teniamos ya el producto en el carrito
+      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
+      if(isItemInCart) {
+        return prev.map(item=>(
+          item.id===clickedItem.id
+          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
+            ? {...item, amount: item.amount+1}
+            : item
+        ))
+      }
+      //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
+      //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
+      return [...prev, {...clickedItem, amount:1}];
+    })
+  };*/
 
+  /*const handleRemoveFromCart = (id: number) => {
+    setCartItems(prev=>(
+      prev.reduce((ack, item)=> {
+        if(item.id===id){
+          if(item.amount===1) return ack;
+          return [...ack, {...item, amount:item.amount - 1}]
+        } else {
+          return [...ack, item];
+        }
+      }, [] as CartItemType[])
+    ))
+
+  };*/
 
   //Coloca una barra de carga cuando la página está cargando
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
 
-  
-
   return (
-    <div className='page-container'>
-      
-    <Wrapper>
-      <div className='content-wrap'>
-        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-          <Cart
-            cartItems={cartItems}
-            addToCart={handleAddToCart}
-            removeFromCart={handleRemoveFromCart}
-          />
-        
-        </Drawer>
-        <StyledButton onClick={() => setCartOpen(true)}>
-          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
-          </Badge>
-        </StyledButton>
-        <Grid container spacing={3}>
-          {data?.map(item => (
-            <Grid item key={item.id} xs={12} sm={4}>
-              <Item item={item} handleAddToCart={handleAddToCart} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-      <Footer />
-    </Wrapper>
-    </div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+        <Route path="" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+        <Route path="/productos" element={
+           <div className='page-container'>
+           <Wrapper>
+             <div className='content-wrap'>
+               <Navbar />
+               <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                 <Cart
+                   cartItems={cartItems}
+                   addToCart={handleAddToCart}
+                   removeFromCart={handleRemoveFromCart}
+                 />
+               </Drawer>
+               <StyledButton onClick={() => setCartOpen(true)}>
+                 <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                   <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                 </Badge>
+               </StyledButton>
+               <Grid container spacing={3}>
+                 {data?.map(item => (
+                   <Grid item key={item.id} xs={12} sm={4}>
+                     <Item item={item} handleAddToCart={handleAddToCart} />
+                   </Grid>
+                 ))}
+               </Grid>
+             </div>
+             <Footer />
+           </Wrapper>
+           </div>
+      }/>
+        <Route path="/contactanos" element={
+              <Wrapper>
+                <Navbar/>
+                <ContactUs/>
+                <Footer/>
+            </Wrapper>
+            }/>
+         <Route path="/confirmar-pedido" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }/>
+      </Routes>
+    </BrowserRouter>
+   </>
   );
 
 };
 
-const Enlace =()=>{
-  //const [page,setPage]=useState('home')
-   
-   const getContent = (page:string) =>{
-     if(page == 'home'){
-       return <App />
-     }else if(page =='login'){
-       return <Navbar />
-     }
-     else
-       return <Navbar />
-     }
-     /*const toPage = (pagetx : string) =>{
-         setPage(pagetx)
-     }*/
- 
- return (
-   <div>
-     {getContent('home')}
-   </div>
- )
- }
-export default Enlace;
+
+/*
+ const vista =()=>{
+   return(
+     <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+
+        <Route path="/productos" element={<App/>}/>
+
+        <Route path="/contactanos" element={
+           <Wrapper>
+            <Navbar/>
+            <ContactUs/>
+            <Footer/>
+         </Wrapper>
+        }/>
+      </Routes>
+    </BrowserRouter>
+   </>)
+ }*/
+
+export default App;
