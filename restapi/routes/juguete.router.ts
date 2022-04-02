@@ -27,7 +27,7 @@ jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
             res.json(juguete);
         }
         else{
-            res.send("El juguete no existe")
+            res.status(204).send("El juguete no existe")
         }
     } catch (err) {
         res.status(500).send("Error en el formato");
