@@ -155,7 +155,7 @@ const App = () => {
   if (isLoading) return <LinearProgess />;
   if (error) return <div>Algo ha fallado</div>;
 
-  console.log(cartItems)
+
 
   return (
     <>
@@ -188,9 +188,7 @@ const App = () => {
                    addToCart={handleAddToCart}
                    removeFromCart={handleRemoveFromCart}
                  />
-            <PayForm
-             cartItems={cartItems}
-             />
+
                </Drawer>
                <StyledButton onClick={() => setCartOpen(true)}>
                  <Badge badgeContent={getTotalItems(cartItems)} color='error'>
@@ -220,7 +218,7 @@ const App = () => {
           <Wrapper>
             <Navbar/>
             <PayForm
-             cartItems={elementosCarrito}
+             cartItems={cartItems.slice()}
              />
             <Footer/>
           </Wrapper>
