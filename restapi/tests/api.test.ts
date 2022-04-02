@@ -49,7 +49,7 @@ describe('user ', () => {
         let email:string = 'gonzalezgpablo@uniovi.es'
         const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
         expect(response.statusCode).toBe(200);
-    });*/
+    });
 
     it('can be list', async () => {
         await api
@@ -109,8 +109,8 @@ describe('user ', () => {
    * test que prueba a obtener un producto inexistente
    */
    it("No se puede obtener un producto inexistente", async () => {
-       const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7h');
-       expect(response.text).toEqual("No se encuentra disponible")
+       const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7b');
+       expect(response.text).toEqual("El juguete no existe")
     });
 
 });

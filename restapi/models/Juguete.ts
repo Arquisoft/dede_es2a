@@ -17,9 +17,9 @@ const jugueteSchema = new mongoose.Schema({
 jugueteSchema.set('toJSON', {
     
     transform: (document:any, returnedObject:any) =>{
-        returnedObject.id = returnedObject.id
+        returnedObject.id = returnedObject._id
         returnedObject.cantidad = 0
-        delete returnedObject.id
+        delete returnedObject._id
         delete returnedObject.__v
     }
 })
