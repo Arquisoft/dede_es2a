@@ -23,6 +23,7 @@ type Props = {
 };
 
 const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
+
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
     const { isAuthenticated } = useAuth0();
