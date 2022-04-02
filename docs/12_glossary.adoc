@@ -29,5 +29,12 @@ Potentially more columns in case you need translations.
 | _SOLID_     | _SOLID es una especificación que permite a las personas almacenar sus datos de forma segura en almacenes de datos descentralizados llamados PODs._
 | _POD_    | _Los PODs son como servidores web personales seguros para datos. Cuando los datos se almacenan en el POD de alguien, controlan qué personas y aplicaciones pueden acceder a ellos._
 | _REACT_    | _React es una biblioteca de JavaScript para construir interfaces de usuario interactivas. Además, se encarga de actualizar y renderizar de manera eficiente los componentes correctos cuando los datos cambien._
+| _TypeScript_    | _Sirve para el desarrollo de aplicaciones con Javascript a gran escala._
 | _NODE.js_    | _Node.js es un entorno de tiempo de ejecución de JavaScript. Incluye todo lo que se necesita para ejecutar un programa escrito en JavaScript. También aporta muchos beneficios y soluciona gran cantidad de problemas._
+| _Express_    | _Es el framework web más popular de Node._
+| _Heroku_    | _Es la plataforma para la creación de aplicaciones que hemos usado._
+| _Auth0_    | _API que permite la autenticación en aplicaciones de manera sencilla y eficaz._
+| _Dotenv_    | _Usada para manejar variables de entorno y nos sirve para proteger la información privada._
+| _MongoDB_    | _Es un sistema de base de datos NoSQL orientado a documentos de código abierto._
+| _BootStrap_    | _Es un framework front-end utilizado para desarrollar aplicaciones web._
 |===
