@@ -49,11 +49,18 @@ describe('user ', () => {
         let email:string = 'gonzalezgpablo@uniovi.es'
         const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
         expect(response.statusCode).toBe(200);
-    });
+    });*/
 
     it('can be list', async () => {
         await api
         const response:Response = await request(app).get('/juguete')
+        expect(response.statusCode).toBe(200)
+        expect(response.type).toEqual("application/json")
+    })
+
+    it('can be list only products withStock', async () => {
+        await api
+        const response:Response = await request(app).get('/juguete/withStock')
         expect(response.statusCode).toBe(200)
         expect(response.type).toEqual("application/json")
     })
@@ -70,6 +77,20 @@ describe('user ', () => {
         expect(response.text).toEqual("Añadido nuevo juguete")
     })
 
+    it('can be update', async () => {
+        
+        let name:String = "jugueteActualizado"
+        let description:String = "decripcion actualizada"
+        let price:Number = 10
+        let imag:String = "no tiene"
+        let category:String = "sin categoria"
+        let quantity:Number = 12
+        const response:Response = await request(app).post('/juguete/update/6245d3812fea24b3e7945ef8').send({nombre:name,descripcion:description,precio:price,
+            imagen:imag,categoria:category, cantidad : quantity})
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("El juguete se ha actualizo correctamente")
+    })
+
     it('find one by id', async () => {
         const response: Response = await request(app).get("/juguete/622c7f956016f025f28e9b7d");
         expect(response.statusCode).toBe(200);
@@ -83,33 +104,13 @@ describe('user ', () => {
             cantidad: 0,
         });
     });
-});
-*/
 
-describe('juguete ', () => {
-    /**
-     * Test que puede listar los juguetes sin errores.
-     
-    it('pueden ser listados',async () => {
-        const result = await request(app).get("/juguete");
-        expect(result).toBe(400);
-    });*/
-
-    /**
-     * Tests that a user can be created through the productService without throwing any errors.
-     */
-    /*it('can be created correctly', async () => {
-        let username:string = 'Pablo'
-        let email:string = 'gonzalezgpablo@uniovi.es'
-        const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
-        expect(response.statusCode).toBe(200);
-    });*/
-
-    /**
+     /**
    * test que prueba a obtener un producto inexistente
    */
    it("No se puede obtener un producto inexistente", async () => {
-    const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7h');
-    expect(response.statusCode).toBe(204);
-  });
+       const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7h');
+       expect(response.text).toEqual("No se encuentra disponible")
+    });
+
 });
