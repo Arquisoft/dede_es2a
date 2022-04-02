@@ -209,6 +209,13 @@ const App = () => {
                 <Footer/>
             </Wrapper>
             }/>
+         <Route path="/confirmar-pedido" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }/>
       </Routes>
     </BrowserRouter>
    </>

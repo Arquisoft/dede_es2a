@@ -39,6 +39,19 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                 />
             ))}
             <h2>Total: {calculateTotal(cartItems).toFixed(2)}€</h2>
+            
+           {cartItems.length===0 ?
+            <li key={0}>
+                <a className={'active'} >
+                    {'Pagar'}
+                </a>
+            </li> :
+            <li key={0}>
+                <a className={'active'} href={'confirmar-pedido'}>
+                    {'Pagar'}
+                </a>
+            </li>
+            }           
         </Wrapper>
     )
 };
