@@ -33,83 +33,82 @@ afterAll(async () => {
 })
 
 describe('user ', () => {
-    /**
-     * Test that we can list users without any error.
-    */
-    it('can be listed',async () => {
-        const response:Response = await request(app).get("/api/users/list");
-        expect(response.statusCode).toBe(200);
-    });
-
-    /**
-     * Tests that a user can be created through the productService without throwing any errors.
-     */
-    it('can be created correctly', async () => {
-        let username:string = 'Pablo'
-        let email:string = 'gonzalezgpablo@uniovi.es'
-        const response:Response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
-        expect(response.statusCode).toBe(200);
-    });
-
-    it('can be list', async () => {
+    it('Los juguetes se pueden listar', async () => {
         await api
         const response:Response = await request(app).get('/juguete')
         expect(response.statusCode).toBe(200)
         expect(response.type).toEqual("application/json")
     })
 
-    it('can be list only products withStock', async () => {
+    it('Se pueden listar los juguetes tan solo con stock', async () => {
         await api
         const response:Response = await request(app).get('/juguete/withStock')
         expect(response.statusCode).toBe(200)
         expect(response.type).toEqual("application/json")
     })
 
-    it('can be add', async () => {
-        
-        let name:String = "juguete3"
-        let description:String = "un pepinu"
+    it('Se puede añadir un juguete', async () => {
+        let name:String = "juguete1Prueba"
+        let description:String = "descripcion"
         let price:Number = 13.5
         let imag:String = "alguna"
         let category:String = "la ostia"
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Añadido nuevo juguete")
+        // lo borramos para que no se quede almacendo en la base de datos
+        await request(app).delete('/juguete/juguete1Prueba');
     })
 
-    it('can be update', async () => {
-        
-        let name:String = "jugueteActualizado"
+    it('Encontrar un juguete por nombre', async () => {
+        // añadimos juguete para prueba
+        let name:String = "juguetePruebas"
+        let description:String = "descripcion"
+        let price:Number = 13.5
+        let imag:String = "sin imagen"
+        let category:String = "categoria"
+        let quantity:Number = 0
+        let stock2:Number = 5
+        await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,
+        cantidad:quantity, stock:stock2})
+        // comprobamos que lo podemos encontrar
+        const response: Response = await request(app).get("/juguete/juguetePruebas");
+        let id = response.body.id;
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({
+            id: id,
+            nombre: "juguetePruebas",
+            descripcion: "descripcion",
+            precio: 13.5,
+            imagen: "sin imagen",
+            categoria: "categoria",
+            cantidad: 0,
+            stock:5
+        });
+    });
+
+    it('Se puede actualizar un juguete', async () => {
         let description:String = "decripcion actualizada"
         let price:Number = 10
         let imag:String = "no tiene"
         let category:String = "sin categoria"
         let quantity:Number = 12
-        const response:Response = await request(app).post('/juguete/update/6245d3812fea24b3e7945ef8').send({nombre:name,descripcion:description,precio:price,
-            imagen:imag,categoria:category, cantidad : quantity})
+        let stock2:Number = 10
+        // actualizamos el juguete añadido en la prueba anterior y lo borramos aqui ya que no lo vamos a utilizar mas
+        const response:Response = await request(app).post('/juguete/update/juguetePruebas').send({descripcion:description,precio:price,
+            imagen:imag,categoria:category, cantidad : quantity, stock:stock2})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("El juguete se ha actualizo correctamente")
+        // lo eliminamos
+        await request(app).delete('/juguete/juguetePruebas');
     })
 
-    it('find one by id', async () => {
-        const response: Response = await request(app).get("/juguete/622c7f956016f025f28e9b7d");
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({
-            id: "622c7f956016f025f28e9b7d",
-            nombre: "Juguete1",
-            descripcion: "Un shiny",
-            precio: 15.8,
-            imagen: "https://ae01.alicdn.com/kf/H70f6cbb9d19d4b64ae9970e64dae39f4U/TOMY-figuras-de-acci-n-de-Pok-mon-para-ni-os-juguetes-de-transformaci-n-de.jpg_Q90.jpg_.webp",
-            categoria: "Bueh",
-            cantidad: 0,
-        });
-    });
 
      /**
    * test que prueba a obtener un producto inexistente
    */
-   it("No se puede obtener un producto inexistente", async () => {
-       const response: Response = await request(app).get('/juguete/622c7fab6016f025f28e9b7b');
+   it("No se puede obtener un producto inexistente (El juguete no existe)", async () => {
+       const response: Response = await request(app).get('/juguete/NoExiste');
        expect(response.text).toEqual("El juguete no existe")
     });
 

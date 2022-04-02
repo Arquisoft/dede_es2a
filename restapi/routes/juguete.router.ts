@@ -20,17 +20,17 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
 
 // petición que solo muestra los productos con stock
 jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
-    Juguete.find({ __v: { $gt: 0 } }).then((juguetes: typeof Juguete) =>{ // __v deberia ser cantidad
+    Juguete.find({ stock: { $gt: 0 } }).then((juguetes: typeof Juguete) =>{ // __v deberia ser cantidad
         //console.log(juguetes)
         res.json(juguetes)
     })
 })
 
 
-jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
+jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
     try{
-        let _id = req.params._id
-        const juguete = await Juguete.findOne({_id});
+        let nombre = req.params.nombre
+        const juguete = await Juguete.findOne({nombre});
         if(juguete){
             res.json(juguete);
         }
@@ -42,14 +42,14 @@ jugueteRouter.get("/:_id", async (req:Request,res:Response) =>{
     }
 });
 
-jugueteRouter.delete("/:_id", async (req:Request,res:Response) =>{
+jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
     try{
-        let _id = req.params._id
-        const juguete = await Juguete.findOne({_id})
+        let nombre = req.params.nombre;
+        const juguete = await Juguete.findOne({nombre})
         console.log("Entró")
         if(juguete){
-            await Juguete.deleteOne({_id});
-            res.send("Elimado juguete ");
+            await Juguete.deleteOne({nombre});
+            res.send("Eliminado juguete ");
         }
         else{
             res.send("No existe el juguete");
@@ -78,11 +78,11 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
     }
 })
 
-jugueteRouter.post("/update/:id", async (req:Request,res:Response) =>{
-    const filter = { _id : req.params.id }
+jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
+    const filter = { nombre : req.params.nombre }
     const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
                 precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
-                cantidad : req.body.cantidad}
+                cantidad : req.body.cantidad, stock: req.body.stock}
 
     let doc = await Juguete.findOneAndUpdate(filter, update, { new:true}).then((jugueteActualizado:typeof Juguete,err:Error) =>{
         if(err){
