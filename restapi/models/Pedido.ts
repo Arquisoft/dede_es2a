@@ -20,7 +20,6 @@ const pedidoSchema = new mongoose.Schema({
 })
 
 pedidoSchema.set('toJSON', {
-    
     transform: (document:any, returnedObject:any) =>{
         returnedObject.id = returnedObject._id
         delete returnedObject._id
