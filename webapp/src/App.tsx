@@ -59,8 +59,6 @@ export async function getJuguetes():Promise<Juguete[]>{
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
 
-const getProducts = async (): Promise<CartItemType[]> =>
-  await (await fetch('https://fakestoreapi.com/products')).json();
 
 const App = () => {
 
@@ -230,34 +228,5 @@ const App = () => {
 
 };
 
-
-/*
- const vista =()=>{
-   return(
-     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={
-          <Wrapper>
-            <Navbar/>
-            <Home/>
-            <Footer/>
-          </Wrapper>
-        }
-        />
-
-        <Route path="/productos" element={<App/>}/>
-
-        <Route path="/contactanos" element={
-           <Wrapper>
-            <Navbar/>
-            <ContactUs/>
-            <Footer/>
-         </Wrapper>
-        }/>
-      </Routes>
-    </BrowserRouter>
-   </>)
- }*/
 
 export default App;
