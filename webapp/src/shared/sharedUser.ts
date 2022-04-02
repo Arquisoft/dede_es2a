@@ -4,4 +4,5 @@ export type Usuario = {
     nombre: string;
     apellidos: string;
     correo: string;
+    rol: String;
 }
