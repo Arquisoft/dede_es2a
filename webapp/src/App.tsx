@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
+import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
 import { Juguete } from './shared/sharedJuguete';
@@ -13,7 +14,8 @@ import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
-
+import Home from './paginas/Home';
+import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
 
@@ -85,10 +87,10 @@ const App = () => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
+      const isItemInCart = prev.find(item => item.nombre ===clickedItem.nombre)
       if(isItemInCart) {
         return prev.map(item=>(
-          item.id===clickedItem.id
+          item.nombre===clickedItem.nombre
           //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
             ? {...item, cantidad: item.cantidad+1}
             : item
@@ -100,12 +102,12 @@ const App = () => {
     })
   };
 
-  const handleRemoveFromCart = (id: number) => {
+  const handleRemoveFromCart = (nombre: string) => {
     setCartItems(prev=>(
       prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.cantidad===1) return ack;
-          return [...ack, {...item, amount:item.cantidad - 1}]
+        if(item.nombre===nombre ){
+          if(item.cantidad===1)return ack;
+          return [...ack, {...item, cantidad:item.cantidad - 1}]
         } else {
           return [...ack, item];
         }
@@ -183,26 +185,34 @@ const App = () => {
 
 };
 
-const Enlace =()=>{
-  //const [page,setPage]=useState('home')
-   
-   const getContent = (page:string) =>{
-     if(page == 'home'){
-       return <App />
-     }else if(page =='login'){
-       return <Navbar />
-     }
-     else
-       return <Navbar />
-     }
-     /*const toPage = (pagetx : string) =>{
-         setPage(pagetx)
-     }*/
- 
- return (
-   <div>
-     {getContent('home')}
-   </div>
- )
+
+
+ const vista =()=>{
+   return(
+     <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+
+        <Route path="/productos" element={<App/>}/>
+
+        <Route path="/contactanos" element={
+           <Wrapper>
+            <Navbar/>
+            <ContactUs/>
+            <Footer/>
+         </Wrapper>
+        }/>
+      </Routes>
+    </BrowserRouter>
+   </>)
  }
-export default Enlace;
+
+export default vista;
