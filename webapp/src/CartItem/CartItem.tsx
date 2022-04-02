@@ -22,6 +22,7 @@ type Props = {
 
 
 const CartItem: React.FC<Props> = ({item, addToCart, removeFromCart}) => (
+    
     <Wrapper>
         <div>
             <h3>{item.nombre}</h3>
@@ -38,6 +39,7 @@ const CartItem: React.FC<Props> = ({item, addToCart, removeFromCart}) => (
                     >
                     -
                 </Button>
+                
                 <p>{item.cantidad}</p>
                 <Button
                     size = 'small'

@@ -14,7 +14,7 @@ import {Juguete} from '../shared/sharedJuguete';
 /*type Props = {
     cartItems: CartItemType[];
     addToCart: (clickedItem:CartItemType)=> void;
-    removeFromCart: (id:number) => void;
+    removeFromCart: (id:number) => void;aa
 };*/
 
 type Props = {
@@ -25,7 +25,7 @@ type Props = {
 const PayForm:React.FC<Props> = ({cartItems})=> {
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
-
+    console.log(cartItems)
     return (
         <Wrapper>
             <h2>Tu Pedido</h2>
@@ -40,7 +40,7 @@ const PayForm:React.FC<Props> = ({cartItems})=> {
             <h2>Va a pagar: {calculateTotal(cartItems).toFixed(2)}€</h2>
 
             <button type="button" className="btn btn-primary">
-
+                Permisos de POD
             </button>
         </Wrapper>
     )
