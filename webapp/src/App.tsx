@@ -154,39 +154,77 @@ const App = () => {
   if (error) return <div>Algo ha fallado</div>;
 
   return (
-    <div className='page-container'>
-    <Wrapper>
-      <div className='content-wrap'>
-        <Navbar />
-        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-          <Cart
-            cartItems={cartItems}
-            addToCart={handleAddToCart}
-            removeFromCart={handleRemoveFromCart}
-          />
-        </Drawer>
-        <StyledButton onClick={() => setCartOpen(true)}>
-          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
-          </Badge>
-        </StyledButton>
-        <Grid container spacing={3}>
-          {data?.map(item => (
-            <Grid item key={item.id} xs={12} sm={4}>
-              <Item item={item} handleAddToCart={handleAddToCart} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-      <Footer />
-    </Wrapper>
-    </div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+        <Route path="" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }
+        />
+        <Route path="/productos" element={
+           <div className='page-container'>
+           <Wrapper>
+             <div className='content-wrap'>
+               <Navbar />
+               <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                 <Cart
+                   cartItems={cartItems}
+                   addToCart={handleAddToCart}
+                   removeFromCart={handleRemoveFromCart}
+                 />
+               </Drawer>
+               <StyledButton onClick={() => setCartOpen(true)}>
+                 <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                   <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                 </Badge>
+               </StyledButton>
+               <Grid container spacing={3}>
+                 {data?.map(item => (
+                   <Grid item key={item.id} xs={12} sm={4}>
+                     <Item item={item} handleAddToCart={handleAddToCart} />
+                   </Grid>
+                 ))}
+               </Grid>
+             </div>
+             <Footer />
+           </Wrapper>
+           </div>
+      }/>
+        <Route path="/contactanos" element={
+              <Wrapper>
+                <Navbar/>
+                <ContactUs/>
+                <Footer/>
+            </Wrapper>
+            }/>
+         <Route path="/confirmar-pedido" element={
+          <Wrapper>
+            <Navbar/>
+            <Home/>
+            <Footer/>
+          </Wrapper>
+        }/>
+      </Routes>
+    </BrowserRouter>
+   </>
   );
 
 };
 
 
-
+/*
  const vista =()=>{
    return(
      <>
@@ -213,6 +251,6 @@ const App = () => {
       </Routes>
     </BrowserRouter>
    </>)
- }
+ }*/
 
-export default vista;
+export default App;
