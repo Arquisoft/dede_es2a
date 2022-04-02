@@ -12,6 +12,7 @@ jugueteRouter.use(express.json());
 
 
 jugueteRouter.get("/", async (req:Request,res:Response) =>{
+    gestorDB.connect();
     const juguetes = await Juguete.find({});
     res.json(juguetes);
 });
@@ -58,9 +59,10 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             precio: req.body.precio,
             imagen: req.body.imagen,
             categoria: req.body.categoria,
+            stock: req.body.stock
         });
         const juguete = await nuevoJuguete.save(nuevoJuguete);
-        res.send("Añadido")
+        res.send("Añadido nuevo juguete")
 
     } catch{
         res.send("Error");

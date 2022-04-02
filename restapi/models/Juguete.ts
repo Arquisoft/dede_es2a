@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
     id:Number,
@@ -10,7 +10,8 @@ const jugueteSchema = new mongoose.Schema({
     precio:Number,
     imagen:String,
     categoria:String,
-    cantidad:Number
+    cantidad:Number,
+    stock:Number
 })
 
 jugueteSchema.set('toJSON', {

@@ -73,7 +73,7 @@ describe('user ', () => {
     it('find one by id', async () => {
         const response: Response = await request(app).get("/juguete/622c7f956016f025f28e9b7d");
         expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual([{
+        expect(response.body).toEqual({
             id: "622c7f956016f025f28e9b7d",
             nombre: "Juguete1",
             descripcion: "Un shiny",
@@ -81,6 +81,6 @@ describe('user ', () => {
             imagen: "https://ae01.alicdn.com/kf/H70f6cbb9d19d4b64ae9970e64dae39f4U/TOMY-figuras-de-acci-n-de-Pok-mon-para-ni-os-juguetes-de-transformaci-n-de.jpg_Q90.jpg_.webp",
             categoria: "Bueh",
             cantidad: 0,
-        }]);
+        });
     });
 });
