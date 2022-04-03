@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-solution-strategy">4. Estrategia de solución</a></li>
 <li><a href="#section-building-block-view">5. Vista de bloques de construcción</a>
 <ul class="sectlevel2">
-<li><a href="#_sistema_general_de_casa_blanca">5.1. Sistema General de Casa Blanca</a></li>
+<li><a href="#_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</a></li>
 <li><a href="#_nivel_2">5.2. Nivel 2</a></li>
 <li><a href="#_nivel_3">5.3. Nivel 3</a></li>
 </ul>
@@ -467,11 +467,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-runtime-view">6. Vista de tiempo de ejecución</a>
 <ul class="sectlevel2">
 <li><a href="#_compra_de_productos">6.1. Compra de productos</a></li>
-<li><a href="#_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_diagrama_de_secuencia_n">6.4. &lt;Diagrama de secuencia n&gt;</a></li>
-<li><a href="#_2">6.5. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.6. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_añadir_productos">6.2. Añadir productos</a></li>
+<li><a href="#_eliminar_productos">6.3. Eliminar productos</a></li>
+<li><a href="#_filtrar_productos">6.4. Filtrar productos</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Vista de implementación</a>
@@ -494,7 +492,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_escenarios_de_calidad">10.2. Escenarios de calidad</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
+<li><a href="#section-technical-risks">11. Riesgos y deudas técnicas</a></li>
 <li><a href="#section-glossary">12. Glosario</a></li>
 </ul>
 </div>
@@ -729,7 +727,7 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Seguridad</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Se seguirán los principios SOLID a la hora de almacenar la informacion del login del usuario para poder asegurar la privacidad de este.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Para mantener la privacidad de los usuarios se almacenará toda su información privada en pods.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Despliegue</p></td>
@@ -759,6 +757,10 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Configuracion y control del repositorio</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona del equipo trabajará desde una rama propia.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha limite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La fecha limite del proyecto es el 2 de mayo.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1116,7 +1118,7 @@ Thus it contains the white box description of selected building blocks of level 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sistema_general_de_casa_blanca">5.1. Sistema General de Casa Blanca</h3>
+<h3 id="_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1395,23 +1397,28 @@ You will mainly capture scenarios in your documentation to communicate your arch
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagrama_de_secuencia_2">6.2. &lt;Diagrama de secuencia 2&gt;</h3>
-
+<h3 id="_añadir_productos">6.2. Añadir productos</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="375" height="343">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
-
+<h3 id="_eliminar_productos">6.3. Eliminar productos</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="408" height="343">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_diagrama_de_secuencia_n">6.4. &lt;Diagrama de secuencia n&gt;</h3>
-
+<h3 id="_filtrar_productos">6.4. Filtrar productos</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="483" height="283">
 </div>
-<div class="sect2">
-<h3 id="_2">6.5. &#8230;&#8203;</h3>
-
 </div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.6. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1898,7 +1905,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
+<h2 id="section-technical-risks">11. Riesgos y deudas técnicas</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <div class="title">Falta de conocimiento de React</div>
@@ -2055,8 +2062,36 @@ sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>React es una biblioteca de JavaScript para construir interfaces de usuario interactivas. Además, se encarga de actualizar y renderizar de manera eficiente los componentes correctos cuando los datos cambien.</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>TypeScript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Sirve para el desarrollo de aplicaciones con Javascript a gran escala.</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>NODE.js</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Node.js es un entorno de tiempo de ejecución de JavaScript. Incluye todo lo que se necesita para ejecutar un programa escrito en JavaScript. También aporta muchos beneficios y soluciona gran cantidad de problemas.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Express</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es el framework web más popular de Node.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Heroku</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es la plataforma para la creación de aplicaciones que hemos usado.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth0</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API que permite la autenticación en aplicaciones de manera sencilla y eficaz.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dotenv</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usada para manejar variables de entorno y nos sirve para proteger la información privada.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es un sistema de base de datos NoSQL orientado a documentos de código abierto.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>BootStrap</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es un framework front-end utilizado para desarrollar aplicaciones web.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -2085,7 +2120,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-03-04 10:46:35 +0100
+Last updated 2022-04-02 00:10:29 +0200
 </div>
 </div>
 </body>
