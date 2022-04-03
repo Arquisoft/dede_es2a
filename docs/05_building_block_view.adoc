@@ -34,7 +34,7 @@ Thus it contains the white box description of selected building blocks of level 
 *Level 3* zooms into selected building blocks of level 2, and so on.
 ****
 
-=== Sistema General de Casa Blanca
+=== Sistema General de Caja Blanca
 
 [role="arc42help"]
 ****

@@ -23,7 +23,7 @@ Restricciones tecnicas
 |===
 |Restriccion|Explicacion
 |Implementacion| La aplicacion estará formada por un front-end utilizando React  con TypeScript y un back-end utilizando NodeJS con Express
-|Seguridad| Se seguirán los principios SOLID a la hora de almacenar la informacion del login del usuario para poder asegurar la privacidad de este.
+|Seguridad| Para mantener la privacidad de los usuarios se almacenará toda su información privada en pods.
 |Despliegue| La aplicacion será accesible de manera continua y utilizará un sistema de integracion continuo.
 |===
 
@@ -33,6 +33,7 @@ Restricciones organizacionales
 |Restriccion|Explicacion
 |Equipo|  -Alejandro Galán Freire - Aarón García García - Mario Lada Martínez - Jorge López Peláez - Rafael Muñiz Reguera.
 |Configuracion y control del repositorio| Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona del equipo trabajará desde una rama propia.
+|Fecha limite| La fecha limite del proyecto es el 2 de mayo.
 |===
 
 Convenciones

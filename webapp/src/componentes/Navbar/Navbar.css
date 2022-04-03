@@ -9,10 +9,29 @@
     margin-bottom: 1em;
 }
 
+.prof-name {
+    color: #fff;
+    margin-right: 3.5em;
+    min-width: 9em;
+    margin-left: 1em;
+}
+
+.prof-img {
+    margin-right: 0.5em;
+}
+
+.btn-primary-login {
+    background-color: rgb(255, 255, 255);
+    color:#0d6efd;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 5em;
+    font-size: 1.2rem;
+}
+
 .btn-primary {
     background-color: rgb(255, 255, 255);
     color:#0d6efd;
-    margin-right: 4.5rem;
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     font-size: 1.2rem;

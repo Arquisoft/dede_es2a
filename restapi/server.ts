@@ -31,6 +31,8 @@ app.get("/", function(req,res){
     res.send("Por aqui no, dale a /juguete");
 });
 
+bd.connect();
+
 app.use("/juguete", jugueteRouter);
 
 app.listen(port, ():void => {

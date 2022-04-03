@@ -75,10 +75,27 @@ BaseDeDatos -> Dede: Devuelve la nueva lista de productos
 Dede -> Admin: Muestra todos los productos
 ----
 
-=== ...
+=== Eliminar productos
+[plantuml,"Sequence diagram",png]
+----
+actor Admin
+database BaseDeDatos as "Base de datos" #blue
+Admin -> Dede: Accede  a la página para eliminar productos
+Admin -> Dede: Escoge el producto a eliminar
+Dede -> BaseDeDatos: Elimina el producto
+BaseDeDatos -> Dede: Devuelve la lista actualizada de productos
+Dede -> Admin: Muestra todos los productos
+----
 
-=== <Diagrama de secuencia n>
+=== Filtrar productos
+[plantuml,"Sequence diagram",png]
+----
+actor Usuario
+database BaseDeDatos as "Base de datos" #blue
+Usuario -> Dede: Escribe un texto en el cuadro de búsqueda y pulsa 'filtrar'
+BaseDeDatos --> Dede: Devuelve los juguetes que coincidan con la búsqueda
+Usuario <- Dede: Muestra los juguetes encontrados con el filtro
+----
 
-=== ...
 
-=== <Runtime Scenario n>
+
