@@ -4,6 +4,11 @@ import * as React from "react";
 //Styles
 import {Wrapper} from '../Cart/Cart.styles';
 
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+
+import Container from "@mui/material/Container";
 //Types
 import { CartItemType } from '../App';
 
@@ -12,15 +17,17 @@ import {Juguete} from '../shared/sharedJuguete';
 import Shipping from './Shipping';
 import Delivery from './Delivery';
 import Review from './Review';
-//import FinalizedOrder from '/.FinalizedOrder';
+import FinalizedOrder from './FinalizedOrder';
 
 
 
-/*type Props = {
+/*
+type Props = {
     cartItems: CartItemType[];
     addToCart: (clickedItem:CartItemType)=> void;
     removeFromCart: (id:number) => void;aa
-};*/
+};
+*/
 
 type Props = {
     cartItems: Juguete[];
@@ -32,6 +39,8 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
+
+      const steps = ["Shipping", "Delivery", "Summary"]
       
       const pasoAnterior = () => {
         setPasoActual((pasoPrevio) => pasoPrevio - 1);
@@ -80,14 +89,29 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             );
           case 3:
             return <FinalizedOrder />;
+            
         }
       };
 
 
 
       return (
+        <React.Fragment>
+    <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>
+         <Stepper
+            activeStep={pasoActual}
+            alternativeLabel
+          >
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
         <React.Fragment>    
               {getPaso(pasoActual)}
+        </React.Fragment>
+        </Container>
         </React.Fragment>
       )
       

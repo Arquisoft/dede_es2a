@@ -5,16 +5,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 //Types
 import { CartItemType } from '../App';
-
 import {Juguete} from '../shared/sharedJuguete';
 
-
-const FinalizedOrder = () => {
-
+export default function FinalizedOrder(props: any): JSX.Element {
     return (
-        <div></div>
-
-    );
+        <div>
+            <p>Hola</p>
+        </div>
+    )
 };
 //El boton se utilizara para obtener el pod del usuario, faltaría la función onClickl
-export default FinalizedOrder;
