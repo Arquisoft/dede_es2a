@@ -24,16 +24,32 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
     const price = calculateTotal(cartItems);
     return (
         <div>
-            <h2>Resumen</h2>
-            <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
-            <p>Gastos de envío: <b>{deliveryCost}</b></p>
-            <Button
+            <div>
+              //Aqui irian los transportistas sacados por la api
+              Transportistas
+            </div>
+
+            <div id="resumen">
+              <h2>Resumen</h2>
+              <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
+              <p>Gastos de envío: <b>{deliveryCost}</b></p>
+              <h3>Total: {(deliveryCost + price).toFixed(2)}€</h3>
+
+              <Button
               onClick={siguientePaso}
               variant="contained"
               className="m-1"
             >
               Guardar y continuar
             </Button>
+            </div>
+
+            <div>
+              <h3>opciones de entrega</h3>
+              <p>Fecha de entrega???</p>
+              <p>numero de bultos</p>
+            </div>
+         
         </div>
     )
 };
