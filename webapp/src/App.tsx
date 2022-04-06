@@ -20,7 +20,7 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import PayForm from './PayForm/PayForm';
+import ProcesoPago from './PayForm/ProcesoPago';
 
 
 //Types
@@ -233,7 +233,7 @@ const App = () => {
                   <Wrapper>
                   <Navbar/>
                   
-                  <PayForm
+                  <ProcesoPago
                     cartItems={cartItems.slice()}
                   />
                   <Footer/>

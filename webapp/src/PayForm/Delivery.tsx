@@ -16,6 +16,7 @@ type Props = {
     siguientePaso: () => void;
     setAddress:(n:string) => void;
     address: string;
+    setDeliveryDate:(n:string) => void;
 }
 
 const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, siguientePaso, setAddress, address})=> {
@@ -27,6 +28,8 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             <div>
               //Aqui irian los transportistas sacados por la api
               Transportistas
+
+              *Aqui tambien se tiene que utilizar "setDeliveryDate" con la referencia al string de la fecha de entrega*
             </div>
 
             <div id="resumen">

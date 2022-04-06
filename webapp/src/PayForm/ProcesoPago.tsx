@@ -27,7 +27,7 @@ type Props = {
 };
 
 
-const PayForm:React.FC<Props> = ({cartItems}) => {
+const ProcesoPago:React.FC<Props> = ({cartItems}) => {
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
@@ -38,7 +38,8 @@ const PayForm:React.FC<Props> = ({cartItems}) => {
       };
 
       const [deliveryCost, setDeliveryCost] = React.useState<number>(Number());
-      const [address, setAdress] = React.useState("");
+      const [address, setAddress] = React.useState("");
+      const [deliveryDate, setDeliveryDate] = React.useState("");
 
       const getPaso = (stepIndex: number) => {
         switch (stepIndex) {
@@ -49,7 +50,7 @@ const PayForm:React.FC<Props> = ({cartItems}) => {
                 siguientePaso={siguientePaso}
                 setDeliveryCost={setDeliveryCost}
                 deliveryCost={deliveryCost}
-                setAddress={siguientePaso}
+                setAddress={setAddress}
                 
               />
             );
@@ -60,16 +61,21 @@ const PayForm:React.FC<Props> = ({cartItems}) => {
                 siguientePaso={siguientePaso}
                 deliveryCost={deliveryCost}
                 setDeliveryCost={setDeliveryCost}
-                setAddress={siguientePaso}
+                setAddress={setAddress}
                 address={address}
+                setDeliveryDate={setDeliveryDate}
               />
             );
           case 2:
             return (
               <Review
-              cartItems={cartItems}
-                gastosEnvio={-1}
+                cartItems={cartItems}
                 siguientePaso={siguientePaso}
+                deliveryCost={deliveryCost}
+                setDeliveryCost={setDeliveryCost}
+                setAddress={siguientePaso}
+                address={address}
+                deliveryDate={deliveryDate}
               />
             );
           case 3:
@@ -87,3 +93,4 @@ const PayForm:React.FC<Props> = ({cartItems}) => {
       
 };
 //El boton se utilizara para obtener el pod del usuario, faltaría la función onClickl
+export default ProcesoPago;
