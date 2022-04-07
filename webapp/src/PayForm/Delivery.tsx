@@ -2,7 +2,7 @@ import * as React from "react";
 import CartItem from '../CartItem/CartItem';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
-
+import { Typography } from "@material-ui/core";
 
 //Types
 import { CartItemType } from '../App';
@@ -33,10 +33,10 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             </div>
 
             <div id="resumen">
-              <h2>Resumen</h2>
+            <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
               <p>Gastos de envío: <b>{deliveryCost}</b></p>
-              <h3>Total: {(deliveryCost + price).toFixed(2)}€</h3>
+              <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
 
               <Button
               onClick={siguientePaso}

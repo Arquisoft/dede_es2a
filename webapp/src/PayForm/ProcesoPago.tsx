@@ -1,6 +1,7 @@
 import CartItem from '../CartItem/CartItem';
 
 import * as React from "react";
+import Paper from "@mui/material/Paper";
 //Styles
 import {Wrapper} from '../Cart/Cart.styles';
 
@@ -40,7 +41,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
-      const steps = ["Shipping", "Delivery", "Summary"]
+      const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
       
       const pasoAnterior = () => {
         setPasoActual((pasoPrevio) => pasoPrevio - 1);
@@ -97,8 +98,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
 
       return (
         <React.Fragment>
-    <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>
-         <Stepper
+           <Stepper
             activeStep={pasoActual}
             alternativeLabel
           >
@@ -108,10 +108,18 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               </Step>
             ))}
           </Stepper>
+          <Paper
+          elevation = {12}
+          sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}
+        >
+    <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>
+
         <React.Fragment>    
               {getPaso(pasoActual)}
         </React.Fragment>
+    
         </Container>
+        </Paper>
         </React.Fragment>
       )
       

@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
+import { Typography } from "@material-ui/core";
 
 type Props = {
     cartItems: Juguete[];
@@ -34,10 +35,10 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
     return (
         <div>
             <div id="resumen">
-                <h2>Total</h2>
+                <Typography variant="h2" component="h2"> Total</Typography>
                 <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
                 <p>Gastos de envío: <b>{deliveryCost}</b></p>
-                <h3>Total: {(deliveryCost + price).toFixed(2)}€</h3>
+                <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
                 <Button
                 onClick={siguientePaso}
                 variant="contained"
