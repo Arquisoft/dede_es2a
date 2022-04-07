@@ -2,6 +2,10 @@ import * as React from "react";
 import CartItem from '../CartItem/CartItem';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 
 //Types
@@ -34,19 +38,24 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
     }
     return (
         <div>
-            <div id="resumen">
-                <Typography variant="h2" component="h2"> Total</Typography>
-                <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
-                <p>Gastos de envío: <b>{deliveryCost}</b></p>
-                <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
-                <Button
-                onClick={siguientePaso}
-                variant="contained"
-                className="m-1"
-                >
-                Guardar y continuar
-                </Button>
-            </div>
+           <Card sx={{ maxWidth: 600 }} >
+          <CardContent>
+            <Typography variant="h2" component="h2">Resumen</Typography>
+              <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
+              <p>Gastos de envío: <b>{deliveryCost}</b></p>
+              <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
+              </CardContent>
+              <CardActions>
+              <Button
+              onClick={siguientePaso}
+              variant="contained"
+              className="m-1"
+            >
+              Guardar y continuar
+            </Button>
+            </CardActions>
+            </Card>
+         
             <Button
               onClick={obtainPodAndCalculateDeliveryCost}
               variant="contained"

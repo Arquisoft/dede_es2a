@@ -3,6 +3,10 @@ import CartItem from '../CartItem/CartItem';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
 import { Typography } from "@material-ui/core";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 //Types
 import { CartItemType } from '../App';
@@ -32,12 +36,14 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
               *Aqui tambien se tiene que utilizar "setDeliveryDate" con la referencia al string de la fecha de entrega*
             </div>
 
-            <div id="resumen">
+            <Card sx={{ maxWidth: 600 }} >
+          <CardContent>
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
               <p>Gastos de envío: <b>{deliveryCost}</b></p>
               <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
-
+              </CardContent>
+              <CardActions>
               <Button
               onClick={siguientePaso}
               variant="contained"
@@ -45,7 +51,9 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             >
               Guardar y continuar
             </Button>
-            </div>
+            </CardActions>
+            </Card>
+         
 
             <div>
               <h3>opciones de entrega</h3>
