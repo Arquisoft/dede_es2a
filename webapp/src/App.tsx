@@ -21,6 +21,9 @@ import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
 import PayForm from './PayForm/PayForm';
+import Profile from './componentes/loginSOLID/Profile';
+import LoginForm from './componentes/loginSOLID/LoginForm';
+import LogoutForm from './componentes/loginSOLID/LogoutForm';
 
 
 //Types
@@ -240,6 +243,38 @@ const App = () => {
                   </Wrapper>
                 }
               />
+        <Route
+      path="/profile"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <Profile/>
+        
+        <Footer/>
+        </Wrapper>
+      }
+    />
+    <Route
+      path="/loginPago"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <LoginForm/>
+        
+        <Footer/>
+        </Wrapper>
+      }
+    />
+    <Route
+      path="/logoutPago"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <LogoutForm/>
+        <Footer/>
+        </Wrapper>
+      }
+    />
       </Routes>
     </BrowserRouter>
    </>
