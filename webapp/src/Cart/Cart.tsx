@@ -7,7 +7,7 @@ import {Wrapper} from './Cart.styles';
 import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
-
+import LoginButtonCart from '../componentes/Login/LoginButtonCart';
 
 
 /*type Props = {
@@ -27,7 +27,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
     const { isAuthenticated } = useAuth0();
-    const href=!isAuthenticated?"confirmar-pedido":"confirmar-pedido";
+    console.log(isAuthenticated)
     return (
         <Wrapper>
             <h2>Tu Carrito</h2>
@@ -46,11 +46,17 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
             <li key={0}>
         
             </li> :
+            isAuthenticated?
+           
             <li key={0}>
-                <a className={'active'} href={href}>
+                <a className={'active'} href={"confirmar-pedido"}>
                     {'Pagar'}
                 </a>
-            </li>
+            </li>:
+              <li key={0}>
+             <LoginButtonCart />
+              </li>
+
             }           
         </Wrapper>
     )
