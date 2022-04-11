@@ -32,9 +32,7 @@ const PayForm:React.FC<Props> = ({cartItems})=> {
             {cartItems.length===0 ? <p>No hay juguetes en el carrito</p>: null}
             {cartItems.map(item=>(
                 <div> 
-                    <h3>{item.nombre}</h3>
-                    <h3>{item.cantidad}</h3>
-                    <h3>{item.cantidad*item.precio}</h3>
+                    <h3>{item.nombre}: {item.cantidad*item.precio}</h3>
                 </div>
             ))}
             <h2>Va a pagar: {calculateTotal(cartItems).toFixed(2)}€</h2>
