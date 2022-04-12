@@ -24,6 +24,7 @@ import PayForm from './PayForm/PayForm';
 import Profile from './componentes/loginSOLID/Profile';
 import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
+import ProcesoPago from './PayForm/ProcesoPago';
 
 
 //Types
@@ -90,6 +91,10 @@ const App = () => {
       localStorage.setItem("cart", JSON.stringify([]));
     }
   }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
 
   const getTotalItems = (items: Juguete[]) => 
@@ -236,7 +241,7 @@ const App = () => {
                   <Wrapper>
                   <Navbar/>
                   
-                  <PayForm
+                  <ProcesoPago
                     cartItems={cartItems.slice()}
                   />
                   <Footer/>
