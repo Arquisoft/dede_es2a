@@ -1,20 +1,25 @@
 
 import { useState } from "react";
-import { Autocomplete, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 import { LoginButton, useSession } from "@inrupt/solid-ui-react";
 import { useNavigate } from "react-router-dom";
 import { handleIncomingRedirect,  onSessionRestore } from "@inrupt/solid-client-authn-browser";
+import { Autocomplete, Button, Container, TextField } from "@mui/material";
+import { Wrapper} from '../../App.styles';
 import { useEffect } from 'react';
-import { Wrapper, StyledButton } from '../../App.styles';
-
-const authOptions = { clientName: "DedeNostalgia" }; // nobre de nuestra aplicacion
 
 export default function LoginForm() {
 
   const navigate = useNavigate();
   const [idp, setIdp] = useState("https://broker.pod.inrupt.com/");
-  const providers = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" }]
+  const proveedores = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" },
+                    {displayName: "Solid community", url: "https://solidcommunity.net/"},
+                    {displayName: "Solid Web", url:"https://solidweb.org/"}]
   const { session } = useSession();
+  const [UrlActual, setUrlActual] = useState("https://localhost:3000");
+
+  useEffect(() => {
+    setUrlActual(window.location.href);
+  }, [setUrlActual]);
 
   onSessionRestore((url) => {
     if (session.info.isLoggedIn) {
@@ -29,7 +34,7 @@ export default function LoginForm() {
       if (session.info.isLoggedIn) {
         localStorage.setItem("webID", session.info.webId+"");
         localStorage.setItem("sessionID", session.info.sessionId);
-        navigate("/profile");
+        navigate("/perfilPod");
       }
     })
   });
@@ -37,11 +42,22 @@ export default function LoginForm() {
   return (
     <Container>
         <Wrapper>
+        <Autocomplete
+            disablePortal
+            id="combo-box-providers"
+            options={proveedores}
+            renderInput={(params) => <TextField {...params} label="Provider:" />}
+            getOptionLabel={(option) => option.displayName}
+            onChange={(e, value) => {
+              if (value != null)
+                setIdp(value.url)
+            }}
+          />
           <LoginButton
-                oidcIssuer={idp}
-                redirectUrl={window.location.href}
-                authOptions={authOptions}>
-                <Button id="LoginSolid" data-testid="button" color="primary" variant="contained">Obtener dirección</Button>
+            oidcIssuer={idp}
+            redirectUrl={UrlActual}    
+            onError={console.error}>
+                <Button variant="contained">Obtener dirección </Button>
           </LoginButton>
         </Wrapper>
     </Container>

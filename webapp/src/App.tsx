@@ -244,7 +244,7 @@ const App = () => {
                 }
               />
         <Route
-      path="/profile"
+      path="/perfilPod"
       element={
         <Wrapper>
         <Navbar/>
@@ -260,7 +260,6 @@ const App = () => {
         <Wrapper>
         <Navbar/>
         <LoginForm/>
-        
         <Footer/>
         </Wrapper>
       }
