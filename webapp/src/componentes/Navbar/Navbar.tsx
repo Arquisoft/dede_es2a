@@ -38,6 +38,7 @@ const Navbar = () => {
             {
                 isAuthenticated ? <ProfileName/> : <></>
             }
+            
         </nav>
     )
 }
