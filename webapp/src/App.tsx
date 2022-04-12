@@ -20,7 +20,6 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import PayForm from './PayForm/PayForm';
 import Profile from './componentes/loginSOLID/Profile';
 import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
