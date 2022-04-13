@@ -19,7 +19,8 @@ const PedidoRepository = module.exports = {
     },
     addPedido: async function(object:Object){
         try{
-            
+            let pedidoNuevo = new Pedido(object);
+            await pedidoNuevo.save();
         } catch (error){
             throw error;
         }

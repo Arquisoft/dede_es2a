@@ -16,7 +16,6 @@ pedidoRouter.get("/", async(req:Request,res:Response)=>{
     } catch {
         res.send("Error al listar los pedidos");
     }
-    
 });
 
 
@@ -32,4 +31,4 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
     } catch (error) {
         throw (error);
     }
-})
+});
