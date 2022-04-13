@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { SessionProvider } from "@inrupt/solid-ui-react";
 
 // react application -> DeNostalgia
 const domain = 'dev-o-6umpor.us.auth0.com';
@@ -23,7 +24,9 @@ ReactDOM.render(
       clientId={client_id}
       redirectUri={window.location.origin}
     >
-      <App />
+      <SessionProvider>
+        <App />
+      </SessionProvider>
     </Auth0Provider>
   </QueryClientProvider>,
 
