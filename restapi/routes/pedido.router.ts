@@ -5,15 +5,20 @@ import { request } from "http";
 
 export const pedidoRouter = express.Router()
 
-let gestorDB = require("../modules/gestorDB.ts")
-const pedido = require('../models/Pedido')
-
+let PedidoRepository = require('../repositories/PedidosRepository')
 
 pedidoRouter.use(express.json());
 
 pedidoRouter.get("/", async(req:Request,res:Response)=>{
-
+    try{
+        let pedidos = await PedidoRepository.getPedidos();
+        res.send(pedidos);
+    } catch {
+        res.send("Error al listar los pedidos");
+    }
+    
 });
+
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
@@ -23,12 +28,8 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
             precionFinal: req.body.precioFinal,
             productos: req.body.productos
         }
-        await gestorDB.connect();
-        await pedido.save(nuevoPedido);
-    } catch {
-
+        let pedidos = PedidoRepository.addPedido(nuevoPedido);
+    } catch (error) {
+        throw (error);
     }
-    
-
-
 })
