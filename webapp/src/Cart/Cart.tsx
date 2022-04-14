@@ -47,6 +47,9 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                 </a>
             </div>:
               <div>
+                      <a className={'active'} href={"confirmar-pedido"}>
+                    {'Pagar'}
+                </a>
              <LoginButtonCart />
               </div>
             }           
