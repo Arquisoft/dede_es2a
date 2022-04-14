@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const LoginButton = () => {
     const { loginWithRedirect } = useAuth0();
-    return <button className='btn btn-primary-login' onClick={() => useEffect(() => {
+    return <button className='btn btn-primary-login' onClick={() => {
         loginWithRedirect();
         
         const localUser = localStorage.getItem("user");
@@ -13,7 +13,7 @@ const LoginButton = () => {
             localStorage.setItem("user", JSON.stringify([]));
         }
 
-      }, [])}>Registrarse</button>;
+      }}>Registrarse</button>;
 }
 
 export default LoginButton;
