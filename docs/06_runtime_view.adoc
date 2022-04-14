@@ -47,7 +47,7 @@ Alice <-- Bob: another authentication Response
 ****
 
 === Compra de productos
-[plantuml,"Sequence diagram",png]
+[plantuml,"ComprarProducto",png]
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
@@ -64,7 +64,7 @@ Usuario -> DeDe: Confirma el pedido.
 ----
 
 === Añadir productos
-[plantuml,"Sequence diagram",png]
+[plantuml,"AñadirProducto",png]
 ----
 actor Admin
 database BaseDeDatos as "Base de datos" #blue
@@ -76,7 +76,7 @@ Dede -> Admin: Muestra todos los productos
 ----
 
 === Eliminar productos
-[plantuml,"Sequence diagram",png]
+[plantuml,"EliminarProducto",png]
 ----
 actor Admin
 database BaseDeDatos as "Base de datos" #blue
@@ -88,7 +88,7 @@ Dede -> Admin: Muestra todos los productos
 ----
 
 === Filtrar productos
-[plantuml,"Sequence diagram",png]
+[plantuml,"FiltrarProducto",png]
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue

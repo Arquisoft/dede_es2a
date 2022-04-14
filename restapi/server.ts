@@ -5,6 +5,7 @@ import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import { jugueteRouter } from "./routes/juguete.router";
 import { url } from "inspector";
+import { pedidoRouter } from "./routes/pedido.router";
 
 const app: Application = express();
 const port: number = 5000;
@@ -31,9 +32,9 @@ app.get("/", function(req,res){
     res.send("Por aqui no, dale a /juguete");
 });
 
-bd.connect();
 
 app.use("/juguete", jugueteRouter);
+app.use("/pedido",pedidoRouter);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
