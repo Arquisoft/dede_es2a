@@ -1,13 +1,17 @@
-const mongoose = require('mongoose')
+import mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
     id:Number,
-    nombre: String,
+    nombre: {
+        type : String,
+        unique : true
+    },
     descripcion: String,
     precio:Number,
     imagen:String,
     categoria:String,
-    cantidad:Number
+    cantidad:Number,
+    stock:Number
 })
 
 jugueteSchema.set('toJSON', {

@@ -5,6 +5,7 @@ import promBundle from 'express-prom-bundle';
 import api from "./api"; 
 import { jugueteRouter } from "./routes/juguete.router";
 import { url } from "inspector";
+import { pedidoRouter } from "./routes/pedido.router";
 
 const app: Application = express();
 const port: number = 5000;
@@ -14,6 +15,7 @@ let bd = require('./modules/gestorDB')
 
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
+  //origin: ['https://dede-es2a-webapp.herokuapp.com']
 };
 
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
@@ -30,7 +32,9 @@ app.get("/", function(req,res){
     res.send("Por aqui no, dale a /juguete");
 });
 
+
 app.use("/juguete", jugueteRouter);
+app.use("/pedido",pedidoRouter);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
@@ -38,3 +42,4 @@ app.listen(port, ():void => {
     console.error('Error occured: ' + error.message);
 });
 
+module.exports = app

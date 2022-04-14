@@ -4,6 +4,8 @@ import './Navbar.css'
 import LoginButton from '../Login/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from '../Login/LogoutButton';
+import ProfileImg from '../Login/ProfileImg';
+import ProfileName from '../Login/ProfileName';
 
 
 const Navbar = () => {
@@ -33,6 +35,10 @@ const Navbar = () => {
             {
                 isAuthenticated ? <LogoutButton /> : <LoginButton />
             }
+            {
+                isAuthenticated ? <ProfileName/> : <></>
+            }
+            
         </nav>
     )
 }

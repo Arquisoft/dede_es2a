@@ -5,6 +5,9 @@
     "@auth0/auth0-react": "^1.9.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@inrupt/lit-generated-vocab-common": "^0.3.11",
+    "@inrupt/solid-client-authn-browser": "^1.11.7",
+    "@inrupt/solid-ui-react": "^2.7.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.2.5",
@@ -21,17 +24,21 @@
     "react-dom": "^17.0.2",
     "react-json-pretty": "^2.2.0",
     "react-query": "^3.34.16",
+    "react-router-dom": "^6.2.2",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.3",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "test:e2e": "start-server-and-test 'npm --prefix ../restapi start' http://localhost:5000/api/users/list prod 3000 'cd e2e && jest'",
     "eject": "react-scripts eject",
-    "prod": "ts-node-dev ./server.ts"
+    "prod": "ts-node-dev ./server.ts",
+    "start": "serve -s build",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [
