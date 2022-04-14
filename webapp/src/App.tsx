@@ -78,12 +78,14 @@ const App = () => {
 
   useEffect(() => {
     // Aqui meter tambien las cosas de usuario
+    /*
     const localUser = localStorage.getItem("user");
     if (localUser) {
       let user = JSON.parse(localUser);
     } else {
       localStorage.setItem("user", JSON.stringify([]));
     }
+    */
     // Carrito
     const localCart = localStorage.getItem("cart");
     if (localCart) {
