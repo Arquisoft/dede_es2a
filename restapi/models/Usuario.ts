@@ -1,3 +1,5 @@
+import mongoose = require('mongoose');
+
 // creamos el esquema que tiene que cumplir el usuario en la BD
 const usuarioSchema = new mongoose.Schema({
     id:Number,

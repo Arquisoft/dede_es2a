@@ -20,7 +20,10 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import PayForm from './PayForm/PayForm';
+import Profile from './componentes/loginSOLID/Profile';
+import LoginForm from './componentes/loginSOLID/LoginForm';
+import LogoutForm from './componentes/loginSOLID/LogoutForm';
+import ProcesoPago from './PayForm/ProcesoPago';
 
 
 //Types
@@ -52,6 +55,7 @@ export type Juguete = {
 // Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes():Promise<Juguete[]>{
   const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
   let response = await fetch(apiEndPoint+'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
@@ -95,6 +99,10 @@ const App = () => {
       localStorage.setItem("cart", JSON.stringify([]));
     }
   }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
 
   const getTotalItems = (items: Juguete[]) => 
@@ -140,42 +148,10 @@ const App = () => {
     ))
   };
  
-  /*const handleAddToCart = (clickedItem: CartItemType) => {
-    //"prev" es el estado previo del carrito, justo antes de añadir un producto
-    setCartItems(prev => {
-      //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
-      if(isItemInCart) {
-        return prev.map(item=>(
-          item.id===clickedItem.id
-          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
-            ? {...item, amount: item.amount+1}
-            : item
-        ))
-      }
-      //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
-      //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, {...clickedItem, amount:1}];
-    })
-  };*/
-
-  /*const handleRemoveFromCart = (id: number) => {
-    setCartItems(prev=>(
-      prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.amount===1) return ack;
-          return [...ack, {...item, amount:item.amount - 1}]
-        } else {
-          return [...ack, item];
-        }
-      }, [] as CartItemType[])
-    ))
-
-  };*/
 
   //Coloca una barra de carga cuando la página está cargando
   if (isLoading) return <LinearProgess />;
-  if (error) return <div>Algo ha fallado</div>;
+  //if (error) return <div>Algo ha fallado</div>;
 
 
 
@@ -241,13 +217,44 @@ const App = () => {
                   <Wrapper>
                   <Navbar/>
                   
-                  <PayForm
+                  <ProcesoPago
                     cartItems={cartItems.slice()}
                   />
                   <Footer/>
                   </Wrapper>
                 }
               />
+        <Route
+      path="/perfilPod"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <Profile/>
+        
+        <Footer/>
+        </Wrapper>
+      }
+    />
+    <Route
+      path="/loginPago"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <LoginForm/>
+        <Footer/>
+        </Wrapper>
+      }
+    />
+    <Route
+      path="/logoutPago"
+      element={
+        <Wrapper>
+        <Navbar/>
+        <LogoutForm/>
+        <Footer/>
+        </Wrapper>
+      }
+    />
       </Routes>
     </BrowserRouter>
    </>

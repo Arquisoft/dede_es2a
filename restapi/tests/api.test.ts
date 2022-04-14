@@ -60,13 +60,23 @@ describe('user ', () => {
         await request(app).delete('/juguete/juguete1Prueba');
     })
 
+    it("No se puede añadir un juguete que ya existe", async () => {
+        let name:String = "Avión"
+        let description:String = "sin descripcion"
+        let price:Number = 13.55
+        let imag:String = "alguna cosa"
+        let category:String = "mu grande"
+        const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
+        expect(response.text).toEqual("Este juguete ya existe");
+    });
+
     it('Encontrar un juguete por nombre', async () => {
         // añadimos juguete para prueba
         let name:String = "juguetePruebas"
         let description:String = "descripcion"
         let price:Number = 13.5
         let imag:String = "sin imagen"
-        let category:String = "categoria"
+        let category:String = "sin categoria"
         let quantity:Number = 0
         let stock2:Number = 5
         await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,
@@ -81,12 +91,12 @@ describe('user ', () => {
             descripcion: "descripcion",
             precio: 13.5,
             imagen: "sin imagen",
-            categoria: "categoria",
+            categoria: "sin categoria",
             cantidad: 0,
             stock:5
         });
     });
-
+    
     it('Se puede actualizar un juguete', async () => {
         let description:String = "decripcion actualizada"
         let price:Number = 10
@@ -98,18 +108,38 @@ describe('user ', () => {
         const response:Response = await request(app).post('/juguete/update/juguetePruebas').send({descripcion:description,precio:price,
             imagen:imag,categoria:category, cantidad : quantity, stock:stock2})
         expect(response.statusCode).toBe(200);
-        expect(response.text).toEqual("El juguete se ha actualizo correctamente")
-        // lo eliminamos
-        await request(app).delete('/juguete/juguetePruebas');
-    })
+        expect(response.text).toEqual("El juguete se ha actualizado correctamente")
+    });
 
+    it("No se puede actualizar un juguete que no existe", async () => {
+        let description:String = "decripcion actualizada"
+        let price:Number = 10
+        let imag:String = "no tiene"
+        let category:String = "sin categoria"
+        let quantity:Number = 12
+        let stock2:Number = 10
+        const response:Response = await request(app).post('/juguete/update/noExiste').send({descripcion:description,precio:price,
+            imagen:imag,categoria:category, cantidad : quantity, stock:stock2})
+        expect(response.statusCode).toBe(500);
+        expect(response.text).toEqual("Error")
+    });
 
-     /**
-   * test que prueba a obtener un producto inexistente
-   */
-   it("No se puede obtener un producto inexistente (El juguete no existe)", async () => {
+    /**
+      * test que prueba a obtener un producto inexistente
+    */
+    it("No se puede obtener un producto inexistente (El juguete no existe)", async () => {
        const response: Response = await request(app).get('/juguete/NoExiste');
        expect(response.text).toEqual("El juguete no existe")
+    });
+    
+    it("Se puede eliminar un producto", async () =>{
+        const response: Response = await request(app).delete('/juguete/juguetePruebas');
+        expect(response.text).toEqual("Eliminado juguete")
+    });
+
+    it("No se puede eliminar un producto inexistente", async () => {
+        const response: Response = await request(app).delete('/juguete/noExiste');
+        expect(response.text).toEqual("No existe el juguete");
     });
 
 });
