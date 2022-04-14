@@ -32,8 +32,8 @@ export default function LoginForm() {
       restorePreviousSession: false
     }).then(() => {
       if (session.info.isLoggedIn) {
-        sessionStorage.setItem("webID", session.info.webId+"");
-        sessionStorage.setItem("sessionID", session.info.sessionId);
+        localStorage.setItem("webID", session.info.webId+"");
+        localStorage.setItem("sessionID", session.info.sessionId);
       }
     })
   });

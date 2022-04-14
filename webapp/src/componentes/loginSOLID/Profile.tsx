@@ -29,9 +29,9 @@ export default function Profile() {
     
 
     obtenerInformacionPod(session.info.webId+"").then((result) => {
-        sessionStorage.setItem("usuario", result[0]);
-        sessionStorage.setItem("organizacion", result[1]);
-        sessionStorage.setItem("direccion", result[2]);
+        localStorage.setItem("usuario", result[0]);
+        localStorage.setItem("organizacion", result[1]);
+        localStorage.setItem("direccion", result[2]);
     });
 
     return (
@@ -45,7 +45,7 @@ export default function Profile() {
             <CardContent>
                 <div className="cardContent">
                 <Typography gutterBottom variant="h4" component="h1" id="solidName">
-                <Text property={FOAF.name.iri.value} />
+                <p >{localStorage.getItem("direccion")}</p>
                 </Typography>
                 </div>
                 <div className="cardContent">
