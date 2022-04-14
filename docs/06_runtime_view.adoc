@@ -103,10 +103,20 @@ Usuario <- Dede: Muestra los juguetes encontrados con el filtro
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
 Usuario -> Dede: Accede a la página y presiona el botón de registro
-Usuario -> Dede: Rellena el formulario
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente
+Usuario -> Dede: Rellena el formulario de registro/inicio sesión
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente, si es nuevo, si no ya estaría
 Usuario <- Dede: Se muestra la página principal de la aplicación
 ----
 
-
-
+=== Cierre de sesión
+[plantuml,"CierreSesión",png]
+----
+actor Usuario
+database BaseDeDatos as "Base de datos" #blue
+Usuario -> Dede: Accede a la página y presiona el botón de registro
+Usuario -> Dede: Rellena el formulario de registro/inicio sesión
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente si es nuevo, si no ya estaría
+Usuario <- Dede: Se muestra la página principal de la aplicación
+Usuario -> Dede: Presiona el botón de desconectarse
+Usuario <- Dede: Se muestra la página principal de la aplicación
+----
