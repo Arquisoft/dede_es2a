@@ -29,12 +29,11 @@ export default function LoginForm() {
 
   useEffect(() => {
     handleIncomingRedirect({
-      restorePreviousSession: true
+      restorePreviousSession: false
     }).then(() => {
       if (session.info.isLoggedIn) {
         localStorage.setItem("webID", session.info.webId+"");
         localStorage.setItem("sessionID", session.info.sessionId);
-        navigate("/perfilPod");
       }
     })
   });

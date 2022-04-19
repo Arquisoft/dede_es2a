@@ -45,7 +45,7 @@ export default function Profile() {
             <CardContent>
                 <div className="cardContent">
                 <Typography gutterBottom variant="h4" component="h1" id="solidName">
-                <Text property={FOAF.name.iri.value} />
+                <p >{localStorage.getItem("direccion")}</p>
                 </Typography>
                 </div>
                 <div className="cardContent">

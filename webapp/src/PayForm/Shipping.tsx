@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
-
+import LoginForm from '../componentes/loginSOLID/LoginForm';
 //Types
 import { CartItemType } from '../App';
 
@@ -55,15 +55,8 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             </Button>
             </CardActions>
             </Card>
-         
-            <Button
-              onClick={obtainPodAndCalculateDeliveryCost}
-              variant="contained"
-              className="m-1"
-            >
-              Boton del POD
-            </Button>
-     
+            <LoginForm/>
+          
         </div>
     )
 };

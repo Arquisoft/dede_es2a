@@ -30,10 +30,7 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
     return (
         <div>
             <div>
-              //Aqui irian los transportistas sacados por la api
-              Transportistas
-
-              *Aqui tambien se tiene que utilizar "setDeliveryDate" con la referencia al string de la fecha de entrega*
+              <p>{localStorage.getItem("direccion")}</p>
             </div>
 
             <Card sx={{ maxWidth: 600 }} >
