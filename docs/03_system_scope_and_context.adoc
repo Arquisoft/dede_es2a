@@ -41,6 +41,7 @@ _Despliegue tanto del frontend como del backend e información de la app para el
 |_Auth0_|_Se corresponde con la opción de inicio/cierre de sesión del frontend_|_Loguea al usuario en la aplicación desde esta o desde Google_
 | _POD_ | _Solicitud de datos del cliente por parte de la app._ | _Respuesta a solicitud._
 | _Base de datos_ | _Gestión de los datos a través de API rest de la aplicación_ | _respuesta a las peticiones de esa API rest (productos, usuarios, pedidos...)_
+|_Geocode_|_Petición por parte del backend de las coordenadas de una dirección de un usuario extraída a través de los POD_|_Devolución de las coordenadas_
 |===
 
 
@@ -71,12 +72,14 @@ TABLA DEL CONTEXTO TÉCNICO
 [options="header",cols="1,2"]
 |===
 |Elemento|Funcionalidad/Canal
-| _Cliente_ | _Usuario que interactuará con la app web a través de internet (http)._ 
-| _Servidor DeDe_ | _Aplicación web con la que interactuarán y comunicarán los usuarios utilizando PODs._ 
+| _Cliente_ | _Usuario que interactuará con la app web a través de internet (https)._ 
+| _Servidor DeDe_ | _Aplicación web con la que interactuarán y comunicarán los usuarios utilizando PODs. Se dividirá en frontend, parte visual con la que interacciona el usuario, y backend, parte que se encarga de gestionar los datos y peticiones de la aplicación internamente_ 
 | _SOLID_ | _Descentralizado/externo a la aplicación. Proveedor de los PODs._ 
-| _POD_ | _Almacena los datos del cliente. Buena privacidad para los usuarios._ 
-| _HTTP_ | _Protocolo de peticiones y respuestas con el servidor._ 
+| _POD_ | _Almacena los datos privados del cliente que la aplicación solo necesitará para realizar las compras, en nuestro caso la dirección principlamente. Buena privacidad para los usuarios._ 
+| _HTTPS_ | _Protocolo seguro de peticiones y respuestas con el servidor._ 
 | _MERN_ | _M-> MongoDB (persistencia) / E-> Express (peticiones) / R-> React (Front-End) / N-> Node (Back-End)._ 
+| _Auth0_ | _API que se encarga de gestionar el inicio y cierre de sesión por parte de los usuarios_
+|_Geocode_|_API que se encargará de aportar las coordenadas de una dirección concreta con el objetivo de calcular los gastos de envío posteriormente_
 |===
 
 
