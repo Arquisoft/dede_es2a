@@ -212,57 +212,59 @@ const App = () => {
               </Wrapper>
             </div>
           } />
-          <Route path="/contactanos" element={
-            <Wrapper>
-              <Navbar />
-              <ContactUs />
-              <Footer />
-            </Wrapper>
-          } />
-          <Route
-            path="confirmar-pedido"
-            element={
+      
+            <Route path="/contactanos" element={
               <Wrapper>
                 <Navbar />
+                <ContactUs />
+                <Footer />
+              </Wrapper>
+            } />
+            <Route
+              path="confirmar-pedido"
+              element={
+                <Wrapper>
+                  <Navbar />
 
-                <ProcesoPago
-                  cartItems={cartItems.slice()}
-                />
-                <Footer />
-              </Wrapper>
-            }
-          />
-          <Route
-            path="/perfilPod"
-            element={
-              <Wrapper>
-                <Navbar />
-                <Profile />
+                  <ProcesoPago
+                    cartItems={cartItems.slice()}
+                  />
+                  <Footer />
+                </Wrapper>
+              }
+            />
+            <Route
+              path="/perfilPod"
+              element={
+                <Wrapper>
+                  <Navbar />
+                  <Profile />
 
-                <Footer />
-              </Wrapper>
-            }
-          />
-          <Route
-            path="/loginPago"
-            element={
-              <Wrapper>
-                <Navbar />
-                <LoginForm />
-                <Footer />
-              </Wrapper>
-            }
-          />
-          <Route
-            path="/logoutPago"
-            element={
-              <Wrapper>
-                <Navbar />
-                <LogoutForm />
-                <Footer />
-              </Wrapper>
-            }
-          />
+                  <Footer />
+                </Wrapper>
+              }
+            />
+            <Route
+              path="/loginPago"
+              element={
+                <Wrapper>
+                  <Navbar />
+                  <LoginForm />
+                  <Footer />
+                </Wrapper>
+              }
+            />
+            <Route
+              path="/logoutPago"
+              element={
+                <Wrapper>
+                  <Navbar />
+                  <LogoutForm />
+                  <Footer />
+                </Wrapper>
+              }
+            />
+          
         </Routes>
       </BrowserRouter>
     </>

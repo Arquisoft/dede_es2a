@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { MenuItems } from "./Menitems"
-import { MenuItemsAdmin } from "./MenitemsAdmin"
+import { MenuItemsAdmin } from "./Menitemsadmin"
 import './Navbar.css'
 import LoginButton from '../Login/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';

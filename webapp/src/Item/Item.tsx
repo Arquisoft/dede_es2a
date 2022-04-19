@@ -6,13 +6,13 @@ import { Wrapper } from './Item.styles';
 
 import { Juguete } from '../shared/sharedJuguete';
 
-
+import { useNavigate } from "react-router-dom";
 
 /*type Props = {
     item: CartItemType;
     handleAddToCart: (clickedItem: CartItemType) => void;
 }*/
-
+const navigate = useNavigate();
 type Props = {
     item: Juguete;
     handleAddToCart: (clickedItem: Juguete) => void;
@@ -28,8 +28,12 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
                     <h3>{item.nombre}</h3>
                     <p>{item.descripcion}</p>
                     <h3>€{item.precio}</h3>
-                    <Button onClick={() => handleAddToCart(item)}>Editar producto</Button>
-                    <Button onClick={() => handleAddToCart(item)}>Añadir existencias</Button>
+                    <Button onClick={() => {
+                        navigate("https://localhost:3000/edit");
+                    }}>Editar producto</Button>
+                    <Button onClick={() => {
+                        //faltaria añadir stock
+                    }}>Añadir existencias</Button>
                 </div>
                 :
                 <div>
