@@ -1,5 +1,5 @@
 const Juguete = require("../models/Juguete");
-const gestorBd = require("../modules/gestorDB");
+var gestorBd = require("../modules/gestorDB");
 
 const JugueteRepository = module.exports = {
     
@@ -51,7 +51,7 @@ const JugueteRepository = module.exports = {
     },
     updateJuguete: async function(filter: Object,update: Object){
         try{
-            gestorBd.connect();
+            await gestorBd.connect();
             let juguete = await Juguete.findOneAndUpdate(filter, update, { new:true})
             return juguete;
         } catch (error){

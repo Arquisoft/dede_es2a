@@ -1,9 +1,11 @@
 const Pedido = require('../models/Pedido')
+var gestorBd = require('../modules/gestorDB')
 
 const PedidoRepository = module.exports = {
     getPedidos: async function(){
         try{
-            let pedidos = await Pedido.find({});
+            gestorBd.connect();
+            let pedidos = await Pedido.find({}).populate('juguetes');
             return pedidos;
         } catch (error){
             throw (error);
@@ -11,6 +13,8 @@ const PedidoRepository = module.exports = {
     },
     findPedido: async function(filter:Object) {
         try{
+            gestorBd.connect();
+            console.log(filter)
             let pedido = await Pedido.find(filter);
             return pedido;
         } catch (error){
@@ -19,8 +23,10 @@ const PedidoRepository = module.exports = {
     },
     addPedido: async function(object:Object){
         try{
+            gestorBd.connect();
             let pedidoNuevo = new Pedido(object);
             await pedidoNuevo.save();
+            return pedidoNuevo;
         } catch (error){
             throw error;
         }
