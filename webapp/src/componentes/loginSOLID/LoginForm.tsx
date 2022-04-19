@@ -40,6 +40,26 @@ export default function LoginForm() {
   });
 
   return (
-  
+    <Container>
+    <Wrapper>
+    <Autocomplete
+        disablePortal
+        id="combo-box-providers"
+        options={proveedores}
+        renderInput={(params) => <TextField {...params} label="Provider:" />}
+        getOptionLabel={(option) => option.displayName}
+        onChange={(e, value) => {
+          if (value != null)
+            setIdp(value.url)
+        }}
+      />
+      <LoginButton
+        oidcIssuer={idp}
+        redirectUrl={UrlActual}    
+        onError={console.error}>
+            <Button variant="contained">Obtener dirección </Button>
+      </LoginButton>
+    </Wrapper>
+</Container>
   );
 }

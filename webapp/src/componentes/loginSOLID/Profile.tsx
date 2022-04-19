@@ -8,6 +8,7 @@ import {
 } from "@inrupt/solid-client";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
 import { Grid } from "@mui/material";
+import { Wrapper } from '../../App.styles';
 
 async function obtenerInformacionPod(webID: string): Promise<string[]> {
     //Nos quedamos con la primera que nos aporta la info de la tarjeta
@@ -35,6 +36,41 @@ export default function Profile() {
     });
 
     return (
-       
+       <Wrapper>
+        {session.info.webId ? (
+            <CombinedDataProvider 
+            datasetUrl={session.info.webId} 
+            thingUrl={session.info.webId}>
+            <Card style={{ maxWidth: 1300 }}>
+            <CardContent>
+                <div className="cardContent">
+                <Typography gutterBottom variant="h4" component="h1" id="solidName">
+                <Text property={FOAF.name.iri.value} />
+                </Typography>
+                </div>
+                <div className="cardContent">
+                <Typography variant="body2" color="textSecondary" component="p" style={{ display: "flex", alignItems: "center" }}>
+                <Text property={VCARD.organization_name.iri.value} />
+                </Typography>
+                <Typography gutterBottom variant="h4" component="h3">
+                {/* Para obtener la direccion */}
+                <Text id= "direction" property={VCARD.note.iri.value} />
+                </Typography>
+                </div>
+            </CardContent>
+            </Card>
+            </CombinedDataProvider>
+        ): null } 
+                
+        <Grid id="solidButtons" container>
+            <Grid item>
+            <LogoutButton >
+                <Button id="logoutButton" href="http://localhost:3000" variant="contained" color="primary">
+                Logout
+                </Button>
+            </LogoutButton>
+            </Grid>
+        </Grid>
+       </Wrapper>
     );
 }
