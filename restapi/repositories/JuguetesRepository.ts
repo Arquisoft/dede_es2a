@@ -51,7 +51,7 @@ const JugueteRepository = module.exports = {
     },
     updateJuguete: async function(filter: Object,update: Object){
         try{
-            gestorBd.connect();
+            await gestorBd.connect();
             let juguete = await Juguete.findOneAndUpdate(filter, update, { new:true})
             return juguete;
         } catch (error){

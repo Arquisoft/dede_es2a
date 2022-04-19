@@ -36,27 +36,32 @@ pedidoRouter.get("/:user", async(req:Request,res:Response)=>{
 })
 
 async function procesarJuguetes(juguetes:any): Promise<any> {
-    let productos = [];
-    for(var producto of juguetes){
-        console.log(producto._id)
-        let juguete = await JugueteRepository.findJuguete({_id:new ObjectId(producto._id)});
-        console.log(juguete)
-        if(juguete){
-            var cantidad = producto.cantidad;
-            if(juguete.stock != 0){
-                if(juguete.stock < producto.cantidad){
-                    cantidad = juguete.stock
+    try{
+        let productos = [];
+        for(var producto of juguetes){
+            console.log(producto._id)
+            let juguete = await JugueteRepository.findJuguete({_id:new ObjectId(producto._id)});
+            console.log(juguete)
+            if(juguete){
+                var cantidad = producto.cantidad;
+                if(juguete.stock != 0){
+                    if(juguete.stock < producto.cantidad){
+                        cantidad = juguete.stock
+                    }
+                    var nuevoStock = juguete.stock - cantidad;
+                    JugueteRepository.updateJuguete({"_id":new ObjectId(producto._id)},{stock:nuevoStock});
+                    productos.push(producto._id)
                 }
-                var nuevoStock = juguete.stock - cantidad;
-                JugueteRepository.updateJuguete({"_id":new ObjectId(producto._id)},{stock:nuevoStock});
-                productos.push(producto._id)
+            }
+            else{
+                return null;
             }
         }
-        else{
-           return null;
-        }
+        return productos;
+    } catch (error){
+        throw error;
     }
-    return productos;
+    
 }
 
 
