@@ -24,7 +24,7 @@ import Profile from './componentes/loginSOLID/Profile';
 import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
-
+import EditForm from './componentes/editarProducto/editarProducto';
 
 //Types
 export type CartItemType = {
@@ -212,59 +212,107 @@ const App = () => {
               </Wrapper>
             </div>
           } />
-      
-            <Route path="/contactanos" element={
+
+          <Route path="/edit" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <EditForm />
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+          } />
+
+          <Route path="/contactanos" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
               <Wrapper>
                 <Navbar />
                 <ContactUs />
                 <Footer />
               </Wrapper>
-            } />
-            <Route
-              path="confirmar-pedido"
-              element={
-                <Wrapper>
-                  <Navbar />
+          } />
 
-                  <ProcesoPago
-                    cartItems={cartItems.slice()}
-                  />
-                  <Footer />
-                </Wrapper>
-              }
-            />
-            <Route
-              path="/perfilPod"
-              element={
-                <Wrapper>
-                  <Navbar />
-                  <Profile />
+          <Route path="confirmar-pedido" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <ProcesoPago
+                  cartItems={cartItems.slice()}
+                />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/perfilPod" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <Profile />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/loginPago" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <LoginForm />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/logoutPago" element={
+            true ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <LogoutForm />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/*" element={
+            <Wrapper>
+              <Navbar />
+              <h1>No existe esa dirección</h1>
+              <Footer />
+            </Wrapper>
+          } />
 
-                  <Footer />
-                </Wrapper>
-              }
-            />
-            <Route
-              path="/loginPago"
-              element={
-                <Wrapper>
-                  <Navbar />
-                  <LoginForm />
-                  <Footer />
-                </Wrapper>
-              }
-            />
-            <Route
-              path="/logoutPago"
-              element={
-                <Wrapper>
-                  <Navbar />
-                  <LogoutForm />
-                  <Footer />
-                </Wrapper>
-              }
-            />
-          
         </Routes>
       </BrowserRouter>
     </>
