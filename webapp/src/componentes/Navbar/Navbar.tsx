@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { MenuItems } from "./Menitems"
-import { MenuItemsAdmin } from "./Menitemsadmin"
+import { MenuItemsAdmin } from "./MenitemsAdmin"
 import './Navbar.css'
 import LoginButton from '../Login/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -22,41 +22,41 @@ const Navbar = () => {
                 <i className={state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             {
-                true ? //admin
+                true ? // isAdmin ?
                     <ul className={state.clicked ? 'nav-menu active' :
-                    'nav-menu'}>
-                    {MenuItemsAdmin.map((item, index) => {
-                        return (
-                            <li key={index}>
-                                <a className={item.cName} href={item.url}>
-                                    {item.title}
-                                </a>
-                            </li>
-                        )
-                    })}
-                </ul>
-                :
-                <ul className={state.clicked ? 'nav-menu active' :
-                'nav-menu'}>
-                {MenuItems.map((item, index) => {
-                    return (
-                        <li key={index}>
-                            <a className={item.cName} href={item.url}>
-                                {item.title}
-                            </a>
-                        </li>
-                    )
-                })}
-            </ul>
+                        'nav-menu'}>
+                        {MenuItemsAdmin.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <a className={item.cName} href={item.url}>
+                                        {item.title}
+                                    </a>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    :
+                    <ul className={state.clicked ? 'nav-menu active' :
+                        'nav-menu'}>
+                        {MenuItems.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <a className={item.cName} href={item.url}>
+                                        {item.title}
+                                    </a>
+                                </li>
+                            )
+                        })}
+                    </ul>
             }
-           
+
             {
                 isAuthenticated ? <LogoutButton /> : <LoginButton />
             }
             {
-                isAuthenticated ? <ProfileName/> : <></>
+                isAuthenticated ? <ProfileName /> : <></>
             }
-            
+
         </nav>
     )
 }

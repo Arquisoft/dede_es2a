@@ -1,10 +1,10 @@
 import Button from '@material-ui/core/Button';
 //Types
-import {CartItemType} from '../App';
+import { CartItemType } from '../App';
 //Styles
-import {Wrapper} from './Item.styles';
+import { Wrapper } from './Item.styles';
 
-import {Juguete} from '../shared/sharedJuguete';
+import { Juguete } from '../shared/sharedJuguete';
 
 
 
@@ -19,15 +19,27 @@ type Props = {
 }
 
 //Así creamos un elemento reactivo con las propiedades especificadas
-const Item: React.FC<Props> = ({item, handleAddToCart})=>(
+const Item: React.FC<Props> = ({ item, handleAddToCart }) => (
     <Wrapper>
-        <div>
-            <img src={item.imagen} alt={item.nombre}/>
-            <h3>{item.nombre}</h3>
-            <p>{item.descripcion}</p>
-            <h3>€{item.precio}</h3>
-        </div>
-        <Button onClick = {() => handleAddToCart(item)}>Añadir al carrito</Button>
+        {
+            true ? // isAdmin ?
+                <div>
+                    <img src={item.imagen} alt={item.nombre} />
+                    <h3>{item.nombre}</h3>
+                    <p>{item.descripcion}</p>
+                    <h3>€{item.precio}</h3>
+                    <Button onClick={() => handleAddToCart(item)}>Editar producto</Button>
+                    <Button onClick={() => handleAddToCart(item)}>Añadir existencias</Button>
+                </div>
+                :
+                <div>
+                    <img src={item.imagen} alt={item.nombre} />
+                    <h3>{item.nombre}</h3>
+                    <p>{item.descripcion}</p>
+                    <h3>€{item.precio}</h3>
+                    <Button onClick={() => handleAddToCart(item)}>Añadir al carrito</Button>
+                </div>
+        }
     </Wrapper>
 )
 

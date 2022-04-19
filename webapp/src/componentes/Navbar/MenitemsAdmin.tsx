@@ -6,7 +6,7 @@ export const MenuItemsAdmin =[
     },
     {
         title: 'Administar Productos',
-        url:'productos-admin',
+        url:'productos',
         cName:'nav-links'
     }
 ]
