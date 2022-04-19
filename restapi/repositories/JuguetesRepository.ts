@@ -1,5 +1,5 @@
 const Juguete = require("../models/Juguete");
-const gestorBd = require("../modules/gestorDB");
+var gestorBd = require("../modules/gestorDB");
 
 const JugueteRepository = module.exports = {
     

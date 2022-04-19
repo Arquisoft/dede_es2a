@@ -15,9 +15,9 @@ const pedidoSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    juguetes:[{ // juguete que componen el pedido
+    juguetes:[{ // juguetes que componen el pedido
         type:mongoose.Schema.Types.ObjectId,
-        ref: "Juguete",
+        ref: 'Juguete',
         required:true
     }]
 })
