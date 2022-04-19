@@ -34,10 +34,11 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                         <p>{item.descripcion}</p>
                         <h3>€{item.precio}</h3>
                         <Button onClick={() => {
+                            // añadir al localStorage el Item para poder coger sus datos
                             navigate("/edit");
                         }}>Editar producto</Button>
                         <Button onClick={() => {
-                            //faltaria añadir stock
+                            // faltaria añadir stock -> crear método
                         }}>Añadir existencias</Button>
                     </div>
                     :
