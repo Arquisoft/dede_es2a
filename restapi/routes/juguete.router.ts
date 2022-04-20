@@ -3,7 +3,7 @@ import express, {Request,response,Response} from "express"
 import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
-let JugueteRepository = require('../repositories/JuguetesRepository');
+var JugueteRepository = require('../repositories/JuguetesRepository');
 jugueteRouter.use(express.json());
 
 /**

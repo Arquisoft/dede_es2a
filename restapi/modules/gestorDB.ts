@@ -13,7 +13,6 @@ export function connect(){
     });
 }
 
-
 /*
 juguete.save()
     .then((result:typeof Juguete)=> {
