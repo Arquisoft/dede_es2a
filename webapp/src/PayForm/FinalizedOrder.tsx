@@ -11,7 +11,10 @@ export default function FinalizedOrder(props: any): JSX.Element {
         <div>
              <Typography variant="h2" component="h2">Pedido finalizado</Typography>
             <Typography variant="h5" component="h2">Muchas gracias por su compra!</Typography>
-            <a href="/logoutPago">Finalizar pedido</a>
+
+            <a className={'btn btn-primary btn-lg'} href={"/logoutPago"}>
+                    {'Finalizar Pedido'}
+                </a>
 
         </div>
     )
