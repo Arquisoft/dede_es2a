@@ -5,7 +5,7 @@ const PedidoRepository = module.exports = {
     getPedidos: async function(){
         try{
             gestorBd.connect();
-            let pedidos = await Pedido.find({}).populate('juguetes').populate('usuario');
+            let pedidos = await Pedido.find({}).populate('juguetes._id ').populate('usuario');
             console.log(pedidos)
             return pedidos;
         } catch (error){
