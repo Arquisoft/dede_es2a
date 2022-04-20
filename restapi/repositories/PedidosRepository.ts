@@ -1,17 +1,11 @@
 const Pedido = require('../models/Pedido')
-// import de API Geocode para calcular coordenadas de una direccion
-const ApiGeocode = require('node-geocoder')
-// opciones para configurar API Geocode (proveedor, apiKey...)
-const opciones = { 
-    provider:'google',
-}
-const geocoder = ApiGeocode(opciones)
-// informacion de nuestra tienda, deberia encontrarse en un .env
+var gestorBd = require('../modules/gestorDB')
 
 const PedidoRepository = module.exports = {
     getPedidos: async function(){
         try{
-            let pedidos = await Pedido.find({});
+            gestorBd.connect();
+            let pedidos = await Pedido.find({}).populate('juguetes');
             return pedidos;
         } catch (error){
             throw (error);
@@ -19,6 +13,8 @@ const PedidoRepository = module.exports = {
     },
     findPedido: async function(filter:Object) {
         try{
+            gestorBd.connect();
+            console.log(filter)
             let pedido = await Pedido.find(filter);
             return pedido;
         } catch (error){
@@ -27,17 +23,19 @@ const PedidoRepository = module.exports = {
     },
     addPedido: async function(object:Object){
         try{
+            gestorBd.connect();
             let pedidoNuevo = new Pedido(object);
             await pedidoNuevo.save();
+            return pedidoNuevo;
         } catch (error){
             throw error;
         }
     },
     // calculamos los gastos de envío de un pedido en concreto
     shippingCosts: async function(order:Object){
-        // obtenemos la direccion del usuario en sesion a traves del POD
-        // calculamos la distancia entre la direccion de nuestra tienda y la del usuario
+        // obtenemos la direccion del usuario en sesion a traves del POD (segunda ventana de pago ya deberia tener los gastos de envio)
+        // calculamos la distancia entre la direccion de nuestra tienda y la del usuario (primero probamos con una direccion preestablecida)
         // hacemos una formula que calcule el precio (€ por km)
-        // le damos valor al atributo gastosDeEnvio del pedido pasado por parámetro
+        // le damos valor al atributo gastosDeEnvio del pedido pasado por parámetro (generamos el pedido en la última parte del pago)
     }
 }
