@@ -6,6 +6,7 @@ import api from "./api";
 import { jugueteRouter } from "./routes/juguete.router";
 import { url } from "inspector";
 import { pedidoRouter } from "./routes/pedido.router";
+import { usuarioRouter } from "./routes/usuario.router";
 
 const app: Application = express();
 const port: number = 5000;
@@ -35,6 +36,7 @@ app.get("/", function(req,res){
 
 app.use("/juguete", jugueteRouter);
 app.use("/pedido",pedidoRouter);
+app.use("/usuario",usuarioRouter);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);

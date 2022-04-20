@@ -7,7 +7,8 @@ import { ObjectId } from "mongodb";
 
 export const pedidoRouter = express.Router()
 var JugueteRepository = require('../repositories/JuguetesRepository');
-var PedidoRepository = require('../repositories/PedidosRepository')
+var PedidoRepository = require('../repositories/PedidosRepository');
+var UsuarioRepository = require("../repositories/UsuarioRepository");
 
 pedidoRouter.use(express.json());
 
@@ -145,16 +146,32 @@ pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
     }
 });
 
-pedidoRouter.get("/:user", async(req:Request,res:Response)=>{
+pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
+    try{
+        
+        var usuario = await UsuarioRepository.findUsuario({"email":req.params.user,"isAdmin":false});
+        if(!usuario){
+            res.send("No existe el usuario");
+        }
+        else{
+            var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
+            if(pedidos){
+                res.send(pedidos);
+            }else{
+                res.send("No tiene pedidos");
+            }
+        }
+        
+    } catch(error){
+        res.status(500).send(error);
+    }
 })
 
 async function procesarJuguetes(juguetes:any): Promise<any> {
     try{
         let productos = [];
         for(var producto of juguetes){
-            console.log(producto._id)
             let juguete = await JugueteRepository.findJuguete({_id:new ObjectId(producto._id)});
-            console.log(juguete)
             if(juguete){
                 var cantidad = producto.cantidad;
                 if(juguete.stock != 0){
@@ -163,7 +180,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
                     }
                     var nuevoStock = juguete.stock - cantidad;
                     JugueteRepository.updateJuguete({"_id":new ObjectId(producto._id)},{stock:nuevoStock});
-                    productos.push(producto._id)
+                    productos.push(producto)
                 }
             }
             else{
@@ -180,20 +197,29 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
-        console.log(req.body.productos);
         let productos = await procesarJuguetes(req.body.productos);
-        console.log(productos)
-        let nuevoPedido = {
-            precioSinIva: req.body.precioSinIva,
-            precioGastosDeEnvio: req.body.precioGastosDeEnvio,
-            precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
-            juguetes: productos
+        if(productos.length == 0){
+            res.send("No se pudo crear el pedido por falta de stock");
         }
-        let pedido = await PedidoRepository.addPedido(nuevoPedido);
-        if(pedido){
-            res.send("Su pedido ha sido tramitado");
-        } else{
-            res.status(500).send("Se ha producido un error")
+        else{
+            var user = await UsuarioRepository.findUsuario({"email":req.body.usuario});
+            if(!user){
+                res.status(500).send("El usuario no existe");
+            }
+            let nuevoPedido = {
+                precioSinIva: req.body.precioSinIva,
+                precioGastosDeEnvio: req.body.precioGastosDeEnvio,
+                precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
+                juguetes: productos,
+                usuario:user._id
+            }
+        
+            let pedido = await PedidoRepository.addPedido(nuevoPedido);
+            if(pedido){
+                res.send("Su pedido ha sido tramitado");
+            } else{
+                res.status(500).send("Se ha producido un error")
+            }
         }
     } catch (error) {
         res.send(error);
