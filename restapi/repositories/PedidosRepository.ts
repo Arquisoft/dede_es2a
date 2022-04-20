@@ -5,7 +5,8 @@ const PedidoRepository = module.exports = {
     getPedidos: async function(){
         try{
             gestorBd.connect();
-            let pedidos = await Pedido.find({}).populate('juguetes');
+            let pedidos = await Pedido.find({}).populate('juguetes').populate('usuario');
+            console.log(pedidos)
             return pedidos;
         } catch (error){
             throw (error);
@@ -15,7 +16,7 @@ const PedidoRepository = module.exports = {
         try{
             gestorBd.connect();
             console.log(filter)
-            let pedido = await Pedido.find(filter);
+            let pedido = await Pedido.find(filter).populate('juguetes').populate('usuario');
             return pedido;
         } catch (error){
             throw (error);

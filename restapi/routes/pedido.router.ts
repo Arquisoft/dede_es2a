@@ -6,7 +6,8 @@ import { ObjectId } from "mongodb";
 
 export const pedidoRouter = express.Router()
 var JugueteRepository = require('../repositories/JuguetesRepository');
-var PedidoRepository = require('../repositories/PedidosRepository')
+var PedidoRepository = require('../repositories/PedidosRepository');
+var UsuarioRepository = require("../repositories/UsuarioRepository");
 
 pedidoRouter.use(express.json());
 
@@ -32,7 +33,23 @@ pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
     }
 });
 
-pedidoRouter.get("/:user", async(req:Request,res:Response)=>{
+pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
+    try{
+        
+        var usuario = await UsuarioRepository.findUsuario({"email":req.params.user,"isAdmin":false});
+        if(!usuario){
+            res.send("No existe el usuario");
+        }
+        var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
+        console.log(pedidos)
+        if(pedidos){
+            res.send(pedidos);
+        }else{
+            res.send("No tiene pedidos");
+        }
+    } catch(error){
+        res.status(500).send(error);
+    }
 })
 
 async function procesarJuguetes(juguetes:any): Promise<any> {
@@ -69,14 +86,19 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
         console.log(req.body.productos);
         let productos = await procesarJuguetes(req.body.productos);
-        console.log(productos)
+        var user = await UsuarioRepository.findUsuario({"email":req.body.usuario});
+        if(!user){
+            res.status(500).send("El usuario no existe");
+        }
         let nuevoPedido = {
             precioSinIva: req.body.precioSinIva,
             precioGastosDeEnvio: req.body.precioGastosDeEnvio,
             precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
-            juguetes: productos
+            juguetes: productos,
+            usuario:user._id
         }
         let pedido = await PedidoRepository.addPedido(nuevoPedido);
+        console.log(pedido)
         if(pedido){
             res.send("Su pedido ha sido tramitado");
         } else{

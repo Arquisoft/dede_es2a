@@ -12,15 +12,16 @@ const usuarioSchema = new mongoose.Schema({
         required:true
     },
     apellidos:{
-        type:Number,
-        required:true
-    },
-    correo:{
         type:String,
         required:true
     },
-    rol:{
+    email:{
         type:String,
+        required:true,
+        unique:true
+    },
+    isAdmin:{
+        type:Boolean,
         required:true
     }
 });
