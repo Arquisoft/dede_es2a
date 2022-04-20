@@ -52,7 +52,7 @@ const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sigui
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
               <p>Gastos de envío: <b>{deliveryCost}</b></p>
-              
+              <Typography variant="h6" component="h2">-------------------------------------------------------------------</Typography>
               <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
               </CardContent>
               <CardActions>

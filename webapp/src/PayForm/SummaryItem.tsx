@@ -23,11 +23,11 @@ type Props = {
 const SummaryItem: React.FC<Props> = ({item}) => (
     
     
-    <Box sx={{ borderRadius: '16px' }}>…
+    <Box sx={{ borderRadius: '16px',  borderColor: 'error.main' }}>
             <h3>{item.nombre}</h3>
             <div >
-                <p>Cantidad: {item.cantidad}</p>
-                <p>Total: €{(item.cantidad * item.precio).toFixed(2)}</p>
+                <p>Cantidad: <b>{item.cantidad}</b></p>
+                <p>Total: <b>{(item.cantidad * item.precio).toFixed(2)}€</b></p>
             </div>
 
         <img src={item.imagen} alt={item.nombre} width="100"/>
