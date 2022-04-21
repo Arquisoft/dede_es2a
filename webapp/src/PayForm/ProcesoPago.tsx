@@ -35,8 +35,21 @@ type Props = {
     cartItems: Juguete[];
 };
 
+// Petición para obtener los gastos de envio
+export async function getGastosEnvio(): Promise<Number> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido/gastosEnvio/', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({"direccion":localStorage.getItem("direccion")})
+  });
+  console.log(response.json());
+  return response.json();
+}
+
 toast.configure();
 const ProcesoPago:React.FC<Props> = ({cartItems}) => {
+    let gastos:number;
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
@@ -48,7 +61,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
           toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
         } else {
           //TODO Calcular envio+
-
+          gastos = Number.parseFloat(getGastosEnvio().toString());
 
 
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
@@ -83,7 +96,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               <Delivery
                 cartItems={cartItems}
                 siguientePaso={siguientePaso}
-                deliveryCost={deliveryCost}
+                deliveryCost={gastos}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={setAddress}
                 address={address}
