@@ -42,13 +42,13 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
             </div> :
             isAuthenticated?
             <div>
-                <a className={'active'} href={"confirmar-pedido"}>
-                    {'Pagar'}
+                <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"}>
+                    {'Realizar pedido'}
                 </a>
             </div>:
               <div>
-                      <a className={'active'} href={"confirmar-pedido"}>
-                    {'Pagar'}
+                      <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"}>
+                    {'Realizar pedido'}
                 </a>
              <LoginButtonCart />
               </div>
