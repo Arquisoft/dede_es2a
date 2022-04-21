@@ -4,6 +4,8 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 //Styles
 import {Wrapper} from '../Cart/Cart.styles';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -21,7 +23,6 @@ import Review from './Review';
 import FinalizedOrder from './FinalizedOrder';
 
 
-
 /*
 type Props = {
     cartItems: CartItemType[];
@@ -34,11 +35,24 @@ type Props = {
     cartItems: Juguete[];
 };
 
-
+toast.configure();
 const ProcesoPago:React.FC<Props> = ({cartItems}) => {
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
+      };
+
+      const siguientePasoSiPodCalcularEnvio = () => {
+        console.log(localStorage.getItem("direccion"));
+        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="") {
+          toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
+        } else {
+          //TODO Calcular envio+
+
+
+
+        setPasoActual((pasoPrevio) => pasoPrevio + 1);
+        }
       };
 
       const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
@@ -57,7 +71,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             return (
               <Shipping
                 cartItems={cartItems}
-                siguientePaso={siguientePaso}
+                siguientePaso={siguientePasoSiPodCalcularEnvio}
                 setDeliveryCost={setDeliveryCost}
                 deliveryCost={deliveryCost}
                 setAddress={setAddress}
@@ -89,7 +103,14 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 3:
-            return <FinalizedOrder />;
+            return <FinalizedOrder
+            cartItems={cartItems}
+            siguientePaso={siguientePaso}
+            deliveryCost={deliveryCost}
+            setDeliveryCost={setDeliveryCost}
+            setAddress={siguientePaso}
+            address={address}
+            deliveryDate={deliveryDate} />;
             
         }
       };

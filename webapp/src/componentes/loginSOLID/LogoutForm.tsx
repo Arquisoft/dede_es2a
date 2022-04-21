@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Home from '../../paginas/Home';
+import {useSession } from "@inrupt/solid-ui-react";
 
 const LogoutForm = () => {
 
   const navigate = useNavigate();
+  const { session } = useSession();
 
   useEffect(() => {
     localStorage.clear();
+    
     /*
     sessionStorage.removeItem("webID");
     sessionStorage.removeItem("sessionID");

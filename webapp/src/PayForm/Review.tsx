@@ -7,12 +7,14 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
+import Paper from "@mui/material/Paper";
+import Grid from '@material-ui/core/Grid';
 
 //Types
 import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
+import SummaryItem from "./SummaryItem";
 
 type Props = {
     cartItems: Juguete[];
@@ -30,18 +32,27 @@ const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sigui
     const price = calculateTotal(cartItems);
     return (
         <div>
-          <div id="resumen-general">
-            <p>{address}</p>
-            <p>{deliveryDate}</p>
-            <p>Mapear elementos del carrito con imagenes</p>
-          </div>
+             <Grid container spacing={3}>
+            {cartItems.map(item=>(
+                <SummaryItem 
+                    key={item.id}
+                    item={item}
+                />
+            ))}   
+               </Grid>
+    
 
-
+          <Paper elevation = {9} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
+            <Typography variant="h4" component="h2">Entrega</Typography>
+            <p >Dirección de entrega: <b>{localStorage.getItem("direccion")}</b></p>
+            <p >Fecha de entrega: <b>Mañana</b></p>
+            </Paper>
           <Card sx={{ maxWidth: 600 }} >
           <CardContent>
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
               <p>Gastos de envío: <b>{deliveryCost}</b></p>
+              <Typography variant="h6" component="h2">-------------------------------------------------------------------</Typography>
               <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
               </CardContent>
               <CardActions>
