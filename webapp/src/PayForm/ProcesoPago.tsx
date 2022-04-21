@@ -42,10 +42,15 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
-      const siguientePasoSiPod = () => {
+      const siguientePasoSiPodCalcularEnvio = () => {
+        console.log(localStorage.getItem("direccion"));
         if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="") {
           toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
         } else {
+          //TODO Calcular envio+
+
+
+
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
         }
       };
@@ -66,7 +71,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             return (
               <Shipping
                 cartItems={cartItems}
-                siguientePaso={siguientePasoSiPod}
+                siguientePaso={siguientePasoSiPodCalcularEnvio}
                 setDeliveryCost={setDeliveryCost}
                 deliveryCost={deliveryCost}
                 setAddress={setAddress}
@@ -98,7 +103,14 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 3:
-            return <FinalizedOrder />;
+            return <FinalizedOrder
+            cartItems={cartItems}
+            siguientePaso={siguientePaso}
+            deliveryCost={deliveryCost}
+            setDeliveryCost={setDeliveryCost}
+            setAddress={siguientePaso}
+            address={address}
+            deliveryDate={deliveryDate} />;
             
         }
       };
