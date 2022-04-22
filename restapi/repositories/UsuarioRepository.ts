@@ -40,7 +40,7 @@ const UsuarioRepository = module.exports = {
             throw error;
         }
     },
-    updateJuguete: async function(filter: Object,update: Object){
+    updateUsuario: async function(filter: Object,update: Object){
         try{
             gestorBd.connect();
             let usuario = await Usuario.findOneAndUpdate(filter, update, { new:true})
