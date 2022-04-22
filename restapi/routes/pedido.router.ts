@@ -112,7 +112,7 @@ function haversine(latUsuario:number, lonUsuario:number){
     const radioTierra = 6378;
     let distanciaKm = radioTierra*c;
     // precio por km establecido en nuestra empresa
-    let precioKm = 0.25;
+    let precioKm = 0.1;
 
     // calculamos el precio final y lo retornamos
     return precioKm * distanciaKm;
@@ -124,11 +124,11 @@ pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
         console.log(req.body.direccion)
         let gastos = await gastosEnvio(req.body.direccion);
         if(gastos == 0){
-            res.send("La dirección del usuario no se ha encontrado.")
+            res.send("5"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
         }
         res.send(gastos.toString());
     } catch (error) {
-        res.send(error);
+        res.status(400).json();
     }
 });
 
