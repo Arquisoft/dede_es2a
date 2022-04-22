@@ -24,9 +24,11 @@ type Props = {
 }
 
 const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, siguientePaso, setAddress, address})=> {
-    const calculateTotal = (items:Juguete[]) =>
+  console.log(deliveryCost)  
+  const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
     const price = calculateTotal(cartItems);
+    const finalPrice:number = price + parseFloat(deliveryCost.toString());
     return (
         <div>
            <Paper elevation = {9} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
@@ -40,7 +42,7 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
               <p>Gastos de envío: <b>{deliveryCost}</b></p>
               <Typography variant="h6" component="h2">-------------------------------------------------------------------</Typography>
-              <Typography variant="h4" component="h2">Total: {(deliveryCost + price).toFixed(2)}€</Typography>
+              <Typography variant="h4" component="h2">Total: {finalPrice.toFixed(2)}€</Typography>
               </CardContent>
               <CardActions>
               <Button
