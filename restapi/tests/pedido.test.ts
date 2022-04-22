@@ -32,6 +32,19 @@ afterAll(async () => {
     server.close() //close the server
 })
 
-describe('user ', () => {
-    
+describe('pedido ', () => {
+    it("Se puede añadir un pedido", async () => {
+        let precio =  135.5
+        let gastosEnvio =  15
+        let precioTotal =  precio + gastosEnvio
+        let juguetes = [{"_id":"6248442ddac5d2a2644fb656","cantidad":3},{"_id":"6248449cdac5d2a2644fb659","cantidad":1}]
+        const response: Response = await request(app).post('/pedido').send({precioSinIva:precio,precioGastosDeEnvio:gastosEnvio,precioFinal:precioTotal,productos:juguetes});
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("Su pedido ha sido tramitado")
+    });
+
+    it("No se puede añadir un pedido porque no hay stock", async() =>{
+        //Cambiamos un juguete a stock 0 para probar
+        
+    });
 });

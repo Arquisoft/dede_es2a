@@ -101,9 +101,7 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
         const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
                 precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
                 cantidad : req.body.cantidad, stock: req.body.stock}
-        console.log("hola");
         let jugueteActualizado = await JugueteRepository.updateJuguete(filter,update);
-        console.log(jugueteActualizado);
         if(jugueteActualizado){
             res.send("El juguete se ha actualizado correctamente");
         } else{
@@ -113,7 +111,21 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
         res.status(500).send("Error al actualizar el juguete");
     }
 });
-    
+
+jugueteRouter.post("/añadirStock/:nombre", async (req:Request,res:Response) => {
+    try{
+        const filter = {nombre: req.params.nombre}
+        const update = {stock: req.body.stock}
+        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,update);
+        if(jugueteActualizado){
+            res.send("Stock del juguete añadido correctamente");
+        } else{
+            res.status(500).send("No se pudo añadir stock al producto")
+        }
+    }catch (error){
+        res.status(500).send("Error al añadir stock al juguete")
+    }
+});
 
     /*let jugueteActualizado = new Juguete({
         _id : req.params.id,
