@@ -43,11 +43,9 @@ async function gastosEnvio(direccion:String): Promise<Number> {
     try{
         let gastos:number = 0; // gastos iniciales
 
-        console.log(direccion);
-
         // le pasamos la direccion del usuario a la api para que nos devuelva los datos en formato json
         let datosDireccion = await geocoder.geocode(direccion);
-        
+
         if(datosDireccion.length == 0){ // dirección no encontrada por la API
             return 0;
         }else{ // resultado obtenido por la API
