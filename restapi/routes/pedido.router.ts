@@ -39,16 +39,13 @@ const lonEmpresa:number = -5.85131;
 * - La de la tienda siempre será la misma, tenerla privada en el .env
 * - Tener en cuenta que la api no encuentre la direccion especificada
 */
-async function gastosEnvio(): Promise<Number> {
+async function gastosEnvio(direccion:String): Promise<Number> {
     try{
         let gastos:number = 0; // gastos iniciales
 
-        // Dirección de prueba del usuario
-        let direccionUsuario:String = "Vicente Aleixandre Corvera"; // realmente sacarla de los PODs
-
         // le pasamos la direccion del usuario a la api para que nos devuelva los datos en formato json
-        let datosDireccion = await geocoder.geocode(direccionUsuario);
-        
+        let datosDireccion = await geocoder.geocode(direccion);
+
         if(datosDireccion.length == 0){ // dirección no encontrada por la API
             return 0;
         }else{ // resultado obtenido por la API
@@ -113,22 +110,23 @@ function haversine(latUsuario:number, lonUsuario:number){
     const radioTierra = 6378;
     let distanciaKm = radioTierra*c;
     // precio por km establecido en nuestra empresa
-    let precioKm = 0.25;
+    let precioKm = 0.1;
 
     // calculamos el precio final y lo retornamos
     return precioKm * distanciaKm;
 }
 
-pedidoRouter.get('/gastosEnvio', async (req:Request,res:Response) =>{
+pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     try{
         // llamar a la funcion gastos de envio y retornar como respuesta el dinero calculado
-        let gastos = await gastosEnvio();
+        console.log(req.body.direccion)
+        let gastos = await gastosEnvio(req.body.direccion);
         if(gastos == 0){
-            res.send("La dirección del usuario no se ha encontrado.")
+            res.send("5"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
         }
         res.send(gastos.toString());
     } catch (error) {
-        res.send(error);
+        res.status(400).json();
     }
 });
 
