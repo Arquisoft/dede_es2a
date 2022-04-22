@@ -12,7 +12,7 @@ module.exports = [{
     stock:35
 },{
     nombre : "juguete3",
-    descripcion : "categoria3",
+    descripcion : "categorias3",
     precio: 14,
     imagen:"imagen3",
     stock:20
