@@ -20,17 +20,18 @@ cloudinary.config({
 require('dotenv').config()
 let bd = require('./modules/gestorDB')
 
+/*
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
   //origin: ['https://dede-es2a-webapp.herokuapp.com']
-};
+};*/
 
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
 
 
-app.use(cors(options));
+app.use(cors());
 app.use(bp.json());
 
 app.use("/api", api)
