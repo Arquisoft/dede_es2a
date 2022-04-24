@@ -22,7 +22,7 @@ const options: cors.CorsOptions = {
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
-
+bd.connect();
 
 app.use(cors(options));
 app.use(bp.json());

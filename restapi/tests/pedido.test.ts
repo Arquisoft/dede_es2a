@@ -3,9 +3,18 @@ import express, { Application } from 'express';
 import * as http from 'http';
 import bp from 'body-parser';
 import cors from 'cors';
-import jugueteRouter from '../routes/juguete.router';
-import api from "../api"
-import exp from 'constants';
+import { pedidoRouter } from '../routes/pedido.router';
+import mongoose  from 'mongoose';
+
+const gestorBd = require('../modules/gestorDB');
+
+const datosJuguetes = require('./datos/juguetes.json');
+const datos = require('./datos/usuarios.json');
+//const datosPedidos = require('./datos/pedidos.json');
+
+const Juguete = require('../models/Juguete');
+const Pedido = require('../models/Pedido');
+const Usuario = require('../models/Usuario');
 
 let app:Application;
 let server:http.Server;
@@ -16,10 +25,13 @@ beforeAll(async () => {
     const options: cors.CorsOptions = {
         origin: ['http://localhost:3000']
     };
+
+    gestorBd.connectTest();
+    await prepararBd();
+
     app.use(cors(options));
     app.use(bp.json());
-    app.use("/api",api)
-    app.use("/juguete", jugueteRouter)
+    app.use("/pedido", pedidoRouter)
 
     server = app.listen(port, ():void => {
         console.log('Restapi server for testing listening on '+ port);
@@ -28,23 +40,54 @@ beforeAll(async () => {
     });
 });
 
+async function prepararBd(){
+    await Usuario.deleteMany({});
+    await Juguete.deleteMany({});
+    await Pedido.deleteMany({});
+
+    for(const dato of datosJuguetes){
+        const juguete = new Juguete(dato);
+        juguete.save();
+    }
+
+    for(const dato of datos){
+        const usuario = new Usuario(dato);
+        usuario.save();
+    }
+    /*
+    for(const dato of datosPedidos){
+        const pedido = new Pedido(dato);
+        pedido.save();
+    }*/
+}
+
 afterAll(async () => {
+    await Usuario.deleteMany({})
+    await Juguete.deleteMany({});
+    await Pedido.deleteMany({});
+    mongoose.connection.close();
     server.close() //close the server
 })
 
-describe('pedido ', () => {
-    it("Se puede añadir un pedido", async () => {
-        let precio =  135.5
-        let gastosEnvio =  15
-        let precioTotal =  precio + gastosEnvio
-        let juguetes = [{"_id":"6248442ddac5d2a2644fb656","cantidad":3},{"_id":"6248449cdac5d2a2644fb659","cantidad":1}]
-        const response: Response = await request(app).post('/pedido').send({precioSinIva:precio,precioGastosDeEnvio:gastosEnvio,precioFinal:precioTotal,productos:juguetes});
+describe('pedidos ', () => {
+    
+    it('Se puede crear un pedido', async () =>{
+        const response:Response = await request(app).post('/pedido').send({precioSinIva:125,precioGastosDeEnvio:20,productos:[{nombre:"juguete1",cantidad:3}],usuario:"goat@email.com"});
         expect(response.statusCode).toBe(200);
-        expect(response.text).toEqual("Su pedido ha sido tramitado")
+        expect(response.text).toEqual("Su pedido ha sido tramitado");
     });
 
-    it("No se puede añadir un pedido porque no hay stock", async() =>{
-        //Cambiamos un juguete a stock 0 para probar
-        
+    it('Se pueden listar todos los pedidos', async() =>{
+        const response:Response = await request(app).get('/pedido')
+        expect(response.statusCode).toBe(200)
+        expect(response.type).toEqual("application/json")
     });
+
+    it('Se pueden listar todos los pedidos de un usuario', async() =>{
+        const response:Response = await request(app).get('/pedido/');
+        expect(response.status).toBe(200);
+        expect(response.type).toEqual("application/json");
+    });
+
+
 });

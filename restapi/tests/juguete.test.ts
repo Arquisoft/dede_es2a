@@ -4,8 +4,11 @@ import * as http from 'http';
 import bp from 'body-parser';
 import cors from 'cors';
 import jugueteRouter from '../routes/juguete.router';
-import api from "../api"
-import exp from 'constants';
+import mongoose from 'mongoose'
+
+const gestorBd = require('../modules/gestorDB');
+const datos = require('./datos/juguetes.json');
+const Juguete = require('../models/Juguete');
 
 let app:Application;
 let server:http.Server;
@@ -20,6 +23,9 @@ beforeAll(async () => {
     app.use(bp.json());
     app.use("/juguete", jugueteRouter)
 
+    gestorBd.connectTest();
+    await prepararBd();
+
     server = app.listen(port, ():void => {
         console.log('Restapi server for testing listening on '+ port);
     }).on("error",(error:Error)=>{
@@ -27,20 +33,31 @@ beforeAll(async () => {
     });
 });
 
+async function prepararBd(){
+    await Juguete.deleteMany({});
+
+    for(const dato of datos){
+        const juguete = new Juguete(dato);
+        juguete.save();
+    }
+}
+
 afterAll(async () => {
+    await Juguete.deleteMany({});
+    mongoose.connection.close();
     server.close() //close the server
+    
+
 })
 
 describe('juguete ', () => {
     it('Los juguetes se pueden listar', async () => {
-        await api
         const response:Response = await request(app).get('/juguete')
         expect(response.statusCode).toBe(200)
         expect(response.type).toEqual("application/json")
     })
 
     it('Se pueden listar los juguetes tan solo con stock', async () => {
-        await api
         const response:Response = await request(app).get('/juguete/withStock')
         expect(response.statusCode).toBe(200)
         expect(response.type).toEqual("application/json")
@@ -55,44 +72,37 @@ describe('juguete ', () => {
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Añadido nuevo juguete")
-        // lo borramos para que no se quede almacendo en la base de datos
-        await request(app).delete('/juguete/juguete1Prueba');
     })
 
     it("No se puede añadir un juguete que ya existe", async () => {
-        let name:String = "Avión"
-        let description:String = "sin descripcion"
-        let price:Number = 13.55
-        let imag:String = "alguna cosa"
+        let name:String = "juguete1"
+        let description:String = "sin categoria1"
+        let price:Number = 13.5
+        let imag:String = " imagen"
         let category:String = "mu grande"
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.text).toEqual("Este juguete ya existe");
     });
 
     it('Encontrar un juguete por nombre', async () => {
-        // añadimos juguete para prueba
-        let name:String = "juguetePruebas"
-        let description:String = "descripcion"
-        let price:Number = 13.5
-        let imag:String = "sin imagen"
-        let category:String = "sin categoria"
+        let name:String = "juguete2"
+        let description:String = "categoria2"
+        let price:Number = 11
+        let imag:String = "imagen2"
+        let category:String = "meh"
         let quantity:Number = 0
-        let stock2:Number = 5
-        await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,
-        cantidad:quantity, stock:stock2})
-        // comprobamos que lo podemos encontrar
-        const response: Response = await request(app).get("/juguete/juguetePruebas");
-        let id = response.body.id;
+        let stock2:Number = 35
+        const response: Response = await request(app).get("/juguete/juguete2");
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual({
-            id: id,
-            nombre: "juguetePruebas",
-            descripcion: "descripcion",
-            precio: 13.5,
-            imagen: "sin imagen",
-            categoria: "sin categoria",
+            id: response.body.id,
+            nombre: "juguete2",
+            descripcion: "categoria2",
+            precio: 11,
+            imagen: "imagen2",
+            categoria: "meh",
             cantidad: 0,
-            stock:5
+            stock:35
         });
     });
     
@@ -104,7 +114,7 @@ describe('juguete ', () => {
         let quantity:Number = 12
         let stock2:Number = 10
         // actualizamos el juguete añadido en la prueba anterior y lo borramos aqui ya que no lo vamos a utilizar mas
-        const response:Response = await request(app).post('/juguete/update/juguetePruebas').send({descripcion:description,precio:price,
+        const response:Response = await request(app).post('/juguete/update/juguete1Prueba').send({descripcion:description,precio:price,
             imagen:imag,categoria:category, cantidad : quantity, stock:stock2})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("El juguete se ha actualizado correctamente")
@@ -124,21 +134,39 @@ describe('juguete ', () => {
     });
 
     /**
-      * test que prueba a obtener un producto inexistente
+      * test que prueba a obtener un juguete inexistente
     */
-    it("No se puede obtener un producto inexistente (El juguete no existe)", async () => {
+    it("No se puede obtener un juguete inexistente (El juguete no existe)", async () => {
        const response: Response = await request(app).get('/juguete/NoExiste');
+       expect(response.statusCode).toBe(500);
        expect(response.text).toEqual("El juguete no existe")
     });
+
     
-    it("Se puede eliminar un producto", async () =>{
-        const response: Response = await request(app).delete('/juguete/juguetePruebas');
+    it("Se puede eliminar un juguete", async () =>{
+        const response: Response = await request(app).delete('/juguete/juguete1Prueba');
         expect(response.text).toEqual("Eliminado juguete")
     });
 
-    it("No se puede eliminar un producto inexistente", async () => {
+    it("No se puede eliminar un juguete inexistente", async () => {
         const response: Response = await request(app).delete('/juguete/noExiste');
         expect(response.text).toEqual("No existe el juguete");
     });
+
+    it("Se puede añadir nuevo stock a un juguete", async() =>{
+        var stock = 10;
+        const response:Response = await request(app).post('/juguete/addStock/juguete1').send({stock:stock});
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("Stock del juguete añadido correctamente");
+    });
+
+    it("No se puede añadir stock a un juguete que no existe", async () => {
+        var stock = 10;
+        const response:Response = await request(app).post('/juguete/addStock/noExiste').send({stock:stock});
+        expect(response.statusCode).toBe(500);
+        expect(response.text).toEqual("No se pudo añadir stock al producto");
+    });
+
+
 
 });

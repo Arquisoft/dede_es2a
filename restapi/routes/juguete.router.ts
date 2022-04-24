@@ -44,7 +44,7 @@ jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
             res.status(500).send("El juguete no existe")
         }
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Ha ocurrido un error al buscarr el juguete");
     }
 });
 
@@ -112,7 +112,7 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
     }
 });
 
-jugueteRouter.post("/añadirStock/:nombre", async (req:Request,res:Response) => {
+jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {nombre: req.params.nombre}
         const update = {stock: req.body.stock}
@@ -127,26 +127,4 @@ jugueteRouter.post("/añadirStock/:nombre", async (req:Request,res:Response) => 
     }
 });
 
-    /*let jugueteActualizado = new Juguete({
-        _id : req.params.id,
-        nombre : req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: req.body.precio,
-        imagen: req.body.imagen,
-        categoria: req.body.categoria,
-    });
-    jugueteActualizado.save().then((jugueteGuardado:typeof Juguete,err:Error) =>{
-        if(err){
-            res.send("Ha ocurrido un error en la actualización")
-        }
-        res.send("Se ha actualizado correctamente");
-    })*/
-
-    /*Juguete.findOneAndUpdate({ _id: req.params._id },
-        jugueteActualizado,
-        { new: true })
-        
-    
-})
-*/
 export default jugueteRouter;
