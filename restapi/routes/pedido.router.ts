@@ -171,9 +171,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
     try{
         let productos = [];
         for(var producto of juguetes){
-            console.log(producto)
             let juguete = await JugueteRepository.findJuguete({nombre:producto.nombre});
-            console.log(juguete)
             if(juguete){
                 var cantidad = producto.cantidad;
                 if(juguete.stock != 0){
