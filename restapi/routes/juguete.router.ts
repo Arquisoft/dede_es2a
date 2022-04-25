@@ -119,8 +119,12 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
 jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {nombre: req.params.nombre}
-        const update = {stock: req.body.stock}
-        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,update);
+
+        var juguete = await JugueteRepository.findJuguete(filter); 
+
+        const stock = {stock: juguete.stock + req.body.stock}
+        
+        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,stock);
         if(jugueteActualizado){
             res.send("Stock del juguete añadido correctamente");
         } else{

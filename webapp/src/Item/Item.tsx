@@ -19,10 +19,10 @@ type Props = {
 
 async function addStock(nombre: string): Promise<any> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    let response = await fetch(apiEndPoint + '/addStock/' + nombre, {
+    let response = await fetch(apiEndPoint + 'juguete/addStock/' + nombre, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "nombre": nombre, "stock": 10 })
+        body: JSON.stringify({ "stock": 10 })
     });
 }
 
@@ -37,7 +37,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
     return (
         <Wrapper>
             {
-                false ? // isAdmin ?
+                true ? // isAdmin ?
                     <div>
                         <img src={item.imagen} alt={item.nombre} />
                         <h3>{item.nombre}</h3>
