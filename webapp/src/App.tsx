@@ -182,7 +182,7 @@ const App = () => {
                   <Navbar />
 
                   {
-                    true ? // isAdmin ?
+                    false ? // isAdmin ?
                       <></>
                       :
                       <div>
@@ -214,7 +214,7 @@ const App = () => {
           } />
 
           <Route path="/edit" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <EditForm />
@@ -229,7 +229,7 @@ const App = () => {
           } />
 
           <Route path="/contactanos" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -244,7 +244,7 @@ const App = () => {
           } />
 
           <Route path="confirmar-pedido" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -261,7 +261,7 @@ const App = () => {
           }
           />
           <Route path="/perfilPod" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -276,7 +276,7 @@ const App = () => {
           }
           />
           <Route path="/loginPago" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -291,7 +291,7 @@ const App = () => {
           }
           />
           <Route path="/logoutPago" element={
-            true ? // isAdmin?
+            false ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>

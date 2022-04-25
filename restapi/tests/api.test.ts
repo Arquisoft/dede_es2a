@@ -142,4 +142,13 @@ describe('user ', () => {
         expect(response.text).toEqual("No existe el juguete");
     });
 
+    it("Se puede añadir un pedido", async () => {
+        let precio =  135.5
+        let gastosEnvio =  15
+        let precioTotal =  precio + gastosEnvio
+        let juguetes = ["6248442ddac5d2a2644fb656","6248449cdac5d2a2644fb659"]
+        const response: Response = await request(app).post('/pedido').send({precioSinIva:precio,precioGastosDeEnvio:gastosEnvio,precioFinal:precioTotal,productos:juguetes});
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("Su pedido ha sido tramitado")
+    });
 });

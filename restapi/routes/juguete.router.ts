@@ -1,9 +1,10 @@
 import { Console } from "console";
 import express, {Request,response,Response} from "express"
+import cloudinary from 'cloudinary';
 import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
-let JugueteRepository = require('../repositories/JuguetesRepository');
+var JugueteRepository = require('../repositories/JuguetesRepository');
 jugueteRouter.use(express.json());
 
 /**
@@ -81,6 +82,9 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             categoria: req.body.categoria,
             stock: req.body.stock
         };
+        var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
+        console.log(nuevaImagen);
+        nuevoJuguete.imagen = nuevaImagen.url;
         let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
         if(juguete){
             res.send("Este juguete ya existe");
@@ -101,9 +105,7 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
         const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
                 precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
                 cantidad : req.body.cantidad, stock: req.body.stock}
-        console.log("hola");
         let jugueteActualizado = await JugueteRepository.updateJuguete(filter,update);
-        console.log(jugueteActualizado);
         if(jugueteActualizado){
             res.send("El juguete se ha actualizado correctamente");
         } else{
