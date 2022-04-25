@@ -4,6 +4,8 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 //Styles
 import {Wrapper} from '../Cart/Cart.styles';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -21,7 +23,6 @@ import Review from './Review';
 import FinalizedOrder from './FinalizedOrder';
 
 
-
 /*
 type Props = {
     cartItems: CartItemType[];
@@ -34,11 +35,37 @@ type Props = {
     cartItems: Juguete[];
 };
 
+let gastosEnvio:any; 
 
+// Petición para obtener los gastos de envio
+async function getGastosEnvio(): Promise<any> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido/gastosEnvio/', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({"direccion":localStorage.getItem("direccion")})
+  }).then(resp => resp.json())
+  .then(data => {
+    gastosEnvio = Number(data).toFixed(2);
+  });
+
+  return response;
+}
+
+toast.configure();
 const ProcesoPago:React.FC<Props> = ({cartItems}) => {
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
+      };
+
+      const siguientePasoSiPodCalcularEnvio = async () => {
+        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="") {
+          toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
+        } else {
+          let variable = await getGastosEnvio();
+          setPasoActual((pasoPrevio) => pasoPrevio + 1);
+        }
       };
 
       const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
@@ -57,7 +84,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             return (
               <Shipping
                 cartItems={cartItems}
-                siguientePaso={siguientePaso}
+                siguientePaso={siguientePasoSiPodCalcularEnvio}
                 setDeliveryCost={setDeliveryCost}
                 deliveryCost={deliveryCost}
                 setAddress={setAddress}
@@ -69,7 +96,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               <Delivery
                 cartItems={cartItems}
                 siguientePaso={siguientePaso}
-                deliveryCost={deliveryCost}
+                deliveryCost={gastosEnvio}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={setAddress}
                 address={address}
@@ -81,7 +108,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               <Review
                 cartItems={cartItems}
                 siguientePaso={siguientePaso}
-                deliveryCost={deliveryCost}
+                deliveryCost={gastosEnvio}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={siguientePaso}
                 address={address}
@@ -89,7 +116,14 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 3:
-            return <FinalizedOrder />;
+            return <FinalizedOrder
+            cartItems={cartItems}
+            siguientePaso={siguientePaso}
+            deliveryCost={gastosEnvio}
+            setDeliveryCost={setDeliveryCost}
+            setAddress={siguientePaso}
+            address={address}
+            deliveryDate={deliveryDate} />;
             
         }
       };

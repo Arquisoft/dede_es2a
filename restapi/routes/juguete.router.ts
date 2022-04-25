@@ -1,5 +1,6 @@
 import { Console } from "console";
 import express, {Request,response,Response} from "express"
+import cloudinary from 'cloudinary';
 import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
@@ -81,6 +82,9 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             categoria: req.body.categoria,
             stock: req.body.stock
         };
+        var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
+        console.log(nuevaImagen);
+        nuevoJuguete.imagen = nuevaImagen.url;
         let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
         if(juguete){
             res.send("Este juguete ya existe");
