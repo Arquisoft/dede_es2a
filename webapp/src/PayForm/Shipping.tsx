@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
+import Paper from "@mui/material/Paper";
 import LoginForm from '../componentes/loginSOLID/LoginForm';
 //Types
 import { CartItemType } from '../App';
@@ -26,19 +26,13 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
     const price = calculateTotal(cartItems);
-    //TODO
-    const obtainPodAndCalculateDeliveryCost = () => {
-        //La que sea del POD
-        setAddress("");
-        //Aqui calculamos gastos de envío con la api
-
-
-        //Aqui colocamos los gastos de envio
-        setDeliveryCost(0);
-    }
     return (
         <div>
-           <Card sx={{ maxWidth: 600 }} >
+         <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}> 
+         <Typography variant="h4" component="h2">Otorgue su dirección a través de su POD</Typography>
+        <LoginForm/>
+      </Paper>
+           <Card elevation = {4} sx={{ maxWidth: 600 }} >
           <CardContent>
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
@@ -55,7 +49,7 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             </Button>
             </CardActions>
             </Card>
-            <LoginForm/>
+        
           
         </div>
     )

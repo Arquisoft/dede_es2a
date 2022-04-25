@@ -34,13 +34,12 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
            <Paper elevation = {9} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
             <Typography variant="h4" component="h2">Entrega</Typography>
             <p >Dirección de entrega: <b>{localStorage.getItem("direccion")}</b></p>
-            <p >Fecha de entrega: <b>Mañana</b></p>
             </Paper>
-            <Card sx={{ maxWidth: 600 }} >
+            <Card sx={{ maxWidth: 600 }} elevation={4}>
           <CardContent>
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
-              <p>Gastos de envío: <b>{deliveryCost}</b></p>
+              <p>Gastos de envío: <b>{deliveryCost}€</b></p>
               <Typography variant="h6" component="h2">-------------------------------------------------------------------</Typography>
               <Typography variant="h4" component="h2">Total: {finalPrice.toFixed(2)}€</Typography>
               </CardContent>
@@ -54,10 +53,6 @@ const Delivery:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
             </Button>
             </CardActions>
             </Card>
-         
-
-            
-         
         </div>
     )
 };

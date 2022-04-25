@@ -108,7 +108,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               <Review
                 cartItems={cartItems}
                 siguientePaso={siguientePaso}
-                deliveryCost={deliveryCost}
+                deliveryCost={gastosEnvio}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={siguientePaso}
                 address={address}
@@ -119,7 +119,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             return <FinalizedOrder
             cartItems={cartItems}
             siguientePaso={siguientePaso}
-            deliveryCost={deliveryCost}
+            deliveryCost={gastosEnvio}
             setDeliveryCost={setDeliveryCost}
             setAddress={siguientePaso}
             address={address}
