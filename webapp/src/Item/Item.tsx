@@ -7,6 +7,7 @@ import { Wrapper } from './Item.styles';
 import { Juguete } from '../shared/sharedJuguete';
 
 import { useNavigate } from "react-router-dom";
+import getRoleUsuario from "../componentes/Login/LoginButton"
 
 /*type Props = {
     item: CartItemType;
@@ -37,7 +38,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
     return (
         <Wrapper>
             {
-                true ? // isAdmin ?
+                getRoleUsuario() ? // isAdmin ?
                     <div>
                         <img src={item.imagen} alt={item.nombre} />
                         <h3>{item.nombre}</h3>
