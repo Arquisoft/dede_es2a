@@ -169,7 +169,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
     try{
         let productos = [];
         for(var producto of juguetes){
-            let juguete = await JugueteRepository.findJuguete({_id:new ObjectId(producto._id)});
+            let juguete = await JugueteRepository.findJuguete({nombre:producto.nombre});
             if(juguete){
                 var cantidad = producto.cantidad;
                 if(juguete.stock != 0){
@@ -178,7 +178,11 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
                     }
                     var nuevoStock = juguete.stock - cantidad;
                     JugueteRepository.updateJuguete({"_id":new ObjectId(producto._id)},{stock:nuevoStock});
-                    productos.push(producto)
+                    var nuevoProducto = {
+                        _id:juguete._id,
+                        cantidad:cantidad
+                    }
+                    productos.push(nuevoProducto)
                 }
             }
             else{
