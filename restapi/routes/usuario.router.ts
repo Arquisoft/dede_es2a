@@ -13,10 +13,10 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
         if(usuario){
             res.send(usuario);
         } else{
-            res.send("No existe ese usuario");
+            res.status(500).send("No existe ese usuario");
         }
     } catch(error){
-        res.send("se ha producido un error");
+        res.status(500).send("se ha producido un error");
     }
 });
 
@@ -34,7 +34,7 @@ usuarioRouter.post("/", async(req:Request,res:Response) =>{
             res.send("Usuario añadido correctamente");
         }
         else{
-            res.send("El usuario no se ha podido añadir");
+            res.status(500).send("El usuario no se ha podido añadir");
         }
     } catch(error){
         res.send(error);
