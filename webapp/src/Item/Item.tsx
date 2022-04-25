@@ -17,13 +17,13 @@ type Props = {
     handleAddToCart: (clickedItem: Juguete) => void;
 }
 
-async function addStock(): Promise<Juguete[]> {
+async function addStock(nombre: string): Promise<any> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + 'juguete/withstock');
-    //The objects returned by the api are directly convertible to User objects
-    //console.log(response.json());
-    return response.json();
+    let response = await fetch(apiEndPoint + '/addStock/' + nombre, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "nombre": nombre, "stock": 10 })
+    });
 }
 
 /*
@@ -48,9 +48,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                             navigate("/edit");
                         }}>Editar producto</Button>
                         <Button onClick={() => {
-                            // faltaria añadir stock -> crear método
-
-                            
+                            addStock(item.nombre);
                         }}>Añadir existencias</Button>
                     </div>
                     :
