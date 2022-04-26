@@ -1,4 +1,4 @@
-import { useSession, CombinedDataProvider, LogoutButton, Text  } from "@inrupt/solid-ui-react";
+import { useSession, CombinedDataProvider, Text  } from "@inrupt/solid-ui-react";
 import { Button, Card, CardContent, Container, Typography } from "@material-ui/core";
 import {
     getSolidDataset,
@@ -46,13 +46,7 @@ export default function Profile() {
                 
         <Grid id="solidButtons" container>
             <Grid item>
-            <LogoutButton >
-                <Button onClick={()=>{
-                    localStorage.clear();
-                }} id="logoutButton" href="http://localhost:3000" variant="contained" color="primary">
-                Logout
-                </Button>
-            </LogoutButton>
+            
             </Grid>
         </Grid>
         </Container>

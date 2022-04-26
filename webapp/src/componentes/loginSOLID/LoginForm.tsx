@@ -5,8 +5,8 @@ import { handleIncomingRedirect,  onSessionRestore } from "@inrupt/solid-client-
 import { Autocomplete, Button, Container, TextField } from "@mui/material";
 import { Wrapper} from '../../App.styles';
 import { useEffect } from 'react';
-import {CombinedDataProvider, LogoutButton, Text  } from "@inrupt/solid-ui-react";
-import {  Card, CardContent, Typography } from "@material-ui/core";
+//import {CombinedDataProvider, LogoutButton, Text  } from "@inrupt/solid-ui-react";
+//import {  Card, CardContent, Typography } from "@material-ui/core";
 import {
     getSolidDataset,
     getThing,
