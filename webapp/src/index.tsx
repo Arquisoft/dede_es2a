@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Auth0Provider } from '@auth0/auth0-react';
+//import { Auth0Provider } from '@auth0/auth0-react';
 import { SessionProvider } from "@inrupt/solid-ui-react";
 
 // react application -> DeNostalgia
