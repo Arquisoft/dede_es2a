@@ -1,7 +1,7 @@
-import { useAuth0 } from '@auth0/auth0-react';
+//import { useAuth0 } from '@auth0/auth0-react';
 import 'react-json-pretty/themes/monikai.css';
 
-const ProfileName = () => {
+/*const ProfileName = () => {
     const { user } = useAuth0();
     return (
         <div className='label prof-name'>
@@ -10,4 +10,4 @@ const ProfileName = () => {
     );
 }
 
-export default ProfileName;
+export default ProfileName;*/
