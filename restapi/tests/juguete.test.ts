@@ -19,7 +19,7 @@ beforeAll(async () => {
     const options: cors.CorsOptions = {
         origin: ['http://localhost:3000']
     };
-    app.use(cors(options));
+    app.use(cors());
     app.use(bp.json());
     app.use("/juguete", jugueteRouter)
 

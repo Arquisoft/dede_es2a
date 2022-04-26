@@ -29,7 +29,7 @@ beforeAll(async () => {
     gestorBd.connectTest();
     await prepararBd();
 
-    app.use(cors(options));
+    app.use(cors());
     app.use(bp.json());
     app.use("/pedido", pedidoRouter)
 
