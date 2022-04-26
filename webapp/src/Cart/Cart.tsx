@@ -1,5 +1,5 @@
 import CartItem from '../CartItem/CartItem';
-import { useAuth0 } from '@auth0/auth0-react';
+//import { useAuth0 } from '@auth0/auth0-react';
 //Styles
 import {Wrapper} from './Cart.styles';
 import { Typography } from "@material-ui/core";
@@ -20,8 +20,8 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
 
     const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
-    const { isAuthenticated } = useAuth0();
-    console.log(isAuthenticated)
+    //const { isAuthenticated } = useAuth0();
+    //console.log(isAuthenticated)
     return (
         <Wrapper>
             <Typography variant="h2" component="h2">Tu carrito</Typography>
@@ -40,18 +40,12 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
             <div>
         
             </div> :
-            isAuthenticated?
+            //isAuthenticated?
             <div>
                 <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"}>
                     {'Realizar pedido'}
                 </a>
-            </div>:
-              <div>
-                      <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"}>
-                    {'Realizar pedido'}
-                </a>
-            
-              </div>
+            </div>
             }           
         </Wrapper>
     )
