@@ -3,7 +3,7 @@
     "descripcion" : "categoria1",
     "precio": 13.5,
     "imagen":"imagen",
-    "categoria":"tocho",
+    "categoria":"grande",
     "stock":12
 },{
     "nombre" : "juguete2",
