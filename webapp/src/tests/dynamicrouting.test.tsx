@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom/extend-expect';
 import {fireEvent, render} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import LoginButton from '../componentes/Login/LoginButton';
-import LogoutButton from '../componentes/Login/LogoutButton'
+//import LoginButton from '../componentes/Login/LoginButton';
+//import LogoutButton from '../componentes/Login/LogoutButton'
 import Navbar from '../componentes/Navbar/Navbar';
 import Footer from '../componentes/Footer/Footer';
 import Home from '../paginas/Home';

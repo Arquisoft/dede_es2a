@@ -2,15 +2,15 @@ import { Component } from 'react';
 import { MenuItems } from "./Menitems"
 import { MenuItemsAdmin } from "./MenitemsAdmin"
 import './Navbar.css'
-import LoginButton from '../Login/LoginButton';
-import { useAuth0 } from '@auth0/auth0-react';
-import LogoutButton from '../Login/LogoutButton';
-import ProfileImg from '../Login/ProfileImg';
-import ProfileName from '../Login/ProfileName';
+//import LoginButton from '../Login/LoginButton';
+//import { useAuth0 } from '@auth0/auth0-react';
+//import LogoutButton from '../Login/LogoutButton';
+//import ProfileImg from '../Login/ProfileImg';
+//import ProfileName from '../Login/ProfileName';
 
 
 const Navbar = () => {
-    const { isAuthenticated } = useAuth0();
+    //const { isAuthenticated } = useAuth0();
     let state = { clicked: false };
     const handleClick = () => {
         state = { clicked: !state.clicked }
@@ -51,10 +51,10 @@ const Navbar = () => {
             }
 
             {
-                isAuthenticated ? <LogoutButton /> : <LoginButton />
+                //isAuthenticated ? <LogoutButton /> : <LoginButton />
             }
             {
-                isAuthenticated ? <ProfileName /> : <></>
+                //isAuthenticated ? <ProfileName /> : <></>
             }
 
         </nav>
