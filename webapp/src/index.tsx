@@ -19,15 +19,9 @@ const client = new QueryClient();
 
 ReactDOM.render(
   <QueryClientProvider client={client}>
-    <Auth0Provider
-      domain={domain}
-      clientId={client_id}
-      redirectUri={window.location.origin}
-    >
       <SessionProvider>
         <App />
       </SessionProvider>
-    </Auth0Provider>
   </QueryClientProvider>,
 
   document.getElementById('root')
