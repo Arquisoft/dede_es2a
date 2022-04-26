@@ -1,11 +1,9 @@
 const Juguete = require("../models/Juguete");
-var gestorBd = require("../modules/gestorDB");
 
 const JugueteRepository = module.exports = {
     
     getJuguetes: async function(){
         try{
-            await gestorBd.connect();
             let juguetes = await Juguete.find({});
             return juguetes;
         } catch (error) {
@@ -14,7 +12,6 @@ const JugueteRepository = module.exports = {
     },
     findJuguete: async function(filter:Object){
         try{
-            await gestorBd.connect();
             let juguete = await Juguete.findOne(filter);
             return juguete;
         } catch (error){
@@ -23,7 +20,6 @@ const JugueteRepository = module.exports = {
     },
     getJuguetesWithStock: async function(){
         try{
-            await gestorBd.connect();
             let juguetes = await Juguete.find({ stock: { $gt: 0 } })
             return juguetes;
         } catch (error){
@@ -32,7 +28,6 @@ const JugueteRepository = module.exports = {
     },
     deleteJuguete: async function(filter:Object){
         try{
-            await gestorBd.connect();
             let juguete = await Juguete.deleteOne(filter);
             return juguete;
         } catch (error){
@@ -41,7 +36,6 @@ const JugueteRepository = module.exports = {
     },
     addJuguete: async function(objeto: Object){
         try{
-            await gestorBd.connect();
             let nuevoJuguete = new Juguete(objeto);
             let añadido = await nuevoJuguete.save();
             return añadido;
@@ -51,7 +45,6 @@ const JugueteRepository = module.exports = {
     },
     updateJuguete: async function(filter: Object,update: Object){
         try{
-            await gestorBd.connect();
             let juguete = await Juguete.findOneAndUpdate(filter, update, { new:true})
             return juguete;
         } catch (error){

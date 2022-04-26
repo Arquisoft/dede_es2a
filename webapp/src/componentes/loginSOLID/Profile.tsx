@@ -8,31 +8,13 @@ import {
 } from "@inrupt/solid-client";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-async function obtenerInformacionPod(webID: string): Promise<string[]> {
-    //Nos quedamos con la primera que nos aporta la info de la tarjeta
-    let profileDocumentURI = webID.split("#")[0]; 
-    //Obtenemos los datos de la tarjeta
-    let myDataset = await getSolidDataset(profileDocumentURI);
-    // obtenemos lo que buscamos del conjunto de datos
-    let profile = getThing(myDataset, webID); 
-    // Obtenemos la informacion especifica del POD
-    let usuario = getStringNoLocale(profile as Thing, FOAF.name.iri.value) as string;
-    let organizacion = getStringNoLocale(profile as Thing, FOAF.name.iri.value) as string;
-    let direccion = getStringNoLocale(profile as Thing, VCARD.note) as string;
-    return [usuario, organizacion, direccion];
-};
 
 
 export default function Profile() {
     const { session } = useSession();
     
-
-    obtenerInformacionPod(session.info.webId+"").then((result) => {
-        localStorage.setItem("usuario", result[0]);
-        localStorage.setItem("organizacion", result[1]);
-        localStorage.setItem("direccion", result[2]);
-    });
 
     return (
         <body>
@@ -65,7 +47,9 @@ export default function Profile() {
         <Grid id="solidButtons" container>
             <Grid item>
             <LogoutButton >
-                <Button id="logoutButton" href="http://localhost:3000" variant="contained" color="primary">
+                <Button onClick={()=>{
+                    localStorage.clear();
+                }} id="logoutButton" href="http://localhost:3000" variant="contained" color="primary">
                 Logout
                 </Button>
             </LogoutButton>
