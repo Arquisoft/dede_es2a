@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect } from 'react';
 
-const LoginButton = () => {
+/*const LoginButton = () => {
     const { loginWithRedirect } = useAuth0();
     return <button className='btn btn-primary-login' onClick={() => {
         loginWithRedirect();
@@ -16,4 +16,4 @@ const LoginButton = () => {
       }}>Registrarse</button>;
 }
 
-export default LoginButton;
+export default LoginButton;*/
