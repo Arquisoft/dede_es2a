@@ -8,7 +8,7 @@ import { Typography } from "@material-ui/core";
 import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
-import LoginButtonCart from '../componentes/Login/LoginButtonCart';
+//import LoginButtonCart from '../componentes/Login/LoginButtonCart';
 
 type Props = {
     cartItems: Juguete[];
@@ -50,7 +50,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                       <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"}>
                     {'Realizar pedido'}
                 </a>
-             <LoginButtonCart />
+            
               </div>
             }           
         </Wrapper>
