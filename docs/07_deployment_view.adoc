@@ -37,6 +37,10 @@ when your infrastructure is more complex.
 === Infraestrutura Nivel 1
 image:infraestructura.png["Hierarchy of building blocks"]
 Este sería un diagrama que muestra la relación entre los distintos componentes de la aplicación.
+.Justificación
+El usuario accederá a la parte de interfaz de usuario que compone nuestra aplicación (webapp). Esta a su vez se comunicará con el backend (restapi) que será la encargada de comunicarse con la base de datos (mongoDb) y de trabajar con la API de gastos de envío.
+La manera de acceder por parte del usuario a todo esto es a través de la nube, es decir, con un navegador de su dispositivo. Para ello, se tiene que realizar el despliegue de la aplicación. Generamos entonces los contenedores Docker con las respectivas imágenes de webapp y restapi y procedemos a realizar el despliegue en Heroku.
+De ahí todas estas relaciones mostradas en el diagrama.
 
 [role="arc42help"]
 ****
