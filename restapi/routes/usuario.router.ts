@@ -50,3 +50,5 @@ usuarioRouter.post("/", async(req:Request,res:Response) =>{
         res.send(error);
     }
 });
+
+export default usuarioRouter;

@@ -227,3 +227,5 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
         res.status(500).send("Se ha producido un error");
     }
 });
+
+export default pedidoRouter;

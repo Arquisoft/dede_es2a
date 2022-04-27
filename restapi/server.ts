@@ -1,45 +1,31 @@
-import express, { Application, RequestHandler } from "express";
+require("dotenv").config();
+
+import express, { Application, RequestHandler,  } from "express";
 import cors from 'cors';
 import bp from 'body-parser';
 import promBundle from 'express-prom-bundle';
-import api from "./api"; 
-import { jugueteRouter } from "./routes/juguete.router";
-import { url } from "inspector";
-import { pedidoRouter } from "./routes/pedido.router";
-import { usuarioRouter } from "./routes/usuario.router";
+import mongoose from 'mongoose';
+import apiUsuarios from './routes/usuario.router';
+import apiProductos from './routes/juguete.router';
+import apiPedidos from './routes/pedido.router';
 
 const app: Application = express();
-const port: number = 5000;
+app.disable("x-powered-by");
+const port: string = process.env.PORT||'5000';
+const conexiondb: string = process.env.MONGO_URI!;
 
+let allowedOrigins = ['http://localhost:3000'];
 
-require('dotenv').config()
-let bd = require('./modules/gestorDB')
-let cloudinary = require('./modules/Cloudinary');
-/*
-const options: cors.CorsOptions = {
-  origin: ['http://localhost:3000']
-  //origin: ['https://dede-es2a-webapp.herokuapp.com']
-};*/
 
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
-bd.connect();
-cloudinary.config(); 
-
 app.use(cors());
 app.use(bp.json());
 
-app.use("/api", api)
-
-app.get("/", function(req,res){
-    res.send("Por aqui no, dale a /juguete");
-});
-
-
-app.use("/juguete", jugueteRouter);
-app.use("/pedido",pedidoRouter);
-app.use("/usuario",usuarioRouter);
+app.use(apiUsuarios);
+app.use(apiPedidos);
+app.use(apiProductos);
 
 app.listen(port, ():void => {
     console.log('Restapi listening on '+ port);
@@ -47,4 +33,5 @@ app.listen(port, ():void => {
     console.error('Error occured: ' + error.message);
 });
 
-module.exports = app
+mongoose.connect(conexiondb) 
+.then(() => console.log("BD conectada"))

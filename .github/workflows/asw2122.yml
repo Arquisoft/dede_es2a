@@ -78,9 +78,9 @@ jobs:
     - name: Deploy over SSH
       uses: fifsky/ssh-action@master
       with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        user: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
+          heroku_api_key: ${{ secrets.DEPLOY_KEY }}
+          heroku_app_name: ${{ secrets.APP_NAME }}
+          heroku_email: ${{ secrets.EMAIL }}
         command: |
           wget https://raw.githubusercontent.com/Arquisoft/dede_es2a/develop/docker-compose-deploy.yml -O docker-compose.yml
           docker-compose stop
