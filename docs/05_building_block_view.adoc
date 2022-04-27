@@ -35,6 +35,8 @@ Thus it contains the white box description of selected building blocks of level 
 ****
 
 === Sistema General de Caja Blanca
+Sistemas de cajas que desglosa la aplicación en niveles. A medida que se avanza en el nivel se adentra con más detalle en la aplicación.
+image:bloqueConstruccion.png["Hierarchy of building blocks"]
 
 [role="arc42help"]
 ****
