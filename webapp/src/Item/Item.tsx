@@ -38,7 +38,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
     return (
         <Wrapper>
             {
-                getRoleUsuario() ? // isAdmin ?
+               false ? // isAdmin ?
                     <div>
                         <img src={item.imagen} alt={item.nombre} />
                         <h3>{item.nombre}</h3>
