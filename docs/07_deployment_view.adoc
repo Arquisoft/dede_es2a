@@ -35,6 +35,8 @@ when your infrastructure is more complex.
 ****
 
 === Infraestrutura Nivel 1
+image:infraestructura.png["Hierarchy of building blocks"]
+Este sería un diagrama que muestra la relación entre los distintos componentes de la aplicación.
 
 [role="arc42help"]
 ****
