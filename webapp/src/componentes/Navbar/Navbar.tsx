@@ -22,7 +22,7 @@ const Navbar = () => {
                 <i className={state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             {
-                false ? // isAdmin ?
+                localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                     <ul className={state.clicked ? 'nav-menu active' :
                         'nav-menu'}>
                         {MenuItemsAdmin.map((item, index) => {

@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { Usuario } from '../../shared/sharedUser';
 import { useQuery } from 'react-query';
 import Ayuda from './Ayuda';
+import Item from '../../Item/Item';
 
 var email: string;
 var usuario: any;
+var isAdmin: any;
 
 async function getData(): Promise<any> {
     //const { data } = useQuery<Usuario>('usuario', checkUserInBD);
@@ -15,7 +17,7 @@ async function getData(): Promise<any> {
 async function checkUserInBD(): Promise<Usuario[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + 'Usuario/findAllUser' );
+    let response = await fetch(apiEndPoint + 'usuario/findAllUser' );
     //The objects returned by the api are directly convertible to User objects
     console.log(response.json());
     return response.json();
@@ -25,6 +27,7 @@ const LoginButton = () => {
     console.log("AAAAAAA");
     const { data, isLoading, error } =  useQuery<Usuario[]>('Usuario', checkUserInBD);
     console.log(data);
+    isAdmin=false;
     return <button className='btn btn-primary-login' onClick={() => {
         loginWithRedirect();
         // console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
@@ -56,6 +59,18 @@ const LoginButton = () => {
 
 
         // añadir usuario a sesión
+        
+        {data?.map(item => {
+            var cond;
+            if(item?.email == email){
+                if(item?.isAdmin==true)
+                    isAdmin=true;
+                else
+                    isAdmin=false;
+            }else
+                isAdmin=false;
+        })}
+        localStorage.setItem("isAdmin",isAdmin);
         const localUser = localStorage.getItem("user");
         if (localUser) {
             let user = JSON.parse(localUser);

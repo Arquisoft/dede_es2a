@@ -19,9 +19,9 @@ const UsuarioRepository = module.exports = {
             throw error;
         }
     },
-    findAllUsuario: async function(filter:Object){
+    findAllUsuario: async function(){
         try{
-            let usuario = await Usuario.findAllUser();
+            let usuario = await Usuario.find();
             return usuario;
         } catch (error){
             throw error;
