@@ -18,9 +18,11 @@ const ApiGeocode = require('node-geocoder');
 const opciones = { provider:'openstreetmap' };
 const geocoder = ApiGeocode(opciones);
 
+
 pedidoRouter.get("/", async(req:Request,res:Response)=>{
     try{
         let pedidos = await PedidoRepository.getPedidos();
+        console.log(pedidos)
         res.send(pedidos);
     } catch {
         res.status(500).send("Error al listar los pedidos");
@@ -130,7 +132,7 @@ pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     }
 });
 
-
+/*
 pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
     try{
         var pedido = await PedidoRepository.findPedido({"_id":req.params._id});
@@ -143,23 +145,23 @@ pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
         res.send("Error al encontrar el pedido");
     }
 });
+*/
 
 pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
     try{
         
         var usuario = await UsuarioRepository.findUsuario({"email":req.params.user,"isAdmin":false});
         if(!usuario){
-            res.send("No existe el usuario");
+            res.send("El usuario no existe");
         }
         else{
             var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
-            if(pedidos){
+            if(pedidos.length > 0){
                 res.send(pedidos);
             }else{
                 res.send("No tiene pedidos");
             }
         }
-        
     } catch(error){
         res.status(500).send(error);
     }
@@ -208,22 +210,20 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
             if(!user){
                 res.status(500).send("El usuario no existe");
             }
-            let nuevoPedido = {
-                precioSinIva: req.body.precioSinIva,
-                precioGastosDeEnvio: req.body.precioGastosDeEnvio,
-                precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
-                juguetes: productos,
-                usuario:user._id
-            }
-        
-            let pedido = await PedidoRepository.addPedido(nuevoPedido);
-            if(pedido){
+            else{
+                let nuevoPedido = {
+                    precioSinIva: req.body.precioSinIva,
+                    precioGastosDeEnvio: req.body.precioGastosDeEnvio,
+                    precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
+                    juguetes: productos,
+                    usuario:user._id
+                }
+                let pedido = await PedidoRepository.addPedido(nuevoPedido);
                 res.send("Su pedido ha sido tramitado");
-            } else{
-                res.status(500).send("Se ha producido un error")
             }
+            
         }
     } catch (error) {
-        res.send(error);
+        res.status(500).send("Se ha producido un error");
     }
 });
