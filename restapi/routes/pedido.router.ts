@@ -132,7 +132,7 @@ pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     }
 });
 
-
+/*
 pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
     try{
         var pedido = await PedidoRepository.findPedido({"_id":req.params._id});
@@ -145,13 +145,14 @@ pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
         res.send("Error al encontrar el pedido");
     }
 });
+*/
 
 pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
     try{
         
         var usuario = await UsuarioRepository.findUsuario({"email":req.params.user,"isAdmin":false});
         if(!usuario){
-            res.send("No existe el usuario");
+            res.send("El usuario no existe");
         }
         else{
             var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
@@ -209,16 +210,18 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
             if(!user){
                 res.status(500).send("El usuario no existe");
             }
-            let nuevoPedido = {
-                precioSinIva: req.body.precioSinIva,
-                precioGastosDeEnvio: req.body.precioGastosDeEnvio,
-                precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
-                juguetes: productos,
-                usuario:user._id
+            else{
+                let nuevoPedido = {
+                    precioSinIva: req.body.precioSinIva,
+                    precioGastosDeEnvio: req.body.precioGastosDeEnvio,
+                    precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
+                    juguetes: productos,
+                    usuario:user._id
+                }
+                let pedido = await PedidoRepository.addPedido(nuevoPedido);
+                res.send("Su pedido ha sido tramitado");
             }
-        
-            let pedido = await PedidoRepository.addPedido(nuevoPedido);
-            res.send("Su pedido ha sido tramitado");
+            
         }
     } catch (error) {
         res.status(500).send("Se ha producido un error");

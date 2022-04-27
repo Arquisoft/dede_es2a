@@ -82,6 +82,12 @@ describe('pedidos ', () => {
         expect(response.text).toEqual("No se pudo crear el pedido por falta de stock");
     });
 
+    it("No se puede crear un pedido con un usuario que no existe", async () =>{
+        const response:Response = await request(app).post('/pedido').send({precioSinIva:125,precioGastosDeEnvio:20,productos:[{nombre:"juguete1",cantidad:3}],usuario:"pedro@email.com"});
+        expect(response.statusCode).toBe(500);
+        expect(response.text).toEqual("El usuario no existe");
+    });
+
     it("Se puede crear un pedido con un juguete con el stock insuficiente", async() =>{
         const response:Response = await request(app).post('/pedido').send({precioSinIva:50,precioGastosDeEnvio:30,productos:[{nombre:"juguete4",cantidad:3},{nombre:"juguete2",cantidad:2}],usuario:"padre@email.com"});
         expect(response.statusCode).toBe(200);
@@ -105,6 +111,14 @@ describe('pedidos ', () => {
         expect(response.status).toBe(200);
         expect(response.text).toEqual("No tiene pedidos");
     });
+
+    it("No se pueden listar los pedidos de un usuario que no existe", async () =>{
+        const response:Response = await request(app).get('/pedido/byUser/pedro@email.com');
+        expect(response.status).toBe(200);
+        expect(response.text).toEqual("El usuario no existe");
+    });
+
+
 
 
 });
