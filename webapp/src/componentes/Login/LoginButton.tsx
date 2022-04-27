@@ -12,17 +12,19 @@ async function getData(): Promise<any> {
     //usuario = data;
 }
 
-async function checkUserInBD(): Promise<Usuario> {
+async function checkUserInBD(): Promise<Usuario[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + 'usuario/' + email);
+    let response = await fetch(apiEndPoint + 'Usuario/findAllUser' );
     //The objects returned by the api are directly convertible to User objects
     console.log(response.json());
     return response.json();
 }
 const LoginButton = () => {
     const { loginWithRedirect, user } = useAuth0();
-    //const { data } = useQuery<Usuario>('usuario', checkUserInBD);
+    console.log("AAAAAAA");
+    const { data, isLoading, error } =  useQuery<Usuario[]>('Usuario', checkUserInBD);
+    console.log(data);
     return <button className='btn btn-primary-login' onClick={() => {
         loginWithRedirect();
         // console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
@@ -37,14 +39,14 @@ const LoginButton = () => {
         // comprobar si email está ya en BD 
         email = user?.email != null ? user?.email : "";
         //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
-        var us = Ayuda(email);
+        //var us = Ayuda(email);
         console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // no
         //var us = usuario as Usuario;
         // si no lo está
         // redirigir a formulario (nombre, apellidos y dni)
-        if (us?.email == null) {
+       /* if (us?.email == null) {
             //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
-        }
+        }*/
         //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
         // se rellenen automaticamente los campos que ya existen y los que no, vacios

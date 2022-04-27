@@ -6,6 +6,19 @@ export const usuarioRouter = express.Router()
 var UsuarioRepository = require('../repositories/UsuarioRepository');
 usuarioRouter.use(express.json());
 
+usuarioRouter.get("/findAllUser", async(req:Request,res:Response) =>{
+    try{
+        var usuario = await UsuarioRepository.findAllUsuario();
+        if(usuario){
+            res.send(usuario);
+        } else{
+            res.status(500).send("No existe ese usuario");
+        }
+    } catch(error){
+        res.status(500).send("se ha producido un error");
+    }
+});
+
 usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
     try{
         var filter = {email: req.params.email};
@@ -19,6 +32,8 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
         res.status(500).send("se ha producido un error");
     }
 });
+
+
 
 usuarioRouter.post("/", async(req:Request,res:Response) =>{
     try{
