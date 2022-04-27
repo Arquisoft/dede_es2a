@@ -12,7 +12,7 @@ import apiPedidos from './routes/pedido.router';
 const app: Application = express();
 app.disable("x-powered-by");
 const port: string = process.env.PORT||'5000';
-const conexiondb: string = process.env.MONGO_URI!;
+const conexiondb: string = 'mongodb+srv://admin:dede2a@tiendajuguetes.1s9n2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 let allowedOrigins = ['http://localhost:3000'];
 
