@@ -48,43 +48,42 @@ on this list.
 
 ****
 
-.Persistencia
+=== Persistencia
 Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará en una carpeta adjuntada
 con el proyecto. 
 
-.Interfaz de Usuario
+=== Interfaz de Usuario
 La interfaz de Usuario de _DeDe_ estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño, 
 si no que se imponía en los requisitos de alto nivel de la aplicación.
 
-.Manejo de Sesion
+=== Manejo de Sesion
 Los usuarios podrán iniciar sesión a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad.
 
-.Seguridad y privacidad
+=== Seguridad y privacidad
 Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo
 los principios SOLID.
 
-.Internacionalización
+=== Internacionalización
 La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.
 
 
-.Build-Management
+=== Gestión de desarrollo
 La web se despliega una vez se pone en marcha el servidor. 
-
-
-
-
 
 image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 
-
-
 === Modelo de Dominio
+image:modeloDominio.png["Hierarchy of building blocks"]
+
+Nuestro sistema está compuesto por tres entidades, juguete, pedido y usuario. Cada uno con sus atributos y se relacionan entre sí
+de tal manera que un juguete puede pertenecer a varios pedidos así como que un pedido pueda tener varios juguetes. Por otro lado,
+un pedido es de un solo usuario mientras que este puede tener asignados varios pedidos. 
+Cabe destacar que el atributo cantidad en pedido va relacionado con cada juguete en concreto, refiriéndose al número de unidades de
+cada uno de ellos.
 
 
-
-
-=== _<Concepto 2>_
-
-
-=== _<Concepto n>_
+=== Testeable
+El sistema dispondrá de diferentes tipos de pruebas para asegurarnos de su correcto funcionamiento. Estas serán
+pruebas unitarias para probar su funcionalidad, pruebas de aceptación para hacerlo pero de manera automática y por último pruebas
+de carga para ver cuantos usuarios y peticiones es capaz de soportar nuestra aplicación.
 
