@@ -9,6 +9,7 @@ import mongoose from 'mongoose'
 const gestorBd = require('../modules/gestorDB');
 const datos = require('./datos/juguetes.json');
 const Juguete = require('../models/Juguete');
+const cloudinary = require('../modules/cloudinary');
 
 let app:Application;
 let server:http.Server;
@@ -23,6 +24,7 @@ beforeAll(async () => {
     app.use(bp.json());
     app.use("/juguete", jugueteRouter)
 
+    cloudinary.config();
     gestorBd.connectTest();
     await prepararBd();
 
@@ -67,7 +69,7 @@ describe('juguete ', () => {
         let name:String = "juguete1Prueba"
         let description:String = "descripcion"
         let price:Number = 13.5
-        let imag:String = "alguna"
+        let imag:String = "https://www.capgemini.com/mx-es/wp-content/uploads/sites/24/2019/02/Testing-3.jpg"
         let category:String = "la ostia"
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.statusCode).toBe(200);
@@ -78,7 +80,7 @@ describe('juguete ', () => {
         let name:String = "juguete1"
         let description:String = "sin categoria1"
         let price:Number = 13.5
-        let imag:String = " imagen"
+        let imag:String = " https://www.capgemini.com/mx-es/wp-content/uploads/sites/24/2019/02/Testing-3.jpg"
         let category:String = "mu grande"
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.text).toEqual("Este juguete ya existe");

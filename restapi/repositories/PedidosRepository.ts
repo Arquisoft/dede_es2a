@@ -3,7 +3,7 @@ const Pedido = require('../models/Pedido')
 const PedidoRepository = module.exports = {
     getPedidos: async function(){
         try{
-            let pedidos = await Pedido.find({}).populate('juguetes._id ').populate('usuario');
+            let pedidos = await Pedido.find({}).populate('juguetes._id').populate('usuario');
             console.log(pedidos)
             return pedidos;
         } catch (error){

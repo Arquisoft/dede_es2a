@@ -18,9 +18,11 @@ const ApiGeocode = require('node-geocoder');
 const opciones = { provider:'openstreetmap' };
 const geocoder = ApiGeocode(opciones);
 
+
 pedidoRouter.get("/", async(req:Request,res:Response)=>{
     try{
         let pedidos = await PedidoRepository.getPedidos();
+        console.log(pedidos)
         res.send(pedidos);
     } catch {
         res.status(500).send("Error al listar los pedidos");
@@ -153,13 +155,12 @@ pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
         }
         else{
             var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
-            if(pedidos){
+            if(pedidos.length > 0){
                 res.send(pedidos);
             }else{
                 res.send("No tiene pedidos");
             }
         }
-        
     } catch(error){
         res.status(500).send(error);
     }
@@ -217,13 +218,9 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
             }
         
             let pedido = await PedidoRepository.addPedido(nuevoPedido);
-            if(pedido){
-                res.send("Su pedido ha sido tramitado");
-            } else{
-                res.status(500).send("Se ha producido un error")
-            }
+            res.send("Su pedido ha sido tramitado");
         }
     } catch (error) {
-        res.send(error);
+        res.status(500).send("Se ha producido un error");
     }
 });

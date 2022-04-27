@@ -83,5 +83,11 @@ describe('user ', () => {
         expect(response.text).toEqual("No existe ese usuario");
     });
 
+    it("Listar todos los usuarios de la aplicacion", async () =>{
+        const response:Response = await request(app).get('/usuario');
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toEqual("application/json");
+    });
+
 
 });
