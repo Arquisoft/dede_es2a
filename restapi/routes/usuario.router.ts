@@ -33,7 +33,14 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
     }
 });
 
-
+usuarioRouter.get("/", async(req:Request,res:Response) => {
+    try{
+        var usuarios = await UsuarioRepository.getUsuarios();
+        res.send(usuarios);
+    }catch(error){
+        res.status(500).send("No se pudo listar los usuarios");
+    }
+});
 
 usuarioRouter.post("/", async(req:Request,res:Response) =>{
     try{

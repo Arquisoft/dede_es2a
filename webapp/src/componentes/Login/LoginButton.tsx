@@ -4,6 +4,9 @@ import { Usuario } from '../../shared/sharedUser';
 import { useQuery } from 'react-query';
 import Ayuda from './Ayuda';
 import Item from '../../Item/Item';
+import LinearProgess from '@material-ui/core/LinearProgress';
+
+import { Juguete } from '../../shared/sharedJuguete';
 
 var email: string;
 var usuario: any;
@@ -14,22 +17,48 @@ async function getData(): Promise<any> {
     //usuario = data;
 }
 
-async function checkUserInBD(): Promise<Usuario[]> {
+export async function getJuguetes(): Promise<Juguete[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + 'usuario/findAllUser' );
+    let response = await fetch(apiEndPoint + 'juguete/withstock');
+    //The objects returned by the api are directly convertible to User objects
+    console.log(response.json());
+    return response.json();
+  }
+
+export async function checkUserInBD(): Promise<Usuario[]> {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
+    let response = await fetch(apiEndPoint +"usuario");
     //The objects returned by the api are directly convertible to User objects
     console.log(response.json());
     return response.json();
 }
+
 const LoginButton = () => {
     const { loginWithRedirect, user } = useAuth0();
     console.log("AAAAAAA");
-    const { data, isLoading, error } =  useQuery<Usuario[]>('Usuario', checkUserInBD);
-    console.log(data);
+    
+    const { data, isLoading, error } =   useQuery<Usuario[]>('us', checkUserInBD);
+    //const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
     isAdmin=false;
+    console.log(data?.length);
+    /*{data?.map(item => {
+        console.log("A: "+email);
+        console.log("A: "+item.email);
+        if(item.email == email){
+            if(item.isAdmin==true)
+                isAdmin=true;
+            else
+                isAdmin=false;
+        }else
+            isAdmin=false;
+    })}*/
+    
+    console.log("CCCCCCCCCC");
     return <button className='btn btn-primary-login' onClick={() => {
         loginWithRedirect();
+        if (isLoading) return <LinearProgess />;
         // console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
         /*
         {data?.map(item => (
@@ -59,9 +88,11 @@ const LoginButton = () => {
 
 
         // añadir usuario a sesión
-        
+        /*
         {data?.map(item => {
             var cond;
+            console.log("A: "+email);
+            console.log("A: "+item?.email);
             if(item?.email == email){
                 if(item?.isAdmin==true)
                     isAdmin=true;
@@ -69,7 +100,8 @@ const LoginButton = () => {
                     isAdmin=false;
             }else
                 isAdmin=false;
-        })}
+        })}*/
+        console.log(email);
         localStorage.setItem("isAdmin",isAdmin);
         const localUser = localStorage.getItem("user");
         if (localUser) {

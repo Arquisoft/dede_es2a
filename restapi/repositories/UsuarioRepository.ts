@@ -27,14 +27,7 @@ const UsuarioRepository = module.exports = {
             throw error;
         }
     },
-    getJuguetesWithStock: async function(){
-        try{
-            let juguetes = await Juguete.find({ stock: { $gt: 0 } })
-            return juguetes;
-        } catch (error){
-            throw error;
-        }
-    },
+    
     /*
     deleteUsuario: async function(filter:Object){
         try{
