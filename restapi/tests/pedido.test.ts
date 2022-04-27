@@ -29,7 +29,7 @@ beforeAll(async () => {
     gestorBd.connectTest();
     await prepararBd();
 
-    app.use(cors(options));
+    app.use(cors());
     app.use(bp.json());
     app.use("/pedido", pedidoRouter)
 
@@ -54,11 +54,8 @@ async function prepararBd(){
         const usuario = new Usuario(dato);
         usuario.save();
     }
-    /*
-    for(const dato of datosPedidos){
-        const pedido = new Pedido(dato);
-        pedido.save();
-    }*/
+    
+
 }
 
 afterAll(async () => {
@@ -69,10 +66,30 @@ afterAll(async () => {
     server.close() //close the server
 })
 
+
+
 describe('pedidos ', () => {
     
     it('Se puede crear un pedido', async () =>{
         const response:Response = await request(app).post('/pedido').send({precioSinIva:125,precioGastosDeEnvio:20,productos:[{nombre:"juguete1",cantidad:3}],usuario:"goat@email.com"});
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("Su pedido ha sido tramitado");
+    });
+
+    it("No se puede crear un pedido por falta de stock", async () =>{
+        const response:Response = await request(app).post('/pedido').send({precioSinIva:125,precioGastosDeEnvio:20,productos:[{nombre:"juguete4",cantidad:3}],usuario:"padre@email.com"});
+        expect(response.statusCode).toBe(200);
+        expect(response.text).toEqual("No se pudo crear el pedido por falta de stock");
+    });
+
+    it("No se puede crear un pedido con un usuario que no existe", async () =>{
+        const response:Response = await request(app).post('/pedido').send({precioSinIva:125,precioGastosDeEnvio:20,productos:[{nombre:"juguete1",cantidad:3}],usuario:"pedro@email.com"});
+        expect(response.statusCode).toBe(500);
+        expect(response.text).toEqual("El usuario no existe");
+    });
+
+    it("Se puede crear un pedido con un juguete con el stock insuficiente", async() =>{
+        const response:Response = await request(app).post('/pedido').send({precioSinIva:50,precioGastosDeEnvio:30,productos:[{nombre:"juguete4",cantidad:3},{nombre:"juguete2",cantidad:2}],usuario:"padre@email.com"});
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Su pedido ha sido tramitado");
     });
@@ -84,10 +101,24 @@ describe('pedidos ', () => {
     });
 
     it('Se pueden listar todos los pedidos de un usuario', async() =>{
-        const response:Response = await request(app).get('/pedido/');
+        const response:Response = await request(app).get('/pedido/byUser/goat@email.com');
         expect(response.status).toBe(200);
         expect(response.type).toEqual("application/json");
     });
+
+    it("No se pueden listar los pedidos de un usuario que no tiene", async() =>{
+        const response:Response = await request(app).get('/pedido/byUser/carlos@email.com');
+        expect(response.status).toBe(200);
+        expect(response.text).toEqual("No tiene pedidos");
+    });
+
+    it("No se pueden listar los pedidos de un usuario que no existe", async () =>{
+        const response:Response = await request(app).get('/pedido/byUser/pedro@email.com');
+        expect(response.status).toBe(200);
+        expect(response.text).toEqual("El usuario no existe");
+    });
+
+
 
 
 });

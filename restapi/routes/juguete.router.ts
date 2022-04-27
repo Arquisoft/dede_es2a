@@ -57,7 +57,7 @@ jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
         let filter = {nombre: req.params.nombre}
         let juguete = await JugueteRepository.findJuguete(filter);
         if(juguete){
-            console.log("entró")
+            await borrarImagen(juguete.imagen);
             await JugueteRepository.deleteJuguete(filter);
             res.send("Eliminado juguete");
         }
@@ -68,6 +68,14 @@ jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
         res.status(500).send(err)
     }
 });
+
+async function borrarImagen(imagen:String){
+    var name = imagen.split('/');
+    var name2 = name[name.length - 1 ]
+    var finalName = name2.split('.')[0];
+    console.log(finalName)
+    await cloudinary.v2.uploader.destroy(finalName);
+}
 
 /**
  * Encuentra un juguete por la id identificativa del juguete, no por la generada por la bd
@@ -82,13 +90,12 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             categoria: req.body.categoria,
             stock: req.body.stock
         };
-        var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
-        console.log(nuevaImagen);
-        nuevoJuguete.imagen = nuevaImagen.url;
         let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
         if(juguete){
             res.send("Este juguete ya existe");
         } else{
+            var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
+            nuevoJuguete.imagen = nuevaImagen.url;
             await JugueteRepository.addJuguete(nuevoJuguete);
             res.send("Añadido nuevo juguete")
         }

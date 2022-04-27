@@ -9,6 +9,7 @@ import mongoose from 'mongoose'
 const gestorBd = require('../modules/gestorDB');
 const datos = require('./datos/juguetes.json');
 const Juguete = require('../models/Juguete');
+const cloudinary = require('../modules/cloudinary');
 
 let app:Application;
 let server:http.Server;
@@ -19,10 +20,11 @@ beforeAll(async () => {
     const options: cors.CorsOptions = {
         origin: ['http://localhost:3000']
     };
-    app.use(cors(options));
+    app.use(cors());
     app.use(bp.json());
     app.use("/juguete", jugueteRouter)
 
+    cloudinary.config();
     gestorBd.connectTest();
     await prepararBd();
 
@@ -67,9 +69,10 @@ describe('juguete ', () => {
         let name:String = "juguete1Prueba"
         let description:String = "descripcion"
         let price:Number = 13.5
-        let imag:String = "alguna"
+        let imag:String = "https://www.capgemini.com/mx-es/wp-content/uploads/sites/24/2019/02/Testing-3.jpg"
         let category:String = "la ostia"
-        const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
+        let stock:Number = 20
+        const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,stock:stock})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Añadido nuevo juguete")
     })
@@ -78,7 +81,7 @@ describe('juguete ', () => {
         let name:String = "juguete1"
         let description:String = "sin categoria1"
         let price:Number = 13.5
-        let imag:String = " imagen"
+        let imag:String = " https://www.capgemini.com/mx-es/wp-content/uploads/sites/24/2019/02/Testing-3.jpg"
         let category:String = "mu grande"
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category})
         expect(response.text).toEqual("Este juguete ya existe");
@@ -109,13 +112,12 @@ describe('juguete ', () => {
     it('Se puede actualizar un juguete', async () => {
         let description:String = "decripcion actualizada"
         let price:Number = 10
-        let imag:String = "no tiene"
         let category:String = "sin categoria"
         let quantity:Number = 12
         let stock2:Number = 10
         // actualizamos el juguete añadido en la prueba anterior y lo borramos aqui ya que no lo vamos a utilizar mas
         const response:Response = await request(app).post('/juguete/update/juguete1Prueba').send({descripcion:description,precio:price,
-            imagen:imag,categoria:category, cantidad : quantity, stock:stock2})
+            categoria:category, cantidad : quantity, stock:stock2})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("El juguete se ha actualizado correctamente")
     });
