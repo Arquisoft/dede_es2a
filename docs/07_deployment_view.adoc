@@ -35,6 +35,12 @@ when your infrastructure is more complex.
 ****
 
 === Infraestrutura Nivel 1
+image:infraestructura.png["Hierarchy of building blocks"]
+Este sería un diagrama que muestra la relación entre los distintos componentes de la aplicación.
+.Justificación
+El usuario accederá a la parte de interfaz de usuario que compone nuestra aplicación (webapp). Esta a su vez se comunicará con el backend (restapi) que será la encargada de comunicarse con la base de datos (mongoDb) y de trabajar con la API de gastos de envío.
+La manera de acceder por parte del usuario a todo esto es a través de la nube, es decir, con un navegador de su dispositivo. Para ello, se tiene que realizar el despliegue de la aplicación. Generamos entonces los contenedores Docker con las respectivas imágenes de webapp y restapi y procedemos a realizar el despliegue en Heroku.
+De ahí todas estas relaciones mostradas en el diagrama.
 
 [role="arc42help"]
 ****
@@ -60,8 +66,32 @@ Here you can include the internal structure of (some) infrastructure elements fr
 Please copy the structure from level 1 for each selected element.
 ****
 
-==== _<Elemento de infraestructura 1>_
+==== _Heroku_
+Heroku desplegará la aplicación de manera automatizada a través del workflows configurado en nuestro proyecto.
 
+==== _Contenedor Docker_
+Dicho elemento es el encargado de generar las imágenes para la webapp y restapi que posteriormente serán utilizadas para el despliegue
 
-==== _<Elemento de infraestructura n>_
+==== _Webapp_
+Interfaz de usuario que se comunicará con el usuario, internamente usa diversas APIs como Auth0 o trabaja con PODs de SOLID para la seguridad. Realizado con React
 
+==== _Restapi_
+Se encarga de comunicarse con la base de datos y la API de gastos de envío. Realizada con Node.js
+
+==== _Ordenador_
+Ordenador o dispositivo del usuario que interaccionará con nuestra aplicación
+
+==== _Navegador_
+Lugar a través del cual el usuario se comunica con nuestro sitio web
+
+==== _PODS_
+Elementos de almacenamiento de información privada del usuario que aumentará la seguridad del mismo en nuestra aplicación. Internamente el usuario ha de crearse una cuenta con uno de los proveedores existentes y almacenar la información que el mismo desee de manera pública o privada.
+
+==== _Auth0_
+API que permite al usuario iniciar sesión en nuestro sitio. Nos permitirá trabajar con sus datos desde la aplicación.
+
+==== _GeoCode_
+API a la que le pasas una dirección y te devuelve ciertos datos. Para nuestro proyecto son de utilidad la latitud y longitud de la misma. Se utilizará la fórmula de Haversine para calcular la distancia en km (previamente diferencia de latitudes y longitudes) entre dos ubicaciones.
+
+==== _MongoDb_
+Entorno que gestionará la base de datos. Se trata de una base de datos NO-SQL que nos aporta gran libertad y comodidad. Además de adapta muy bien a node.js

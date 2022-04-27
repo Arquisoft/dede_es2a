@@ -1,11 +1,23 @@
 [[section-design-decisions]]
 == Decisiones de diseño
-Utilizaremos las tecnologías ya mencionadas anteriormente, la pila MERN, ya que por experiencia de muchos desarrolladores son herramientas
-que se coordinan muy bien. 
-No podemos decir con precisión decisiones de diseño definitivas a estas alturas del desarrollo, pero tenemos pensado
-utilizar el Modelo Vista-Controlador para que la aplicación sea fácilmente ampliable en cuanto a funcionalidad. Podría surgir
-el uso de otros patrones conocidos como por ejemplo Command o Factory, pero es algo que iremos utilizando conforme vayamos desarrollando la
-aplicación. 
+En este apartado no solo se van a comentar las decisiones tomadas por el equipo sino también alguna de las restricciones
+establecidas por los profesores de la asignatura.
+
+[options="header",cols="1,1,2"]
+|===
+|Decisión/Restricción|Tipo|Utilidad
+|_Node_| _Restricción_ | _Lenguaje a utilizar para el desarrollo del backend de la aplicación_
+|_React_| _Restricción_ | _Lenguaje a utilizar para el desarrollo del frontend de la aplicación_
+|_Typescript_| _Restricción_ | _Lenguaje en el que se realizará el desarrollo de la aplicación_
+|_SOLID_| _Restricción_ | _Plataforma de gestión de los POD_
+|_Express_| _Decisión_ | _Framework que nos facilita el trabajo con Node para el backend_
+|_MongoDb_| _Decisión_ | _Para gestionar la base de datos_
+|_GeoCode_| _Decisión_ | _API para calcular los gastos de envío de los pedidos_
+|_Heroku_| _Decisión_ | _Para realizar el despliegue en la nube de la aplicación_
+|_Auth0_| _Decisión_ | _Para hacer el registro e inicio de sesión en la aplicación. Permite hacerlo a través de Google_
+|_BootStrap_| _Decisión_ | _Para añadir estilos a los elementos_
+|_Dotenv_| _Decisión_ | _Para proteger la información privada de la aplicación (url base de datos, ubicación de la empresa...)_ 
+|===
 
 [role="arc42help"]
 ****
