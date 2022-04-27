@@ -35,13 +35,14 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run build",
+    "install-client": "npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "test": "react-scripts test --coverage",
     "test:e2e": "start-server-and-test 'npm --prefix ../restapi start' http://localhost:5000/api/users/list prod 3000 'cd e2e && jest'",
     "eject": "react-scripts eject",
     "prod": "ts-node-dev ./server.ts",
-    "start": "serve -s build",
-    "heroku-postbuild": "npm run build"
+    "start": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +67,7 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.0",
     "@types/puppeteer": "^5.4.4",
+    "css-minimizer-webpack-plugin": "^3.4.1",
     "expect-puppeteer": "^6.0.2",
     "jest-cucumber": "^3.0.1",
     "jest-puppeteer": "^6.0.3",
