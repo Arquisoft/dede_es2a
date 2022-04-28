@@ -20,7 +20,7 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import Profile from './componentes/loginSOLID/Profile';
+//import Profile from './componentes/loginSOLID/Profile';
 import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
@@ -153,7 +153,7 @@ const App = () => {
   if (isLoading) return <LinearProgess />;
   //if (error) return <div>Algo ha fallado</div>;
 
-
+  //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
   return (
     <>
@@ -182,7 +182,7 @@ const App = () => {
                   <Navbar />
 
                   {
-                    false ? // isAdmin ?
+                    localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
                       :
                       <div>
@@ -214,7 +214,7 @@ const App = () => {
           } />
 
           <Route path="/edit" element={
-            false ? // isAdmin?
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <EditForm />
@@ -229,7 +229,7 @@ const App = () => {
           } />
 
           <Route path="/contactanos" element={
-            false ? // isAdmin?
+           localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -244,7 +244,7 @@ const App = () => {
           } />
 
           <Route path="confirmar-pedido" element={
-            false ? // isAdmin?
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -261,7 +261,7 @@ const App = () => {
           }
           />
           <Route path="/perfilPod" element={
-            false ? // isAdmin?
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -270,13 +270,13 @@ const App = () => {
               :
               <Wrapper>
                 <Navbar />
-                <Profile />
+                
                 <Footer />
               </Wrapper>
           }
           />
           <Route path="/loginPago" element={
-            false ? // isAdmin?
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
@@ -291,7 +291,7 @@ const App = () => {
           }
           />
           <Route path="/logoutPago" element={
-            false ? // isAdmin?
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
               <Wrapper>
                 <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>

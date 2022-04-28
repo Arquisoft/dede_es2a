@@ -3,6 +3,6 @@ export type Usuario = {
     DNI: string;
     nombre: string;
     apellidos: string;
-    correo: string;
-    rol: String;
+    email: string;
+    isAdmin: boolean;
 }

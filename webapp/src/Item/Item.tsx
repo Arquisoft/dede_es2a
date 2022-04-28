@@ -7,6 +7,7 @@ import { Wrapper } from './Item.styles';
 import { Juguete } from '../shared/sharedJuguete';
 
 import { useNavigate } from "react-router-dom";
+import getRoleUsuario from "../componentes/Login/LoginButton"
 
 /*type Props = {
     item: CartItemType;
@@ -16,6 +17,16 @@ type Props = {
     item: Juguete;
     handleAddToCart: (clickedItem: Juguete) => void;
 }
+
+async function addStock(nombre: string): Promise<any> {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    let response = await fetch(apiEndPoint + 'juguete/addStock/' + nombre, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "stock": 10 })
+    });
+}
+
 /*
 function mifuncion({ url: any } => {
     navigate(url);
@@ -27,7 +38,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
     return (
         <Wrapper>
             {
-                false ? // isAdmin ?
+               localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                     <div>
                         <img src={item.imagen} alt={item.nombre} />
                         <h3>{item.nombre}</h3>
@@ -38,7 +49,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                             navigate("/edit");
                         }}>Editar producto</Button>
                         <Button onClick={() => {
-                            // faltaria añadir stock -> crear método
+                            addStock(item.nombre);
                         }}>Añadir existencias</Button>
                     </div>
                     :

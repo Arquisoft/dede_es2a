@@ -6,6 +6,7 @@ export const usuarioRouter = express.Router()
 var UsuarioRepository = require('../repositories/UsuarioRepository');
 usuarioRouter.use(express.json());
 
+
 usuarioRouter.get("/", async(req:Request,res:Response) => {
     try{
         var usuarios = await UsuarioRepository.getUsuarios();
@@ -14,7 +15,6 @@ usuarioRouter.get("/", async(req:Request,res:Response) => {
         res.status(500).send("No se pudo listar los usuarios");
     }
 });
-
 
 usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
     try{

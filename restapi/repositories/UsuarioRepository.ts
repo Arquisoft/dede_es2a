@@ -19,6 +19,15 @@ const UsuarioRepository = module.exports = {
             throw error;
         }
     },
+    findAllUsuario: async function(){
+        try{
+            let usuario = await Usuario.find();
+            return usuario;
+        } catch (error){
+            throw error;
+        }
+    },
+    
     /*
     deleteUsuario: async function(filter:Object){
         try{
