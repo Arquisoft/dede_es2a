@@ -19,7 +19,7 @@ en diferentes validadores de internet. Intentaremos disponer el contenido de la 
 aplicación para intentar sacarle el máximo partido.
 
 .Comprensibilidad
-Para la comprensibilidad. No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible
+No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible
  
 .Seguridad
 Garantizamos la seguridad del usuario mediante el uso de PODs, citados en los requisitos del sistema. 
