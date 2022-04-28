@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react"
 //Components
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
-import {BrowserRouter,Route,Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './componentes/Navbar/Navbar';
 //import Juguete from '../../../restapi/models/Juguete';
 import { Juguete } from './shared/sharedJuguete';
@@ -20,8 +20,11 @@ import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import PayForm from './PayForm/PayForm';
-
+//import Profile from './componentes/loginSOLID/Profile';
+import LoginForm from './componentes/loginSOLID/LoginForm';
+import LogoutForm from './componentes/loginSOLID/LogoutForm';
+import ProcesoPago from './PayForm/ProcesoPago';
+import EditForm from './componentes/editarProducto/editarProducto';
 
 //Types
 export type CartItemType = {
@@ -50,10 +53,10 @@ export type Juguete = {
 
 // AÑADIDO---------------------------------------------------------------------------------------------
 // Petición para obtener todos los juguetes de la base de datos
-export async function getJuguetes():Promise<Juguete[]>{
-  const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+export async function getJuguetes(): Promise<Juguete[]> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
   //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-  let response = await fetch(apiEndPoint+'juguete/withstock');
+  let response = await fetch(apiEndPoint + 'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
   return response.json();
@@ -68,29 +71,42 @@ const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   //Inicialmente vamos a tener un array vacio de CartItemType que va a ser cartItems
   //const[cartItems, setCartItems] = useState([] as CartItemType[]);
-  const[cartItems, setCartItems] = useState([] as Juguete[]);
+  const [cartItems, setCartItems] = useState([] as Juguete[]);
 
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
-  const {data, isLoading, error} =useQuery<Juguete[]>('juguetes', getJuguetes);
-  
+  const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
+
 
 
   useEffect(() => {
-    //Aqui meter tambien las cosas de usuario
+    // Aqui meter tambien las cosas de usuario
+    /*
+    const localUser = localStorage.getItem("user");
+    if (localUser) {
+      let user = JSON.parse(localUser);
+    } else {
+      localStorage.setItem("user", JSON.stringify([]));
+    }
+    */
+    // Carrito
     const localCart = localStorage.getItem("cart");
     if (localCart) {
       let cart: Juguete[] = JSON.parse(localCart);
-      setCartItems(cart); 
+      setCartItems(cart);
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
-  const getTotalItems = (items: Juguete[]) => 
-  items.reduce((ack: number, item)=>ack+item.cantidad,0);
+
+  const getTotalItems = (items: Juguete[]) =>
+    items.reduce((ack: number, item) => ack + item.cantidad, 0);
 
 
   const handleAddToCart = (clickedItem: Juguete) => {
@@ -98,19 +114,19 @@ const App = () => {
     //"prev" es el estado previo del carrito, justo antes de añadir un producto
     setCartItems(prev => {
       //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.nombre ===clickedItem.nombre)
-      if(isItemInCart) {
-        var mapeadoCarrito= prev.map(item=>(
-          item.nombre===clickedItem.nombre
-          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
-            ? {...item, cantidad: item.cantidad+1}
+      const isItemInCart = prev.find(item => item.nombre === clickedItem.nombre)
+      if (isItemInCart) {
+        var mapeadoCarrito = prev.map(item => (
+          item.nombre === clickedItem.nombre
+            //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
+            ? { ...item, cantidad: item.cantidad + 1 }
             : item
         ))
         return mapeadoCarrito;
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      var mapeadoCarrito= [...prev, {...clickedItem, cantidad:1}];
+      var mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
       return mapeadoCarrito;
     })
 
@@ -118,131 +134,188 @@ const App = () => {
 
   const handleRemoveFromCart = (nombre: string) => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
-    setCartItems(prev=>(
-      prev.reduce((ack, item)=> {
-        if(item.nombre===nombre ){
-          if(item.cantidad===1)return ack;
-           var mc= [...ack, {...item, cantidad:item.cantidad - 1}]
-           return mc;
+    setCartItems(prev => (
+      prev.reduce((ack, item) => {
+        if (item.nombre === nombre) {
+          if (item.cantidad === 1) return ack;
+          var mc = [...ack, { ...item, cantidad: item.cantidad - 1 }]
+          return mc;
         } else {
-          var mc= [...ack, item];
+          var mc = [...ack, item];
           return mc;
         }
-      },[] as Juguete[]) 
+      }, [] as Juguete[])
     ))
   };
- 
-  /*const handleAddToCart = (clickedItem: CartItemType) => {
-    //"prev" es el estado previo del carrito, justo antes de añadir un producto
-    setCartItems(prev => {
-      //1. Teniamos ya el producto en el carrito
-      const isItemInCart = prev.find(item => item.id ===clickedItem.id)
-      if(isItemInCart) {
-        return prev.map(item=>(
-          item.id===clickedItem.id
-          //Cogemos el objeto viejo y le aumentamos la amount. Si no tenemos el item en el carrito, el item viejo se devuelve tal y como estaba(pòrque no es el mismo)
-            ? {...item, amount: item.amount+1}
-            : item
-        ))
-      }
-      //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
-      //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      return [...prev, {...clickedItem, amount:1}];
-    })
-  };*/
 
-  /*const handleRemoveFromCart = (id: number) => {
-    setCartItems(prev=>(
-      prev.reduce((ack, item)=> {
-        if(item.id===id){
-          if(item.amount===1) return ack;
-          return [...ack, {...item, amount:item.amount - 1}]
-        } else {
-          return [...ack, item];
-        }
-      }, [] as CartItemType[])
-    ))
-
-  };*/
 
   //Coloca una barra de carga cuando la página está cargando
   if (isLoading) return <LinearProgess />;
   //if (error) return <div>Algo ha fallado</div>;
 
-
+  //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={
-          <Wrapper>
-            <Navbar/>
-            <Home/>
-            <Footer/>
-          </Wrapper>
-        }
-        />
-        <Route path="" element={
-          <Wrapper>
-            <Navbar/>
-            <Home/>
-            <Footer/>
-          </Wrapper>
-        }
-        />
-        <Route path="/productos" element={
-           <div className='page-container'>
-           <Wrapper>
-             <div className='content-wrap'>
-               <Navbar />
-               <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-                 <Cart
-                   cartItems={cartItems}
-                   addToCart={handleAddToCart}
-                   removeFromCart={handleRemoveFromCart}
-                 />
-               </Drawer>
-               <StyledButton onClick={() => setCartOpen(true)}>
-                 <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                   <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
-                 </Badge>
-               </StyledButton>
-               <Grid container spacing={3}>
-                 {data?.map(item => (
-                   <Grid item key={item.id} xs={12} sm={4}>
-                     <Item item={item} handleAddToCart={handleAddToCart} />
-                   </Grid>
-                 ))}
-               </Grid>
-             </div>
-             <Footer />
-           </Wrapper>
-           </div>
-      }/>
-        <Route path="/contactanos" element={
-              <Wrapper>
-                <Navbar/>
-                <ContactUs/>
-                <Footer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={
+            <Wrapper>
+              <Navbar />
+              <Home />
+              <Footer />
             </Wrapper>
-            }/>
-         <Route
-                path="confirmar-pedido"
-                element={
-                  <Wrapper>
-                  <Navbar/>
-                  
-                  <PayForm
-                    cartItems={cartItems.slice()}
-                  />
-                  <Footer/>
-                  </Wrapper>
-                }
-              />
-      </Routes>
-    </BrowserRouter>
-   </>
+          }
+          />
+          <Route path="" element={
+            <Wrapper>
+              <Navbar />
+              <Home />
+              <Footer />
+            </Wrapper>
+          }
+          />
+          <Route path="/productos" element={
+            <div className='page-container'>
+              <Wrapper>
+                <div className='content-wrap'>
+                  <Navbar />
+
+                  {
+                    localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
+                      <></>
+                      :
+                      <div>
+                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                          <Cart
+                            cartItems={cartItems}
+                            addToCart={handleAddToCart}
+                            removeFromCart={handleRemoveFromCart}
+                          />
+                        </Drawer>
+                        <StyledButton onClick={() => setCartOpen(true)}>
+                          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                          </Badge>
+                        </StyledButton>
+                      </div>
+                  }
+                  <Grid container spacing={3}>
+                    {data?.map(item => (
+                      <Grid item key={item.id} xs={12} sm={4}>
+                        <Item item={item} handleAddToCart={handleAddToCart} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </div>
+                <Footer />
+              </Wrapper>
+            </div>
+          } />
+
+          <Route path="/edit" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <EditForm />
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+          } />
+
+          <Route path="/contactanos" element={
+           localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <ContactUs />
+                <Footer />
+              </Wrapper>
+          } />
+
+          <Route path="confirmar-pedido" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <ProcesoPago
+                  cartItems={cartItems.slice()}
+                />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/perfilPod" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/loginPago" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <LoginForm />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/logoutPago" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <LogoutForm />
+                <Footer />
+              </Wrapper>
+          }
+          />
+          <Route path="/*" element={
+            <Wrapper>
+              <Navbar />
+              <h1>No existe esa dirección</h1>
+              <Footer />
+            </Wrapper>
+          } />
+
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 
 };

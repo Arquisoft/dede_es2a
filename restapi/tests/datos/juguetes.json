@@ -1,0 +1,29 @@
+[{
+    "nombre" : "juguete1",
+    "descripcion" : "categoria1",
+    "precio": 13.5,
+    "imagen":"imagen",
+    "categoria":"tocho",
+    "stock":12
+},{
+    "nombre" : "juguete2",
+    "descripcion" : "categoria2",
+    "precio": 11,
+    "imagen":"imagen2",
+    "categoria":"meh",
+    "stock":35
+},{
+    "nombre" : "juguete3",
+    "descripcion" : "categoria3",
+    "precio": 14,
+    "imagen":"imagen3",
+    "categoria":"algo mejor",
+    "stock":20
+},{
+    "nombre" : "juguete4",
+    "descripcion" : "categoria4",
+    "precio": 16,
+    "imagen":"imagen4",
+    "categoria":"muy mejorable",
+    "stock":6
+}]

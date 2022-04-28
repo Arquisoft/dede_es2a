@@ -1,7 +1,6 @@
-let mongoose = require('mongoose')
+import mongoose = require('mongoose')
 
 const jugueteSchema = new mongoose.Schema({
-    id:Number,
     nombre: {
         type : String,
         unique : true

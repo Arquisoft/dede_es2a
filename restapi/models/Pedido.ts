@@ -1,3 +1,6 @@
+import mongoose = require('mongoose');
+
+
 const pedidoSchema = new mongoose.Schema({
     id:Number,
     precioSinIva:{
@@ -12,12 +15,20 @@ const pedidoSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    juguetes:[{ // juguete que componen el pedido
-        type:jugueteSchema,
-        required:true
+    juguetes:[{// juguetes que componen el pedido
+        _id:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref: 'Juguete',
+            required:true
+        },
+        cantidad:{
+            type:Number,
+            required:true
+        }
     }],
-    usuario:{ // usuario que realiza el pedido
-        type:Usuario,
+    usuario:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Usuario',
         required:true
     }
 })

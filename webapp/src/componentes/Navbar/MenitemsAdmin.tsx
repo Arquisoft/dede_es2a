@@ -1,11 +1,11 @@
-export const MenuItems =[
+export const MenuItemsAdmin =[
     {
         title: 'Home',
         url:'home',
         cName:'nav-links'
     },
     {
-        title: 'Productos',
+        title: 'Administar Productos',
         url:'productos',
         cName:'nav-links'
     }

@@ -1,0 +1,32 @@
+[{
+    "DNI":"12345678R",
+    "nombre":"admin",
+    "apellidos":"admin",
+    "email":"admin@email.com",
+    "isAdmin":true
+},{
+    "DNI":"78958473Z",
+    "nombre":"Juan",
+    "apellidos":"Garcia",
+    "email":"juan@email.com",
+    "isAdmin":false
+},{
+    "DNI":"25864789B",
+    "nombre":"Wardel Stephen",
+    "apellidos":"Curry",
+    "email":"goat@email.com",
+    "isAdmin":false
+},
+{
+    "DNI":"257413698Y",
+    "nombre":"Carlos",
+    "apellidos":"Alcaraz",
+    "email":"carlos@email.com",
+    "isAdmin":false
+},{
+    "DNI":"20506101F",
+    "nombre":"Fernando",
+    "apellidos":"Alonso",
+    "email":"padre@email.com",
+    "isAdmin":false
+}]

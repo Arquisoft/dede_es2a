@@ -1,6 +1,7 @@
+import mongoose = require('mongoose');
+
 // creamos el esquema que tiene que cumplir el usuario en la BD
 const usuarioSchema = new mongoose.Schema({
-    id:Number,
     DNI:{
         type:String,
         required:true
@@ -10,15 +11,16 @@ const usuarioSchema = new mongoose.Schema({
         required:true
     },
     apellidos:{
-        type:Number,
-        required:true
-    },
-    correo:{
         type:String,
         required:true
     },
-    rol:{
+    email:{
         type:String,
+        required:true,
+        unique:true
+    },
+    isAdmin:{
+        type:Boolean,
         required:true
     }
 });
