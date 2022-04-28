@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node-dev ./server.ts",
-    "build": "tsc",
     "test": "cd tests && jest --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ts-node-dev": "^1.1.8",
     "body-parser": "^1.19.1",
     "cloudinary": "^1.29.1",
     "cors": "^2.8.5",
@@ -31,7 +31,6 @@
     "jest": "^27.4.7",
     "supertest": "^6.1.6",
     "ts-jest": "^27.1.2",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
   }
 }
