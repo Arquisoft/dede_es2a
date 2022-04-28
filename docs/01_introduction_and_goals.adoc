@@ -39,7 +39,7 @@ Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (bas
 |===
 
 
-=== Stakeholders
+=== Partes interesadas
 
 Las partes interesadas en el sistema serán:
 

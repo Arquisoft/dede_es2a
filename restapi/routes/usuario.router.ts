@@ -6,16 +6,13 @@ export const usuarioRouter = express.Router()
 var UsuarioRepository = require('../repositories/UsuarioRepository');
 usuarioRouter.use(express.json());
 
-usuarioRouter.get("/findAllUser", async(req:Request,res:Response) =>{
+
+usuarioRouter.get("/", async(req:Request,res:Response) => {
     try{
-        var usuario = await UsuarioRepository.findAllUsuario();
-        if(usuario){
-            res.send(usuario);
-        } else{
-            res.status(500).send("No existe ese usuario");
-        }
-    } catch(error){
-        res.status(500).send("se ha producido un error");
+        var usuarios = await UsuarioRepository.getUsuarios();
+        res.send(usuarios);
+    }catch(error){
+        res.status(500).send("No se pudo listar los usuarios");
     }
 });
 
@@ -30,15 +27,6 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
         }
     } catch(error){
         res.status(500).send("se ha producido un error");
-    }
-});
-
-usuarioRouter.get("/", async(req:Request,res:Response) => {
-    try{
-        var usuarios = await UsuarioRepository.getUsuarios();
-        res.send(usuarios);
-    }catch(error){
-        res.status(500).send("No se pudo listar los usuarios");
     }
 });
 

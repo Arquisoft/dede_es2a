@@ -25,7 +25,7 @@ beforeAll(async () => {
     gestorBd.connectTest();
     await prepararBd();
 
-    app.use(cors(options));
+    app.use(cors());
     app.use(bp.json());
     app.use("/usuario", usuarioRouter);
 
@@ -81,6 +81,12 @@ describe('user ', () => {
         const response:Response = await request(app).get('/usuario/noExiste');
         expect(response.statusCode).toBe(500);
         expect(response.text).toEqual("No existe ese usuario");
+    });
+
+    it("Listar todos los usuarios de la aplicacion", async () =>{
+        const response:Response = await request(app).get('/usuario');
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toEqual("application/json");
     });
 
 
