@@ -11,9 +11,7 @@ nada que decidir.
 - Node JS: Es un entorno de ejecución de JavaScript que permite ejecutar JavaScript del lado del servidor y no en un navegador.
 
 .Diseño
-En un principio, tenemos pensado utilizar el patrón de Modelo Vista Controlador (MVC), así como otros patrones que puedan ser de utilidad a priori como por ejemplo
-Command o Factorías. Es un punto que aclararemos más adelante.
-
+Hemos utilizado pricipalmente el Modelo Vista Controlador con el fin de generar un proyecto claramente estructurado y fácilmente ampliable.
 
 .Usabilidad
 Para alcanzar la mayor usabilidad posible de nuestra web, intentaremos cumplir con todos los criterios de usabilidad que sabemos hasta el momento y la comprobaremos
