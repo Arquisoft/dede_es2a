@@ -10,7 +10,7 @@ const gestorBd = require('../modules/gestorDB');
 const datos = require('./datos/juguetes.json');
 const Juguete = require('../models/Juguete');
 const cloudinary = require('../modules/cloudinary');
-
+require('dotenv').config();
 let app:Application;
 let server:http.Server;
 
@@ -75,7 +75,18 @@ describe('juguete ', () => {
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,stock:stock})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Añadido nuevo juguete")
-    })
+    });
+
+    it("No se puede añadir un objeto sin un campo",async() =>{
+        let name:String = "juguete2Prueba"
+        let description:String = "descripcion"
+        let price:Number = 13.5
+        let imag:String = "https://www.capgemini.com/mx-es/wp-content/uploads/sites/24/2019/02/Testing-3.jpg"
+        let stock:Number = 20
+        const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,stock:stock})
+        expect(response.statusCode).toBe(500);
+        expect(response.text).toEqual("Error al añadir un juguete")
+    });
 
     it("No se puede añadir un juguete que ya existe", async () => {
         let name:String = "juguete1"

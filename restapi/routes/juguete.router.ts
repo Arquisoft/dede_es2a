@@ -91,17 +91,20 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             stock: req.body.stock
         };
         let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
+        console.log(nuevoJuguete);
         if(juguete){
             res.send("Este juguete ya existe");
         } else{
+            console.log("hola");
             var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
+            console.log(nuevaImagen)
             nuevoJuguete.imagen = nuevaImagen.url;
             await JugueteRepository.addJuguete(nuevoJuguete);
             res.send("Añadido nuevo juguete")
         }
         
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send("Error al añadir un juguete");
     }
 })
 
