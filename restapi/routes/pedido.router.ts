@@ -121,7 +121,6 @@ function haversine(latUsuario:number, lonUsuario:number){
 pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     try{
         // llamar a la funcion gastos de envio y retornar como respuesta el dinero calculado
-        console.log(req.body.direccion)
         let gastos = await gastosEnvio(req.body.direccion);
         if(gastos == 0){
             res.send("5"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección

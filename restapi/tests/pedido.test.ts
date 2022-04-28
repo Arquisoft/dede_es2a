@@ -118,7 +118,15 @@ describe('pedidos ', () => {
         expect(response.text).toEqual("El usuario no existe");
     });
 
+    it("Se calculan los gastos de envío con una dirección válida", async () =>{
+        const response:Response = await request(app).post('/pedido/gastosEnvio').send({direccion:"Vicente Aleixandre Corvera"});
+        expect(response.status).toBe(200);
+        expect(Number(response.text).toFixed(2).toString()).toEqual("2.04");
+    });
 
-
-
+    it("Se calculan los gastos de envío a una dirección que no se encuentra", async () =>{
+        const response:Response = await request(app).post('/pedido/gastosEnvio').send({direccion:"La direccion no se encuentra"});
+        expect(response.status).toBe(200);
+        expect(Number(response.text).toFixed(2).toString()).toEqual("5.00");
+    });
 });
