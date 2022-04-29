@@ -14,7 +14,7 @@ const port: number = 5000;
 
 require('dotenv').config()
 let bd = require('./modules/gestorDB')
-let cloudinary = require('./modules/Cloudinary');
+let cloudinary = require('./modules/cloudinary');
 /*
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
