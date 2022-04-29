@@ -65,7 +65,7 @@ jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
             res.send("No existe el juguete");
         }
     } catch(err){
-        res.status(500).send(err)
+        res.status(500).send("Se ha producido un error");
     }
 });
 
@@ -73,7 +73,6 @@ async function borrarImagen(imagen:String){
     var name = imagen.split('/');
     var name2 = name[name.length - 1 ]
     var finalName = name2.split('.')[0];
-    console.log(finalName)
     await cloudinary.v2.uploader.destroy(finalName);
 }
 
@@ -101,7 +100,7 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
         }
         
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send("Error al añadir un juguete");
     }
 })
 

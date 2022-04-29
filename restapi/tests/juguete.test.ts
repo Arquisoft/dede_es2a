@@ -10,7 +10,6 @@ const gestorBd = require('../modules/gestorDB');
 const datos = require('./datos/juguetes.json');
 const Juguete = require('../models/Juguete');
 const cloudinary = require('../modules/cloudinary');
-
 let app:Application;
 let server:http.Server;
 
@@ -20,11 +19,12 @@ beforeAll(async () => {
     const options: cors.CorsOptions = {
         origin: ['http://localhost:3000']
     };
+
     app.use(cors());
     app.use(bp.json());
     app.use("/juguete", jugueteRouter)
 
-    cloudinary.config();
+    cloudinary.configTest();
     gestorBd.connectTest();
     await prepararBd();
 
@@ -74,8 +74,22 @@ describe('juguete ', () => {
         let stock:Number = 20
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,stock:stock})
         expect(response.statusCode).toBe(200);
-        expect(response.text).toEqual("Añadido nuevo juguete")
-    })
+        expect(response.text).toEqual("Añadido nuevo juguete");
+
+        const next:Response = await request(app).get('/juguete/'+name);
+        expect(next.statusCode).toBe(200);
+        expect(next.body).toEqual({
+            id : next.body.id,
+            nombre: name,
+            descripcion: description,
+            precio: price,
+            imagen: next.body.imagen,
+            categoria: category,
+            cantidad: 0,
+            stock:stock
+        })
+
+    });
 
     it("No se puede añadir un juguete que ya existe", async () => {
         let name:String = "juguete1"
@@ -108,6 +122,13 @@ describe('juguete ', () => {
             stock:35
         });
     });
+
+    it("Se puede eliminar un juguete", async () =>{
+        const response: Response = await request(app).delete('/juguete/juguete1Prueba');
+        console.log("eliminar");
+        expect(response.status).toBe(200);
+        expect(response.text).toEqual("Eliminado juguete")
+    });
     
     it('Se puede actualizar un juguete', async () => {
         let description:String = "decripcion actualizada"
@@ -116,7 +137,7 @@ describe('juguete ', () => {
         let quantity:Number = 12
         let stock2:Number = 10
         // actualizamos el juguete añadido en la prueba anterior y lo borramos aqui ya que no lo vamos a utilizar mas
-        const response:Response = await request(app).post('/juguete/update/juguete1Prueba').send({descripcion:description,precio:price,
+        const response:Response = await request(app).post('/juguete/update/juguete1').send({descripcion:description,precio:price,
             categoria:category, cantidad : quantity, stock:stock2})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("El juguete se ha actualizado correctamente")
@@ -145,13 +166,16 @@ describe('juguete ', () => {
     });
 
     
-    it("Se puede eliminar un juguete", async () =>{
-        const response: Response = await request(app).delete('/juguete/juguete1Prueba');
-        expect(response.text).toEqual("Eliminado juguete")
-    });
+    
 
     it("No se puede eliminar un juguete inexistente", async () => {
         const response: Response = await request(app).delete('/juguete/noExiste');
+        expect(response.text).toEqual("No existe el juguete");
+    });
+
+    it("No se puede eliminar un juguete con el nombre en blanco", async() => {
+        const response:Response = await request(app).delete('/juguete/ ');
+        expect(response.status).toBe(500);
         expect(response.text).toEqual("No existe el juguete");
     });
 
@@ -169,6 +193,7 @@ describe('juguete ', () => {
         expect(response.text).toEqual("No se pudo añadir stock al producto");
     });
 
+    
 
 
 });
