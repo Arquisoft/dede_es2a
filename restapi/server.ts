@@ -30,13 +30,6 @@ cloudinary.config();
 app.use(cors());
 app.use(bp.json());
 
-app.use("/api", api)
-
-app.get("/", function(req,res){
-    res.send("Por aqui no, dale a /juguete");
-});
-
-
 app.use("/juguete", jugueteRouter);
 app.use("/pedido",pedidoRouter);
 app.use("/usuario",usuarioRouter);

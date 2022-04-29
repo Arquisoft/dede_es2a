@@ -65,7 +65,7 @@ jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
             res.send("No existe el juguete");
         }
     } catch(err){
-        res.status(500).send(err)
+        res.status(500).send("Se ha producido un error");
     }
 });
 
@@ -91,13 +91,10 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             stock: req.body.stock
         };
         let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
-        console.log(nuevoJuguete);
         if(juguete){
             res.send("Este juguete ya existe");
         } else{
-            console.log("hola");
             var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
-            console.log(nuevaImagen)
             nuevoJuguete.imagen = nuevaImagen.url;
             await JugueteRepository.addJuguete(nuevoJuguete);
             res.send("Añadido nuevo juguete")

@@ -25,7 +25,7 @@ beforeAll(async () => {
     const options: cors.CorsOptions = {
         origin: ['http://localhost:3000']
     };
-
+    
     gestorBd.connectTest();
     await prepararBd();
 
