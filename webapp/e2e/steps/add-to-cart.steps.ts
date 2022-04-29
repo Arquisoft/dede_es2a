@@ -6,6 +6,20 @@ const feature = loadFeature('./features/add-to-cart.feature');
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
+describe('Google', () => {
+  beforeAll(async () => {
+    await page.goto('https://google.com')
+  })
+
+  it('should display "google" text on page', async () => {
+    await expect(page).toMatch('google')
+  })
+})
+
+
+
+
+/*
 defineFeature(feature, test => {
   
   beforeAll(async () => {
@@ -20,11 +34,24 @@ defineFeature(feature, test => {
       })
       .catch(() => {});
   });
+/*
+  it("navigates to the about page", async () => {
+    await page.goto("http://localhost:3000/productos");
+    await page.click("#botonAnadirAlCarrito");
+    await page.waitForSelector(".App-welcome-text");
+    const text = await page.$eval(".App-welcome-text", (e) => e.textContent);
+    expect(text).toContain("This is the about page.");
+  });
+  afterAll(() => browser.close());
 
-  test('The cart is empty', ({given,when,then}) => {
+
+  test('The cart is empty', async ()=> {
+    await page.click('button#botonAnadirAlCarrito');
     
-    let email:string;
-    let username:string;
+  })
+
+  test('The cart is empty', ({given,when,then} )=> {
+    
 
     given('The empty Cart',async () => {
 
@@ -44,5 +71,7 @@ defineFeature(feature, test => {
     browser.close()
   })
 
+
 });
+  */
 

@@ -58,7 +58,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                         <h3>{item.nombre}</h3>
                         <p>{item.descripcion}</p>
                         <h3>€{item.precio}</h3>
-                        <Button onClick={() => handleAddToCart(item)}>Añadir al carrito</Button>
+                        <Button id='botonAnadirAlCarrito' onClick={() => handleAddToCart(item)}>Añadir al carrito</Button>
                     </div>
             }
         </Wrapper>

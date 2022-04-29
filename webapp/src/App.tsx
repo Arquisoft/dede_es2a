@@ -185,8 +185,8 @@ const App = () => {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
                       :
-                      <div>
-                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                           <Cart
                             cartItems={cartItems}
                             addToCart={handleAddToCart}
