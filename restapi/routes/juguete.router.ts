@@ -73,7 +73,6 @@ async function borrarImagen(imagen:String){
     var name = imagen.split('/');
     var name2 = name[name.length - 1 ]
     var finalName = name2.split('.')[0];
-    console.log(finalName)
     await cloudinary.v2.uploader.destroy(finalName);
 }
 
