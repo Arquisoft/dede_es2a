@@ -11,7 +11,7 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 150 });
+      : await puppeteer.launch({ headless: false, slowMo: 50 });
       //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -26,12 +26,20 @@ defineFeature(feature, test => {
     
 
     given('An item is in the cart',async () => {
-    //Nos registramos en la pagina
+      let email = "prueba1@gmail.com";
+      let password = "Prueba1!";
+    //Iniciamos en sesión auth0
     const registerButton =await page.$('button#registerButton');
     await registerButton!.click();
-    await registerButton!.click();
+    await page.waitForNavigation();
+    await expect(page).toFill("input[name='email']", email);
+    await expect(page).toFill("input[name='password']", password);
+    await expect(page).toClick("button[name='submit']");
+    await page.waitForNavigation();
+    //Volvemos a la pestaña de los productos
+    await expect(page).toClick("a[href='productos']");
+    await page.waitForNavigation();
 
-    
     //Clickamos el primer boton añadir al carrito que encontremos
       const addToCart =await page.$('button#botonAnadirAlCarrito');
       await addToCart!.click();
