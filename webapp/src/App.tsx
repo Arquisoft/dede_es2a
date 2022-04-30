@@ -62,6 +62,15 @@ export async function getJuguetes(): Promise<Juguete[]> {
   //console.log(response.json());
   return response.json();
 }
+
+export async function getJuguetesCategoria(): Promise<Juguete[]> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
+  let response = await fetch(apiEndPoint + 'juguete/categoria/nostalgia');
+  //The objects returned by the api are directly convertible to User objects
+  //console.log(response.json());
+  return response.json();
+}
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
@@ -78,7 +87,6 @@ const App = () => {
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
   const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
-
 
 
   useEffect(() => {
@@ -188,6 +196,45 @@ const App = () => {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
                       :
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                          <Cart
+                            cartItems={cartItems}
+                            addToCart={handleAddToCart}
+                            removeFromCart={handleRemoveFromCart}
+                          />
+                        </Drawer>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                          </Badge>
+                        </StyledButton>
+                      </div>
+                  }
+                  <Grid container spacing={3}>
+                    {data?.map(item => (
+                      <Grid item key={item.id} xs={12} sm={4}>
+                        <Item item={item} handleAddToCart={handleAddToCart} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </div>
+                <Footer />
+              </Wrapper>
+            </div>
+          } />
+           <Route path="/juguete/categoria/nostalgia" element={
+            <div className='page-container'>
+              <Wrapper>
+                <div className='content-wrap'>
+                  <Navbar />
+
+                  {
+                    
+                    localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
+                      <></>
+                      :
+                   
                       <div >
                         <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                           <Cart
