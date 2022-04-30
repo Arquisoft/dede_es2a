@@ -1,7 +1,7 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
-
-const feature = loadFeature('./features/add-to-cart.feature');
+/*
+//const feature = loadFeature('./features/pay-process.feature');
 
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
@@ -21,7 +21,7 @@ defineFeature(feature, test => {
       .catch(() => {});
   });
 
-  test('The cart is empty', ({given,when,then}) => {
+  test('Paying an item', ({given,when,then}) => {
     
     let email:string;
     let username:string;
@@ -46,3 +46,4 @@ defineFeature(feature, test => {
 
 });
 
+*/
