@@ -25,6 +25,21 @@ type Props = {
     address: string;
     deliveryDate:string;
 }
+/*
+//Procesar pedido
+async function finalizarPedido(precioGastosDeEnvio : number,precioSinIva : number ,juguetes: Juguete[]): Promise<any> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        "precioGastosDeEnvio": 10,
+        "precioSinIva": 10,
+        "usuario":localStorage.getItem("usuario"),
+        "productos":juguetes
+      })
+  });
+}*/
 
 const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, siguientePaso, setAddress, address , deliveryDate})=> {
     const calculateTotal = (items:Juguete[]) =>
@@ -55,7 +70,9 @@ const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sigui
               </CardContent>
               <CardActions>
               <Button
-              onClick={siguientePaso}
+              onClick={
+                siguientePaso
+              }
               variant="contained"
               className="m-1"
             >
