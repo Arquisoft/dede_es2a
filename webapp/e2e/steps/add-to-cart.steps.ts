@@ -33,6 +33,13 @@ defineFeature(feature, test => {
     when('I press the add to cart item button', async () => {
 
       //Clickamos el primer boton añadir al carrito que encontremos
+/*
+      const addToCart = await page.$('button#botonAnadirAlCarrito');
+      const espera1=await addToCart!.click();
+      console.log(espera1);
+ */
+
+      //Clickamos el boton que despliega el carrito
       const addToCart =await page.$('button#botonAnadirAlCarrito');
       await addToCart!.click();
       await addToCart!.click();
