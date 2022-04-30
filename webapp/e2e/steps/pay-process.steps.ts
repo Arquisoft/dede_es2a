@@ -11,7 +11,7 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 50 });
+      : await puppeteer.launch({ headless: true, slowMo: 50 });
      // : await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -33,8 +33,8 @@ defineFeature(feature, test => {
     const registerButton =await page.$('button#registerButton');
     await registerButton!.click();
     await page.waitForNavigation();
-    await expect(page).toClick("a");
 
+    await expect(page).toClick("a");
 
     await expect(page).toFill("input[name='email']", email);
     await expect(page).toFill("input[name='password']", password);

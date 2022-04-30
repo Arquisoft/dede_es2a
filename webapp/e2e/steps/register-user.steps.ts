@@ -12,7 +12,7 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 200 });
+      : await puppeteer.launch({ headless: true, slowMo: 150 });
       //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -47,7 +47,7 @@ defineFeature(feature, test => {
       const signupButton = await page.$('a[href="#"]');
       await signupButton!.click();
       await signupButton!.click();
-
+      await page.$('a[href="#"]')
       // Rellenamos el formulario
       await expect(page).toFill("input[name='email']", email);
       await expect(page).toFill("input[name='password']", password);
@@ -63,7 +63,8 @@ defineFeature(feature, test => {
 
     then('Disconnection text appears', async () => {
       //En consecuencia, debería aparecer la palabra desconectar.
-      await expect(page).toMatch('Registrarse');
+      await delay(1500);
+      await expect(page).toMatch('Desconectarse');
     });
   })
 
@@ -75,3 +76,6 @@ defineFeature(feature, test => {
 });
   
 
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
