@@ -144,7 +144,6 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
 jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {nombre: req.params.nombre}
-        console.log("holi")
         var juguete = await Juguete.findOne(filter);
         console.log(juguete.stock)
         console.log(req.body.stock)
