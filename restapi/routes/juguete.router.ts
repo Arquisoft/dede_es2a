@@ -129,6 +129,18 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
     }
 });
 
+/**
+ * Petición que devuelve los juguetes de una categoría específica
+ */
+ jugueteRouter.get("/categoria/:categoria", async (req:Request,res:Response) =>{
+    let juguetes = await Juguete.find({ categoria: req.params.categoria })
+    if(juguetes){
+        res.json(juguetes);
+    } else {
+        res.status(500).send("Error al listar juguetes con stock");
+    }
+});
+
 jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {nombre: req.params.nombre}
