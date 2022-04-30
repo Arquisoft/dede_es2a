@@ -123,7 +123,7 @@ pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
         // llamar a la funcion gastos de envio y retornar como respuesta el dinero calculado
         let gastos = await gastosEnvio(req.body.direccion);
         if(gastos == 0){
-            res.send("5"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
+            res.send("0"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
         }
         res.send(gastos.toString());
     } catch (error) {
