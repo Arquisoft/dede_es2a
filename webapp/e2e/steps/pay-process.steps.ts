@@ -23,15 +23,19 @@ defineFeature(feature, test => {
   });
 
   test('Paying an item', ({given,when,then}) => {
-    
+    let email:string;
+    let password:string;
 
     given('An item is in the cart',async () => {
-      let email = "prueba1@gmail.com";
-      let password = "Prueba1!";
+      email = "prueba1@gmail.com";
+      password = "Prueba1!";
     //Iniciamos en sesión auth0
     const registerButton =await page.$('button#registerButton');
     await registerButton!.click();
     await page.waitForNavigation();
+    await expect(page).toClick("a");
+
+
     await expect(page).toFill("input[name='email']", email);
     await expect(page).toFill("input[name='password']", password);
     await expect(page).toClick("button[name='submit']");
