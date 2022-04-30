@@ -23,6 +23,10 @@ const CategoriesBar = ()=> {
         <>
     <NavigationWrapper>
         <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Nostalgia</Link>
+        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Vehiculos</Link>
+        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Aire libre</Link>
+        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Algo</Link>
+        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Otros</Link>
         <Link className="linkCategorie" href="/productos">Productos</Link>
     </NavigationWrapper>
     <Separator/>

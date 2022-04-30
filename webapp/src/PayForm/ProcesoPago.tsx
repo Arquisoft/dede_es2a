@@ -60,7 +60,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
       };
 
       const siguientePasoSiPodCalcularEnvio = async () => {
-        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="") {
+        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="null"|| localStorage.getItem("direccion")=="") {
           toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
         } else {
           let variable = await getGastosEnvio();
