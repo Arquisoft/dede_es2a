@@ -25,6 +25,7 @@ import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
 import EditForm from './componentes/editarProducto/editarProducto';
+import CategoriesBar from './PayForm/CategoriesBar';
 
 //Types
 export type CartItemType = {
@@ -162,6 +163,7 @@ const App = () => {
           <Route path="/home" element={
             <Wrapper>
               <Navbar />
+              <CategoriesBar/>
               <Home />
               <Footer />
             </Wrapper>
@@ -170,6 +172,7 @@ const App = () => {
           <Route path="" element={
             <Wrapper>
               <Navbar />
+              <CategoriesBar/>
               <Home />
               <Footer />
             </Wrapper>

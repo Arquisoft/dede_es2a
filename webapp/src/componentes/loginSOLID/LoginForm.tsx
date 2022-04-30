@@ -63,7 +63,9 @@ export default function LoginForm() {
             localStorage.setItem("usuario", result[0]);
             localStorage.setItem("organizacion", result[1]);
             localStorage.setItem("direccion", result[2]);
+           
         });
+      
         
       }
     })
@@ -89,6 +91,7 @@ export default function LoginForm() {
             onError={console.error}>
                 <Button  variant="contained">Obtener dirección </Button>
           </LoginButton>
+     
         </Wrapper>
     </Container>
   );
