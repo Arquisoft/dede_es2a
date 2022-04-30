@@ -173,15 +173,9 @@ describe('juguete ', () => {
         expect(response.text).toEqual("No existe el juguete");
     });
 
-    it("No se puede eliminar un juguete con el nombre en blanco", async() => {
-        const response:Response = await request(app).delete('/juguete/ ');
-        expect(response.status).toBe(500);
-        expect(response.text).toEqual("No existe el juguete");
-    });
-
     it("Se puede añadir nuevo stock a un juguete", async() =>{
-        var stock = 10;
-        const response:Response = await request(app).post('/juguete/addStock/juguete1').send({stock:stock});
+        var newStock = 10;
+        const response:Response = await request(app).post('/juguete/addStock/juguete1').send({stock:newStock});
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Stock del juguete añadido correctamente");
     });
@@ -190,7 +184,7 @@ describe('juguete ', () => {
         var stock = 10;
         const response:Response = await request(app).post('/juguete/addStock/noExiste').send({stock:stock});
         expect(response.statusCode).toBe(500);
-        expect(response.text).toEqual("No se pudo añadir stock al producto");
+        expect(response.text).toEqual("Error al añadir stock al juguete");
     });
 
     
