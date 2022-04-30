@@ -51,7 +51,7 @@ async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[])
       body: JSON.stringify({ 
         "precioGastosDeEnvio":p,
         "precioSinIva": price,
-        "usuario":"ace@email.com",
+        "usuario":"ace@email.com",//TO DO: recordar cambiar esto
         "productos":juguetes
       })
   });
