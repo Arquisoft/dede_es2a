@@ -7,7 +7,7 @@ const LogoutForm = () => {
 
   const navigate = useNavigate();
   const { session } = useSession();
-
+/*
   useEffect(() => {
     localStorage.clear();
     
@@ -17,11 +17,11 @@ const LogoutForm = () => {
     sessionStorage.removeItem("usuario");
     sessionStorage.removeItem("organizacion");
     sessionStorage.removeItem("direccion");
-    */
+    
     // tener en cuenta que quizas hay que restaurar tambien el carrito
     navigate("/");
   });
-
+*/
   return <Home />;
 };
 
