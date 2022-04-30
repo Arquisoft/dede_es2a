@@ -30,6 +30,7 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
         <div>
          <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}> 
          <Typography variant="h4" component="h2">Otorgue su dirección a través de su POD</Typography>
+          <Typography >(Se seleccionará Inrupt por defecto)</Typography>
         <LoginForm/>
       </Paper>
            <Card elevation = {4} sx={{ maxWidth: 600 }} >
