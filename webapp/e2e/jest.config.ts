@@ -12,6 +12,6 @@ export default {
     
     preset: "jest-puppeteer",
     
-    testTimeout : 30000
+    testTimeout : 60000
     
     }

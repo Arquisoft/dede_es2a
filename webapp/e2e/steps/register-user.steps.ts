@@ -12,8 +12,8 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 50 });
-     // : await puppeteer.launch({ headless: true });
+      : await puppeteer.launch({ headless: false, slowMo: 200 });
+      //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
     await page
@@ -27,10 +27,11 @@ defineFeature(feature, test => {
     
     let email:string;
     let password:string;
+    let numeroUsuario = Math.random()*100000;
 
     given('The application without user in session',async () => {
-        email = "usuarioPrueba@gmail.com"
-        password = "usuarioPrueba"
+        email = "usuarioPrueba"+ numeroUsuario +"@gmail.com"
+        password = "usuarioPrueba-000"
     });
 
     when('We press the register button and fill the form', async () => {
@@ -40,25 +41,29 @@ defineFeature(feature, test => {
       await registerButton!.click();
       await page.waitForNavigation();
 
-      //Clickamos el span de signup
+      //Clickamos el boton de registro pero de auth0 esta vez
       //await expect(page).toClick("a[href='#']");
-      await expect(page).toClick('a', { text: 'Sign Up' })
-      await page.waitForNavigation();
+      //await expect(page).toClick('a', { text: 'Sign Up' })
+      const signupButton = await page.$('a[href="#"]');
+      await signupButton!.click();
+      await signupButton!.click();
 
       // Rellenamos el formulario
       await expect(page).toFill("input[name='email']", email);
       await expect(page).toFill("input[name='password']", password);
 
-      // Clickamos el submit
+      // Clickamos el submit sign up
       await expect(page).toClick("button[name='submit']");
-      //await page.waitForNavigation();
+      await page.waitForNavigation();
 
-      // Clickamos el botón "Aceptar" para dar permisos en nuestra aplicacion
+      // Clickamos el submit "Aceptar" para dar permisos en nuestra aplicacion
+      await expect(page).toClick("button[value='accept']");
+      await page.waitForNavigation();
     });
 
     then('Disconnection text appears', async () => {
       //En consecuencia, debería aparecer la palabra desconectar.
-      await expect(page).toMatch('Email is invalid.');
+      await expect(page).toMatch('Registrarse');
     });
   })
 
