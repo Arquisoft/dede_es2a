@@ -37,6 +37,16 @@ type Props = {
 
 let gastosEnvio:any; 
 
+//restarsTock
+async function subStock(nombre: string, cantidad: string): Promise<any> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'juguete/subStock/' + nombre, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "stock": cantidad })
+  });
+}
+
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
@@ -116,15 +126,21 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 3:
-            return <FinalizedOrder
-            cartItems={cartItems}
-            siguientePaso={siguientePaso}
-            deliveryCost={gastosEnvio}
-            setDeliveryCost={setDeliveryCost}
-            setAddress={siguientePaso}
-            address={address}
-            deliveryDate={deliveryDate} />;
-            
+            cartItems.map((elem)=>{
+                  subStock(elem.nombre,""+elem.cantidad);
+                })
+            return(
+              <FinalizedOrder
+                cartItems={cartItems}
+                siguientePaso={siguientePaso}
+                deliveryCost={gastosEnvio}
+                setDeliveryCost={setDeliveryCost}
+                setAddress={siguientePaso}
+                address={address}
+                deliveryDate={deliveryDate}
+              />
+            );
+         
         }
       };
 
