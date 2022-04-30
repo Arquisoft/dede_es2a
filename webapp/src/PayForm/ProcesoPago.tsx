@@ -34,8 +34,29 @@ type Props = {
 type Props = {
     cartItems: Juguete[];
 };
-
+let condPedido= true;
 let gastosEnvio:any; 
+
+//Procesar pedido
+async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[]): Promise<any> {
+  let p:number = parseFloat(precioGastosDeEnvio);
+  const calculateTotal = (items:Juguete[]) =>
+    items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
+    var price:number;
+    price = calculateTotal(juguetes);
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        "precioGastosDeEnvio":p,
+        "precioSinIva": price,
+        "usuario":"ace@email.com",//TO DO: recordar cambiar esto
+        "productos":juguetes
+      })
+  });
+  return response;
+}
 
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
@@ -56,6 +77,11 @@ toast.configure();
 const ProcesoPago:React.FC<Props> = ({cartItems}) => {
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
+        setPasoActual((pasoPrevio) => pasoPrevio + 1);
+      };
+
+      const siguientePasoGuardarPedido = () => {
+        finalizarPedido(gastosEnvio,cartItems);
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
@@ -87,6 +113,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
       const getPaso = (stepIndex: number) => {
         switch (stepIndex) {
           case 0:
+            condPedido=true;
             return (
               <Shipping
                 cartItems={cartItems}
@@ -110,10 +137,11 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 2:
+            
             return (
               <Review
                 cartItems={cartItems}
-                siguientePaso={siguientePaso}
+                siguientePaso={siguientePasoGuardarPedido}
                 deliveryCost={gastosEnvio}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={siguientePaso}

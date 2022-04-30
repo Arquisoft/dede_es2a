@@ -177,7 +177,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
                         cantidad = juguete.stock
                     }
                     var nuevoStock = juguete.stock - cantidad;
-                    Juguete.findOneAndUpdate({"_id":new ObjectId(producto._id)},{stock:nuevoStock},{ new:true});
+                    let a =await Juguete.findOneAndUpdate({"_id":(producto.id)},{stock:nuevoStock},{ new:true});
                     var nuevoProducto = {
                         _id:juguete._id,
                         cantidad:cantidad
@@ -199,6 +199,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
+        console.log(req.body.usuario);
         let productos = await procesarJuguetes(req.body.productos);
         if(productos.length == 0){
             res.send("No se pudo crear el pedido por falta de stock");
@@ -212,7 +213,7 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                 let nuevoPedido = {
                     precioSinIva: req.body.precioSinIva,
                     precioGastosDeEnvio: req.body.precioGastosDeEnvio,
-                    precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
+                    precioFinal:req.body.precioSinIva + req.body.precioGastosDeEnvio,
                     juguetes: productos,
                     usuario:user._id
                 }
@@ -222,6 +223,7 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                     res.status(500).send(error);
                 } else{
                     await pedido.save();
+                    console.log("creado");
                     res.send("Su pedido ha sido tramitado");
                 }
 

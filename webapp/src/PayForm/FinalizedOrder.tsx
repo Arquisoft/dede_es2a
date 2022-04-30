@@ -7,6 +7,18 @@ import {Juguete} from '../shared/sharedJuguete';
 import { Typography } from "@material-ui/core";
 
 export default function FinalizedOrder(props: any): JSX.Element {
+
+    localStorage.clear();
+    
+    /*
+    sessionStorage.removeItem("webID");
+    sessionStorage.removeItem("sessionID");
+    sessionStorage.removeItem("usuario");
+    sessionStorage.removeItem("organizacion");
+    sessionStorage.removeItem("direccion");
+    */
+    // tener en cuenta que quizas hay que restaurar tambien el carrito
+       
     return (
         <div>
              <Typography variant="h2" component="h2">Pedido finalizado</Typography>
