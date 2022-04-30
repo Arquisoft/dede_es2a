@@ -2,18 +2,6 @@ import mongoose = require('mongoose');
 
 // creamos el esquema que tiene que cumplir el usuario en la BD
 const usuarioSchema = new mongoose.Schema({
-    DNI:{
-        type:String,
-        required:true
-    },
-    nombre:{
-        type:String,
-        required:true
-    },
-    apellidos:{
-        type:String,
-        required:true
-    },
     email:{
         type:String,
         required:true,
