@@ -158,7 +158,7 @@ jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
         res.status(500).send("Error al añadir stock al juguete")
     }
 });
-
+/*
 jugueteRouter.post("/subtock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {
@@ -179,5 +179,5 @@ jugueteRouter.post("/subtock/:nombre", async (req:Request,res:Response) => {
         res.status(500).send("Error al restar stock al juguete")
     }
 });
-
+*/
 export default jugueteRouter;
