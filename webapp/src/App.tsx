@@ -25,6 +25,7 @@ import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
 import EditForm from './componentes/editarProducto/editarProducto';
+import CategoriesBar from './PayForm/CategoriesBar';
 
 //Types
 export type CartItemType = {
@@ -162,6 +163,7 @@ const App = () => {
           <Route path="/home" element={
             <Wrapper>
               <Navbar />
+              <CategoriesBar/>
               <Home />
               <Footer />
             </Wrapper>
@@ -170,6 +172,7 @@ const App = () => {
           <Route path="" element={
             <Wrapper>
               <Navbar />
+              <CategoriesBar/>
               <Home />
               <Footer />
             </Wrapper>
@@ -185,15 +188,15 @@ const App = () => {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
                       :
-                      <div>
-                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                           <Cart
                             cartItems={cartItems}
                             addToCart={handleAddToCart}
                             removeFromCart={handleRemoveFromCart}
                           />
                         </Drawer>
-                        <StyledButton onClick={() => setCartOpen(true)}>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
                             <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
                           </Badge>

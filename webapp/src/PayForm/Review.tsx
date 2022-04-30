@@ -59,7 +59,7 @@ const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sigui
               variant="contained"
               className="m-1"
             >
-              Guardar y continuar
+             Finalizar Pedido
             </Button>
             </CardActions>
             </Card>

@@ -37,7 +37,6 @@ export async function checkUserInBD(): Promise<Usuario[]> {
 
 const LoginButton = () => {
     const { loginWithRedirect, user } = useAuth0();
-    console.log("AAAAAAA");
     
     const { data, isLoading, error } =   useQuery<Usuario[]>('us', checkUserInBD);
     //const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
@@ -55,8 +54,7 @@ const LoginButton = () => {
             isAdmin=false;
     })}*/
     
-    console.log("CCCCCCCCCC");
-    return <button className='btn btn-primary-login' onClick={() => {
+    return <button className='btn btn-primary-login' id="registerButton" onClick={() => {
         loginWithRedirect();
         if (isLoading) return <LinearProgess />;
         // console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
@@ -72,7 +70,6 @@ const LoginButton = () => {
         email = user?.email != null ? user?.email : "";
         //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si
         //var us = Ayuda(email);
-        console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // no
         //var us = usuario as Usuario;
         // si no lo está
         // redirigir a formulario (nombre, apellidos y dni)

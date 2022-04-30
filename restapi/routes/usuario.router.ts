@@ -3,36 +3,23 @@ import express, {Request,response,Response} from "express"
 import { ObjectId } from "mongodb";
 
 export const usuarioRouter = express.Router()
-var UsuarioRepository = require('../repositories/UsuarioRepository');
+const Usuario = require('../models/Usuario')
 usuarioRouter.use(express.json());
+
 
 usuarioRouter.get("/", async(req:Request,res:Response) => {
     try{
-        var usuarios = await UsuarioRepository.getUsuarios();
+        let usuarios = await Usuario.find({});
         res.send(usuarios);
     }catch(error){
         res.status(500).send("No se pudo listar los usuarios");
-    }
-});
-
-
-usuarioRouter.get("/findAllUser", async(req:Request,res:Response) =>{
-    try{
-        var usuario = await UsuarioRepository.findAllUsuario();
-        if(usuario){
-            res.send(usuario);
-        } else{
-            res.status(500).send("No existe ese usuario");
-        }
-    } catch(error){
-        res.status(500).send("se ha producido un error");
     }
 });
 
 usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
     try{
         var filter = {email: req.params.email};
-        var usuario = await UsuarioRepository.findUsuario(filter);
+        var usuario = await Usuario.findOne(filter);
         if(usuario){
             res.send(usuario);
         } else{
@@ -40,15 +27,6 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
         }
     } catch(error){
         res.status(500).send("se ha producido un error");
-    }
-});
-
-usuarioRouter.get("/", async(req:Request,res:Response) => {
-    try{
-        var usuarios = await UsuarioRepository.getUsuarios();
-        res.send(usuarios);
-    }catch(error){
-        res.status(500).send("No se pudo listar los usuarios");
     }
 });
 
@@ -61,13 +39,15 @@ usuarioRouter.post("/", async(req:Request,res:Response) =>{
             email: req.body.email,
             isAdmin: false,
         }
-        var usuario = await UsuarioRepository.addUsuario(user);
-        if(usuario){
-            res.send("Usuario añadido correctamente");
+        var usuario = new Usuario(user);
+        var error = usuario.validateSync();
+        if(error){
+            res.status(500).send(error);
+        } else{
+            await usuario.save();
+            res.send("Usuario añadido correctamente")
         }
-        else{
-            res.status(500).send("El usuario no se ha podido añadir");
-        }
+    
     } catch(error){
         res.send(error);
     }

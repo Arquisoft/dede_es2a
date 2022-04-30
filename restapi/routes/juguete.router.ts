@@ -4,14 +4,14 @@ import cloudinary from 'cloudinary';
 import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
-var JugueteRepository = require('../repositories/JuguetesRepository');
+const Juguete = require("../models/Juguete");
 jugueteRouter.use(express.json());
 
 /**
  * Peticion que muestra todos los juguetes de la lista
  */
 jugueteRouter.get("/", async (req:Request,res:Response) =>{
-    let juguetes = await JugueteRepository.getJuguetes();
+    let juguetes = await Juguete.find({});
     if(juguetes){
         res.json(juguetes);
     } else{
@@ -23,7 +23,7 @@ jugueteRouter.get("/", async (req:Request,res:Response) =>{
  *  Petición que solo muestra los productos con stock
  */ 
 jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
-    let juguetes = await JugueteRepository.getJuguetesWithStock();
+    let juguetes = await Juguete.find({ stock: { $gt: 0 } })
     if(juguetes){
         res.json(juguetes);
     } else {
@@ -37,7 +37,7 @@ jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
 jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
     try{
         let filter  ={nombre :  req.params.nombre}
-        let juguete = await JugueteRepository.findJuguete(filter);
+        let juguete = await Juguete.findOne(filter);
         if(juguete){
             res.json(juguete);
         }
@@ -55,17 +55,17 @@ jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
 jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
     try{
         let filter = {nombre: req.params.nombre}
-        let juguete = await JugueteRepository.findJuguete(filter);
+        let juguete = await Juguete.findOne(filter);
         if(juguete){
             await borrarImagen(juguete.imagen);
-            await JugueteRepository.deleteJuguete(filter);
+            await Juguete.deleteOne(filter);
             res.send("Eliminado juguete");
         }
         else{
             res.send("No existe el juguete");
         }
     } catch(err){
-        res.status(500).send(err)
+        res.status(500).send("Se ha producido un error");
     }
 });
 
@@ -73,7 +73,6 @@ async function borrarImagen(imagen:String){
     var name = imagen.split('/');
     var name2 = name[name.length - 1 ]
     var finalName = name2.split('.')[0];
-    console.log(finalName)
     await cloudinary.v2.uploader.destroy(finalName);
 }
 
@@ -90,18 +89,25 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             categoria: req.body.categoria,
             stock: req.body.stock
         };
-        let juguete = await JugueteRepository.findJuguete({nombre: nuevoJuguete.nombre});
+        let juguete = await Juguete.findOne({nombre: nuevoJuguete.nombre});
         if(juguete){
             res.send("Este juguete ya existe");
         } else{
             var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
             nuevoJuguete.imagen = nuevaImagen.url;
-            await JugueteRepository.addJuguete(nuevoJuguete);
-            res.send("Añadido nuevo juguete")
+            let jugueteFinal = new Juguete(nuevoJuguete)
+            var error = jugueteFinal.validateSync();
+            if(error){
+                res.status(500).send(error)
+            }else{
+                jugueteFinal.save();
+                res.send("Añadido nuevo juguete")
+            }
+            
         }
         
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send("Error al añadir un juguete");
     }
 })
 
@@ -112,7 +118,7 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
         const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
                 precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
                 cantidad : req.body.cantidad, stock: req.body.stock}
-        let jugueteActualizado = await JugueteRepository.updateJuguete(filter,update);
+        let jugueteActualizado = await Juguete.findOneAndUpdate(filter, update, { new:true});
         if(jugueteActualizado){
             res.send("El juguete se ha actualizado correctamente");
         } else{
@@ -123,20 +129,31 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
     }
 });
 
+/**
+ * Petición que devuelve los juguetes de una categoría específica
+ */
+ jugueteRouter.get("/categoria/:categoria", async (req:Request,res:Response) =>{
+    let juguetes = await Juguete.find({ categoria: req.params.categoria })
+    if(juguetes){
+        res.json(juguetes);
+    } else {
+        res.status(500).send("Error al listar juguetes con stock");
+    }
+});
+
 jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
     try{
         const filter = {nombre: req.params.nombre}
-
-        var juguete = await JugueteRepository.findJuguete(filter); 
-
-        const stock = {stock: juguete.stock + req.body.stock}
-        
-        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,stock);
-        if(jugueteActualizado){
-            res.send("Stock del juguete añadido correctamente");
-        } else{
-            res.status(500).send("No se pudo añadir stock al producto")
-        }
+        console.log("holi")
+        var juguete = await Juguete.findOne(filter);
+        console.log(juguete.stock)
+        console.log(req.body.stock)
+        const number:Number = juguete.stock + req.body.stock
+        const stock = {stock: number}
+        console.log(stock)
+        var jugueteActualizado = await Juguete.findOneAndUpdate(filter, stock, { new:true})
+        res.send("Stock del juguete añadido correctamente");
+    
     }catch (error){
         res.status(500).send("Error al añadir stock al juguete")
     }
