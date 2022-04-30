@@ -171,17 +171,13 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
         for(var producto of juguetes){
             let juguete = await Juguete.findOne({nombre:producto.nombre});
             if(juguete){
-                console.log(juguete.stock)
                 var cantidad = producto.cantidad;
                 if(juguete.stock != 0){
                     if(juguete.stock < producto.cantidad){
                         cantidad = juguete.stock
                     }
-                    console.log(cantidad)
                     var nuevoStock = juguete.stock - cantidad;
-                    console.log(producto)
                     let a =await Juguete.findOneAndUpdate({"_id":(producto.id)},{stock:nuevoStock},{ new:true});
-                    console.log(a);
                     var nuevoProducto = {
                         _id:juguete._id,
                         cantidad:cantidad
@@ -203,7 +199,6 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
-        console.log("Entrooo");
         console.log(req.body.usuario);
         let productos = await procesarJuguetes(req.body.productos);
         if(productos.length == 0){
@@ -222,15 +217,13 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                     juguetes: productos,
                     usuario:user._id
                 }
-                console.log("Lego parte dos");
-                console.log(nuevoPedido);
                 let pedido = new Pedido(nuevoPedido);
                 var error = pedido.validateSync();
                 if(error){
                     res.status(500).send(error);
                 } else{
                     await pedido.save();
-                    console.log(nuevoPedido);
+                    console.log("creado");
                     res.send("Su pedido ha sido tramitado");
                 }
 
