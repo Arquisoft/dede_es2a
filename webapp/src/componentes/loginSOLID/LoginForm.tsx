@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginForm() {
 
   const navigate = useNavigate();
-  const [idp, setIdp] = useState("https://broker.pod.inrupt.com/");
+  const [idp, setIdp] = useState("https://inrupt.net/");
   const proveedores = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" },
                     {displayName: "Solid community", url: "https://solidcommunity.net/"},
                     {displayName: "Solid Web", url:"https://solidweb.org/"}]

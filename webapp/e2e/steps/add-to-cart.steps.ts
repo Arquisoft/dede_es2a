@@ -6,26 +6,15 @@ const feature = loadFeature('./features/add-to-cart.feature');
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
-describe('Google', () => {
-  beforeAll(async () => {
-    await page.goto('https://google.com')
-  })
 
-  it('should display "google" text on page', async () => {
-    await expect(page).toMatch('google')
-  })
-})
-
-
-
-
-/*
 defineFeature(feature, test => {
   
   beforeAll(async () => {
+
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
       : await puppeteer.launch({ headless: true });
+      //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
     await page
@@ -34,21 +23,6 @@ defineFeature(feature, test => {
       })
       .catch(() => {});
   });
-/*
-  it("navigates to the about page", async () => {
-    await page.goto("http://localhost:3000/productos");
-    await page.click("#botonAnadirAlCarrito");
-    await page.waitForSelector(".App-welcome-text");
-    const text = await page.$eval(".App-welcome-text", (e) => e.textContent);
-    expect(text).toContain("This is the about page.");
-  });
-  afterAll(() => browser.close());
-
-
-  test('The cart is empty', async ()=> {
-    await page.click('button#botonAnadirAlCarrito');
-    
-  })
 
   test('The cart is empty', ({given,when,then} )=> {
     
@@ -58,7 +32,23 @@ defineFeature(feature, test => {
     });
 
     when('I press the add to cart item button', async () => {
-      await expect(page).toClick('span', { text: 'Añadir al carrito' })
+
+      //Clickamos el primer boton añadir al carrito que encontremos
+/*
+      const addToCart = await page.$('button#botonAnadirAlCarrito');
+      const espera1=await addToCart!.click();
+      console.log(espera1);
+ */
+
+      //Clickamos el boton que despliega el carrito
+      const addToCart =await page.$('button#botonAnadirAlCarrito');
+      await addToCart!.click();
+      await addToCart!.click();
+
+
+      //Clickamos el boton que despliega el carrito
+      const botonCarrito2 =await page.$('button#botonCarritoDesplegar');
+      await botonCarrito2!.click();
     });
 
     then('The cart should have an item', async () => {
@@ -73,5 +63,5 @@ defineFeature(feature, test => {
 
 
 });
-  */
+  
 

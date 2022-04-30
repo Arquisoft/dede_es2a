@@ -56,7 +56,7 @@ const LoginButton = () => {
     })}*/
     
     console.log("CCCCCCCCCC");
-    return <button className='btn btn-primary-login' onClick={() => {
+    return <button className='btn btn-primary-login' id="registerButton" onClick={() => {
         loginWithRedirect();
         if (isLoading) return <LinearProgess />;
         // console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa'); // si

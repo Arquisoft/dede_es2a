@@ -193,7 +193,7 @@ const App = () => {
                             removeFromCart={handleRemoveFromCart}
                           />
                         </Drawer>
-                        <StyledButton onClick={() => setCartOpen(true)}>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
                             <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
                           </Badge>
