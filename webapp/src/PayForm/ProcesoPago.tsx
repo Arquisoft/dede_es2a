@@ -34,8 +34,29 @@ type Props = {
 type Props = {
     cartItems: Juguete[];
 };
-
+let condPedido= true;
 let gastosEnvio:any; 
+
+//Procesar pedido
+async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[]): Promise<any> {
+  let p:number = parseFloat(precioGastosDeEnvio);
+  const calculateTotal = (items:Juguete[]) =>
+    items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
+    var price:number;
+    price = calculateTotal(juguetes);
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        "precioGastosDeEnvio":p,
+        "precioSinIva": price,
+        "usuario":"ace@email.com",
+        "productos":juguetes
+      })
+  });
+  return response;
+}
 
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
@@ -81,6 +102,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
       const getPaso = (stepIndex: number) => {
         switch (stepIndex) {
           case 0:
+            condPedido=true;
             return (
               <Shipping
                 cartItems={cartItems}
@@ -104,6 +126,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 2:
+            
             return (
               <Review
                 cartItems={cartItems}
@@ -116,6 +139,10 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 3:
+            if(condPedido){
+              finalizarPedido(gastosEnvio,cartItems)
+              condPedido=false;
+            }
             return <FinalizedOrder
             cartItems={cartItems}
             siguientePaso={siguientePaso}
