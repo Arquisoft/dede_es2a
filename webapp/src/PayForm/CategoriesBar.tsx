@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from '@mui/material';
 import styled from 'styled-components';
 import './categories.css';
+import { Juguete } from '../shared/sharedJuguete';
 const NavigationWrapper = styled.nav`
  display: flex;
  width: 70%;
@@ -22,17 +23,19 @@ const Separator = styled.div`
  background-color: #d3707c;
 `
 
-
 const CategoriesBar = ()=> {
+    let juguetes:Juguete[];
+
     return(
         <>
     <NavigationWrapper>
-        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Nostalgia</StyledLink>
-        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Vehiculos</StyledLink>
-        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Aire libre</StyledLink>
-        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Algo</StyledLink>
-        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Otros</StyledLink>
-        <StyledLink className="linkCategorie" href="/productos">Productos</StyledLink>
+        <StyledLink className="linkCategorie" href="/nostalgia" >Nostalgia</StyledLink>
+        <StyledLink className="linkCategorie" href="/vehiculo">Vehiculos</StyledLink>
+        <StyledLink className="linkCategorie" href="/musical">Musicales</StyledLink>
+        <StyledLink className="linkCategorie" href="/peluche">Peluche</StyledLink>
+        <StyledLink className="linkCategorie" href="/bebes">Bebés</StyledLink>
+        <StyledLink className="linkCategorie" href="/otros">Otros</StyledLink>
+       
     </NavigationWrapper>
     <Separator/>
     </>
