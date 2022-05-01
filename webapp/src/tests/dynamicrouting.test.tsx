@@ -16,6 +16,7 @@ import Delivery from '../PayForm/Delivery';
 import Review from '../PayForm/Review';
 import FinalizedOrder from '../PayForm/FinalizedOrder';
 import PedidoItem from '../componentes/Pedidos/PedidoItem';
+import HistorialPedidos from '../componentes/Pedidos/historial';
 
 test('navbar is rendered', () => {
   const component = render(<Navbar/>)
@@ -122,6 +123,24 @@ test('Finalized ordder is rendered', () => {
   expect(component.container).toHaveTextContent('finalizado')
 })
 
+test('Historial pedidos is rendered', () => {
+  const component = render(<HistorialPedidos  />)
+
+  expect(component.container).toHaveTextContent('pedidos')
+})
+
+
+test('Login button is rendered', () => {
+  const component = render(<LoginButton  />)
+
+  expect(component.container).toHaveTextContent('Registrarse')
+})
+
+test('Logout button is rendered', () => {
+  const component = render(<LogoutButton  />)
+
+  expect(component.container).toHaveTextContent('Desconectarse')
+})
 
 test('clicking home nav-button', () => {
   const component = render(<Navbar/>)
