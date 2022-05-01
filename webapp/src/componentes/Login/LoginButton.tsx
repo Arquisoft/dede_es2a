@@ -47,10 +47,10 @@ const LoginButton = () => {
         loginWithRedirect();
         //if (isLoading) return <LinearProgess />;
          
-        email = user?.email != null ? user?.email : "";
+       // email = user?.email != null ? user?.email : "";
 
-        console.log(email);
-        localStorage.setItem("isAdmin", isAdmin);
+       // console.log(email);
+      //  localStorage.setItem("isAdmin",isAdmin);
         const localUser = localStorage.getItem("user");
         if (localUser) {
             let user = JSON.parse(localUser);

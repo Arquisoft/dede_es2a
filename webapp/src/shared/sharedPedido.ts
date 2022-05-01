@@ -5,6 +5,6 @@ export type Pedido = {
     id:number;
     precioGastosDeEnvio: number;
     precioFinal: number;
-    juguete: [{_id:Juguete}, {cantidad: number}];
+    juguetes: [{_id:Juguete, cantidad: number}];
     usuario: Usuario;
 }
