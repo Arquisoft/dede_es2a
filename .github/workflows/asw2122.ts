@@ -2,7 +2,7 @@
 name: CI for ASW2122
 on:
   push:
-    branch: 'develop'
+    branch: [develop]
 
 jobs:
   unit-test-webapp:

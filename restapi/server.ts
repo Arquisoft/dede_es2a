@@ -14,28 +14,21 @@ const port: number = 5000;
 
 require('dotenv').config()
 let bd = require('./modules/gestorDB')
-let cloudinary = require('./modules/cloudinary');
-/*
+let {config} = require('./modules/cloudinary');
+
 const options: cors.CorsOptions = {
   origin: ['http://localhost:3000']
   //origin: ['https://dede-es2a-webapp.herokuapp.com']
-};*/
+};
 
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
 bd.connect();
-cloudinary.config(); 
+config(); 
 
-app.use(cors());
+app.use(cors(options));
 app.use(bp.json());
-
-app.use("/api", api)
-
-app.get("/", function(req,res){
-    res.send("Por aqui no, dale a /juguete");
-});
-
 
 app.use("/juguete", jugueteRouter);
 app.use("/pedido",pedidoRouter);
