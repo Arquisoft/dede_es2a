@@ -1,3 +1,4 @@
+/*
 name: CI for ASW2122
 on:
   push:
@@ -70,20 +71,30 @@ jobs:
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: restapi
-  deploy:
-    name: Deploy over SSH
-    runs-on: ubuntu-latest
+  deploy-webapp:
     needs: [docker-push-restapi,docker-push-webapp]
+    runs-on: ubuntu-latest
     steps:
-    - name: Deploy over SSH
-      uses: fifsky/ssh-action@master
+    - uses: actions/checkout@v2
+    - name: Deploy webapp
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        user: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        command: |
-          wget https://raw.githubusercontent.com/Arquisoft/dede_es2a/develop/docker-compose-deploy.yml -O docker-compose.yml
-          docker-compose stop
-          docker-compose rm -f
-          docker-compose pull   
-          docker-compose up -d        
+        heroku_api_key: ${{ secrets.DEPLOY_HOST }}
+        heroku_app_name: ${{ secrets.DEPLOY_USER }}
+        heroku_email: ${{ secrets.DEPLOY_KEY }}
+        usedocker: true
+        appdir: "webapp"      
+  deploy-restapi:
+    needs: [docker-push-restapi,docker-push-webapp]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy restapi
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+         heroku_api_key: ${{ secrets.DEPLOY_HOST }}
+        heroku_app_name: ${{ secrets.DEPLOY_USER }}
+        heroku_email: ${{ secrets.DEPLOY_KEY }}
+        usedocker: true
+        appdir: "restapi" 
+*/

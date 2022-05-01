@@ -21,6 +21,8 @@ import Shipping from './Shipping';
 import Delivery from './Delivery';
 import Review from './Review';
 import FinalizedOrder from './FinalizedOrder';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Email } from '@material-ui/icons';
 
 
 /*
@@ -38,7 +40,8 @@ let condPedido= true;
 let gastosEnvio:any; 
 
 //Procesar pedido
-async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[]): Promise<any> {
+
+async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[], email:string): Promise<any> {
   let p:number = parseFloat(precioGastosDeEnvio);
   const calculateTotal = (items:Juguete[]) =>
     items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
@@ -51,7 +54,7 @@ async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[])
       body: JSON.stringify({ 
         "precioGastosDeEnvio":p,
         "precioSinIva": price,
-        "usuario":"ace@email.com",
+        "usuario": email,
         "productos":juguetes
       })
   });
@@ -75,13 +78,17 @@ async function getGastosEnvio(): Promise<any> {
 
 toast.configure();
 const ProcesoPago:React.FC<Props> = ({cartItems}) => {
+    const {user} = useAuth0();
     const [pasoActual, setPasoActual] = React.useState(0);
     const siguientePaso = () => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
+      let email:string = user?.email != null ?
+      user?.email
+      : "";
       const siguientePasoGuardarPedido = () => {
-        finalizarPedido(gastosEnvio,cartItems);
+        finalizarPedido(gastosEnvio,cartItems, email);
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
