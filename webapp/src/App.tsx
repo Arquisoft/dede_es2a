@@ -165,32 +165,22 @@ const App = () => {
   //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
   return (
-    <>
+    <>  
+    <Wrapper>
+    <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={
-            <Wrapper>
-              <Navbar />
-              <CategoriesBar/>
               <Home />
-              <Footer />
-            </Wrapper>
           }
           />
-          <Route path="" element={
-            <Wrapper>
-              <Navbar />
-            
+          <Route path="" element={      
               <Home />
-              <Footer />
-            </Wrapper>
           }
           />
           <Route path="/productos" element={
             <div className='page-container'>
-              <Wrapper>
                 <div className='content-wrap'>
-                  <Navbar />
                   <CategoriesBar/>
                   {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
@@ -219,22 +209,15 @@ const App = () => {
                     ))}
                   </Grid>
                 </div>
-                <Footer />
-              </Wrapper>
             </div>
           } />
            <Route path="/juguete/categoria/nostalgia" element={
             <div className='page-container'>
-              <Wrapper>
                 <div className='content-wrap'>
-                  <Navbar />
-
-                  {
-                    
+                 {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
                       :
-                   
                       <div >
                         <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                           <Cart
@@ -258,113 +241,57 @@ const App = () => {
                     ))}
                   </Grid>
                 </div>
-                <Footer />
-              </Wrapper>
             </div>
           } />
-
           <Route path="/edit" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <EditForm />
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
           } />
-
           <Route path="/contactanos" element={
            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <ContactUs />
-                <Footer />
-              </Wrapper>
           } />
-
           <Route path="confirmar-pedido" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <ProcesoPago
                   cartItems={cartItems.slice()}
                 />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/perfilPod" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
-                
-                <Footer />
-              </Wrapper>
+              <></>
           }
           />
           <Route path="/loginPago" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <LoginForm />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/logoutPago" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <LogoutForm />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/*" element={
-            <Wrapper>
-              <Navbar />
               <h1>No existe esa dirección</h1>
-              <Footer />
-            </Wrapper>
           } />
-
         </Routes>
       </BrowserRouter>
+      <Footer />
+      </Wrapper>
     </>
   );
 
