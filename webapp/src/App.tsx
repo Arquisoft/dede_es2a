@@ -181,7 +181,7 @@ const App = () => {
           <Route path="" element={
             <Wrapper>
               <Navbar />
-              <CategoriesBar/>
+            
               <Home />
               <Footer />
             </Wrapper>
@@ -192,7 +192,7 @@ const App = () => {
               <Wrapper>
                 <div className='content-wrap'>
                   <Navbar />
-
+                  <CategoriesBar/>
                   {
                     localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
                       <></>
