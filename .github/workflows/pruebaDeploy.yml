@@ -2,7 +2,6 @@ name: CI for ASW2122
 on:
   release:
     types: [published]
-
 jobs:
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
