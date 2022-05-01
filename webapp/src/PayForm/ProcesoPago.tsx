@@ -159,7 +159,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             );
           case 3:
             cartItems.map((elem)=>{
-                  subStock(elem.nombre,""+elem.cantidad);
+                  //subStock(elem.nombre,""+elem.cantidad);
                 })
             return(
               <FinalizedOrder
