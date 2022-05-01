@@ -9,10 +9,11 @@ async function getPedidos(): Promise<Pedido[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
     //let response = await fetch(apiEndPoint + "usuario");
-    let response = await fetch(apiEndPoint + "byUser/" + correo);
+    let response = await fetch(apiEndPoint + "pedido/byUser/" + correo);
     //The objects returned by the api are directly convertible to User objects
+    let j = response.json();
     console.log(response.json());
-    return response.json();
+    return j;
 }
 
 const HistorialPedidos = () => {
@@ -20,7 +21,7 @@ const HistorialPedidos = () => {
     correo = user?.email == undefined || user?.email == null ? "" : user?.email;
     // coger pedidos del usuario de la Base de datos
     const { data } = useQuery<Pedido[]>('pedidos', getPedidos);
-    if (correo = "") {
+    if (correo == '') {
         return (
             <div>
                 <h2>Debe registrarse primero para ver su historial de pedidos</h2>

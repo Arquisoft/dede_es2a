@@ -150,17 +150,21 @@ pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
     try{
         var usuario = await Usuario.findOne({"email":req.params.user,"isAdmin":false});
         if(!usuario){
+            console.log("El usuario no existe");
             res.send("El usuario no existe");
         }
         else{
             var pedidos = await Pedido.find({"usuario":usuario._id});
             if(pedidos.length > 0){
+                console.log("OK");
                 res.send(pedidos);
             }else{
+                console.log("No tiene pedidos");
                 res.send("No tiene pedidos");
             }
         }
     } catch(error){
+        console.log("ERROR");
         res.status(500).send(error);
     }
 })
