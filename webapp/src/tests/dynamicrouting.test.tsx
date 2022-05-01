@@ -8,6 +8,10 @@ import Footer from '../componentes/Footer/Footer';
 import Home from '../paginas/Home';
 import ContactUs from '../paginas/ContactUs';
 import App from '../App';
+import FinalizedOrder from '../PayForm/FinalizedOrder';
+import ProcesoPago from '../PayForm/ProcesoPago';
+import Item from '../Item/Item';
+import { Juguete } from '../shared/sharedJuguete';
 
 test('navbar is rendered', () => {
   const component = render(<Navbar/>)
@@ -30,17 +34,48 @@ test('footer is rendered', () => {
   expect(component.container).toHaveTextContent('Uniovi')
 })
 
+test('Finalized Order is rendered', () => {
+  const component = render(<FinalizedOrder/>)
+
+  expect(component.container).toHaveTextContent('finalizado')
+})
+
+
+test('Pay form is rendered', () => {
+  const component = render(<ProcesoPago cartItems={[]}/>)
+
+  expect(component.container).toHaveTextContent('Envío')
+
+})
+
+
+test('Item is rendered', () => {
+  const component = render(<Item item={{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 0,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 0
+  }} handleAddToCart={function (clickedItem: Juguete): void {
+  } }/>)
+  expect(component.container).toHaveTextContent('Pikachu')
+  
+})
+
+/*
 test('clicking home nav-button', () => {
   const component = render(<Navbar/>)
 
   const mockHandler = jest.fn()
   //const component2=render(<App/>).container
-  const button = component.getByText('Home')
+  const button = component.container.querySelectorAll("a[href='home']");
   fireEvent.click(button)
   expect(mockHandler).toHaveBeenCalledTimes(1)
   //expect(component.container).toHaveTextContent('Bienvenido')
 })
-
+*/
 //Falta hacer que funcione render(<App>)
 /*
 test('clicking products nav-button', () => {
