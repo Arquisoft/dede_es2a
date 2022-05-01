@@ -1,7 +1,7 @@
 name: CI for ASW2122
 on:
-  push:
-    branch: [master]
+  release:
+    types: [published]
 
 jobs:
   docker-push-webapp:
