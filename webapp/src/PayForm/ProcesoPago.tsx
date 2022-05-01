@@ -97,10 +97,14 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
           toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
         } else {
           let variable = await getGastosEnvio();
+          if(gastosEnvio==0.00 || localStorage.getItem("direccion")=="null") {
+            toast.error("Su dirección no fue encontrada, lo sentimos. Para solucionar el problema "+
+           "modifique la dirección de su POD", {position: toast.POSITION.TOP_CENTER})
+          } else {
           setPasoActual((pasoPrevio) => pasoPrevio + 1);
+          }
         }
       };
-
       const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
       
       const pasoAnterior = () => {
