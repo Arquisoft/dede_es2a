@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 //Components
 import Item from './Item/Item';
@@ -87,7 +87,7 @@ const App = () => {
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
-  const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
+  const { data, isLoading } = useQuery<Juguete[]>('juguetes', getJuguetes);
 
 
   useEffect(() => {
@@ -136,7 +136,8 @@ const App = () => {
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      var mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
+      // var mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
+      mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
       return mapeadoCarrito;
     })
 
@@ -151,7 +152,8 @@ const App = () => {
           var mc = [...ack, { ...item, cantidad: item.cantidad - 1 }]
           return mc;
         } else {
-          var mc = [...ack, item];
+          // var mc = [...ack, item];
+          mc = [...ack, item];
           return mc;
         }
       }, [] as Juguete[])
@@ -185,7 +187,7 @@ const App = () => {
                 <div className='content-wrap'>
                   <CategoriesBar/>
                   {
-                    localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
+                    localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
                       <></>
                       :
                       <div >
@@ -217,7 +219,7 @@ const App = () => {
             <div className='page-container'>
                 <div className='content-wrap'>
                  {
-                    localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
+                    localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
                       <></>
                       :
                       <div >
@@ -246,19 +248,19 @@ const App = () => {
             </div>
           } />
           <Route path="/edit" element={
-            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <EditForm />
               :
                 <h1>No tiene acceso a esa dirección</h1>
           } />
           <Route path="/contactanos" element={
-           localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+           localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
               :
                 <ContactUs />
           } />
           <Route path="confirmar-pedido" element={
-            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
               :
                 <ProcesoPago
@@ -267,14 +269,14 @@ const App = () => {
           }
           />
           <Route path="/perfilPod" element={
-            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
               :
               <></>
           }
           />
           <Route path="/loginPago" element={
-            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
               :
                 <LoginForm />
@@ -288,7 +290,7 @@ const App = () => {
           }
           />
           <Route path="/logoutPago" element={
-            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
               :
                 <LogoutForm />
