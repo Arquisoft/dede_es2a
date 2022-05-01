@@ -172,6 +172,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={
+
               <Home />
           }
           />
@@ -281,17 +282,9 @@ const App = () => {
           />
           <Route path="/pedidos" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <HistorialPedidos />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/logoutPago" element={
