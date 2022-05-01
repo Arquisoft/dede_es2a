@@ -157,5 +157,26 @@ jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
         res.status(500).send("Error al añadir stock al juguete")
     }
 });
+/*
+jugueteRouter.post("/subtock/:nombre", async (req:Request,res:Response) => {
+    try{
+        const filter = {
+            nombre: req.params.nombre,
+        }
 
+        var juguete = await JugueteRepository.findJuguete(filter); 
+
+        const stock = {stock: juguete.stock - req.body.stock}
+        
+        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,stock);
+        if(jugueteActualizado){
+            res.send("Stock del juguete restado correctamente");
+        } else{
+            res.status(500).send("No se pudo restar stock al producto")
+        }
+    }catch (error){
+        res.status(500).send("Error al restar stock al juguete")
+    }
+});
+*/
 export default jugueteRouter;

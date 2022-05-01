@@ -24,12 +24,12 @@ export async function getJuguetes(): Promise<Juguete[]> {
     //The objects returned by the api are directly convertible to User objects
     console.log(response.json());
     return response.json();
-  }
+}
 
 export async function checkUserInBD(): Promise<Usuario[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint +"usuario");
+    let response = await fetch(apiEndPoint + "usuario");
     //The objects returned by the api are directly convertible to User objects
     console.log(response.json());
     return response.json();

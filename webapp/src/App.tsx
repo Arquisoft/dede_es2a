@@ -18,6 +18,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
+import HistorialPedidos from './componentes/Pedidos/historial';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
 //import Profile from './componentes/loginSOLID/Profile';
@@ -278,6 +279,21 @@ const App = () => {
                 <LoginForm />
           }
           />
+          <Route path="/pedidos" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+              <Wrapper>
+                <Navbar />
+                <h1>No tiene acceso a esa dirección</h1>
+                <Footer />
+              </Wrapper>
+              :
+              <Wrapper>
+                <Navbar />
+                <HistorialPedidos />
+                <Footer />
+              </Wrapper>
+          }
+          />
           <Route path="/logoutPago" element={
             localStorage.getItem("isAdmin")=="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
@@ -296,6 +312,5 @@ const App = () => {
   );
 
 };
-
 
 export default App;
