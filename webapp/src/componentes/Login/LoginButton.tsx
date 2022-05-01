@@ -39,18 +39,18 @@ export async function checkUserInBD(): Promise<Usuario[]> {
 const LoginButton = () => {
     const { loginWithRedirect, isAuthenticated, user } = useAuth0();
     
-    const { data, isLoading, error } =   useQuery<Usuario[]>('us', checkUserInBD);
-    isAdmin=false;
-    console.log(data?.length);
+    //const { data, isLoading, error } =   useQuery<Usuario[]>('us', checkUserInBD);
+    //isAdmin=false;
+    //console.log(data?.length);
     
     return <button className='btn btn-primary-login' id="registerButton" onClick={() => {
         loginWithRedirect();
-        if (isLoading) return <LinearProgess />;
+        //if (isLoading) return <LinearProgess />;
          
-        email = user?.email != null ? user?.email : "";
+       // email = user?.email != null ? user?.email : "";
 
-        console.log(email);
-        localStorage.setItem("isAdmin", isAdmin);
+       // console.log(email);
+      //  localStorage.setItem("isAdmin",isAdmin);
         const localUser = localStorage.getItem("user");
         if (localUser) {
             let user = JSON.parse(localUser);
