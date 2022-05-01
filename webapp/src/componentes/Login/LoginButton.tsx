@@ -56,10 +56,6 @@ const LoginButton = () => {
             let user = JSON.parse(localUser);
         } else {
             localStorage.setItem("user", JSON.stringify([]));
-            localStorage.setItem("isAdmin", user?.email != null ?
-                user?.email
-                : ""
-            );
         }
 
     }}>Registrarse</button>;
