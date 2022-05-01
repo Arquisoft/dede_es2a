@@ -9,12 +9,17 @@ const NavigationWrapper = styled.nav`
  justify-content: space-between;
 `
 
-const Separator = styled.hr`
- height: 10%;
+const StyledLink = styled.a`
+color: #ffffff;
+`
+
+const Separator = styled.div`
+ height: 5px;
  width: 70%;
  border-radius: 14px;
- margin: 0 auto;
- background-color: #d1626f;
+ align-content: center;
+ margin: 5px auto;
+ background-color: #d3707c;
 `
 
 
@@ -22,12 +27,12 @@ const CategoriesBar = ()=> {
     return(
         <>
     <NavigationWrapper>
-        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Nostalgia</Link>
-        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Vehiculos</Link>
-        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Aire libre</Link>
-        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Algo</Link>
-        <Link className="linkCategorie" href="/juguete/categoria/nostalgia">Otros</Link>
-        <Link className="linkCategorie" href="/productos">Productos</Link>
+        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Nostalgia</StyledLink>
+        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Vehiculos</StyledLink>
+        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Aire libre</StyledLink>
+        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Algo</StyledLink>
+        <StyledLink className="linkCategorie" href="/juguete/categoria/nostalgia">Otros</StyledLink>
+        <StyledLink className="linkCategorie" href="/productos">Productos</StyledLink>
     </NavigationWrapper>
     <Separator/>
     </>

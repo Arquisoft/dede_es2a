@@ -34,8 +34,29 @@ type Props = {
 type Props = {
     cartItems: Juguete[];
 };
-
+let condPedido= true;
 let gastosEnvio:any; 
+
+//Procesar pedido
+async function finalizarPedido(precioGastosDeEnvio : string,juguetes: Juguete[]): Promise<any> {
+  let p:number = parseFloat(precioGastosDeEnvio);
+  const calculateTotal = (items:Juguete[]) =>
+    items.reduce((ack:number, item) => ack + item.cantidad*item.precio,0);
+    var price:number;
+    price = calculateTotal(juguetes);
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  let response = await fetch(apiEndPoint + 'pedido', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        "precioGastosDeEnvio":p,
+        "precioSinIva": price,
+        "usuario":"ace@email.com",
+        "productos":juguetes
+      })
+  });
+  return response;
+}
 
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
@@ -59,18 +80,17 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       };
 
+      const siguientePasoGuardarPedido = () => {
+        finalizarPedido(gastosEnvio,cartItems);
+        setPasoActual((pasoPrevio) => pasoPrevio + 1);
+      };
+
       const siguientePasoSiPodCalcularEnvio = async () => {
-        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="null"|| localStorage.getItem("direccion")=="") {
+        if(localStorage.getItem("direccion")==null || localStorage.getItem("direccion")=="") {
           toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", {position: toast.POSITION.TOP_CENTER})
         } else {
           let variable = await getGastosEnvio();
-          console.log(gastosEnvio);
-          if(gastosEnvio==0.00) {
-            toast.error("Su dirección no fue encontrada, lo sentimos. Para solucionar el problema "+
-           "modifique la dirección de su POD", {position: toast.POSITION.TOP_CENTER})
-          } else {
           setPasoActual((pasoPrevio) => pasoPrevio + 1);
-          }
         }
       };
 
@@ -87,6 +107,7 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
       const getPaso = (stepIndex: number) => {
         switch (stepIndex) {
           case 0:
+            condPedido=true;
             return (
               <Shipping
                 cartItems={cartItems}
@@ -110,10 +131,11 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
               />
             );
           case 2:
+            
             return (
               <Review
                 cartItems={cartItems}
-                siguientePaso={siguientePaso}
+                siguientePaso={siguientePasoGuardarPedido}
                 deliveryCost={gastosEnvio}
                 setDeliveryCost={setDeliveryCost}
                 setAddress={siguientePaso}
@@ -133,8 +155,6 @@ const ProcesoPago:React.FC<Props> = ({cartItems}) => {
             
         }
       };
-
-
 
       return (
         <React.Fragment>
