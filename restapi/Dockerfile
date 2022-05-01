@@ -4,6 +4,6 @@ COPY . /app
 WORKDIR /app
 #Install the dependencies
 
-RUN docker build
+
 RUN npm install
 CMD [ "npm", "start" ]
