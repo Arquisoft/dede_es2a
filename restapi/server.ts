@@ -27,7 +27,7 @@ app.use(metricsMiddleware);
 bd.connect();
 config(); 
 
-app.use(cors(options));
+app.use(cors());
 app.use(bp.json());
 
 app.use("/juguete", jugueteRouter);
