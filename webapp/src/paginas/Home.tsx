@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Usuario } from "../shared/sharedUser";
 import "./Pag.css"
 
 // Variable para almacenar si el usuario autenticado existe o no en la bd
@@ -15,6 +16,7 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
     .then(usuario => {
       userExists = usuario.isAdmin;
       console.log(usuario.isAdmin);
+      localStorage.setItem("isAdmin", usuario.isAdmin);
     });
     //The objects returned by the api are directly convertible to User objects
     return response;
@@ -34,11 +36,20 @@ async function addUserToBD(email:string): Promise<any> {
   
     return response;
   }
-
+/*
+  export async function checkUserInBD(): Promise<Usuario[]> {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
+    let response = await fetch(apiEndPoint +"usuario");
+    //The objects returned by the api are directly convertible to User objects
+    console.log(response.json());
+    return response.json();
+}
+*/
 const Home = () => {
    
     const {isAuthenticated, user} = useAuth0();
-
+    let usuario:Usuario;
     if(isAuthenticated){
         // comprobamos si ya existe en la bd
         let email:any = user?.email;

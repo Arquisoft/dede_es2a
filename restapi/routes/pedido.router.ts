@@ -153,7 +153,7 @@ pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
             res.send("El usuario no existe");
         }
         else{
-            var pedidos = await Pedido.find({"usuario":usuario._id});
+            var pedidos = await Pedido.find({"usuario":usuario._id}).populate("juguetes._id");
             if(pedidos.length > 0){
                 res.send(pedidos);
             }else{

@@ -8,4 +8,7 @@
     padding:16px;
     border-radius: 32px;
 }
+.linkCategorie:hover {
+    color:rgb(255, 255, 255);
+}
 
