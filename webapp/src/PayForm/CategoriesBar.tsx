@@ -1,8 +1,6 @@
-import React from 'react';
-import { Link } from '@mui/material';
 import styled from 'styled-components';
 import './categories.css';
-import { Juguete } from '../shared/sharedJuguete';
+//import { Juguete } from '../shared/sharedJuguete';
 const NavigationWrapper = styled.nav`
  display: flex;
  width: 70%;
@@ -24,7 +22,7 @@ const Separator = styled.div`
 `
 
 const CategoriesBar = ()=> {
-    let juguetes:Juguete[];
+    //let juguetes:Juguete[];
 
     return(
         <>

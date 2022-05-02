@@ -1,13 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Usuario } from '../../shared/sharedUser';
 
-import { Juguete } from '../../shared/sharedJuguete';
 /*
 async function getData(): Promise<any> {
     //const { data } = useQuery<Usuario>('usuario', checkUserInBD);
     //usuario = data;
 }
-*/
+
 export async function getJuguetes(): Promise<Juguete[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
@@ -25,7 +23,7 @@ export async function checkUserInBD(): Promise<Usuario[]> {
     console.log(response.json());
     return response.json();
 }
-
+*/
 
 const LoginButton = () => {
     const { loginWithRedirect } = useAuth0();
