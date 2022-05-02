@@ -20,7 +20,7 @@ async function addJuguete(): Promise<any> {
             "descripcion": descripcion,
             "categoria": categoria,
             "precio": precio,
-            "sotck": stock,
+            "stock": stock,
             "imagen": imagen
         })
     });

@@ -83,6 +83,7 @@ async function borrarImagen(imagen:String){
  */ 
 jugueteRouter.post("/", async (req:Request,res:Response) =>{
     try{
+        console.log("NUEVO JUGUETE");
         let nuevoJuguete = {
             nombre : req.body.nombre,
             descripcion: req.body.descripcion,
@@ -91,6 +92,7 @@ jugueteRouter.post("/", async (req:Request,res:Response) =>{
             categoria: req.body.categoria,
             stock: req.body.stock
         };
+        console.log(nuevoJuguete);
         let juguete = await Juguete.findOne({nombre: nuevoJuguete.nombre});
         if(juguete){
             res.send("Este juguete ya existe");
