@@ -37,7 +37,9 @@ jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
 jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
     try{
         let filter  ={nombre :  req.params.nombre}
+        console.log(filter);
         let juguete = await Juguete.findOne(filter);
+        console.log(juguete);
         if(juguete){
             res.json(juguete);
         }
@@ -116,8 +118,7 @@ jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
     try{
         const filter = { nombre : req.params.nombre }
         const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
-                precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
-                cantidad : req.body.cantidad, stock: req.body.stock}
+            categoria : req.body.categoria, precio : req.body.precio}
         let jugueteActualizado = await Juguete.findOneAndUpdate(filter, update, { new:true});
         if(jugueteActualizado){
             res.send("El juguete se ha actualizado correctamente");

@@ -4,6 +4,10 @@
 	grid-template-columns: repeat(2, 1fr);
 }
 
+.imagen-producto {
+    max-height: 22em;
+}
+
 .editForm{
     font-size: 1.3em;
     margin-left: 2em;
