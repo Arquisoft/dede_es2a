@@ -18,13 +18,13 @@ technical constraints, organizational and political constraints and
 conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
 ****
 
-Restricciones tecnicas
+Restricciones técnicas
 [options="header",cols="1,2"]
 |===
-|Restriccion|Explicacion
-|Implementacion| La aplicacion estará formada por un front-end utilizando React  con TypeScript y un back-end utilizando NodeJS con Express
-|Seguridad| Para mantener la privacidad de los usuarios se almacenará toda su información privada en pods.
-|Despliegue| La aplicacion será accesible de manera continua y utilizará un sistema de integracion continuo.
+|Restricción|Explicación
+|Implementación| La aplicación estará formada por un front-end utilizando React con TypeScript y un back-end utilizando NodeJS con Express
+|Seguridad| Para mantener la privacidad de los usuarios se almacenará toda su información privada en PODs.
+|Despliegue| La aplicación será accesible de manera continua y utilizará un sistema de integracion continuo.
 |===
 
 Restricciones organizacionales
@@ -32,15 +32,15 @@ Restricciones organizacionales
 |===
 |Restriccion|Explicacion
 |Equipo|  -Alejandro Galán Freire - Aarón García García - Mario Lada Martínez - Jorge López Peláez - Rafael Muñiz Reguera.
-|Configuracion y control del repositorio| Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona del equipo trabajará desde una rama propia.
-|Fecha limite| La fecha limite del proyecto es el 2 de mayo.
+|Configuracion y control del repositorio| Toda la aplicación se encuentra en un repositorio privado de github donde existe una rama develop general donde se irá uniendo el trabajo de todos y cada persona del equipo trabajará desde una rama propia. Cada miembro puede tener varias ramas ya que se creará una por funcionalidad nueva a implementar.
+|Fecha límite| La fecha límite del proyecto es el 4 de mayo.
 |===
 
 Convenciones
 [options="header",cols="1,2"]
 |===
-|Convencion|Explicacion
-|Documentacion de la arquitectura| Estructura basada en la plantilla arc42.
-|Convenciones de codificacion| El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript y utilizará la guía de estilo de Node.
+|Convención|Explicación
+|Documentación de la arquitectura| Estructura basada en la plantilla arc42.
+|Convenciones de codificación| El proyecto utiliza las convenciones de código para el lenguaje de TypeScript y utilizará la guía de estilo de Node.
 |Idioma| Español.
 |===
