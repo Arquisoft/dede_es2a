@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
-    - uses: elgohr/Publish-Docker-Github-Action@3.04
+      uses: elgohr/Publish-Docker-Github-Action@3.04
       with:
           name: arquisoft/dede_es2a/webapp
           username: ${{ github.actor }}
@@ -23,7 +23,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
-    - uses: elgohr/Publish-Docker-Github-Action@3.04
+      uses: elgohr/Publish-Docker-Github-Action@3.04
       with:
           name: arquisoft/dede_es2a/restapi
           username: ${{ github.actor }}
@@ -36,7 +36,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Deploy webapp
-    - uses: akhileshns/heroku-deploy@v3.12.12
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.DEPLOY_KEY }}
         heroku_app_name: "dede-es2a-webapp"
@@ -53,7 +53,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Deploy restapi
-    - uses: akhileshns/heroku-deploy@v3.12.12
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.DEPLOY_KEY }}
         heroku_app_name: "dede-es2a-restapi"
