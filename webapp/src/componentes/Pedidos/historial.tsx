@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Pedido } from '../../shared/sharedPedido';
 import PedidoItem from './PedidoItem';
 import './pedidos.css';
-
 var correo: string;
 var numero: number;
 

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import { act, screen } from "@testing-library/react";
 import {fireEvent, render} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import LoginButton from '../componentes/Login/LoginButton';
@@ -59,16 +60,32 @@ test('Item is rendered', () => {
     cantidad: 1
   }} handleAddToCart={function (clickedItem: Juguete): void {
   } }/>)
-
-
-
   expect(component.container).toHaveTextContent('Pikachu')
+  expect(component.container).toHaveTextContent('Añadir al carrito')
+  const button = component.container.querySelector('button');
+  button!.click();
 })
 
-test('Payform is rendered', () => {
+
+
+test('Payform is rendered', async () => {
   const component = render(<ProcesoPago cartItems={[]}/>)
 
   expect(component.container).toHaveTextContent('Envío')
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("botonSiguiente"));
+  });
+
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("botonSiguiente"));
+  });
+
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("botonSiguiente"));
+  });
+  
+
+
 })
 
 test('Shipping is rendered', () => {
@@ -119,7 +136,7 @@ test('PedidoItem ordder is rendered', () => {
 })
 
 
-test('Finalized ordder is rendered', () => {
+test('Finalized order is rendered', () => {
   const component = render(<FinalizedOrder  />)
 
   expect(component.container).toHaveTextContent('finalizado')
@@ -136,6 +153,13 @@ test('Login button is rendered', () => {
   const component = render(<LoginButton  />)
 
   expect(component.container).toHaveTextContent('Registrarse')
+})
+
+test('Login button is rendered', () => {
+  const component = render(<LoginButton  />)
+  const button = component.container.querySelector('button');
+  button!.click();
+  
 })
 /*
 test('Login form is rendered', () => {
