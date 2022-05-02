@@ -1,0 +1,45 @@
+.formulario {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+input {
+    min-width: 15em;
+}
+
+.img {
+    min-width: 25em;
+}
+
+.imagen-producto {
+    max-height: 33em;
+    min-height: 33em;
+}
+
+.editForm{
+    font-size: 1.3em;
+    margin-left: 2em;
+    grid-column: 1/2;
+}
+
+label {
+    margin-top: 0.5em;
+}
+
+.botones {
+    margin-top: 0.8em;
+}
+
+.guardar {
+    color: white;
+    background-color: rgb(18, 118, 175);
+    margin-left: 1em;
+    border-radius: 0.5em;
+}
+
+.cancelar {
+    color: white;
+    background-color: rgb(187, 38, 38);
+    border-radius: 0.5em;
+}

@@ -27,6 +27,7 @@ import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
 import EditForm from './componentes/editarProducto/editarProducto';
 import CategoriesBar from './PayForm/CategoriesBar';
+import AddForm from './componentes/nuevoProducto/nuevoProducto';
 
 //Types
 export type CartItemType = {
@@ -470,6 +471,12 @@ const App = () => {
             <Route path="/edit/*" element={
               localStorage.getItem("isAdmin") === "true" ? // isAdmin?
                 <EditForm />
+                :
+                <h1>No tiene acceso a esa dirección</h1>
+            } />
+            <Route path="/nuevoProducto" element={
+              localStorage.getItem("isAdmin") === "true" ? // isAdmin?
+                <AddForm />
                 :
                 <h1>No tiene acceso a esa dirección</h1>
             } />
