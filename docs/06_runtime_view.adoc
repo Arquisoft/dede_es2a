@@ -55,12 +55,13 @@ database Pod as "Pod del usuario" #yellow
 Usuario -> DeDe: Abre el carrito
 DeDe <-- BaseDeDatos: Devuelve contenido del carrito del usuario
 Usuario <-- DeDe: Muestra lista de juguetes del carrito
-Usuario -> DeDe: Confirma la compra de los productos
+Usuario -> DeDe: Presiona botón realizar pedido
 DeDe -> Pod: Se solicita la dirección del usuario
+Usuario -> Pod: Inicia sesión en Pod y añade su dirección en la sección "notes" del mismo
 DeDe <-- Pod: Devuelve la dirección del usuario
-DeDe -> DeDe: Crea el pedido con el coste y dirección asociados.
+DeDe -> DeDe: Muestra la dirección y se calculan gastos de envío (API GeoCode)
 Usuario <-- DeDe: Muestra el precio y la dirección.
-Usuario -> DeDe: Confirma el pedido.
+Usuario -> DeDe: Recorre pantallas de pago hasta confirmar el pedido.
 ----
 
 === Añadir productos
