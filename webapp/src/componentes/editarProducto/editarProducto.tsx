@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Juguete } from "../../shared/sharedJuguete";
 import './editar.css';
 import { useQuery } from 'react-query';
-import { WindowSharp } from "@mui/icons-material";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 var url = window.location.href;
 var nombre: string;
@@ -40,10 +41,14 @@ async function updateJuguete(): Promise<any> {
     //The objects returned by the api are directly convertible to User objects
 }
 
+toast.configure();
 const EditForm = () => {
     const navigate = useNavigate();
     const { data } = useQuery<Juguete>('juguete', getJuguete);
-
+    nombre = data?.nombre != null ? data?.nombre : "";
+    descripcion = data?.descripcion != null ? data?.descripcion : "";
+    precio = data?.precio != null ? data?.precio : 0;
+    categoria = data?.categoria != null ? data?.categoria : "";
     return (
         <div>
             <h2>Modificar juguete</h2>
@@ -92,14 +97,19 @@ const EditForm = () => {
                         }}>Cancelar</button>
                         <button type="submit" className="guardar" onClick={() => {
                             // validaciones de campos
-                            console.log(nombre);
-                            console.log(descripcion);
-                            console.log(precio);
-                            // guardar en bd
-                            updateJuguete();
-                            //navigate("/home");
-                            navigate("/productos");
-                            window.location.reload();
+                            if (nombre === "" || nombre == null || nombre === undefined) {
+                                toast.warn("El nombre no puede ser vacío", { position: toast.POSITION.TOP_CENTER });
+                            } else if (descripcion === "" || descripcion == null || descripcion === undefined) {
+                                toast.warn("La descripción no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
+                            } else if (precio <= 0.0 || precio == null || precio === undefined) {
+                                toast.warn("El precio debe ser mayor que 0", { position: toast.POSITION.TOP_CENTER });
+                            } else {
+                                // guardar en bd
+                                updateJuguete();
+                                // volver a productos
+                                navigate("/productos");
+                                window.location.reload();
+                            }
                         }}>Guardar</button>
                     </div>
                 </form>
