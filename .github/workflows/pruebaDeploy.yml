@@ -42,7 +42,11 @@ jobs:
         heroku_app_name: "dede-es2a-webapp"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        appdir: "webapp"      
+        appdir: "webapp"     
+        docker_build_args: |
+          API_URI
+      env:
+        API_URI: "https://dede-es2a-restapi.herokuapp.com"
   deploy-restapi:
     needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
@@ -55,4 +59,14 @@ jobs:
         heroku_app_name: "dede-es2a-restapi"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        appdir: "restapi" 
+        appdir: "restapi"
+        docker_build_args: |
+          MONGO_URI 
+          CLOUDINARY_NAME
+          CLOUDINARY_API_KEY
+          CLOUDINARY_API_SECRET
+      env:
+        MONGO_URI = {{secrets.MONGO_URI}}
+        CLOUDINARY_NAME={{secrets.CLOUD_NAME}}
+        CLOUDINARY_API_KEY={{secrets.CLOUD_KEY}}
+        CLOUDINARY_API_SECRET={{secrets.CLOUD_SECRET}}

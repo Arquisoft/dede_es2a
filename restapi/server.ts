@@ -18,7 +18,7 @@ let {config} = require('./modules/cloudinary');
 
 const options: cors.CorsOptions = {
   //origin: ['http://localhost:3000']
-  origin: ['https://dede-es2a-webapp.herokuapp.com']
+  origin: ['https://dede-es2a-webapp.herokuapp.com' || 'http://localhost:3000']
 };
 
 const metricsMiddleware:RequestHandler = promBundle({includeMethod: true});
