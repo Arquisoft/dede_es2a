@@ -1,11 +1,9 @@
-import { Component } from 'react';
 import { MenuItems } from "./Menitems"
 import { MenuItemsAdmin } from "./MenitemsAdmin"
 import './Navbar.css'
 import LoginButton from '../Login/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from '../Login/LogoutButton';
-import ProfileImg from '../Login/ProfileImg';
 import ProfileName from '../Login/ProfileName';
 
 
@@ -22,7 +20,7 @@ const Navbar = () => {
                 <i className={state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             {
-                false ? // isAdmin ?
+                localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
                     <ul className={state.clicked ? 'nav-menu active' :
                         'nav-menu'}>
                         {MenuItemsAdmin.map((item, index) => {

@@ -10,8 +10,8 @@ export const MenuItems =[
         cName:'nav-links'
     },
     {
-        title: 'Contactanos',
-        url:'contactanos',
+        title: 'Historial Pedidos',
+        url:'pedidos',
         cName:'nav-links'
     }
 ]

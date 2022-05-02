@@ -3,14 +3,30 @@ import mongoose = require('mongoose')
 const jugueteSchema = new mongoose.Schema({
     nombre: {
         type : String,
-        unique : true
+        unique : true,
+        required:true
     },
-    descripcion: String,
-    precio:Number,
-    imagen:String,
-    categoria:String,
+    descripcion: {
+        type:String,
+        required:true
+    },
+    precio:{
+        type:Number,
+        required:true
+    },
+    imagen:{
+        type:String,
+        required:true
+    },
+    categoria:{
+        type:String,
+        required:true
+    },
     cantidad:Number,
-    stock:Number
+    stock:{
+        type:Number,
+        required:true
+    }
 })
 
 jugueteSchema.set('toJSON', {

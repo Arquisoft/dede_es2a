@@ -11,7 +11,7 @@ import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 
-
+/*
 export default function Profile() {
     const { session } = useSession();
     
@@ -35,7 +35,7 @@ export default function Profile() {
                 <Text property={VCARD.organization_name.iri.value} />
                 </Typography>
                 <Typography gutterBottom variant="h4" component="h3">
-                {/* Para obtener la direccion */}
+                { Para obtener la direccion }
                 <Text id= "direction" property={VCARD.note.iri.value} />
                 </Typography>
                 </div>
@@ -58,4 +58,4 @@ export default function Profile() {
         </Container>
         </body>
     );
-}
+}*/

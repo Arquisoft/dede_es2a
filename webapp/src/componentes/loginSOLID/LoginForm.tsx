@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginForm() {
 
   const navigate = useNavigate();
-  const [idp, setIdp] = useState("https://broker.pod.inrupt.com/");
+  const [idp, setIdp] = useState("https://inrupt.net/");
   const proveedores = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" },
                     {displayName: "Solid community", url: "https://solidcommunity.net/"},
                     {displayName: "Solid Web", url:"https://solidweb.org/"}]
@@ -63,7 +63,9 @@ export default function LoginForm() {
             localStorage.setItem("usuario", result[0]);
             localStorage.setItem("organizacion", result[1]);
             localStorage.setItem("direccion", result[2]);
+           
         });
+      
         
       }
     })
@@ -89,6 +91,7 @@ export default function LoginForm() {
             onError={console.error}>
                 <Button  variant="contained">Obtener dirección </Button>
           </LoginButton>
+     
         </Wrapper>
     </Container>
   );

@@ -8,6 +8,16 @@ import Footer from '../componentes/Footer/Footer';
 import Home from '../paginas/Home';
 import ContactUs from '../paginas/ContactUs';
 import App from '../App';
+import Item from '../Item/Item';
+import { Juguete } from '../shared/sharedJuguete';
+import ProcesoPago from '../PayForm/ProcesoPago';
+import Shipping from '../PayForm/Shipping';
+import Delivery from '../PayForm/Delivery';
+import Review from '../PayForm/Review';
+import FinalizedOrder from '../PayForm/FinalizedOrder';
+import PedidoItem from '../componentes/Pedidos/PedidoItem';
+import HistorialPedidos from '../componentes/Pedidos/historial';
+import LoginForm from '../componentes/loginSOLID/LoginForm';
 
 test('navbar is rendered', () => {
   const component = render(<Navbar/>)
@@ -30,6 +40,114 @@ test('footer is rendered', () => {
   expect(component.container).toHaveTextContent('Uniovi')
 })
 
+test('App is rendered', () => {
+  const component = render(<App/>)
+
+  expect(component.container).toHaveTextContent('DeNostalgia')
+})
+
+
+test('Item is rendered', () => {
+  const component = render(<Item item={{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 2,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 1
+  }} handleAddToCart={function (clickedItem: Juguete): void {
+  } }/>)
+
+
+
+  expect(component.container).toHaveTextContent('Pikachu')
+})
+
+test('Payform is rendered', () => {
+  const component = render(<ProcesoPago cartItems={[]}/>)
+
+  expect(component.container).toHaveTextContent('Envío')
+})
+
+test('Shipping is rendered', () => {
+  const component = render(<Shipping cartItems={[]} setDeliveryCost={function (n: number): void {
+  } } deliveryCost={0} siguientePaso={function (): void {
+  } } setAddress={function (n: string): void {
+  } } />)
+
+  expect(component.container).toHaveTextContent('Resumen')
+})
+
+test('Delivery is rendered', () => {
+  const component = render(<Delivery cartItems={[]} setDeliveryCost={function (n: number): void {
+  } } deliveryCost={0} siguientePaso={function (): void {
+  } } setAddress={function (n: string): void {
+  } } address={''} setDeliveryDate={function (n: string): void {
+  } } />)
+
+  expect(component.container).toHaveTextContent('Resumen')
+})
+test('Review is rendered', () => {
+  const component = render(<Review cartItems={[]} setDeliveryCost={function (n: number): void {
+  } } deliveryCost={0} siguientePaso={function (): void {
+  } } setAddress={function (n: string): void {
+  } } address={''} deliveryDate={''}  />)
+
+  expect(component.container).toHaveTextContent('Entrega')
+})
+
+test('Finalized ordder is rendered', () => {
+  const component = render(<FinalizedOrder  />)
+
+  expect(component.container).toHaveTextContent('finalizado')
+})
+
+test('PedidoItem ordder is rendered', () => {
+  const component = render(<PedidoItem item={{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 0,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 2
+  }} cantidad={2}  />)
+
+  expect(component.container).toHaveTextContent('Pikachu')
+})
+
+
+test('Finalized ordder is rendered', () => {
+  const component = render(<FinalizedOrder  />)
+
+  expect(component.container).toHaveTextContent('finalizado')
+})
+
+test('Historial pedidos is rendered', () => {
+  const component = render(<HistorialPedidos  />)
+
+  expect(component.container).toHaveTextContent('pedidos')
+})
+
+
+test('Login button is rendered', () => {
+  const component = render(<LoginButton  />)
+
+  expect(component.container).toHaveTextContent('Registrarse')
+})
+
+test('Login form is rendered', () => {
+  const component = render(<LoginForm  />)
+
+  expect(component.container).toHaveTextContent('Registrarse')
+})
+test('Logout button is rendered', () => {
+  const component = render(<LogoutButton  />)
+
+  expect(component.container).toHaveTextContent('dirección')
+})
+
 test('clicking home nav-button', () => {
   const component = render(<Navbar/>)
 
@@ -40,6 +158,8 @@ test('clicking home nav-button', () => {
   expect(mockHandler).toHaveBeenCalledTimes(1)
   //expect(component.container).toHaveTextContent('Bienvenido')
 })
+
+
 
 //Falta hacer que funcione render(<App>)
 /*

@@ -4,12 +4,11 @@ import express, {Request,response,Response} from "express"
 import { maxHeaderSize, request } from "http";
 import { ObjectId } from "mongodb";
 
+const Juguete = require("../models/Juguete");
+const Pedido = require('../models/Pedido')
+const Usuario = require('../models/Usuario')
 
 export const pedidoRouter = express.Router()
-var JugueteRepository = require('../repositories/JuguetesRepository');
-var PedidoRepository = require('../repositories/PedidosRepository');
-var UsuarioRepository = require("../repositories/UsuarioRepository");
-
 pedidoRouter.use(express.json());
 
 // import de API Geocode para calcular coordenadas de una direccion
@@ -21,7 +20,7 @@ const geocoder = ApiGeocode(opciones);
 
 pedidoRouter.get("/", async(req:Request,res:Response)=>{
     try{
-        let pedidos = await PedidoRepository.getPedidos();
+        let pedidos = await Pedido.find({}).populate('juguetes._id').populate('usuario');
         console.log(pedidos)
         res.send(pedidos);
     } catch {
@@ -121,16 +120,16 @@ function haversine(latUsuario:number, lonUsuario:number){
 pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     try{
         // llamar a la funcion gastos de envio y retornar como respuesta el dinero calculado
-        console.log(req.body.direccion)
         let gastos = await gastosEnvio(req.body.direccion);
         if(gastos == 0){
-            res.send("5"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
+            res.send("0"); // Gastos de envio por defecto en caso de que la api no encuentre la dirección
         }
         res.send(gastos.toString());
     } catch (error) {
         res.status(400).json();
     }
 });
+
 
 /*
 pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
@@ -149,13 +148,12 @@ pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
 
 pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
     try{
-        
-        var usuario = await UsuarioRepository.findUsuario({"email":req.params.user,"isAdmin":false});
+        var usuario = await Usuario.findOne({"email":req.params.user,"isAdmin":false});
         if(!usuario){
             res.send("El usuario no existe");
         }
         else{
-            var pedidos = await PedidoRepository.findPedido({"usuario":usuario._id});
+            var pedidos = await Pedido.find({"usuario":usuario._id}).populate("juguetes._id");
             if(pedidos.length > 0){
                 res.send(pedidos);
             }else{
@@ -171,7 +169,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
     try{
         let productos = [];
         for(var producto of juguetes){
-            let juguete = await JugueteRepository.findJuguete({nombre:producto.nombre});
+            let juguete = await Juguete.findOne({nombre:producto.nombre});
             if(juguete){
                 var cantidad = producto.cantidad;
                 if(juguete.stock != 0){
@@ -179,7 +177,7 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
                         cantidad = juguete.stock
                     }
                     var nuevoStock = juguete.stock - cantidad;
-                    JugueteRepository.updateJuguete({"_id":new ObjectId(producto._id)},{stock:nuevoStock});
+                    let a =await Juguete.findOneAndUpdate({"_id":(producto.id)},{stock:nuevoStock},{ new:true});
                     var nuevoProducto = {
                         _id:juguete._id,
                         cantidad:cantidad
@@ -201,12 +199,13 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
+        console.log(req.body.usuario);
         let productos = await procesarJuguetes(req.body.productos);
         if(productos.length == 0){
             res.send("No se pudo crear el pedido por falta de stock");
         }
         else{
-            var user = await UsuarioRepository.findUsuario({"email":req.body.usuario});
+            var user = await Usuario.findOne({"email":req.body.usuario});
             if(!user){
                 res.status(500).send("El usuario no existe");
             }
@@ -214,14 +213,21 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                 let nuevoPedido = {
                     precioSinIva: req.body.precioSinIva,
                     precioGastosDeEnvio: req.body.precioGastosDeEnvio,
-                    precioFinal: req.body.precioSinIva + req.body.precioGastosDeEnvio,
+                    precioFinal:req.body.precioSinIva + req.body.precioGastosDeEnvio,
                     juguetes: productos,
                     usuario:user._id
                 }
-                let pedido = await PedidoRepository.addPedido(nuevoPedido);
-                res.send("Su pedido ha sido tramitado");
+                let pedido = new Pedido(nuevoPedido);
+                var error = pedido.validateSync();
+                if(error){
+                    res.status(500).send(error);
+                } else{
+                    await pedido.save();
+                    console.log("creado");
+                    res.send("Su pedido ha sido tramitado");
+                }
+
             }
-            
         }
     } catch (error) {
         res.status(500).send("Se ha producido un error");

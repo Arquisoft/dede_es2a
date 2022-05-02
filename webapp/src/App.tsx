@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 //Components
 import Item from './Item/Item';
@@ -18,13 +18,15 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import Home from './paginas/Home';
 import ContactUs from './paginas/ContactUs';
+import HistorialPedidos from './componentes/Pedidos/historial';
 //Styles
 import { Wrapper, StyledButton } from './App.styles';
-import Profile from './componentes/loginSOLID/Profile';
+//import Profile from './componentes/loginSOLID/Profile';
 import LoginForm from './componentes/loginSOLID/LoginForm';
 import LogoutForm from './componentes/loginSOLID/LogoutForm';
 import ProcesoPago from './PayForm/ProcesoPago';
 import EditForm from './componentes/editarProducto/editarProducto';
+import CategoriesBar from './PayForm/CategoriesBar';
 
 //Types
 export type CartItemType = {
@@ -61,6 +63,15 @@ export async function getJuguetes(): Promise<Juguete[]> {
   //console.log(response.json());
   return response.json();
 }
+
+export async function getJuguetesCategoria(): Promise<Juguete[]> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
+  let response = await fetch(apiEndPoint + 'juguete/categoria/nostalgia');
+  //The objects returned by the api are directly convertible to User objects
+  //console.log(response.json());
+  return response.json();
+}
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
@@ -76,8 +87,7 @@ const App = () => {
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
-  const { data, isLoading, error } = useQuery<Juguete[]>('juguetes', getJuguetes);
-
+  const { data, isLoading } = useQuery<Juguete[]>('juguetes', getJuguetes);
 
 
   useEffect(() => {
@@ -126,7 +136,8 @@ const App = () => {
       }
       //2. El producto no está en el carrito, tenemos que añadirlo como uno nuevo
       //Entonces lo que hacemos es retornar el estado previo (prev) y le añadimos una nueva casilla que tienen el clickedItem con un amount de 1
-      var mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
+      // var mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
+      mapeadoCarrito = [...prev, { ...clickedItem, cantidad: 1 }];
       return mapeadoCarrito;
     })
 
@@ -141,7 +152,8 @@ const App = () => {
           var mc = [...ack, { ...item, cantidad: item.cantidad - 1 }]
           return mc;
         } else {
-          var mc = [...ack, item];
+          // var mc = [...ack, item];
+          mc = [...ack, item];
           return mc;
         }
       }, [] as Juguete[])
@@ -153,47 +165,260 @@ const App = () => {
   if (isLoading) return <LinearProgess />;
   //if (error) return <div>Algo ha fallado</div>;
 
-
+  //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
   return (
-    <>
+    <>  
+    <Wrapper>
+    <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={
-            <Wrapper>
-              <Navbar />
-              <Home />
-              <Footer />
-            </Wrapper>
-          }
-          />
-          <Route path="" element={
-            <Wrapper>
-              <Navbar />
-              <Home />
-              <Footer />
-            </Wrapper>
-          }
-          />
-          <Route path="/productos" element={
-            <div className='page-container'>
-              <Wrapper>
-                <div className='content-wrap'>
-                  <Navbar />
 
+              <Home />
+          }
+          />
+          <Route path="/nostalgia" element={  
+            <div className='page-container'>
+            <div className='content-wrap'>
+              <CategoriesBar/>
+              {
+               localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                 <></>
+                 :
+                 <div >
+                   <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                     <Cart
+                       cartItems={cartItems}
+                       addToCart={handleAddToCart}
+                       removeFromCart={handleRemoveFromCart}
+                     />
+                   </Drawer>
+                   <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                     <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                       <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                     </Badge>
+                   </StyledButton>
+                 </div>
+             }       
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="nostalgia"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+              </div>
+          }
+          />
+
+      <Route path="/vehiculo" element={      
+        <div className='page-container'>
+        <div className='content-wrap'>
+          <CategoriesBar/>
+          {
+           localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+             <></>
+             :
+             <div >
+               <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                 <Cart
+                   cartItems={cartItems}
+                   addToCart={handleAddToCart}
+                   removeFromCart={handleRemoveFromCart}
+                 />
+               </Drawer>
+               <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                 <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                   <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                 </Badge>
+               </StyledButton>
+             </div>
+         }   
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="vehiculo"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+              </div>
+          }
+          />
+           <Route path="/peluche" element={   
+              <div className='page-container'>
+              <div className='content-wrap'>
+                <CategoriesBar/>
+                {
+                 localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                   <></>
+                   :
+                   <div >
+                     <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                       <Cart
+                         cartItems={cartItems}
+                         addToCart={handleAddToCart}
+                         removeFromCart={handleRemoveFromCart}
+                       />
+                     </Drawer>
+                     <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                       <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                         <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                       </Badge>
+                     </StyledButton>
+                   </div>
+               }   
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="peluche"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+              </div>
+          }
+          />
+             <Route path="/musical" element={      
+               <div className='page-container'>
+               <div className='content-wrap'>
+                 <CategoriesBar/>
+                 {
+                  localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                    <></>
+                    :
+                    <div >
+                      <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                        <Cart
+                          cartItems={cartItems}
+                          addToCart={handleAddToCart}
+                          removeFromCart={handleRemoveFromCart}
+                        />
+                      </Drawer>
+                      <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                          <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                        </Badge>
+                      </StyledButton>
+                    </div>
+                }
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="musical"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+            </div>
+          }
+          />
+             <Route path="/bebes" element={      
+                <div className='page-container'>
+                <div className='content-wrap'>
+                  <CategoriesBar/>
                   {
-                    false ? // isAdmin ?
+                   localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                     <></>
+                     :
+                     <div >
+                       <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                         <Cart
+                           cartItems={cartItems}
+                           addToCart={handleAddToCart}
+                           removeFromCart={handleRemoveFromCart}
+                         />
+                       </Drawer>
+                       <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                         <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                           <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                         </Badge>
+                       </StyledButton>
+                     </div>
+                 }
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="bebes"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+            </div>
+          }
+          />
+              <Route path="/otros" element={      
+                 <div className='page-container'>
+                 <div className='content-wrap'>
+                   <CategoriesBar/>
+                   {
+                    localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
                       <></>
                       :
-                      <div>
-                        <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
                           <Cart
                             cartItems={cartItems}
                             addToCart={handleAddToCart}
                             removeFromCart={handleRemoveFromCart}
                           />
                         </Drawer>
-                        <StyledButton onClick={() => setCartOpen(true)}>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                          </Badge>
+                        </StyledButton>
+                      </div>
+                  }
+                <Grid container spacing={3}>
+                {data?.map(item => {
+                  return item.categoria=="otros"?
+                  <Grid item key={item.id} xs={12} sm={4}>                    
+                    <Item item={item} handleAddToCart={handleAddToCart} />
+                  </Grid>
+                  :
+                  <></>
+          })}
+              </Grid>
+              </div>
+            </div>
+          }
+          />
+
+          <Route path="/productos" element={
+            <div className='page-container'>
+                <div className='content-wrap'>
+                  <CategoriesBar/>
+                  {
+                    localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                      <></>
+                      :
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                          <Cart
+                            cartItems={cartItems}
+                            addToCart={handleAddToCart}
+                            removeFromCart={handleRemoveFromCart}
+                          />
+                        </Drawer>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
                             <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
                           </Badge>
@@ -208,117 +433,99 @@ const App = () => {
                     ))}
                   </Grid>
                 </div>
-                <Footer />
-              </Wrapper>
             </div>
           } />
-
+           <Route path="/juguete/categoria/nostalgia" element={
+            <div className='page-container'>
+                <div className='content-wrap'>
+                 {
+                    localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
+                      <></>
+                      :
+                      <div >
+                        <Drawer  anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+                          <Cart
+                            cartItems={cartItems}
+                            addToCart={handleAddToCart}
+                            removeFromCart={handleRemoveFromCart}
+                          />
+                        </Drawer>
+                        <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
+                          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                          </Badge>
+                        </StyledButton>
+                      </div>
+                  }
+                  <Grid container spacing={3}>
+                    {data?.map(item => (
+                      <Grid item key={item.id} xs={12} sm={4}>
+                        <Item item={item} handleAddToCart={handleAddToCart} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </div>
+            </div>
+          } />
           <Route path="/edit" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <EditForm />
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
           } />
-
           <Route path="/contactanos" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+           localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <ContactUs />
-                <Footer />
-              </Wrapper>
           } />
-
           <Route path="confirmar-pedido" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <ProcesoPago
                   cartItems={cartItems.slice()}
                 />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/perfilPod" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
-                <Profile />
-                <Footer />
-              </Wrapper>
+              <></>
           }
           />
           <Route path="/loginPago" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <LoginForm />
-                <Footer />
-              </Wrapper>
+          }
+          />
+          <Route path="/pedidos" element={
+            localStorage.getItem("isAdmin")=="true" ? // isAdmin?
+                <h1>No tiene acceso a esa dirección</h1>
+              :
+                <HistorialPedidos />
           }
           />
           <Route path="/logoutPago" element={
-            false ? // isAdmin?
-              <Wrapper>
-                <Navbar />
+            localStorage.getItem("isAdmin")==="true" ? // isAdmin?
                 <h1>No tiene acceso a esa dirección</h1>
-                <Footer />
-              </Wrapper>
               :
-              <Wrapper>
-                <Navbar />
                 <LogoutForm />
-                <Footer />
-              </Wrapper>
           }
           />
           <Route path="/*" element={
-            <Wrapper>
-              <Navbar />
               <h1>No existe esa dirección</h1>
-              <Footer />
-            </Wrapper>
           } />
-
         </Routes>
       </BrowserRouter>
+      <Footer />
+      </Wrapper>
     </>
   );
 
 };
-
 
 export default App;
