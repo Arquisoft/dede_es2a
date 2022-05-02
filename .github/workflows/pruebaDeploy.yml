@@ -66,7 +66,7 @@ jobs:
           CLOUDINARY_API_KEY,
           CLOUDINARY_API_SECRET,
       env:
-        MONGO_URI = {{secrets.MONGO_URI}},
-        CLOUDINARY_NAME={{secrets.CLOUD_NAME}},
-        CLOUDINARY_API_KEY={{secrets.CLOUD_KEY}},
-        CLOUDINARY_API_SECRET={{secrets.CLOUD_SECRET}},
+        MONGO_URI =${{secrets.MONGO_URI}},
+        CLOUDINARY_NAME=${{secrets.CLOUD_NAME}},
+        CLOUDINARY_API_KEY=${{secrets.CLOUD_KEY}},
+        CLOUDINARY_API_SECRET=${{secrets.CLOUD_SECRET}},
