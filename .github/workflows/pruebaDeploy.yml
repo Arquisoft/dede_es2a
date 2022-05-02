@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@3.04
+    - uses: elgohr/Publish-Docker-Github-Action@3.04
       with:
           name: arquisoft/dede_es2a/webapp
           username: ${{ github.actor }}
@@ -23,7 +23,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@3.04
+    - uses: elgohr/Publish-Docker-Github-Action@3.04
       with:
           name: arquisoft/dede_es2a/restapi
           username: ${{ github.actor }}
