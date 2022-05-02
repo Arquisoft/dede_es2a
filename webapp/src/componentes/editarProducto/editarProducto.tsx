@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Juguete } from "../../shared/sharedJuguete";
 import './editar.css';
 import { useQuery } from 'react-query';
+import { WindowSharp } from "@mui/icons-material";
 
 var url = window.location.href;
 var nombre: string;
@@ -25,7 +26,7 @@ async function updateJuguete(): Promise<any> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
     let partes = url.split('/');
-    let response = await fetch(apiEndPoint + "juguete/update" + partes[partes.length - 1], {
+    let response = await fetch(apiEndPoint + "juguete/update/" + partes[partes.length - 1], {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -68,12 +69,12 @@ const EditForm = () => {
                         <label>Categoría:</label>
                         <div>
                             <select id="kind" name="kind" required onChange={event => categoria = event.target.value}>
-                                {data?.categoria === "nostalgia" ? <option selected>Nostalgia</option> : <option>Nostalgia</option>}
-                                {data?.categoria === "vehiculo" ? <option selected>Vehiculos</option> : <option>Vehiculos</option>}
-                                {data?.categoria === "musicales" ? <option selected>Musicales</option> : <option>Musicales</option>}
-                                {data?.categoria === "peluche" ? <option selected>Peluche</option> : <option>Peluche</option>}
-                                {data?.categoria === "bebés" ? <option selected>Bebés</option> : <option>Bebés</option>}
-                                {data?.categoria === "otros" ? <option selected>Otros</option> : <option>Otros</option>}
+                                {data?.categoria === "nostalgia" ? <option selected>nostalgia</option> : <option>nostalgia</option>}
+                                {data?.categoria === "vehiculo" ? <option selected>vehiculos</option> : <option>vehiculos</option>}
+                                {data?.categoria === "musicales" ? <option selected>musicales</option> : <option>musicales</option>}
+                                {data?.categoria === "peluche" ? <option selected>peluche</option> : <option>peluche</option>}
+                                {data?.categoria === "bebes" ? <option selected>bebes</option> : <option>bebes</option>}
+                                {data?.categoria === "otros" ? <option selected>otros</option> : <option>otros</option>}
                             </select>
                         </div>
                     </div>
@@ -96,7 +97,9 @@ const EditForm = () => {
                             console.log(precio);
                             // guardar en bd
                             updateJuguete();
+                            //navigate("/home");
                             navigate("/productos");
+                            window.location.reload();
                         }}>Guardar</button>
                     </div>
                 </form>
