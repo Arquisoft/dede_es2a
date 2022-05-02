@@ -47,6 +47,7 @@ async function addUserToBD(email:string): Promise<any> {
 }
 */
 const Home = () => {
+
    
     const {isAuthenticated, user} = useAuth0();
     let usuario:Usuario;

@@ -6,8 +6,9 @@ import { Wrapper } from './Item.styles';
 
 import { Juguete } from '../shared/sharedJuguete';
 
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import getRoleUsuario from "../componentes/Login/LoginButton"
+import { Router } from 'express';
 
 /*type Props = {
     item: CartItemType;
@@ -34,7 +35,7 @@ function mifuncion({ url: any } => {
 */
 //Así creamos un elemento reactivo con las propiedades especificadas
 const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     return (
         <Wrapper>
             {
@@ -46,7 +47,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                         <h3>€{item.precio}</h3>
                         <Button id="botonEditar" onClick={() => {
                             // añadir al localStorage el Item para poder coger sus datos
-                            navigate("/edit");
+                            window.location.href ="/edit";
                         }}>Editar producto</Button>
                         <Button id="botonAnadir" onClick={() => {
                             addStock(item.nombre);
@@ -60,6 +61,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
                         <h3>{item.precio}€</h3>
                         <Button id='botonAnadirAlCarrito' onClick={() => handleAddToCart(item)}>Añadir al carrito</Button>
                     </div>
+                    
             }
         </Wrapper>
     )

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 
 import { useEffect, useState } from "react"
@@ -76,7 +76,7 @@ export async function getJuguetesCategoria(): Promise<Juguete[]> {
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
 
-
+const queryClient = new QueryClient()
 const App = () => {
 
   const [cartOpen, setCartOpen] = useState(false);
@@ -162,10 +162,8 @@ const App = () => {
 
 
   //Coloca una barra de carga cuando la página está cargando
-  if (isLoading) return <LinearProgess />;
+  if (isLoading) return <LinearProgess data-testid="cargando" />;
   //if (error) return <div>Algo ha fallado</div>;
-
-  //console.log('aaaaaaaaaaa \n aaaaaaaaaaaa \n aaaaaaaaaaaaaaa');
 
   return (
     <>  
@@ -523,6 +521,7 @@ const App = () => {
       </BrowserRouter>
       <Footer />
       </Wrapper>
+
     </>
   );
 

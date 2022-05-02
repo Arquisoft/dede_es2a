@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [idp, setIdp] = useState("https://inrupt.net/");
   const proveedores = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" },
                     {displayName: "Solid community", url: "https://solidcommunity.net/"},
@@ -33,7 +33,7 @@ export default function LoginForm() {
 
   onSessionRestore((url) => {
     if (session.info.isLoggedIn) {
-      navigate(url);
+      window.location.href =url;
     }
   });
 
@@ -89,7 +89,7 @@ export default function LoginForm() {
             oidcIssuer={idp}
             redirectUrl={UrlActual}    
             onError={console.error}>
-                <Button  variant="contained">Obtener dirección </Button>
+                <Button  variant="contained" id="botonDireccion">Obtener dirección </Button>
           </LoginButton>
      
         </Wrapper>
