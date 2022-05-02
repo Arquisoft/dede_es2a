@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Juguete } from "../../shared/sharedJuguete";
 import './nuevo.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 var nombre: string;
 var descripcion: string;
@@ -28,6 +29,7 @@ async function addJuguete(): Promise<any> {
     //The objects returned by the api are directly convertible to User objects
 }
 
+toast.configure();
 const AddForm = () => {
     const navigate = useNavigate();
     return (
@@ -89,12 +91,23 @@ const AddForm = () => {
                         }}>Cancelar</button>
                         <button type="submit" className="guardar" onClick={() => {
                             // validaciones de campos
-                            
-                            // guardar en bd
-                            addJuguete();
-                            //navigate("/home");
-                            navigate("/productos");
-                            window.location.reload();
+                            if (nombre === "" || nombre == null || nombre === undefined) {
+                                toast.warn("El nombre no puede ser vacío", { position: toast.POSITION.TOP_CENTER });
+                            } else if (descripcion === "" || descripcion == null || descripcion === undefined) {
+                                toast.warn("La descripción no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
+                            } else if (imagen === "" || imagen == null || imagen === undefined) {
+                                toast.warn("La URL de la imagen no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
+                            } else if (precio <= 0.0 || precio == null || precio === undefined) {
+                                toast.warn("El precio debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
+                            } else if (stock <= 0 || stock == null || stock === undefined) {
+                                toast.warn("El stock debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
+                            } else {
+                                // guardar en bd
+                                addJuguete();
+                                // volver a productos
+                                navigate("/productos");
+                                window.location.reload();
+                            }
                         }}>Guardar</button>
                     </div>
                 </form>
