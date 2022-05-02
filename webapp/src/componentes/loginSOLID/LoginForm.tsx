@@ -89,7 +89,7 @@ export default function LoginForm() {
             oidcIssuer={idp}
             redirectUrl={UrlActual}    
             onError={console.error}>
-                <Button  variant="contained" data-testid="botonDireccion">Obtener dirección </Button>
+                <Button  variant="contained" data-testid="botonDireccion" id="botonDireccion">Obtener dirección </Button>
           </LoginButton>
      
         </Wrapper>

@@ -11,6 +11,7 @@ async function getData(): Promise<any> {
 
 const LoginButton = () => {
     const { loginWithRedirect } = useAuth0();
+
     
     //const { data, isLoading, error } =   useQuery<Usuario[]>('us', checkUserInBD);
     //isAdmin=false;
@@ -19,10 +20,12 @@ const LoginButton = () => {
     return <button className='btn btn-primary-login' id="registerButton" onClick={() => {
         loginWithRedirect();
         const localUser = localStorage.getItem("user");
-        if (localUser) { 
+        if (localUser) {
+            localStorage.setItem("sesion","true")
             JSON.parse(localUser);
         } else {
-            localStorage.setItem("user", localUser!);
+            localStorage.setItem("sesion","false")
+            localStorage.setItem("user", JSON.stringify([]));
         }
 
     }}>Registrarse</button>;

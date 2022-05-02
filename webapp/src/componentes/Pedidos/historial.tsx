@@ -11,9 +11,8 @@ async function getPedidos(): Promise<Pedido[]> {
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
     let response = await fetch(apiEndPoint + "pedido/byUser/" + correo);
     //The objects returned by the api are directly convertible to User objects
-    let j = response.json();
-    console.log(response.json());
-    return j;
+    return response.json();
+
 }
 
 const HistorialPedidos = () => {

@@ -13,6 +13,7 @@ const Navbar = () => {
     const handleClick = () => {
         state = { clicked: !state.clicked }
     }
+    localStorage.setItem("sesion",isAuthenticated+"");
     return (
         <nav className="NavbarItems">
             <h1 className="navbar-logo">DeNostalgia<i className="fab fa-react"></i></h1>

@@ -39,7 +39,8 @@ test('navbar is rendered', () => {
 })
 
 test('home is rendered', () => {
-  localStorage.setItem("user","ejemplo1@gmail.com")
+  localStorage.setItem("user","ejemplo2@gmail.com")
+  localStorage.setItem("sesion","true")
   const component = render(<Home/>)
   expect(component.container).toHaveTextContent('Bienvenido')
   localStorage.clear();
@@ -107,16 +108,17 @@ test('Finalized order is rendered', () => {
 
   expect(component.container).toHaveTextContent('finalizado')
 })
-test('Logout button is rendered', () => {
+test('Logout button is rendered', async () => {
   const component = render(<LogoutButton  />)
 
   expect(component.container).toHaveTextContent('Desconectarse')
+
 })
 
 test('App is rendered', async () => {
   const component = await act(async () => {render( <QueryClientProvider client={queryClient}  contextSharing={true}><App/></QueryClientProvider>)  });
   //expect(screen.getByText("Home")).toBeInTheDocument();
-  expect(screen.getByTestId("cargando")).toBeInTheDocument();
+  //expect(screen.getByTestId("cargando")).toBeInTheDocument();
 })
 
  test('Item is rendered', () => {
@@ -161,12 +163,39 @@ test('Item is rendered', () => {
 
 
   test('ProcesoPago is rendered', async () => {
-  const component = render(<ProcesoPago cartItems={[]}/>)
-//No me deja pasar porque me solicita el POD
+    localStorage.setItem("direccion","Vicente Aleixandre Corvera");
+  const component = render(<ProcesoPago cartItems={[{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 2,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 1
+  }]}/>)
   expect(component.container).toHaveTextContent('Envío')
+
+    fireEvent.click(screen.getByText("Guardar y continuar"));
+
   await act(async () => {
     fireEvent.click(screen.getByTestId("botonSiguiente"));
   });
+  console.log("AAAAAAAAAAAAAAAAAAAAAA"+component.container.textContent);
+
+  expect(component.container).toHaveTextContent('Entrega')
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("botonSiguiente"));
+  });
+  expect(component.container).toHaveTextContent('Resumen')
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("botonSiguiente"));
+  });
+  expect(component.container).toHaveTextContent('Muchas gracias por su compra!')
+ const finalizar = component.container.querySelector("a");
+ finalizar!.click();
+
+
+  localStorage.clear();
 
 
 
@@ -183,6 +212,7 @@ test('Shipping is rendered', () => {
 
 
 test('Historial pedidos is rendered', () => {
+  
   const component = render(<QueryClientProvider client={queryClient}><HistorialPedidos  /></QueryClientProvider>)
 
   expect(component.container).toHaveTextContent('pedidos')
@@ -194,6 +224,8 @@ test('Login form is rendered', () => {
   const component = render(<LoginForm  />)
 
   expect(component.container).toHaveTextContent('Obtener dirección')
+  const button = component.container.querySelector("#botonDireccion")
+  //fireEvent.click(button!);
 })
 
 test('Logout form is rendered', () => {
@@ -203,7 +235,9 @@ test('Logout form is rendered', () => {
 })
 
 
-/* test('Login button is rendered', async () => {
+
+
+ test('Login button is rendered', async () => {
   const component = render( <Auth0Provider
     domain={domain}
     clientId={client_id}
@@ -217,7 +251,7 @@ test('Logout form is rendered', () => {
 
   expect(screen.getByText("Registrarse")).toBeInTheDocument();
 })
- */
+
 
 /*
 test('clicking home nav-button', () => {
@@ -253,14 +287,4 @@ test('clicking contact nav-button', () => {
   expect(mockHandler).toHaveBeenCalledTimes(1)
 })
 
-test('clicking login button', () => {
-  const component = render(<LoginButton/>)
-
-  const mockHandler = jest.fn()
-
-  const button = component.getByText('Registrarse')
-  fireEvent.click(button)
-  
-  expect(mockHandler).toHaveBeenCalledTimes(1)
-})
 */

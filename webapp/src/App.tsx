@@ -162,7 +162,7 @@ const App = () => {
 
 
   //Coloca una barra de carga cuando la página está cargando
-  if (isLoading) return <LinearProgess data-testid="cargando" />;
+  //if (isLoading) return <LinearProgess data-testid="cargando" />;
   //if (error) return <div>Algo ha fallado</div>;
 
   return (

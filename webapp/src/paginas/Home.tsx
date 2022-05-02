@@ -41,12 +41,10 @@ async function addUserToBD(email:string): Promise<any> {
     return response.json();
 }
 */
-/*
 const Home = () => {
 
   const {isAuthenticated, user} = useAuth0();
-  let usuario:Usuario;
-  if(isAuthenticated){
+  if(localStorage.getItem("sesion")==="true"){
       // comprobamos si ya existe en la bd
       let email:any = user?.email;
       checkUserInBDByEmail(email);
@@ -54,7 +52,7 @@ const Home = () => {
           addUserToBD(email);
       }
   }
-
+  localStorage.removeItem("sesion")
   return (
       <body>
       <h1>Bienvenido</h1>
@@ -66,34 +64,24 @@ const Home = () => {
   )
 }
 
+/* const Home = () => {
+  const {isAuthenticated, user} = useAuth0();
+  let usuario:Usuario;
+  if(isAuthenticated){
+      // comprobamos si ya existe en la bd
+      let email:any = user?.email;
+      checkUserInBDByEmail(email);
+      if(!userExists){ // almacenamos en la base de datos
+          addUserToBD(email);
+      }
+  }
+  return (
+      <body>
+      <h1>Bienvenido</h1>
+              <p>Esperamos que disfrutes nuestra pagina web</p>
+      </body>
+  )
+} */
 export default Home;
-*/
 
-const Home = () => {
-
-   
-    const {isAuthenticated, user} = useAuth0();
-    let usuario:Usuario;
-    if(localStorage.getItem("user")!=null){
-        // comprobamos si ya existe en la bd
-        //let email:any = user?.email;
-        let email:any = localStorage.getItem("user");
-        checkUserInBDByEmail(email);
-           if(!userExists){ // almacenamos en la base de datos
-            addUserToBD(email);
-        }
-    }
-    
-    return (
-        <body>
-        <h1>Bienvenido</h1>
-           
-                <p>Esperamos que disfrutes nuestra pagina web</p>
-           
-        </body>
-      
-    )
-}
-
-export default Home;
 
