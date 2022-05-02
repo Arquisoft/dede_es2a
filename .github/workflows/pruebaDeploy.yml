@@ -42,7 +42,7 @@ jobs:
         heroku_app_name: "dede-es2a-webapp"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        workdir: "webapp"     
+        appdir: "webapp"     
         docker_build_args: |
           API_URI
       env:
@@ -59,7 +59,7 @@ jobs:
         heroku_app_name: "dede-es2a-restapi"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        workdir: "restapi"
+        appdir: "restapi"
         docker_build_args: |
           MONGO_URI
           CLOUDINARY_NAME
