@@ -69,13 +69,13 @@ La prioridad de los escenarios viene dada por la importancia para el cliente y p
 |===
 |Id|Atributo de calidad|Escenario de calidad|Prioridad (Cliente/Arquitecto)
 |_US1_| _Usabilidad_ | _Los usuarios deben poder usar la aplicacion sin ningun tipo de problema, haciendo que comprar un producto sea una tarea sencilla_ | _Alto/Bajo_
-|_US2_| _Usabilidad_ | _La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible_ | _Alto/Bajo_
+|_US2_| _Usabilidad_ | _La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible, así como realizar la compra_ | _Alto/Bajo_
 |_COM1_| _Comprensibilidad_ | _La aplicacion debe ser lo mas intuitiva posible para el usuario, para que sea capaz de realizar cualquier funcion dentro de ella_ | _Alto/Medio_
-|_COM2_| _Comprensibilidad_ | _En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara_ | _Alto/Medio_
+|_COM2_| _Comprensibilidad_ | _En caso de tener funciones distintas a las habituales de una tienda online, es decir, no usar convenciones, se deberán explicar y mostrar de manera clara_ | _Alto/Medio_
 |_SEG1_| _Seguridad_ | _Si en cualquier momento la aplicación no es segura (por ejemplo debido a malware) se deberá mostrar un mensaje de que no es seguro el uso del sistema o incluso incapacitar el sistema hasta que se resuelva_ | _Alto/Alto_
 |_SEG2_| _Seguridad_ | _Todos los datos de los usuarios no pueden ser expuestos a terceros_ | _Alto/Alto_
 |_TEST1_| _Testabilidad_ | _Si se da el caso de que se necesite añadir nuevas funcionalidades a la tienda online, se deberá poder probar antes de su despliegue_ | _Medio/Medio_
-|_TEST2_| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente_ | _Medio/Medio_
+|_TEST2_| _Testabilidad_ | _La aplicacion sera sometida a pruebas unitarias, de aceptación y de carga, para probar que funcione correctamente_ | _Medio/Medio_
 |_ATRA1_| _Atractivo_ | _Si la tienda incorpora opciones inusuales en tiendas online, se deberá usar la interfaz para que sean fácilmente usables y accesibles_ | _Medio/Bajo_
 |_ATRA2_| _Atractivo_ | _La aplicacion debe llamar la atencion al usuario, implementando opciones poco habituales o por una interfaz llamativa y fácil de usar_ | _Bajo/Bajo_
 |===
