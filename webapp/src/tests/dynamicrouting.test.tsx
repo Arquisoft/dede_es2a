@@ -118,7 +118,8 @@ test('Logout button is rendered', async () => {
 test('App is rendered', async () => {
   const component = await act(async () => {render( <QueryClientProvider client={queryClient}  contextSharing={true}><App/></QueryClientProvider>)  });
   //expect(screen.getByText("Home")).toBeInTheDocument();
-  //expect(screen.getByTestId("cargando")).toBeInTheDocument();
+  expect(screen.getByText("Home")).toBeInTheDocument();
+  fireEvent.click(screen.getByTestId("botonAnadirAlCarrito"));
 })
 
  test('Item is rendered', () => {
@@ -180,7 +181,6 @@ test('Item is rendered', () => {
   await act(async () => {
     fireEvent.click(screen.getByTestId("botonSiguiente"));
   });
-  console.log("AAAAAAAAAAAAAAAAAAAAAA"+component.container.textContent);
 
   expect(component.container).toHaveTextContent('Entrega')
   await act(async () => {

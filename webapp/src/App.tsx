@@ -64,14 +64,6 @@ export async function getJuguetes(): Promise<Juguete[]> {
   return response.json();
 }
 
-export async function getJuguetesCategoria(): Promise<Juguete[]> {
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-  let response = await fetch(apiEndPoint + 'juguete/categoria/nostalgia');
-  //The objects returned by the api are directly convertible to User objects
-  //console.log(response.json());
-  return response.json();
-}
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
