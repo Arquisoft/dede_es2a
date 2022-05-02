@@ -24,14 +24,25 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter } from 'react-router-dom';
 import LogoutForm from '../componentes/loginSOLID/LogoutForm';
 const queryClient = new QueryClient()
+const domain = 'dev-o-6umpor.us.auth0.com';
+const client_id = 'gVZPxJXH5Lx34bGRc8XHl6siZ4lJ72E0';
 test('navbar is rendered', () => {
   const component = render(<Navbar/>)
   expect(component.container).toHaveTextContent('DeNostalgia')
 })
 
+test('navbar is rendered', () => {
+  localStorage.setItem("isAdmin","true")
+  const component = render(<Navbar/>)
+  expect(component.container).toHaveTextContent('DeNostalgia')
+  localStorage.clear();
+})
+
 test('home is rendered', () => {
+  localStorage.setItem("user","ejemplo1@gmail.com")
   const component = render(<Home/>)
   expect(component.container).toHaveTextContent('Bienvenido')
+  localStorage.clear();
 })
 
 test('ContactUs is rendered', () => {
@@ -54,7 +65,15 @@ test('Delivery is rendered', () => {
   expect(component.container).toHaveTextContent('Resumen')
 })
 test('Review is rendered', () => {
-  const component = render(<Review cartItems={[]} setDeliveryCost={function (n: number): void {
+  const component = render(<Review cartItems={[{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 0,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 2
+  }]} setDeliveryCost={function (n: number): void {
   } } deliveryCost={0} siguientePaso={function (): void {
   } } setAddress={function (n: string): void {
   } } address={''} deliveryDate={''}  />)
@@ -101,7 +120,6 @@ test('App is rendered', async () => {
 })
 
  test('Item is rendered', () => {
-  const queryClient = new QueryClient()
   const app = render(  <QueryClientProvider client={queryClient}><App/></QueryClientProvider>)
   const component = render(   <BrowserRouter><Item item={{
     id: 0,
@@ -120,29 +138,39 @@ test('App is rendered', async () => {
 }) 
 
 
-/*  test('ProcesoPago is rendered', async () => {
+test('Item is rendered', () => {
+  localStorage.setItem("isAdmin",true+"");
+  const app = render(  <QueryClientProvider client={queryClient}><App/></QueryClientProvider>)
+  const component = render(   <BrowserRouter><Item item={{
+    id: 0,
+    nombre: 'Pikachu',
+    descripcion: 'juguete',
+    precio: 2,
+    imagen: '',
+    categoria: 'nostalgia',
+    cantidad: 1
+  }} handleAddToCart={function (clickedItem: Juguete): void {
+  } }/></BrowserRouter>)
+  expect(component.container).toHaveTextContent('Pikachu');
+  const button = component.container.querySelector('button');
+  button!.click();
+  const buttons = component.container.querySelectorAll('button');
+  buttons[1]!.click();
+  localStorage.clear();
+}) 
+
+
+  test('ProcesoPago is rendered', async () => {
   const component = render(<ProcesoPago cartItems={[]}/>)
-
-  expect(component.container).toHaveTextContent('Envío')
-  await act(async () => {
-    fireEvent.click(screen.getByTestId("botonDireccion"));
-  });
-
-  expect(component.container).toHaveTextContent('Evnío')
-
-  await act(async () => {
-    fireEvent.click(screen.getByTestId("botonSiguiente"));
-  });
+//No me deja pasar porque me solicita el POD
   expect(component.container).toHaveTextContent('Envío')
   await act(async () => {
     fireEvent.click(screen.getByTestId("botonSiguiente"));
   });
-  expect(component.container).toHaveTextContent('Envío')
-  await act(async () => {
-    fireEvent.click(screen.getByTestId("botonFinalizarPedido"));
-  });
 
-})  */
+
+
+})  
 
 test('Shipping is rendered', () => {
   const component = render(<Shipping cartItems={[]} setDeliveryCost={function (n: number): void {
@@ -160,18 +188,7 @@ test('Historial pedidos is rendered', () => {
   expect(component.container).toHaveTextContent('pedidos')
 })
 
-/*
-test('Login button is rendered', async () => {
-  const component = render(<LoginButton  />)
 
-  expect(component.container).toHaveTextContent('Registrarse')
-  await act(async () => {
-    fireEvent.click(component.container.querySelector("#registerButton")!);
-  });
-
-  expect(screen.getByText("Registrarse")).toBeInTheDocument();
-})
-*/
 
 test('Login form is rendered', () => {
   const component = render(<LoginForm  />)
@@ -186,6 +203,21 @@ test('Logout form is rendered', () => {
 })
 
 
+/* test('Login button is rendered', async () => {
+  const component = render( <Auth0Provider
+    domain={domain}
+    clientId={client_id}
+    redirectUri={window.location.origin}
+  ><LoginButton  /></Auth0Provider>)
+
+  expect(component.container).toHaveTextContent('Registrarse')
+  await act(async () => {
+    fireEvent.click(component.container.querySelector("#registerButton")!);
+  });
+
+  expect(screen.getByText("Registrarse")).toBeInTheDocument();
+})
+ */
 
 /*
 test('clicking home nav-button', () => {

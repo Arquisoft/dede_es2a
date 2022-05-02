@@ -22,7 +22,7 @@ const LoginButton = () => {
         if (localUser) { 
             JSON.parse(localUser);
         } else {
-            localStorage.setItem("user", JSON.stringify([]));
+            localStorage.setItem("user", localUser!);
         }
 
     }}>Registrarse</button>;

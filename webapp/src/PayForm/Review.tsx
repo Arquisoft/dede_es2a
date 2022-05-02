@@ -71,6 +71,7 @@ const Review:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sigui
               <CardActions>
               <Button
               id="botonSiguiente"
+              data-testid="botonSiguiente"
               onClick={
                 siguientePaso
               }

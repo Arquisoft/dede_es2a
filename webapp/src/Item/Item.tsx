@@ -35,7 +35,7 @@ function mifuncion({ url: any } => {
 */
 //Así creamos un elemento reactivo con las propiedades especificadas
 const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     return (
         <Wrapper>
             {
