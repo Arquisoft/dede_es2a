@@ -18,7 +18,7 @@ jobs:
           registry: ghcr.io
           workdir: restapi
   deploy-restapi:
-    needs: [docker-push-restapi,docker-push-webapp]
+    needs: [docker-push-restapi]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
