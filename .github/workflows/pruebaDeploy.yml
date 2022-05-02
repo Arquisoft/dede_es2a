@@ -4,9 +4,24 @@ on:
     types: [published]
 
 jobs:
+  docker-push-webapp:
+    name: Push webapp Docker Image to GitHub Packages
+    runs-on: ubuntu-latest
+    needs: [e2e-tests]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@3.04
+      with:
+          name: arquisoft/dede_es2a/webapp
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PUSH_TOKEN }}
+          registry: ghcr.io
+          appdir: webapp
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
+    needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
@@ -16,27 +31,30 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
-          workdir: restapi
+          appdir: restapi
+  deploy-webapp:
+    needs: [docker-push-restapi,docker-push-webapp]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy webapp
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{ secrets.DEPLOY_HOST }}
+        heroku_app_name: ${{ secrets.DEPLOY_USER }}
+        heroku_email: ${{ secrets.DEPLOY_KEY }}
+        usedocker: true
+        appdir: "webapp"      
   deploy-restapi:
-    needs: [docker-push-restapi]
+    needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Deploy restapi
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        heroku_api_key: ${{ secrets.DEPLOY_KEY }}
-        heroku_app_name: "dede-es2a-restapi"
-        heroku_email: ${{ secrets.EMAIL }}
+         heroku_api_key: ${{ secrets.DEPLOY_HOST }}
+        heroku_app_name: ${{ secrets.DEPLOY_USER }}
+        heroku_email: ${{ secrets.DEPLOY_KEY }}
         usedocker: true
-        appdir: "restapi"
-        docker_build_args: |
-          MONGO_URI
-          CLOUDINARY_NAME
-          CLOUDINARY_API_KEY
-          CLOUDINARY_API_SECRET
-      env:
-        MONGO_URI: ${{secrets.MONGO_URI}}
-        CLOUDINARY_NAME: ${{secrets.CLOUD_NAME}}
-        CLOUDINARY_API_KEY: ${{secrets.CLOUD_KEY}}
-        CLOUDINARY_API_SECRET: ${{secrets.CLOUD_SECRET}}
+        appdir: "restapi" 
