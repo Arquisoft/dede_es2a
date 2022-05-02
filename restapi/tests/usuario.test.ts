@@ -69,9 +69,6 @@ describe('user ', () => {
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual({
             id:response.body.id,
-            DNI:"20506101F",
-            nombre:"Fernando",
-            apellidos:"Alonso",
             email: "padre@email.com",
             isAdmin:  false
         });
