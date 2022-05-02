@@ -8,7 +8,7 @@ jobs:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - user: actions/checkoout@v2
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@3.04
       with:
@@ -16,7 +16,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
-          appdir: webapp
+          workdir: webapp
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
@@ -29,20 +29,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
-          appdir: restapi
-  deploy-webapp:
-    needs: [docker-push-restapi,docker-push-webapp]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Deploy webapp
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{ secrets.DEPLOY_HOST }}
-        heroku_app_name: ${{ secrets.DEPLOY_USER }}
-        heroku_email: ${{ secrets.DEPLOY_KEY }}
-        usedocker: true
-        appdir: "webapp"      
+          workdir: restapi
   deploy-restapi:
     needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
@@ -51,8 +38,35 @@ jobs:
     - name: Deploy restapi
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-         heroku_api_key: ${{ secrets.DEPLOY_HOST }}
-        heroku_app_name: ${{ secrets.DEPLOY_USER }}
-        heroku_email: ${{ secrets.DEPLOY_KEY }}
+        heroku_api_key: ${{ secrets.DEPLOY_KEY }}
+        heroku_app_name: "dede-es2a-webapp"
+        heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        appdir: "restapi" 
+        appdir: "webapp"
+        docker_build_args: |
+          API_URI
+      env:
+        API_URI: "https://dede-es2a-restapi.herokuapp.com/"   
+  deploy-restapi:
+    needs: [docker-push-restapi,docker-push-webapp]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy restapi
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{ secrets.DEPLOY_KEY }}
+        heroku_app_name: "dede-es2a-restapi"
+        heroku_email: ${{ secrets.EMAIL }}
+        usedocker: true
+        appdir: "restapi"
+        docker_build_args: |
+          MONGO_URI
+          CLOUDINARY_NAME
+          CLOUDINARY_API_KEY
+          CLOUDINARY_API_SECRET
+      env:
+        MONGO_URI: ${{secrets.MONGO_URI}}
+        CLOUDINARY_NAME: ${{secrets.CLOUD_NAME}}
+        CLOUDINARY_API_KEY: ${{secrets.CLOUD_KEY}}
+        CLOUDINARY_API_SECRET: ${{secrets.CLOUD_SECRET}}
