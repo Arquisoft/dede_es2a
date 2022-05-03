@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Typography } from "@material-ui/core";
 import { Usuario } from "../shared/sharedUser";
 import "./Pag.css"
 
@@ -16,6 +17,10 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
     .then(usuario => {
       userExists = usuario.isAdmin;
       localStorage.setItem("isAdmin", usuario.isAdmin);
+      if(localStorage.getItem("reload")=="true"){
+        window.location.reload();
+        localStorage.setItem("reload","false")
+      }
     });
 }
 
@@ -55,12 +60,15 @@ const Home = () => {
   localStorage.removeItem("sesion")
   return (
       <body>
-      <h1>Bienvenido</h1>
+      <div id="contenedorPrincipal">
+        
+      <h1 >Bienvenido</h1>
 
-              <p>Esperamos que disfrutes nuestra pagina web</p>
+              <h2 id="lema">"La alegría que un día tuvimos para los nuestros"</h2>
+              </div>
 
       </body>
-
+      
   )
 }
 

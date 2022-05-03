@@ -52,16 +52,21 @@ Alice <-- Bob: another authentication Response
 actor Usuario #green
 database BaseDeDatos as "Base de datos" #blue
 database Pod as "Pod del usuario" #yellow
+database GeoCoder as "GeoCoder" #yellow
 Usuario -> DeDe: Abre el carrito
-DeDe <-- BaseDeDatos: Devuelve contenido del carrito del usuario
-Usuario <-- DeDe: Muestra lista de juguetes del carrito
-Usuario -> DeDe: Presiona botón realizar pedido
+DeDe <-- DeDe: Devuelve contenido del carrito del usuario
+Usuario <-- DeDe: Muestra pantalla de pago
+Usuario -> DeDe: Presiona botón de obtención de dirección POD
 DeDe -> Pod: Se solicita la dirección del usuario
 Usuario -> Pod: Inicia sesión en Pod y añade su dirección en la sección "notes" del mismo
 DeDe <-- Pod: Devuelve la dirección del usuario
-DeDe -> DeDe: Muestra la dirección y se calculan gastos de envío (API GeoCode)
-Usuario <-- DeDe: Muestra el precio y la dirección.
-Usuario -> DeDe: Recorre pantallas de pago hasta confirmar el pedido.
+Usuario -> DeDe: Continua con el proceso de compra
+DeDe -> GeoCoder: Solicita el calculo de los gastos de envío
+DeDe <-- GeoCoder: Se devuelven los gastos de envío.
+DeDe -> DeDe: Muestra la dirección y los gastos de envío
+Usuario -> DeDe: Continua con la revisión de compra
+DeDe -> DeDe: Muestra el resumen del pedido
+Usuario -> DeDe: Finaliza el pedido
 ----
 
 === Añadir productos

@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import './categories.css';
 //import { Juguete } from '../shared/sharedJuguete';
@@ -20,6 +21,8 @@ const Separator = styled.div`
  margin: 5px auto;
  background-color: #d3707c;
 `
+
+
 
 const CategoriesBar = ()=> {
     //let juguetes:Juguete[];
