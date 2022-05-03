@@ -25,7 +25,7 @@ const LoginButton = () => {
             localStorage.setItem("sesion","false")
             localStorage.setItem("user", JSON.stringify([]));
         }
-
+        localStorage.setItem("reload","true")
     }}>Registrarse</button>;
 }
 
