@@ -28,13 +28,14 @@ const domain = 'dev-o-6umpor.us.auth0.com';
 const client_id = 'gVZPxJXH5Lx34bGRc8XHl6siZ4lJ72E0';
 test('navbar is rendered', () => {
   const component = render(<Navbar/>)
-  expect(component.container).toHaveTextContent('DeNostalgia')
+  expect(component.container).toHaveTextContent('Home')
 })
 
 test('navbar is rendered', () => {
   localStorage.setItem("isAdmin","true")
   const component = render(<Navbar/>)
-  expect(component.container).toHaveTextContent('DeNostalgia')
+  expect(component.container).toHaveTextContent('Productos')
+  console.log(component.getAllByText)
   localStorage.clear();
 })
 
@@ -193,12 +194,7 @@ test('Item is rendered', () => {
   expect(component.container).toHaveTextContent('Muchas gracias por su compra!')
  const finalizar = component.container.querySelector("a");
  finalizar!.click();
-
-
   localStorage.clear();
-
-
-
 })  
 
 test('Shipping is rendered', () => {
@@ -237,7 +233,7 @@ test('Logout form is rendered', () => {
 
 
 
- test('Login button is rendered', async () => {
+/*  test('Login button is rendered', async () => {
   const component = render( <Auth0Provider
     domain={domain}
     clientId={client_id}
@@ -251,7 +247,7 @@ test('Logout form is rendered', () => {
 
   expect(screen.getByText("Registrarse")).toBeInTheDocument();
 })
-
+ */
 
 /*
 test('clicking home nav-button', () => {
