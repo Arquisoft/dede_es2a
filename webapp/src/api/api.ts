@@ -16,7 +16,6 @@ export async function addUser(user:User):Promise<boolean>{
 
 export async function getJuguetes(): Promise<Juguete[]> {
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  console.log(process.env.REACT_APP_API_URI)
   //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + 'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
