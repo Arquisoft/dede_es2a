@@ -446,7 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_descripción_general_de_los_requisitos_características_esenciales_y_objetivos_comerciales">1.1. Descripción general de los requisitos, características esenciales y objetivos comerciales</a></li>
 <li><a href="#_objetivos_de_calidad">1.2. Objetivos de calidad</a></li>
-<li><a href="#_stakeholders">1.3. Stakeholders</a></li>
+<li><a href="#_partes_interesadas">1.3. Partes interesadas</a></li>
 </ul>
 </li>
 <li><a href="#section-architecture-constraints">2. Restricciones de la arquitectura</a></li>
@@ -460,8 +460,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-building-block-view">5. Vista de bloques de construcción</a>
 <ul class="sectlevel2">
 <li><a href="#_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</a></li>
-<li><a href="#_nivel_2">5.2. Nivel 2</a></li>
-<li><a href="#_nivel_3">5.3. Nivel 3</a></li>
+<li><a href="#_usuario_caja_negra">5.2. Usuario (caja negra)</a></li>
+<li><a href="#_juguete_caja_negra">5.3. Juguete (caja negra)</a></li>
+<li><a href="#_pedido_caja_negra">5.4. Pedido (caja negra)</a></li>
+<li><a href="#_usuario_caja_blanca">5.5. Usuario (caja blanca)</a></li>
+<li><a href="#_juguete_caja_blanca">5.6. Juguete (caja blanca)</a></li>
+<li><a href="#_pedido_caja_blanca">5.7. Pedido (caja blanca)</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Vista de tiempo de ejecución</a>
@@ -470,6 +474,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_añadir_productos">6.2. Añadir productos</a></li>
 <li><a href="#_eliminar_productos">6.3. Eliminar productos</a></li>
 <li><a href="#_filtrar_productos">6.4. Filtrar productos</a></li>
+<li><a href="#_iniciar_sesión">6.5. Iniciar sesión</a></li>
+<li><a href="#_cierre_de_sesión">6.6. Cierre de sesión</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Vista de implementación</a>
@@ -480,9 +486,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Conceptos transversales</a>
 <ul class="sectlevel2">
-<li><a href="#_modelo_de_dominio">8.1. Modelo de Dominio</a></li>
-<li><a href="#_concepto_2">8.2. <em>&lt;Concepto 2&gt;</em></a></li>
-<li><a href="#_concepto_n">8.3. <em>&lt;Concepto n&gt;</em></a></li>
+<li><a href="#_persistencia">8.1. Persistencia</a></li>
+<li><a href="#_interfaz_de_usuario">8.2. Interfaz de Usuario</a></li>
+<li><a href="#_manejo_de_sesión">8.3. Manejo de Sesión</a></li>
+<li><a href="#_seguridad_y_privacidad">8.4. Seguridad y privacidad</a></li>
+<li><a href="#_internacionalización">8.5. Internacionalización</a></li>
+<li><a href="#_gestión_de_desarrollo">8.6. Gestión de desarrollo</a></li>
+<li><a href="#_modelo_de_dominio">8.7. Modelo de Dominio</a></li>
+<li><a href="#_testeable">8.8. Testeable</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Decisiones de diseño</a></li>
@@ -553,16 +564,16 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <p>Los clientes deben tener la posibilidad de seleccionar y encargar productos para comprarlos.</p>
 </li>
 <li>
-<p>Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo se llevará a cabo una vez el cliente haya seleccionado los productos a comprar.</p>
+<p>Se calcularán los costes de envío consultando la dirección del usuario en su POD (calculando los costes en función de la distnacia del centro de distribución a la dirección del usuario). Este cálculo se llevará a cabo una vez el cliente haya seleccionado los productos a comprar y para ello ha de estar registrado en la aplicación.</p>
 </li>
 <li>
-<p>Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y se pasará a su envío.</p>
+<p>Se mostrarán los costes finales de los productos a comprar por un cliente. Una vez el cliente decida comprarlos, se registrará la venta como realizada y "se pasará a su envío".</p>
 </li>
 <li>
 <p>Los clientes podrán en todo momento ver sus pedidos realizados.</p>
 </li>
 <li>
-<p>El desarrollo de la aplicación será mediante React y TypeScript para el Front-end y Node.js y Express para el Back-end.</p>
+<p>El desarrollo de la aplicación será mediante React y TypeScript para el Front-end y Node.js y Express para el Back-end además de MongoDb para la gestión de la base de datos.</p>
 </li>
 <li>
 <p>La aplicación deberá ser accesible y estar desplegada usando un sistema de integración continua. La tecnología de despliegue se especificará en el punto 4.</p>
@@ -589,7 +600,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect2">
 <h3 id="_objetivos_de_calidad">1.2. Objetivos de calidad</h3>
 <div class="paragraph">
-<p>Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basandonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos y la prioridad que le damos:</p>
+<p>Los cinco objetivos de calidad para la arquitectura que hemos decido seguir (basándonos en nuestras capacidades y los requisitos de la aplicación) son los siguientes. Junto con ellos se muestra una breve descripción de lo que pretendemos conseguir con cada uno de ellos y la prioridad que le damos:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -618,12 +629,12 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>3</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Seguridad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser seguro en cuanto a los datos personales de cada usuario y también en lo que se refiere a la navegabilidad por la aplicación, gestión de imágenes de los productos, etc.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>4</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>El sistema deberá ser testable para poder comprobar que el funcionamiento es el correcto. También influye en otros atributos de calidad como la seguridad. Se realizarán pruebas unitarias, de aceptación y de carga para asegurar este campo.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>5</em></p></td>
@@ -634,7 +645,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 </table>
 </div>
 <div class="sect2">
-<h3 id="_stakeholders">1.3. Stakeholders</h3>
+<h3 id="_partes_interesadas">1.3. Partes interesadas</h3>
 <div class="paragraph">
 <p>Las partes interesadas en el sistema serán:</p>
 </div>
@@ -707,7 +718,7 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </div>
 </div>
 <div class="paragraph">
-<p>Restricciones tecnicas</p>
+<p>Restricciones técnicas</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -716,22 +727,22 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Restriccion</th>
-<th class="tableblock halign-left valign-top">Explicacion</th>
+<th class="tableblock halign-left valign-top">Restricción</th>
+<th class="tableblock halign-left valign-top">Explicación</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementacion</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicacion estará formada por un front-end utilizando React  con TypeScript y un back-end utilizando NodeJS con Express</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementación</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación estará formada por un front-end utilizando React con TypeScript y un back-end utilizando NodeJS con Express</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Seguridad</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Para mantener la privacidad de los usuarios se almacenará toda su información privada en pods.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Para mantener la privacidad de los usuarios se almacenará toda su información privada en PODs.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Despliegue</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicacion será accesible de manera continua y utilizará un sistema de integracion continuo.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación será accesible de manera continua y utilizará un sistema de integracion continuo.</p></td>
 </tr>
 </tbody>
 </table>
@@ -756,11 +767,11 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Configuracion y control del repositorio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Toda la aplicacion se encuentra en un repositorio privado de github donde existe una rama develop general y cada persona del equipo trabajará desde una rama propia.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toda la aplicación se encuentra en un repositorio privado de github donde existe una rama develop general donde se irá uniendo el trabajo de todos y cada persona del equipo trabajará desde una rama propia. Cada miembro puede tener varias ramas ya que se creará una por funcionalidad nueva a implementar.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha limite</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La fecha limite del proyecto es el 2 de mayo.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha límite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La fecha límite del proyecto es el 4 de mayo.</p></td>
 </tr>
 </tbody>
 </table>
@@ -774,18 +785,18 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Convencion</th>
-<th class="tableblock halign-left valign-top">Explicacion</th>
+<th class="tableblock halign-left valign-top">Convención</th>
+<th class="tableblock halign-left valign-top">Explicación</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Documentacion de la arquitectura</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documentación de la arquitectura</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Estructura basada en la plantilla arc42.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Convenciones de codificacion</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">El proyecto utiliza las convenciones de codigo para el lenguaje de TypeScript y utilizará la guía de estilo de Node.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convenciones de codificación</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El proyecto utiliza las convenciones de código para el lenguaje de TypeScript y utilizará la guía de estilo de Node.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Idioma</p></td>
@@ -833,8 +844,7 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 <h3 id="_contexto_empresarial">3.1. Contexto empresarial</h3>
 <div class="paragraph">
 <p>Dede es una aplicación que tiene como objetivo vender de manera online juguetes infantiles. Los usuarios podrán hacer compras de
-estos productos con la mayor privacidad posible debido a que nuestra aplicación estará integrada con SOLID, de tal manera que todos
-los datos de los clientes utilizados por la misma estarán almacenados en los POD de los usuarios permitiendo así un mayor control de
+estos productos con la mayor privacidad posible debido a que nuestra aplicación estará integrada con SOLID, de tal manera los datos más privados de los clientes utilizados por la misma estarán almacenados en los POD de los usuarios permitiendo así un mayor control de
 los datos personales.</p>
 </div>
 <div class="paragraph">
@@ -860,13 +870,28 @@ los datos personales.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cliente</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Información acerca de los productos de la tienda.</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Pedidos o visitas a las distintas páginas de la app web.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Contenido y operaciones permitidas en la tienda</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Visitas a las distintas páginas de la app web a través de la nube.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>DeDe (juguetes)</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Solicitudes clientes/Direcciones clientes/ Información base de datos</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Respuesta peticiones/ Solicitud información cliente/ Solicitud o envío de información a la base de datos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Heroku</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>interfaz de usuario (frontend) y datos de la base de datos, apis&#8230;&#8203;(backend) para su respectiva visualización en la nube</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Despliegue tanto del frontend como del backend e información de la app para el usuario</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Frontend (interfaz usuario)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Solicita a Heroku su despliegue y gestiona la API de logueo del usuario</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Muestra todas las opciones de la aplicación de manera visual para el cliente y esta es mandada a heroku para ser desplegada en la nube</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Backend (datos almacenados y peticiones)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Solicita a Heroku su despliegue y recibe/modifica los datos de la base de datos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Gestiona los datos de las base de datos y se los transmite al frontend para poder visualizar y realizar operaciones. También se envían a Heroku para que esta parte sea desplegada en la nube</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth0</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Se corresponde con la opción de inicio/cierre de sesión del frontend</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Loguea al usuario en la aplicación desde esta o desde Google</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>POD</em></p></td>
@@ -875,8 +900,13 @@ los datos personales.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Base de datos</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Solicitud o envío de información desde la app.</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>respuesta con productos o datos solicitados.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Gestión de los datos a través de API rest de la aplicación</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>respuesta a las peticiones de esa API rest (productos, usuarios, pedidos&#8230;&#8203;)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Geocode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Petición por parte del backend de las coordenadas de una dirección de un usuario extraída a través de los POD</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Devolución de las coordenadas</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -925,11 +955,11 @@ The title of the table is the name of your system, the three columns contain the
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cliente</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usuario que interactuará con la app web a través de internet (http).</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usuario que interactuará con la app web a través de internet (https).</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Servidor DeDe</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aplicación web con la que interactuarán y comunicarán los usuarios utilizando PODs.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aplicación web con la que interactuarán y comunicarán los usuarios utilizando PODs. Se dividirá en frontend, parte visual con la que interacciona el usuario, y backend, parte que se encarga de gestionar los datos y peticiones de la aplicación internamente</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>SOLID</em></p></td>
@@ -937,15 +967,23 @@ The title of the table is the name of your system, the three columns contain the
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>POD</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Almacena los datos del cliente. Buena privacidad para los usuarios.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Almacena los datos privados del cliente que la aplicación solo necesitará para realizar las compras, en nuestro caso la dirección principlamente. Buena privacidad para los usuarios.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>HTTP</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Protocolo de peticiones y respuestas con el servidor.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>HTTPS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Protocolo seguro de peticiones y respuestas con el servidor.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>MERN</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>M&#8594; MongoDB (persistencia) / E&#8594; Express (peticiones) / R&#8594; React (Front-End) / N&#8594; Node (Back-End).</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth0</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API que se encarga de gestionar el inicio y cierre de sesión por parte de los usuarios</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Geocode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API que se encargará de aportar las coordenadas de una dirección concreta con el objetivo de calcular los gastos de envío posteriormente</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -980,15 +1018,13 @@ Para realizar nuestro sistema de ventas hemos decidido utilizar la MERN stack. E
 <div class="ulist">
 <ul>
 <li>
-<p>MongoDB: Es una base de datos NoSQL que facilita el trabajo con el Back-End. Es una decisión de diseño propia</p>
+<p>MongoDB: Es una base de datos NoSQL que facilita el trabajo con el Back-End. Es una decisión de diseño propia.</p>
 </li>
 <li>
-<p>Express js: Es un marco que se ha superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado
-para la creación de sitios web.</p>
+<p>Express js: Es un marco que se ha superpuesto a Node JS y se puede utilizar para crear el Back-End de nuestra web. Fue precisamente creado para la creación de sitios web.</p>
 </li>
 <li>
-<p>React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Es un requisito de diseño por lo que no tenemos
-nada que decidir.</p>
+<p>React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Es un requisito de diseño por lo que no tenemos nada que decidir.</p>
 </li>
 <li>
 <p>Node JS: Es un entorno de ejecución de JavaScript que permite ejecutar JavaScript del lado del servidor y no en un navegador.</p>
@@ -997,22 +1033,19 @@ nada que decidir.</p>
 </div>
 <div class="paragraph">
 <div class="title">Diseño</div>
-<p>En un principio, tenemos pensado utilizar el patrón de Modelo Vista Controlador (MVC), así como otros patrones que puedan ser de utilidad a priori como por ejemplo
-Command o Factorías. Es un punto que aclararemos más adelante.</p>
+<p>Hemos utilizado pricipalmente el Modelo Vista Controlador con el fin de generar un proyecto claramente estructurado y fácilmente ampliable.</p>
 </div>
 <div class="paragraph">
 <div class="title">Usabilidad</div>
-<p>Para alcanzar la mayor usabilidad posible de nuestra web, intentaremos cumplir con todos los criterios de usabilidad que sabemos hasta el momento y la comprobaremos
-en diferentes validadores de internet. Intentaremos disponer el contenido de la manera más intuitiva posible, haciendo pruebas con usuarios a medida que vamos desarollando la
-aplicación para intentar sacarle el máximo partido.</p>
+<p>Para alcanzar la mayor usabilidad posible de nuestra web, intentaremos cumplir con todos los criterios de usabilidad que sabemos hasta el momento y la comprobaremos en diferentes validadores de internet. Intentaremos disponer el contenido de la manera más intuitiva posible, haciendo pruebas con usuarios a medida que vamos desarollando la aplicación para intentar sacarle el máximo partido.</p>
 </div>
 <div class="paragraph">
 <div class="title">Comprensibilidad</div>
-<p>Para la comprensibilidad. No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible</p>
+<p>No tenemos una gran cantidad de requisitos funcionales por lo que podemos producir una solución sencilla de utilizar y comprensible</p>
 </div>
 <div class="paragraph">
 <div class="title">Seguridad</div>
-<p>Garantizamos la seguridad del usuario mediante el uso de PODs, citados en los requisitos del sistema.</p>
+<p>Garantizamos la seguridad del usuario mediante el uso de PODs, citados en los requisitos del sistema. También la aplicación será segura al introducir la información confidencial en un fichero .env el cual será privado.</p>
 </div>
 <div class="paragraph">
 <div class="title">Testabilidad</div>
@@ -1020,14 +1053,11 @@ aplicación para intentar sacarle el máximo partido.</p>
 </div>
 <div class="paragraph">
 <div class="title">Desarrollo</div>
-<p>El sistema va a ser desarrollado completamente por el equipo (utilizando debidamente los recursos mencionados) dividiendo el trabajo en dos partes claras: Front-End y Back-End. En cualquier caso, se irán compartiendo
-todos los avances y cualquier duda intentando seguir una metodología ágil.</p>
+<p>El sistema va a ser desarrollado completamente por el equipo (utilizando debidamente los recursos mencionados) dividiendo el trabajo en dos partes claras: Front-End y Back-End. En cualquier caso, se irán compartiendo todos los avances y cualquier duda intentando seguir una metodología ágil a través de reuniones frecuentes.</p>
 </div>
 <div class="paragraph">
 <div class="title">Estructura</div>
-<p>El sistema de ventas se compondrá de diversas páginas web implementadas mediante TypeScript y React principalmente. La página principal desplegará diferentes categorías de
-juguetes y un conjunto de juguetes destacados. Tendremos acceso a nuestro carrito y a nuestra cuenta, con lo que también podemos ver pedidos realizados anteriormente. Una vez
-entras en una categoría de juguetes se desplegarán todos aquellos que estén presentes en la base de datos. También es posible utilizar el buscador para encontrar un determinado juguete.</p>
+<p>El sistema de ventas se compondrá de diversas páginas web implementadas mediante TypeScript y React principalmente. La página principal desplegará diferentes categorías de juguetes y un conjunto de juguetes destacados (o filtrados por categorías). Tendremos acceso a nuestro carrito y a nuestra cuenta, con lo que también podemos ver pedidos realizados anteriormente. Una vez entras en una categoría de juguetes se desplegarán todos aquellos que estén presentes en la base de datos.</p>
 </div>
 <div class="paragraph">
 <div class="title">Interfaz</div>
@@ -1119,6 +1149,11 @@ Thus it contains the white box description of selected building blocks of level 
 </div>
 <div class="sect2">
 <h3 id="_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</h3>
+<div class="paragraph">
+<p>En este apartado vamos a estudiar más a fondo la API de nuestra aplicación con un sistema de cajas negras (función de los elementos) y cajas blancas (funcionamiento interno de los elementos)
+Este sería el diagrama que indica las entidades que componen nuestra aplicación así como las interfaces que utilizan.
+<span class="image"><img src="./images/bloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1194,8 +1229,65 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_nombre_caja_negra_1">5.1.1. &lt;Nombre caja negra 1&gt;</h4>
+</div>
+<div class="sect2">
+<h3 id="_usuario_caja_negra">5.2. Usuario (caja negra)</h3>
+<div class="paragraph">
+<div class="title">Intención/responsabilidad</div>
+<p>Usuario gestiona a los clientes que interactúan con nuestra aplicación. No se almacenará demasiada información de los mismos, ya que la intención de nuestro sitio es extraer únicamente los datos necesarios así como puede ser la dirección pero sin necesidad de disponer de ella en nuestro almacenamiento (BD), sino en el sistema de PODs. No utiliza ninguna interfaz (API) externa.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_juguete_caja_negra">5.3. Juguete (caja negra)</h3>
+<div class="paragraph">
+<div class="title">Intención/responsabilidad</div>
+<p>Juguete se encarga de administrar a los productos que forman parte de nuestro sitio web.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Interfaces</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interfaz</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloudinary</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Almacén que se encargará de guardar las imágenes de los juguetes en la nube, de tal manera que tengamos un almacén seguro. Es un servicio que siempre está corriendo y que nos aporta usabilidad y escalabilidad.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_pedido_caja_negra">5.4. Pedido (caja negra)</h3>
+<div class="paragraph">
+<div class="title">Intención/responsabilidad</div>
+<p>Pedido sería la entidad que simula a los pedidos de nuestra aplicación, ya sea los productos que contenga, como su cantidad, los gastos de envío en función de la distancia&#8230;&#8203;</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Interfaces</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interfaz</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>GeoCode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Extrae las coordenadas de una dirección para así hacer posible el calculo de los gasto de envío respecto a las coordenadas de nuestra tienda.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1226,32 +1318,11 @@ according the the following black box template:</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_nombre_caja_negra_2">5.1.2. &lt;Nombre caja negra 2&gt;</h4>
+<h4 id="_bloque_de_construcción_nivel_2">5.4.1. Bloque de construcción - Nivel 2</h4>
 <div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
+<p>Nosotros decidimos organizar nuestra REST API a través de modelos que definen las entidades tal y como serán en la base de datos y los routes que se encargan de gestionar las peticiones así como el acceso a datos.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_nombre_caja_negra_n">5.1.3. &lt;Nombre caja negra n&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nombre_interfaz_1">5.1.4. &lt;Nombre interfaz 1&gt;</h4>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nombre_interfaz_m">5.1.5. &lt;Nombre interfaz m&gt;</h4>
-
-</div>
-</div>
-<div class="sect2">
-<h3 id="_nivel_2">5.2. Nivel 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1264,58 +1335,38 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_1">5.2.1. Caja Blanca <em>&lt;bloque de construcción 1&gt;</em></h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_2">5.2.2. Caja Blanca <em>&lt;bloque de construcción 2&gt;</em></h4>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_m">5.2.3. Caja Blanca <em>&lt;bloque de construcción m&gt;</em></h4>
-
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nivel_3">5.3. Nivel 3</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
+<h3 id="_usuario_caja_blanca">5.5. Usuario (caja blanca)</h3>
 <div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
+<p><span class="image"><img src="./images/UsuarioBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
 </div>
 <div class="paragraph">
-<p>When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.</p>
+<p>Modelo usuario se encarga de definir la estructura que el usuario tendrá en nuestra base de datos. Este modelo es usado por el routeUsuario que es el que se encarga de gestionar las peticiones recibidas y del acceso a datos como puede ser encontrar,
+añadir un usuario, etc.</p>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_x_1">5.3.1. Caja Blanca <em>&lt;bloque de construcción x.1</em>&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect2">
+<h3 id="_juguete_caja_blanca">5.6. Juguete (caja blanca)</h3>
 <div class="paragraph">
-<p>Specifies the internal structure of <em>building block x.1</em>.</p>
+<p><span class="image"><img src="./images/JugueteBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<p>Seguimos la misma estructura que con el usuario, se define el esquema de la entidad en el ModeloJuguete, el cual es utilizado por el routerJuguete ya que las peticiones requieren operaciones con acceso a datos (encontrar, añadir, etc).
+En este caso el router también hace uso de la interfaz externa Cloudinary. Esta se encargará de cuando se añade un juguete, coger su imagen y guardarla en su almacén. Clodinary nos devolverá una URL propia que será el direccionamiento de la imagen que ha almacenado y que usaremos para el juguete.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_pedido_caja_blanca">5.7. Pedido (caja blanca)</h3>
+<div class="paragraph">
+<p><span class="image"><img src="./images/PedidoBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
 </div>
+<div class="paragraph">
+<p>Volvemos con la misma estructura, ModeloPedido define el esquema el pedido con sus atributos y restricciones que poseerá en la base de datos. Este modelo es necesario para realizar operaciones de acceso a datos, y por tanto, será requerido desde routerPedido ya que peticiones como encontrar, añadir pedidos, etc, necesitan realizar operaciones con la base de datos. RouterPedido hace acceso también al ModeloJuguete y ModeloUsuario para por ejemplo buscar los juguetes de un pedido en concreto o encontrar los pedidos de un usuario específico.
+En este caso el router hace acceso tambíen a una API externa que es GeoCode, import de "node-geocoder". Esta internamente recibe una dirección y puede trabajar con distintos proveedores, en nuestro caso openstreetmap. Si su base de datos encuentra la dirección especificada devolverá una serie de datos sobre la misma, como puede ser las coordenadas. Esto nos hace posible posteriormente calcular manualmente el precio por km entre dos direcciones.</p>
 </div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_x_2">5.3.2. Caja Blanca <em>&lt;bloque de construcción x.2</em>&gt;</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_caja_blanca_bloque_de_construcción_y_1">5.3.3. Caja Blanca <em>&lt;bloque de construcción y.1</em>&gt;</h4>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 </div>
@@ -1392,7 +1443,7 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <h3 id="_compra_de_productos">6.1. Compra de productos</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ComprarProducto.png" alt="ComprarProducto" width="755" height="478">
+<img src="./images/ComprarProducto.png" alt="ComprarProducto" width="1106" height="508">
 </div>
 </div>
 </div>
@@ -1417,6 +1468,22 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <div class="imageblock">
 <div class="content">
 <img src="./images/FiltrarProducto.png" alt="FiltrarProducto" width="483" height="283">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_iniciar_sesión">6.5. Iniciar sesión</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/InicioSesion.png" alt="InicioSesion" width="660" height="313">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cierre_de_sesión">6.6. Cierre de sesión</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/CierreSesión.png" alt="CierreSesión" width="656" height="374">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1478,6 +1545,14 @@ when your infrastructure is more complex.</p>
 </div>
 <div class="sect2">
 <h3 id="_infraestrutura_nivel_1">7.1. Infraestrutura Nivel 1</h3>
+<div class="paragraph">
+<p><span class="image"><img src="./images/infraestructura.png" alt="Hierarchy of building blocks"></span>
+Este sería un diagrama que muestra la relación entre los distintos componentes de la aplicación.
+.Justificación
+El usuario accederá a la parte de interfaz de usuario que compone nuestra aplicación (webapp). Esta a su vez se comunicará con el backend (restapi) que será la encargada de comunicarse con la base de datos (mongoDb) y de trabajar con la API de gastos de envío.
+La manera de acceder por parte del usuario a todo esto es a través de la nube, es decir, con un navegador de su dispositivo. Para ello, se tiene que realizar el despliegue de la aplicación. Generamos entonces los contenedores Docker con las respectivas imágenes de webapp y restapi y procedemos a realizar el despliegue en Heroku.
+De ahí todas estas relaciones mostradas en el diagrama.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1518,11 +1593,64 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_elemento_de_infraestructura_1">7.2.1. <em>&lt;Elemento de infraestructura 1&gt;</em></h4>
-
+<h4 id="_heroku">7.2.1. <em>Heroku</em></h4>
+<div class="paragraph">
+<p>Heroku desplegará la aplicación de manera automatizada a través del workflows configurado en nuestro proyecto.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_elemento_de_infraestructura_n">7.2.2. <em>&lt;Elemento de infraestructura n&gt;</em></h4>
+<h4 id="_contenedor_docker">7.2.2. <em>Contenedor Docker</em></h4>
+<div class="paragraph">
+<p>Dicho elemento es el encargado de generar las imágenes para la webapp y restapi que posteriormente serán utilizadas para el despliegue</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_webapp">7.2.3. <em>Webapp</em></h4>
+<div class="paragraph">
+<p>Interfaz de usuario que se comunicará con el usuario, internamente usa diversas APIs como Auth0 o trabaja con PODs de SOLID para la seguridad. Realizado con React</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restapi">7.2.4. <em>Restapi</em></h4>
+<div class="paragraph">
+<p>Se encarga de comunicarse con la base de datos y la API de gastos de envío. Realizada con Node.js</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ordenador">7.2.5. <em>Ordenador</em></h4>
+<div class="paragraph">
+<p>Ordenador o dispositivo del usuario que interaccionará con nuestra aplicación</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_navegador">7.2.6. <em>Navegador</em></h4>
+<div class="paragraph">
+<p>Lugar a través del cual el usuario se comunica con nuestro sitio web</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pods">7.2.7. <em>PODS</em></h4>
+<div class="paragraph">
+<p>Elementos de almacenamiento de información privada del usuario que aumentará la seguridad del mismo en nuestra aplicación. Internamente el usuario ha de crearse una cuenta con uno de los proveedores existentes y almacenar la información que el mismo desee de manera pública o privada.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_auth0">7.2.8. <em>Auth0</em></h4>
+<div class="paragraph">
+<p>API que permite al usuario iniciar sesión en nuestro sitio. Nos permitirá trabajar con sus datos desde la aplicación. Esta API además gestionará las contraseñas de los usuarios sin necesidad de tener que introducirlas en nuestra base de datos, algo que incrementará la seguridad de la aplicación.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_geocode">7.2.9. <em>GeoCode</em></h4>
+<div class="paragraph">
+<p>API a la que le pasas una dirección y te devuelve ciertos datos. Para nuestro proyecto son de utilidad la latitud y longitud de la misma. Se utilizará la fórmula de Haversine para calcular la distancia en km (previamente diferencia de latitudes y longitudes) entre dos ubicaciones.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mongodb">7.2.10. <em>MongoDb</em></h4>
+<div class="paragraph">
+<p>Entorno que gestionará la base de datos. Se trata de una base de datos NO-SQL que nos aporta gran libertad y comodidad. Además de adapta muy bien a node.js</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1624,46 +1752,62 @@ on this list.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_persistencia">8.1. Persistencia</h3>
 <div class="paragraph">
-<div class="title">Persistencia</div>
-<p>Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará en una carpeta adjuntada
-con el proyecto.</p>
+<p>Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará a través de la API Cloudinary, almacenando estas en una nube que está constantemente corriendo y, por tanto, nos aportará usabilidad y escalabilidad.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_interfaz_de_usuario">8.2. Interfaz de Usuario</h3>
 <div class="paragraph">
-<div class="title">Interfaz de Usuario</div>
 <p>La interfaz de Usuario de <em>DeDe</em> estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño,
 si no que se imponía en los requisitos de alto nivel de la aplicación.</p>
 </div>
-<div class="paragraph">
-<div class="title">Manejo de Sesion</div>
-<p>Los usuarios podrán iniciar sesión a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad.</p>
 </div>
+<div class="sect2">
+<h3 id="_manejo_de_sesión">8.3. Manejo de Sesión</h3>
 <div class="paragraph">
-<div class="title">Seguridad y privacidad</div>
-<p>Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo
-los principios SOLID.</p>
+<p>Los usuarios podrán iniciar sesión para realiar su compra a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad. De esta manera obtenemos la dirección del usuario necesaria para calcular los gastos de envío de los pedidos. Por otro lado, el inicio de sesión con la aplicación en sí será a través de la API Auth0, que se encargará de gestionar a todos los usuarios que hayan iniciado sesión en nuestro sitio. Además, almacenaremos en la base de datos los email de aquellos usuarios que se hayan registrado para poder así gestionar sus pedidos.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_seguridad_y_privacidad">8.4. Seguridad y privacidad</h3>
 <div class="paragraph">
-<div class="title">Internacionalización</div>
+<p>Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo los principios SOLID, ya que solo se podrán acceder a los datos que el usuario de permisos. Además, las contraseñas de inicio de sesión de los usuarios no se encontrarán almacenadas en la base de datos ni visibles (en caso de que sí se podrían llevar a cabo métodos como la encriptación de las mismas).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_internacionalización">8.5. Internacionalización</h3>
+<div class="paragraph">
 <p>La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_gestión_de_desarrollo">8.6. Gestión de desarrollo</h3>
 <div class="paragraph">
-<div class="title">Build-Management</div>
 <p>La web se despliega una vez se pone en marcha el servidor.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_modelo_de_dominio">8.7. Modelo de Dominio</h3>
 <div class="paragraph">
-<p><span class="image"><img src="./images/08-Crosscutting-Concepts-Structure-EN.png" alt="Possible topics for crosscutting concepts"></span></p>
+<p><span class="image"><img src="./images/modeloDominio.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<p>Nuestro sistema está compuesto por tres entidades, juguete, pedido y usuario. Cada uno con sus atributos y se relacionan entre sí
+de tal manera que un juguete puede pertenecer a varios pedidos así como que un pedido pueda tener varios juguetes. Por otro lado,
+un pedido es de un solo usuario mientras que este puede tener asignados varios pedidos.
+Cabe destacar que el atributo cantidad en pedido va relacionado con cada juguete en concreto, refiriéndose al número de unidades de
+cada uno de ellos.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_modelo_de_dominio">8.1. Modelo de Dominio</h3>
-
+<h3 id="_testeable">8.8. Testeable</h3>
+<div class="paragraph">
+<p>El sistema dispondrá de diferentes tipos de pruebas para asegurarnos de su correcto funcionamiento. Estas serán
+pruebas unitarias para probar su funcionalidad, pruebas de aceptación para hacerlo pero de manera automática por el navegador y por último pruebas de carga para ver cuantos usuarios y peticiones es capaz de soportar nuestra aplicación.</p>
 </div>
-<div class="sect2">
-<h3 id="_concepto_2">8.2. <em>&lt;Concepto 2&gt;</em></h3>
-
-</div>
-<div class="sect2">
-<h3 id="_concepto_n">8.3. <em>&lt;Concepto n&gt;</em></h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1672,13 +1816,85 @@ los principios SOLID.</p>
 <h2 id="section-design-decisions">9. Decisiones de diseño</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Utilizaremos las tecnologías ya mencionadas anteriormente, la pila MERN, ya que por experiencia de muchos desarrolladores son herramientas
-que se coordinan muy bien.
-No podemos decir con precisión decisiones de diseño definitivas a estas alturas del desarrollo, pero tenemos pensado
-utilizar el Modelo Vista-Controlador para que la aplicación sea fácilmente ampliable en cuanto a funcionalidad. Podría surgir
-el uso de otros patrones conocidos como por ejemplo Command o Factory, pero es algo que iremos utilizando conforme vayamos desarrollando la
-aplicación.</p>
+<p>En este apartado no solo se van a comentar las decisiones tomadas por el equipo sino también alguna de las restricciones
+establecidas por los profesores de la asignatura.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Decisión/Restricción</th>
+<th class="tableblock halign-left valign-top">Tipo</th>
+<th class="tableblock halign-left valign-top">Utilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Node</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Restricción</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lenguaje a utilizar para el desarrollo del backend de la aplicación</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Restricción</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lenguaje a utilizar para el desarrollo del frontend de la aplicación</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Typescript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Restricción</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lenguaje en el que se realizará el desarrollo de la aplicación</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SOLID</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Restricción</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Plataforma de gestión de los POD</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Express</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Framework que nos facilita el trabajo con Node para el backend</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDb</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para gestionar la base de datos</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>GeoCode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API para calcular los gastos de envío de los pedidos</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Heroku</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para realizar el despliegue en la nube de la aplicación</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth0</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para hacer el registro e inicio de sesión en la aplicación. Permite hacerlo a través de Google</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>BootStrap</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para añadir estilos a los elementos</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Dotenv</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para proteger la información privada de la aplicación (url base de datos, ubicación de la empresa&#8230;&#8203;)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloudinary</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Decisión</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Para almacenar las imágenes que utilicemos en nuestra aplicación (juguetes, logo&#8230;&#8203;) en la nube y aumentar la usabilidad y escalabilidad</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1847,7 +2063,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>US2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La opción de añadir al carrito un producto debe estar muy clara y fácilmente accesible, así como realizar la compra</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Bajo</em></p></td>
 </tr>
 <tr>
@@ -1859,7 +2075,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>COM2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Comprensibilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>En caso de tener funciones distintas a las habituales de una tienda online, se deberán explicar y mostrar de manera clara</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>En caso de tener funciones distintas a las habituales de una tienda online, es decir, no usar convenciones, se deberán explicar y mostrar de manera clara</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Alto/Medio</em></p></td>
 </tr>
 <tr>
@@ -1883,7 +2099,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>TEST2</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Testabilidad</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion sera sometida a pruebas unitarias, para probar que funcione correctamente</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La aplicacion sera sometida a pruebas unitarias, de aceptación y de carga, para probar que funcione correctamente</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medio/Medio</em></p></td>
 </tr>
 <tr>
@@ -1909,22 +2125,29 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div class="sectionbody">
 <div class="paragraph">
 <div class="title">Falta de conocimiento de React</div>
-<p>Es la primera vez que trabajamos con este framework, por lo que no tenemos ni idea de como funciona.
-Sí que es cierto que la documentación es muy buena y tiene una gran cantidad de ejemplos, por lo que podemos aprender bastante en poco tiempo.</p>
+<p>Es la primera vez que trabajamos con este framework. Aunque hemos aprendido bastante durante la implementación del sitio web sí que es verdad que en muchas ocasiones nos hemos visto con problemas para realizar alguna funcionalidad debido a falta de conocimiento en aspectos como puede ser la sintaxis del lenguaje.
+Sí que es cierto que la documentación es muy buena y tiene una gran cantidad de ejemplos, ayudándonos con el desarrollo.</p>
+</div>
+<div class="paragraph">
+<div class="title">Falta de conocimiento de Node.js</div>
+<p>Nos pasa lo mismo que con React. Hemos tenido que ir aprendiendo el lenguaje a medida que ibamos desarrollando la aplicación.
+También tiene un documentación exhaustiva al ser un framework muy utilizado en el mundo del desarrollo web.</p>
 </div>
 <div class="paragraph">
 <div class="title">Tiempo</div>
-<p>Estamos limitados a una fecha para entregar el proyecto, por lo que debemos optimizar el trabajo lo máximo posible.</p>
+<p>Estamos limitados a una fecha para entregar el proyecto, por lo que debemos optimizar el trabajo lo máximo posible, algo que hará que aparezca más deuda técnica que si tuvieramos el tiempo que quisiéramos para perfeccionar todo lo necesario.</p>
 </div>
 <div class="paragraph">
 <div class="title">Equipos</div>
-<p>No tenemos mucha experiencia trabajando en equipo, y en ocasiones no es fácil coordinarse. Haremos reuniones cada poco tiempo con el fin de poner
-nuestro trabajo al día y avanzar uniformemente.</p>
+<p>No tenemos mucha experiencia trabajando en equipo, y en ocasiones no es fácil coordinarse. Haremos reuniones cada poco tiempo con el fin de poner nuestro trabajo al día y avanzar uniformemente.</p>
 </div>
 <div class="paragraph">
-<div class="title">Desconocimiento de SOLID</div>
-<p>SOLID es una nueva tecnología y su documentación es muy escasa. No tiene muchos ejemplos por lo que deberemos informarnos por cuenta propia por cualquier medio posible
-acerca de esa tecnología.</p>
+<div class="title">Despliegue</div>
+<p>Nos han surgido muchos problemas con el despliegue, no hemos sido capaces de realizarlo en la plataforma AWS y de momento estamos en progreso para hacerlo en Heroku. Es una operación de la que no teníamos conocimiento inicialmente y esto nos ha llevado a tener que investigar y solventar una gran cantidad de inconvenientes.</p>
+</div>
+<div class="paragraph">
+<div class="title">Desconococimiento de PODs de SOLID</div>
+<p>Tecnología desconocida con muy poca documentación y ejemplos.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1946,15 +2169,24 @@ acerca de esa tecnología.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>La documentación de React es muy buena y cuenta con una gran cantidad de ejemplos y facilidades, por lo que aprenderemos a desenvolvernos rápido.</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_Falta de conocimiento de Node.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es la primera vez que trabajamos con este framework, así no tenemos experiencia con él.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>La documentación es muy buena y cuenta con una gran cantidad de ejemplos y facilidades, por lo que aprenderemos a desenvolvernos rápido.</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Tiempo</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Estamos condicionados por una fecha de entrega</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Debemos optimizar tanto el trabajo individual como colectivo lo máximo posible</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Desconocimiento de SOLID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desconococimiento de PODs de SOLID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es una tecnología muy nueva, su documentación es muy escasa y se han reportado varios bugs</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Intentaremos informarnos de cualquier manera posible
-sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Intentaremos informarnos de cualquier manera posible sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Despliegue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Problemas en todas las plataformas en las que intentamos realizarlo</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Nos informamos a través de diversas fuentes así como con la ayuda de los profesores para realizar la misma.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1971,12 +2203,20 @@ sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Errores del POD</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Esta nueva tecnología puede ocasionar errores repentinos o algunos bugs.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Internacionalización</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aspecto que ha quedado sin realizar debido a falta de tiempo. Nos habría gustado realizarlo</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Errores de conexión</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Puede ocurrir que la conexión a la red sea muy débil y que en consecuencia la aplicación trabaje más lento</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usabilidad</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Operaciones como pasar validadores o probar la aplicación con usuarios reales antes de la presentación no han sido realizadas también debido al tiempo</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Despliegue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Todavía no hemos logrado desplegar exitosamente la aplicación</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -2093,6 +2333,14 @@ sobre esta tecnología, ya que tampoco tiene muchos ejemplos</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>BootStrap</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Es un framework front-end utilizado para desarrollar aplicaciones web.</em></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloudinary</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Api que se encarga de almacenar las imágenes de los juguetes en la nube, en una cuenta creada por nosotros a través de una api key</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>GeoCode</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Api para calcular los gastos de envío, obteniendo de ella datos de una dirección específica.</em></p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -2120,7 +2368,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-04-02 00:10:29 +0200
+Last updated 2022-03-21 14:29:22 +0100
 </div>
 </div>
 </body>
