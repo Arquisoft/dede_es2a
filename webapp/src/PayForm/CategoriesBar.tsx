@@ -29,7 +29,7 @@ const CategoriesBar = ()=> {
     <NavigationWrapper>
         <StyledLink className="linkCategorie" href="/nostalgia" >Nostalgia</StyledLink>
         <StyledLink className="linkCategorie" href="/vehiculo">Vehiculos</StyledLink>
-        <StyledLink className="linkCategorie" href="/musical">Musicales</StyledLink>
+        <StyledLink className="linkCategorie" href="/musicales">Musicales</StyledLink>
         <StyledLink className="linkCategorie" href="/peluche">Peluche</StyledLink>
         <StyledLink className="linkCategorie" href="/bebes">Bebés</StyledLink>
         <StyledLink className="linkCategorie" href="/otros">Otros</StyledLink>
