@@ -8,6 +8,8 @@ const LogoutForm = () => {
 
   const navigate = useNavigate();
   const { session } = useSession();
+  
+  
 /*
   useEffect(() => {
     localStorage.clear();
