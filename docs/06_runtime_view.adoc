@@ -116,3 +116,20 @@ Usuario <- Dede: Se muestra la página principal de la aplicación
 Usuario -> Dede: Presiona el botón de "Desconectarse"
 Usuario <- Dede: Se muestra la página principal de la aplicación con las funciones de un usuario normal
 ----
+
+=== Editar productos
+[plantuml,"EditarProducto",png]
+----
+actor Admin #green
+database BaseDeDatos as "Base de datos" #blue
+Admin -> Dede: Accede  a la página para iniciar sesión
+Admin -> Dede: Rellena la pagina con una cuenta de administrador
+Admin <-- Dede: La aplicación redirige al usuario a la página principal
+Admin -> Dede: Accede a la sección "Administrar productos"
+Admin -> Dede: Accede a "Editar producto"
+DeDe --> Dede: Muestra el formulario de edición del producto.
+Admin -> Dede: Accede a "Editar producto"
+Admin -> Dede: Rellena los nuevos campos del producto
+Admin -> Dede: Confirma los cambios
+BaseDeDatos <-- Dede: Actualiza los cambios realizados en el producto.
+----
