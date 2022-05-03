@@ -86,10 +86,10 @@ const AddForm = () => {
                         </div>
                     </div>
                     <div className="botones">
-                        <button className="cancelar" onClick={() => {
+                        <button data-testid="cancelar" id="cancelar" className="cancelar" onClick={() => {
                             navigate("/productos");
                         }}>Cancelar</button>
-                        <button type="submit" className="guardar" onClick={() => {
+                        <button data-testid="guardar" id="guardar" type="submit" className="guardar" onClick={() => {
                             // validaciones de campos
                             if (nombre === "" || nombre == null || nombre === undefined) {
                                 toast.warn("El nombre no puede ser vacío", { position: toast.POSITION.TOP_CENTER });

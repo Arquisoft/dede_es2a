@@ -51,7 +51,6 @@ const Navbar = () => {
                         })}
                     </ul>
             }
-
             {
                 isAuthenticated ? <LogoutButton /> : <LoginButton />
             }

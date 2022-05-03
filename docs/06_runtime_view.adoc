@@ -93,8 +93,8 @@ Dede -> Admin: Muestra todos los productos
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Escribe un texto en el cuadro de búsqueda y pulsa 'filtrar'
-BaseDeDatos --> Dede: Devuelve los juguetes que coincidan con la búsqueda
+Usuario -> Dede: Pulsa uno de los botones de filtrado por categorías
+BaseDeDatos --> Dede: Devuelve los juguetes que coincidan con la categoría
 Usuario <- Dede: Muestra los juguetes encontrados con el filtro
 ----
 
