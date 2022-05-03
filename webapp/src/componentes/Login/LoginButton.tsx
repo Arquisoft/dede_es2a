@@ -1,7 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Usuario } from '../../shared/sharedUser';
 
-import { Juguete } from '../../shared/sharedJuguete';
 /*
 async function getData(): Promise<any> {
     //const { data } = useQuery<Usuario>('usuario', checkUserInBD);
