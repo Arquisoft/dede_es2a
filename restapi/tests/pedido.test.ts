@@ -127,6 +127,6 @@ describe('pedidos ', () => {
     it("Se calculan los gastos de envío a una dirección que no se encuentra", async () =>{
         const response:Response = await request(app).post('/pedido/gastosEnvio').send({direccion:"La direccion no se encuentra"});
         expect(response.status).toBe(200);
-        expect(Number(response.text).toFixed(2).toString()).toEqual("5.00");
+        expect(Number(response.text).toFixed(2).toString()).toEqual("0.00");
     });
 });
