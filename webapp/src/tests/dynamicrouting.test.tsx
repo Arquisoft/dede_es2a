@@ -253,7 +253,7 @@ test('Editar prodcuto is rendered', () => {
 
   expect(screen.getByText("Registrarse")).toBeInTheDocument();
 })
- */
+ 
 
 /*
 test('clicking home nav-button', () => {
