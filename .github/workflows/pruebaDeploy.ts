@@ -1,3 +1,4 @@
+/*
 name: CI for ASW2122
 on:
   release:
@@ -55,3 +56,4 @@ jobs:
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
         appdir: "restapi"
+        */
