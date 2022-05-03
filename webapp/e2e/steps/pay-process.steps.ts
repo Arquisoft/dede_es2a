@@ -7,7 +7,7 @@ let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
-  
+  jest.setTimeout(100000)
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
@@ -37,6 +37,7 @@ defineFeature(feature, test => {
       }
     });
     await page.waitForNavigation();
+    await page.waitForTimeout(1000);
 
     //await expect(page).toClick("a");
 

@@ -3,13 +3,6 @@ import {Juguete} from '../shared/sharedJuguete';
 import Paper from "@mui/material/Paper";
 //Styles
 
-
-/*type Props = {
-    item: CartItemType;
-    addToCart: (clickedItem: CartItemType) => void;
-    removeFromCart: (id:number) => void;
-}*/
-
 type Props = {
     item: Juguete;
 }
