@@ -1,5 +1,16 @@
 h1{
-    color:rgb(18, 118, 175);
+    color:rgb(255, 255, 255);
+    font-size: 5em;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center  ;
+}
+
+h2 {
+    color:rgb(255, 255, 255);
+    
+    font-family: monospace;
     display: flex;
     justify-content: center;
     align-items: center  ;
@@ -10,4 +21,11 @@ p{
     margin-left: 2em;
     margin-top: 1em;
     margin-block-end: 1em;
+}
+
+#contenedorPrincipal {
+    background: url(./fondonostalgia.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    height: 40vw;
 }

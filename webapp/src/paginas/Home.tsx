@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Typography } from "@material-ui/core";
 import { Usuario } from "../shared/sharedUser";
 import "./Pag.css"
 
@@ -55,12 +56,15 @@ const Home = () => {
   localStorage.removeItem("sesion")
   return (
       <body>
-      <h1>Bienvenido</h1>
+      <div id="contenedorPrincipal">
+        
+      <h1 >Bienvenido</h1>
 
-              <p>Esperamos que disfrutes nuestra pagina web</p>
+              <h2>"La alegría que un día tuvimos para los nuestros"</h2>
+              </div>
 
       </body>
-
+      
   )
 }
 
