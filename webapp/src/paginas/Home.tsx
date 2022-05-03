@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Typography } from "@material-ui/core";
 import { Usuario } from "../shared/sharedUser";
 import "./Pag.css"
 
@@ -15,11 +16,12 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
     .then(resp => resp.json())
     .then(usuario => {
       userExists = usuario.isAdmin;
-      console.log(usuario.isAdmin);
       localStorage.setItem("isAdmin", usuario.isAdmin);
+      if(localStorage.getItem("reload")=="true"){
+        window.location.reload();
+        localStorage.setItem("reload","false")
+      }
     });
-    //The objects returned by the api are directly convertible to User objects
-    return response;
 }
 
 /**
@@ -33,8 +35,6 @@ async function addUserToBD(email:string): Promise<any> {
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({"email":email, "isAdmin": false})
     })
-  
-    return response;
   }
 /*
   export async function checkUserInBD(): Promise<Usuario[]> {
@@ -47,27 +47,49 @@ async function addUserToBD(email:string): Promise<any> {
 }
 */
 const Home = () => {
-   
-    const {isAuthenticated, user} = useAuth0();
-    let usuario:Usuario;
-    if(isAuthenticated){
-        // comprobamos si ya existe en la bd
-        let email:any = user?.email;
-        checkUserInBDByEmail(email);
-        if(!userExists){ // almacenamos en la base de datos
-            addUserToBD(email);
-        }
-    }
-    
-    return (
-        <body>
-        <h1>Bienvenido</h1>
-           
-                <p>Esperamos que disfrutes nuestra pagina web</p>
-           
-        </body>
+
+  const {isAuthenticated, user} = useAuth0();
+  if(localStorage.getItem("sesion")==="true"){
+      // comprobamos si ya existe en la bd
+      let email:any = user?.email;
+      checkUserInBDByEmail(email);
+      if(!userExists){ // almacenamos en la base de datos
+          addUserToBD(email);
+      }
+  }
+  localStorage.removeItem("sesion")
+  return (
+      <body>
+      <div id="contenedorPrincipal">
+        
+      <h1 >Bienvenido</h1>
+
+              <h2 id="lema">"La alegría que un día tuvimos para los nuestros"</h2>
+              </div>
+
+      </body>
       
-    )
+  )
 }
 
+/* const Home = () => {
+  const {isAuthenticated, user} = useAuth0();
+  let usuario:Usuario;
+  if(isAuthenticated){
+      // comprobamos si ya existe en la bd
+      let email:any = user?.email;
+      checkUserInBDByEmail(email);
+      if(!userExists){ // almacenamos en la base de datos
+          addUserToBD(email);
+      }
+  }
+  return (
+      <body>
+      <h1>Bienvenido</h1>
+              <p>Esperamos que disfrutes nuestra pagina web</p>
+      </body>
+  )
+} */
 export default Home;
+
+

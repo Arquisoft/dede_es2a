@@ -9,6 +9,11 @@
     margin-bottom: 1em;
 }
 
+.logo {
+    margin-top: 1em;
+    max-height: 9em;
+}
+
 .prof-name {
     color: #fff;
     margin-right: 3.5em;
@@ -25,7 +30,7 @@
     color:#0d6efd;
     border-radius: 0.5em;
     margin-bottom: 0.5em;
-    margin-right: 5em;
+    margin-right: 10em;
     font-size: 1.2rem;
 }
 

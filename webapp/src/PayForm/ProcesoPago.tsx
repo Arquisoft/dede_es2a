@@ -1,9 +1,6 @@
-import CartItem from '../CartItem/CartItem';
-
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 //Styles
-import { Wrapper } from '../Cart/Cart.styles';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +10,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 
 import Container from "@mui/material/Container";
 //Types
-import { CartItemType } from '../App';
+
 
 import { Juguete } from '../shared/sharedJuguete';
 
@@ -22,7 +19,6 @@ import Delivery from './Delivery';
 import Review from './Review';
 import FinalizedOrder from './FinalizedOrder';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Email } from '@material-ui/icons';
 
 
 /*
@@ -106,10 +102,6 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
     }
   };
   const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
-
-  const pasoAnterior = () => {
-    setPasoActual((pasoPrevio) => pasoPrevio - 1);
-  };
 
   const [deliveryCost, setDeliveryCost] = React.useState<number>(Number());
   const [address, setAddress] = React.useState("");

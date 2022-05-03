@@ -1,11 +1,20 @@
-.formularioYfoto {
-    display: grid;
+.formulario {
+	display: grid;
 	gap: 1em;
 	grid-template-columns: repeat(2, 1fr);
 }
 
+input {
+    min-width: 15em;
+}
+
+.img {
+    min-width: 25em;
+}
+
 .imagen-producto {
-    max-height: 22em;
+    max-height: 33em;
+    min-height: 33em;
 }
 
 .editForm{

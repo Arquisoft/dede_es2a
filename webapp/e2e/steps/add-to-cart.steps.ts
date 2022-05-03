@@ -13,7 +13,7 @@ defineFeature(feature, test => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: true });
+      : await puppeteer.launch({ headless: false, slowMo:100 });
       //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -42,14 +42,23 @@ defineFeature(feature, test => {
 
       //Clickamos el boton que despliega el carrito
       const addToCart =await page.$('button#botonAnadirAlCarrito');
-      await addToCart!.click();
-      await addToCart!.click();
+      await addToCart!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
+       
 
 
       //Clickamos el boton que despliega el carrito
-      const botonCarrito2 =await page.$('button#botonCarritoDesplegar');
-      await botonCarrito2!.click();
-    });
+      const botonCarrito =await page.$('button#botonCarritoDesplegar');
+      await botonCarrito!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
+    }
+  );
 
     then('The cart should have an item', async () => {
       //En consecuencia, debería aparecer la palabra precio.
