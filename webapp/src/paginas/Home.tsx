@@ -17,6 +17,10 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
     .then(usuario => {
       userExists = usuario.isAdmin;
       localStorage.setItem("isAdmin", usuario.isAdmin);
+      if(localStorage.getItem("reload")=="true"){
+        window.location.reload();
+        localStorage.setItem("reload","false")
+      }
     });
 }
 
