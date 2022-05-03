@@ -57,8 +57,8 @@ export type Juguete = {
 // AÑADIDO---------------------------------------------------------------------------------------------
 // Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes(): Promise<Juguete[]> {
-  //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  const apiEndPoint = process.env.API_URL || 'http://localhost:5000/'
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + 'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
@@ -80,7 +80,7 @@ const App = () => {
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
-  const { data, isLoading } = useQuery<Juguete[]>('juguetes', getJuguetes);
+  const { data } = useQuery<Juguete[]>('juguetes', getJuguetes);
 
 
   useEffect(() => {
@@ -153,10 +153,6 @@ const App = () => {
     ))
   };
 
-
-  //Coloca una barra de carga cuando la página está cargando
-  if (isLoading) return <LinearProgess />;
-  //if (error) return <div>Algo ha fallado</div>;
 
   return (
     <>
