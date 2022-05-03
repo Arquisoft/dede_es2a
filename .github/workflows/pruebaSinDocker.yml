@@ -4,7 +4,6 @@ on:
     types: [published]
 jobs:
   deploy-webapp:
-    needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +20,6 @@ jobs:
       env:
         API_URI: "https://dede-es2a-restapi.herokuapp.com/"
   deploy-restapi:
-    needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
