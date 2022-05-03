@@ -1,25 +1,26 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Typography } from "@material-ui/core";
-import { Usuario } from "../shared/sharedUser";
+//import { Typography } from "@material-ui/core";
+//import { Usuario } from "../shared/sharedUser";
 import "./Pag.css"
 
 // Variable para almacenar si el usuario autenticado existe o no en la bd
-let userExists:boolean = false;
+let userExists: boolean = false;
 
 /**
  * Método que hace petición a restapi para comprobar si el usuario con el email especificado existe en la bd
  * @param email 
  * @returns 
  */
-export async function checkUserInBDByEmail(email:string): Promise<any> {
-    let response = await fetch('http://localhost:5000/usuario/'+email)
+export async function checkUserInBDByEmail(email: string): Promise<any> {
+  //let response = 
+  await fetch('http://localhost:5000/usuario/' + email)
     .then(resp => resp.json())
     .then(usuario => {
       userExists = usuario.isAdmin;
       localStorage.setItem("isAdmin", usuario.isAdmin);
-      if(localStorage.getItem("reload")=="true"){
+      if (localStorage.getItem("reload") === "true") {
         window.location.reload();
-        localStorage.setItem("reload","false")
+        localStorage.setItem("reload", "false")
       }
     });
 }
@@ -28,14 +29,15 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
  * Método que hace petición a restapi para añadir un usuario a la bd
  * @returns 
  */
-async function addUserToBD(email:string): Promise<any> {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    let response = await fetch(apiEndPoint + 'usuario', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({"email":email, "isAdmin": false})
-    })
-  }
+async function addUserToBD(email: string): Promise<any> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //let response = 
+  await fetch(apiEndPoint + 'usuario', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "email": email, "isAdmin": false })
+  })
+}
 /*
   export async function checkUserInBD(): Promise<Usuario[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
@@ -48,27 +50,27 @@ async function addUserToBD(email:string): Promise<any> {
 */
 const Home = () => {
 
-  const {isAuthenticated, user} = useAuth0();
-  if(localStorage.getItem("sesion")==="true"){
-      // comprobamos si ya existe en la bd
-      let email:any = user?.email;
-      checkUserInBDByEmail(email);
-      if(!userExists){ // almacenamos en la base de datos
-          addUserToBD(email);
-      }
+  const { user } = useAuth0();
+  if (localStorage.getItem("sesion") === "true") {
+    // comprobamos si ya existe en la bd
+    let email: any = user?.email;
+    checkUserInBDByEmail(email);
+    if (!userExists) { // almacenamos en la base de datos
+      addUserToBD(email);
+    }
   }
   localStorage.removeItem("sesion")
   return (
-      <body>
+    <body>
       <div id="contenedorPrincipal">
-        
-      <h1 >Bienvenido</h1>
 
-              <h2 id="lema">"La alegría que un día tuvimos para los nuestros"</h2>
-              </div>
+        <h1 >Bienvenido</h1>
 
-      </body>
-      
+        <h2 id="lema">"La alegría que un día tuvimos para los nuestros"</h2>
+      </div>
+
+    </body>
+
   )
 }
 

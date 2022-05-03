@@ -256,14 +256,7 @@ test('Edit product form is rendered', () => {
   const button = component.container.querySelector('button');
   button!.click();
   const buttons = component.container.querySelectorAll('button');
-  buttons[1]!.click();
-})
-
-
-test('Editar producto is rendered', () => {
-  const component = render(<EditForm  />)
-
-  expect(component.container).toHaveTextContent('Modificar juguete')
+  buttons[1]!.click(); 
 })
 
 

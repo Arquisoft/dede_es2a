@@ -47,9 +47,6 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                 </a>
             </div>:
               <div>
-                      <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"} id="confirmarPedido">
-                    {'Realizar pedido'}
-                </a>
              <LoginButtonCart />
               </div>
             }           
