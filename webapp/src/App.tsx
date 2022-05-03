@@ -187,7 +187,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -225,7 +225,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -262,7 +262,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor="#ffffff"  />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -299,7 +299,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -336,7 +336,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -373,7 +373,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large"htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -411,7 +411,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -443,7 +443,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>

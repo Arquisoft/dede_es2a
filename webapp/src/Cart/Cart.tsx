@@ -24,7 +24,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
     console.log(isAuthenticated)
     return (
         <Wrapper>
-            <Typography variant="h2" component="h2">Tu carrito</Typography>
+            <Typography color="textPrimary" variant="h2" component="h2">Tu carrito</Typography>
             {cartItems.length===0 ? <p>No hay juguetes en el carrito</p>: null}
             {cartItems.map(item=>(
                 <CartItem 
