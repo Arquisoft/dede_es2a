@@ -21,8 +21,7 @@ type Props = {
 }
 
 async function addStock(nombre: string): Promise<any> {
-    //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
     //let response = 
     await fetch(apiEndPoint + '/juguete/addStock/' + nombre, {
         method: 'POST',

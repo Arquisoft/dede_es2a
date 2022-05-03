@@ -54,8 +54,7 @@ export type Juguete = {
 */
 
 export async function getJuguetes(): Promise<Juguete[]> {
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
   let response = await fetch(apiEndPoint + '/juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
