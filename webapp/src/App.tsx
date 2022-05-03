@@ -28,6 +28,8 @@ import ProcesoPago from './PayForm/ProcesoPago';
 import EditForm from './componentes/editarProducto/editarProducto';
 import CategoriesBar from './PayForm/CategoriesBar';
 import AddForm from './componentes/nuevoProducto/nuevoProducto';
+import {getJuguetes} from './api/api';
+
 
 //Types
 export type CartItemType = {
@@ -54,16 +56,7 @@ export type Juguete = {
 
 
 
-// AÑADIDO---------------------------------------------------------------------------------------------
-// Petición para obtener todos los juguetes de la base de datos
-export async function getJuguetes(): Promise<Juguete[]> {
-  const apiEndPoint = process.env.API_URL || 'http://localhost:5000/'
-  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
-  let response = await fetch(apiEndPoint + 'juguete/withstock');
-  //The objects returned by the api are directly convertible to User objects
-  //console.log(response.json());
-  return response.json();
-}
+
 
 /*Tambien se ha añadido la entidad compartida 'Juguete' en la carpeta shared, creando un type con el esquema de juguete
 en la BD y exportando para poder usarlo desde fuera*/

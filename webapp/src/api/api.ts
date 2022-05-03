@@ -1,4 +1,5 @@
 import {User} from '../shared/shareddtypes';
+import { Juguete } from '../shared/sharedJuguete';
 
 export async function addUser(user:User):Promise<boolean>{
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
@@ -11,6 +12,16 @@ export async function addUser(user:User):Promise<boolean>{
       return true;
     else
       return false;
+}
+
+export async function getJuguetes(): Promise<Juguete[]> {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  console.log(process.env.REACT_APP_API_URI)
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  let response = await fetch(apiEndPoint + 'juguete/withstock');
+  //The objects returned by the api are directly convertible to User objects
+  //console.log(response.json());
+  return response.json();
 }
 
 export async function getUsers():Promise<User[]>{
