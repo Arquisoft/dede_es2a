@@ -52,13 +52,16 @@ const LoginButton = () => {
 
        // console.log(email);
       //  localStorage.setItem("isAdmin",isAdmin);
+      //window.location.href=("/home");
         const localUser = localStorage.getItem("user");
         if (localUser) {
+           // window.location.href=("/home");
             let user = JSON.parse(localUser);
         } else {
             localStorage.setItem("user", JSON.stringify([]));
         }
-        window.location.reload();
+        localStorage.setItem("reload","true");
+       // window.location.reload();
         //Refresh;
     }}>Registrarse</button>;
 }

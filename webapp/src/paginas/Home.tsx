@@ -4,6 +4,7 @@ import "./Pag.css"
 
 // Variable para almacenar si el usuario autenticado existe o no en la bd
 let userExists:boolean = false;
+let reload:boolean = true;
 
 /**
  * Método que hace petición a restapi para comprobar si el usuario con el email especificado existe en la bd
@@ -17,6 +18,10 @@ export async function checkUserInBDByEmail(email:string): Promise<any> {
       userExists = usuario.isAdmin;
       console.log(usuario.isAdmin);
       localStorage.setItem("isAdmin", usuario.isAdmin);
+     if( localStorage.getItem("reload")=="true"){
+        window.location.reload();
+        localStorage.setItem("reload","false");
+      }
     });
     //The objects returned by the api are directly convertible to User objects
     return response;
@@ -51,6 +56,7 @@ const Home = () => {
     const {isAuthenticated, user} = useAuth0();
     let usuario:Usuario;
     if(isAuthenticated){
+      //window.location.reload();
         // comprobamos si ya existe en la bd
         let email:any = user?.email;
         checkUserInBDByEmail(email);

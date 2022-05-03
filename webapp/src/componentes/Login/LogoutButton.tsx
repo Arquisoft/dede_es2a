@@ -7,6 +7,7 @@ const LogoutButton = () => {
         <button className='btn btn-primary' onClick={() => {
             logout()
             localStorage.setItem("isAdmin","false");
+            window.location.href=("/home");
         }
         }>Desconectarse</button>
     );
