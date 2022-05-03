@@ -7,7 +7,7 @@ jobs:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     env:
-      API_URI: "https://dede-es2a-restapi.herokuapp.com"
+      API_URI: https://dede-es2a-restapi.herokuapp.com
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
