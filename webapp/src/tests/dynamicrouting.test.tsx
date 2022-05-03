@@ -230,7 +230,7 @@ test('Logout form is rendered', () => {
 })
 
 
-test('Editar prodcuto is rendered', () => {
+test('Editar producto is rendered', () => {
   const component = render(<EditForm  />)
 
   expect(component.container).toHaveTextContent('Modificar juguete')
