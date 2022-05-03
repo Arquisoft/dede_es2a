@@ -13,7 +13,7 @@ defineFeature(feature, test => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo:100 });
+      : await puppeteer.launch({ headless: true, slowMo:100 });
       //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
