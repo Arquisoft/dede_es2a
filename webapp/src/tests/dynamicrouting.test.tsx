@@ -260,13 +260,6 @@ test('Edit product form is rendered', () => {
 })
 
 
-test('Editar producto is rendered', () => {
-  const component = render(<EditForm  />)
-
-  expect(component.container).toHaveTextContent('Modificar juguete')
-})
-
-
 
 
 /*  test('Login button is rendered', async () => {

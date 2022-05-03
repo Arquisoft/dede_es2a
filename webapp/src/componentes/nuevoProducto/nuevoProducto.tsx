@@ -62,6 +62,7 @@ const AddForm = () => {
                         <label>Categoría:</label>
                         <div>
                             <select id="kind" name="kind" required onChange={event => categoria = event.target.value}>
+                                <option selected></option>
                                 <option>nostalgia</option>
                                 <option>vehiculos</option>
                                 <option>musicales</option>
@@ -89,7 +90,7 @@ const AddForm = () => {
                         <button data-testid="cancelar" id="cancelar" className="cancelar" onClick={() => {
                             navigate("/productos");
                         }}>Cancelar</button>
-                        <button data-testid="guardar" id="guardar" type="submit" className="guardar" onClick={() => {
+                        <button data-testid="guardar" id="guardar" type="submit" className="guardar" onClick={async () => {
                             // validaciones de campos
                             if (nombre === "" || nombre == null || nombre === undefined) {
                                 toast.warn("El nombre no puede ser vacío", { position: toast.POSITION.TOP_CENTER });
@@ -97,15 +98,18 @@ const AddForm = () => {
                                 toast.warn("La descripción no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
                             } else if (imagen === "" || imagen == null || imagen === undefined) {
                                 toast.warn("La URL de la imagen no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
+                            } else if (categoria === "" || categoria == null || categoria === undefined) {
+                                toast.warn("Se debe seleccionar una categoría.", { position: toast.POSITION.TOP_CENTER });
                             } else if (precio <= 0.0 || precio == null || precio === undefined) {
                                 toast.warn("El precio debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
                             } else if (stock <= 0 || stock == null || stock === undefined) {
                                 toast.warn("El stock debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
                             } else {
                                 // guardar en bd
-                                addJuguete();
+                                await addJuguete();
                                 // volver a productos
-                                navigate("/productos");
+                                window.location.href = ("/productos"); // no funciona
+                                //navigate("/productos");
                                 window.location.reload();
                             }
                         }}>Guardar</button>
