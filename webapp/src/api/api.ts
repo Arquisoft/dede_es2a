@@ -1,8 +1,9 @@
 import {User} from '../shared/shareddtypes';
 import { Juguete } from '../shared/sharedJuguete';
+require('dotenv').config();
 
 export async function addUser(user:User):Promise<boolean>{
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    const apiEndPoint= process.env.API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -15,7 +16,7 @@ export async function addUser(user:User):Promise<boolean>{
 }
 
 export async function getJuguetes(): Promise<Juguete[]> {
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  const apiEndPoint = process.env.API_URI || 'http://localhost:5000/'
   //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + 'juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
@@ -24,7 +25,7 @@ export async function getJuguetes(): Promise<Juguete[]> {
 }
 
 export async function getUsers():Promise<User[]>{
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    const apiEndPoint= process.env.API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/list');
     //The objects returned by the api are directly convertible to User objects
     return response.json()

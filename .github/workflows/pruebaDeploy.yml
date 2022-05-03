@@ -6,8 +6,6 @@ jobs:
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    env:
-      API_URI: https://dede-es2a-restapi.herokuapp.com
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
@@ -18,15 +16,9 @@ jobs:
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: webapp
-          buildargs: API_URI
   docker-push-restapi:
     name: Push restapi Docker Image to GitHub Packages
     runs-on: ubuntu-latest
-    env:
-      MONGO_URI: ${{ secrets.MONGO_URI }}
-      CLOUDINARY_NAME: ${{ secrets.CLOUD_NAME }}
-      CLOUDINARY_API_KEY: ${{ secrets.CLOUD_KEY }}
-      CLOUDINARY_API_SECRET: ${{ secrets.CLOUD_SECRET}}
     steps:
     - uses: actions/checkout@v2
     - name: Publish to Registry
@@ -37,7 +29,6 @@ jobs:
           password: ${{ secrets.DOCKER_PUSH_TOKEN }}
           registry: ghcr.io
           workdir: restapi
-          buildargs: MONGO_URI, CLOUDINARY_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
   deploy-webapp:
     needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
