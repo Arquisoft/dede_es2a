@@ -256,7 +256,7 @@ test('Edit product form is rendered', () => {
   const button = component.container.querySelector('button');
   button!.click();
   const buttons = component.container.querySelectorAll('button');
-  buttons[1]!.click();
+  buttons[1]!.click(); 
 })
 
 

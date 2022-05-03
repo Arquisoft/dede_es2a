@@ -95,12 +95,13 @@ Usuario <- Dede: Muestra los juguetes encontrados con el filtro
 === Iniciar sesión
 [plantuml,"InicioSesion",png]
 ----
-actor Usuario #green
+actor Usuario
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
-Usuario <- Dede: Se despliega un formulario de inicio de sesión aportado por la API Auth0
-Usuario -> Dede: Rellena el formulario
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+database Auth0 as "Auth0" #blue
+Usuario -> Dede: Accede  a la página y presiona "Registrarse"
+DeDe -> Auth0: Redirecciona al usuario a Auth0
+Usuario -> Auth0: Rellena sus datos e inicia sesión con su cuenta
+DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
 Usuario <- Dede: Se muestra la página principal de la aplicación, con unas opciones u otras en función del rol del usuario (se usa el localStorage)
 ----
 
@@ -109,12 +110,35 @@ Usuario <- Dede: Se muestra la página principal de la aplicación, con unas opc
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
-Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
+database Auth0 as "Auth0" #blue
+Usuario -> Dede: Accede  a la página y presiona "Registrarse"
+DeDe -> Auth0: Redirecciona al usuario a Auth0
+Usuario -> Auth0: Rellena sus datos e inicia sesión con una cuenta de administrador
+DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
 BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
 Usuario <- Dede: Se muestra la página principal de la aplicación
 Usuario -> Dede: Presiona el botón de "Desconectarse"
 Usuario <- Dede: Se muestra la página principal de la aplicación con las funciones de un usuario normal
+----
+
+
+=== Editar productos
+[plantuml,"EditarProducto",png]
+----
+actor Admin #green
+database BaseDeDatos as "Base de datos" #blue
+database Auth0 as "Auth0" #blue
+Admin -> Dede: Accede  a la página para iniciar sesión
+DeDe -> Auth0: Redirecciona al usuario a Auth0
+Admin -> Auth0: Rellena sus datos e inicia sesión con una cuenta de administrador
+DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
+Admin -> Dede: Accede a la sección "Administrar productos"
+Admin -> Dede: Accede a "Editar producto"
+DeDe --> Dede: Muestra el formulario de edición del producto.
+Admin -> Dede: Accede a "Editar producto"
+Admin -> Dede: Rellena los nuevos campos del producto
+Admin -> Dede: Confirma los cambios
+BaseDeDatos <-- Dede: Actualiza los cambios realizados en el producto.
 ----
 
 === Histórico de pedidos
@@ -129,4 +153,5 @@ Usuario <- Dede: Se muestra la página principal de la aplicación
 Usuario -> Dede: Presiona el botón de "Historial Pedidos"
 Usuario <- Dede: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
 ----
+
 
