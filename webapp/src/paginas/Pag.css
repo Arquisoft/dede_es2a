@@ -7,10 +7,10 @@ h1{
     align-items: center  ;
 }
 
-h2 {
+#lema {
     color:rgb(255, 255, 255);
     
-    font-family: monospace;
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center  ;
