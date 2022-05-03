@@ -91,11 +91,11 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   };
 
   const siguientePasoSiPodCalcularEnvio = async () => {
-    if (localStorage.getItem("direccion") == null || localStorage.getItem("direccion") == "") {
+    if (localStorage.getItem("direccion") == null || localStorage.getItem("direccion") === "") {
       toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", { position: toast.POSITION.TOP_CENTER })
     } else {
       let variable = await getGastosEnvio();
-      if (gastosEnvio == 0.00 || localStorage.getItem("direccion") == "null") {
+      if (gastosEnvio === 0.00 || localStorage.getItem("direccion") === "null") {
         toast.error("Su dirección no fue encontrada, lo sentimos. Para solucionar el problema " +
           "modifique la dirección de su POD", { position: toast.POSITION.TOP_CENTER })
       } else {
@@ -112,7 +112,6 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   const getPaso = (stepIndex: number) => {
     switch (stepIndex) {
       case 0:
-        condPedido = true;
         return (
           <Shipping
             cartItems={cartItems}

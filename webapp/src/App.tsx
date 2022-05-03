@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import {useQuery } from 'react-query'
 
 
 import { useEffect, useState } from "react"
@@ -12,7 +12,6 @@ import Navbar from './componentes/Navbar/Navbar';
 import { Juguete } from './shared/sharedJuguete';
 import Footer from './componentes/Footer/Footer';
 import Drawer from '@material-ui/core/Drawer';
-import LinearProgess from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
@@ -65,7 +64,6 @@ export async function getJuguetes(): Promise<Juguete[]> {
 en la BD y exportando para poder usarlo desde fuera*/
 //--------------------------------------------------------------------------------------------------------
 
-const queryClient = new QueryClient()
 const App = () => {
 
   const [cartOpen, setCartOpen] = useState(false);

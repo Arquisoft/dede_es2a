@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Home from '../../paginas/Home';
-import {useSession } from "@inrupt/solid-ui-react";
-import { LocalStorageCache } from "@auth0/auth0-react";
 
 const LogoutForm = () => {
 
