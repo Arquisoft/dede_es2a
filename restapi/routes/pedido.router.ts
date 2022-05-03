@@ -1,8 +1,4 @@
-import { match } from "assert";
-import { Console } from "console";
 import express, {Request,response,Response} from "express"
-import { maxHeaderSize, request } from "http";
-import { ObjectId } from "mongodb";
 
 const Juguete = require("../models/Juguete");
 const Pedido = require('../models/Pedido')
@@ -21,7 +17,6 @@ const geocoder = ApiGeocode(opciones);
 pedidoRouter.get("/", async(req:Request,res:Response)=>{
     try{
         let pedidos = await Pedido.find({}).populate('juguetes._id').populate('usuario');
-        console.log(pedidos)
         res.send(pedidos);
     } catch {
         res.status(500).send("Error al listar los pedidos");
@@ -130,22 +125,6 @@ pedidoRouter.post('/gastosEnvio', async (req:Request,res:Response) =>{
     }
 });
 
-
-/*
-pedidoRouter.get("/:_id", async(req:Request,res:Response)=>{
-    try{
-        var pedido = await PedidoRepository.findPedido({"_id":req.params._id});
-        if(pedido){
-            res.send(pedido);
-        } else{
-            res.send("El pedido no existe");
-        }
-    } catch (error){
-        res.send("Error al encontrar el pedido");
-    }
-});
-*/
-
 pedidoRouter.get("/byUser/:user", async(req:Request,res:Response)=>{
     try{
         var usuario = await Usuario.findOne({"email":req.params.user,"isAdmin":false});
@@ -199,7 +178,6 @@ async function procesarJuguetes(juguetes:any): Promise<any> {
 
 pedidoRouter.post("/", async (req:Request,res:Response) =>{
     try{
-        console.log(req.body.usuario);
         let productos = await procesarJuguetes(req.body.productos);
         if(productos.length == 0){
             res.send("No se pudo crear el pedido por falta de stock");
@@ -217,15 +195,12 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                     juguetes: productos,
                     usuario:user._id
                 }
-                console.log(nuevoPedido);
                 let pedido = new Pedido(nuevoPedido);
-                console.log(pedido);
                 var error = pedido.validateSync();
                 if(error){
                     res.status(500).send(error);
                 } else{
                     await pedido.save();
-                    console.log("creado");
                     res.send("Su pedido ha sido tramitado");
                 }
 

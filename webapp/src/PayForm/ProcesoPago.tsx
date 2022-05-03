@@ -32,7 +32,6 @@ type Props = {
 type Props = {
   cartItems: Juguete[];
 };
-let condPedido = true;
 let gastosEnvio: any;
 
 //Procesar pedido
@@ -98,6 +97,7 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
       if (gastosEnvio === 0.00 || localStorage.getItem("direccion") === "null") {
         toast.error("Su dirección no fue encontrada, lo sentimos. Para solucionar el problema " +
           "modifique la dirección de su POD", { position: toast.POSITION.TOP_CENTER })
+          variable++;
       } else {
         setPasoActual((pasoPrevio) => pasoPrevio + 1);
       }

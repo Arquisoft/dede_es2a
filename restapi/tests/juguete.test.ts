@@ -112,7 +112,6 @@ describe('juguete ', () => {
 
     it("Se puede eliminar un juguete", async () =>{
         const response: Response = await request(app).delete('/juguete/juguete1Prueba');
-        console.log("eliminar");
         expect(response.status).toBe(200);
         expect(response.text).toEqual("Eliminado juguete")
     });
