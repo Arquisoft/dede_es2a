@@ -103,10 +103,6 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   };
   const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
 
-  const pasoAnterior = () => {
-    setPasoActual((pasoPrevio) => pasoPrevio - 1);
-  };
-
   const [deliveryCost, setDeliveryCost] = React.useState<number>(Number());
   const [address, setAddress] = React.useState("");
   const [deliveryDate, setDeliveryDate] = React.useState("");

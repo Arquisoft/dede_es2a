@@ -40,6 +40,8 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
               </CardContent>
               <CardActions>
               <Button
+              id="botonSiguiente"
+              data-testid="botonSiguiente"
               onClick={siguientePaso}
               variant="contained"
               className="m-1"

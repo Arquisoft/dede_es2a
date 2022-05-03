@@ -13,6 +13,7 @@ const Navbar = () => {
     const handleClick = () => {
         state = { clicked: !state.clicked }
     }
+    localStorage.setItem("sesion",isAuthenticated+"");
     // <h1 className="navbar-logo">DeNostalgia<i className="fab fa-react"></i></h1>
     const urlLogo = "https://res.cloudinary.com/dypp8pt31/image/upload/v1651487254/denostalgia_mas_clarito_zcya53.png";
     return (
