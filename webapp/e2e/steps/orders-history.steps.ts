@@ -8,7 +8,6 @@ let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
 
-  jest.setTimeout(100000);
   beforeAll(async () => {
 
     browser = process.env.GITHUB_ACTIONS
@@ -50,16 +49,15 @@ defineFeature(feature, test => {
 
     when('I click the orders history button', async () => {
 
-      await delay(1500);
       //Nos desplazamos a pedidos
+      
       await expect(page).toClick("a[href='pedidos']");
       await page.waitForNavigation();
     });
 
     then('Orders must be seen', async () => {
-      await delay(1500);
       //En consecuencia, debería aparecer la palabra bakugan, ya que este usuario de prueba tenia un pedido con bakugans
-      await expect(page).toMatch('Bakugan', {timeout:6000})
+      await expect(page).toMatch('Bakugan')
     });
   })
 
@@ -67,8 +65,5 @@ defineFeature(feature, test => {
     browser.close()
   })
 
-});
 
-function delay(ms:number){
-  return new Promise( resolve => setTimeout(resolve, ms));
-}
+});
