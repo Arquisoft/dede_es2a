@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { act, screen } from "@testing-library/react";
-import {fireEvent, render} from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import LoginButton from '../componentes/Login/LoginButton';
 import LogoutButton from '../componentes/Login/LogoutButton'
@@ -23,46 +23,48 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter } from 'react-router-dom';
 import LogoutForm from '../componentes/loginSOLID/LogoutForm';
+import AddForm from '../componentes/nuevoProducto/nuevoProducto';
+import EditForm from '../componentes/editarProducto/editarProducto';
 const queryClient = new QueryClient()
 const domain = 'dev-o-6umpor.us.auth0.com';
 const client_id = 'gVZPxJXH5Lx34bGRc8XHl6siZ4lJ72E0';
 test('navbar is rendered', () => {
-  const component = render(<Navbar/>)
+  const component = render(<Navbar />)
   expect(component.container).toHaveTextContent('Home')
 })
 
 test('navbar is rendered', () => {
-  localStorage.setItem("isAdmin","true")
-  const component = render(<Navbar/>)
+  localStorage.setItem("isAdmin", "true")
+  const component = render(<Navbar />)
   expect(component.container).toHaveTextContent('Productos')
   console.log(component.getAllByText)
   localStorage.clear();
 })
 
 test('home is rendered', () => {
-  localStorage.setItem("user","ejemplo2@gmail.com")
-  localStorage.setItem("sesion","true")
-  const component = render(<Home/>)
+  localStorage.setItem("user", "ejemplo2@gmail.com")
+  localStorage.setItem("sesion", "true")
+  const component = render(<Home />)
   expect(component.container).toHaveTextContent('Bienvenido')
   localStorage.clear();
 })
 
 test('ContactUs is rendered', () => {
-  const component = render(<ContactUs/>)
+  const component = render(<ContactUs />)
   expect(component.container).toHaveTextContent('Contáctanos')
 })
 
 test('footer is rendered', () => {
-  const component = render(<Footer/>)
+  const component = render(<Footer />)
 
   expect(component.container).toHaveTextContent('Uniovi')
 })
 test('Delivery is rendered', () => {
   const component = render(<Delivery cartItems={[]} setDeliveryCost={function (n: number): void {
-  } } deliveryCost={0} siguientePaso={function (): void {
-  } } setAddress={function (n: string): void {
-  } } address={''} setDeliveryDate={function (n: string): void {
-  } } />)
+  }} deliveryCost={0} siguientePaso={function (): void {
+  }} setAddress={function (n: string): void {
+  }} address={''} setDeliveryDate={function (n: string): void {
+  }} />)
 
   expect(component.container).toHaveTextContent('Resumen')
 })
@@ -76,15 +78,15 @@ test('Review is rendered', () => {
     categoria: 'nostalgia',
     cantidad: 2
   }]} setDeliveryCost={function (n: number): void {
-  } } deliveryCost={0} siguientePaso={function (): void {
-  } } setAddress={function (n: string): void {
-  } } address={''} deliveryDate={''}  />)
+  }} deliveryCost={0} siguientePaso={function (): void {
+  }} setAddress={function (n: string): void {
+  }} address={''} deliveryDate={''} />)
 
   expect(component.container).toHaveTextContent('Entrega')
 })
 
 test('Finalized ordder is rendered', () => {
-  const component = render(<FinalizedOrder  />)
+  const component = render(<FinalizedOrder />)
 
   expect(component.container).toHaveTextContent('finalizado')
 })
@@ -98,34 +100,34 @@ test('PedidoItem order is rendered', () => {
     imagen: '',
     categoria: 'nostalgia',
     cantidad: 2
-  }} cantidad={2}  />)
+  }} cantidad={2} />)
 
   expect(component.container).toHaveTextContent('Pikachu')
 })
 
 
 test('Finalized order is rendered', () => {
-  const component = render(<FinalizedOrder  />)
+  const component = render(<FinalizedOrder />)
 
   expect(component.container).toHaveTextContent('finalizado')
 })
 test('Logout button is rendered', async () => {
-  const component = render(<LogoutButton  />)
+  const component = render(<LogoutButton />)
 
   expect(component.container).toHaveTextContent('Desconectarse')
 
 })
 
 test('App is rendered', async () => {
-  const component = await act(async () => {render( <QueryClientProvider client={queryClient}  contextSharing={true}><App/></QueryClientProvider>)  });
+  const component = await act(async () => { render(<QueryClientProvider client={queryClient} contextSharing={true}><App /></QueryClientProvider>) });
   //expect(screen.getByText("Home")).toBeInTheDocument();
   expect(screen.getByText("Home")).toBeInTheDocument();
   fireEvent.click(screen.getByTestId("botonAnadirAlCarrito"));
 })
 
- test('Item is rendered', () => {
-  const app = render(  <QueryClientProvider client={queryClient}><App/></QueryClientProvider>)
-  const component = render(   <BrowserRouter><Item item={{
+test('Item is rendered', () => {
+  const app = render(<QueryClientProvider client={queryClient}><App /></QueryClientProvider>)
+  const component = render(<BrowserRouter><Item item={{
     id: 0,
     nombre: 'Pikachu',
     descripcion: 'juguete',
@@ -134,18 +136,18 @@ test('App is rendered', async () => {
     categoria: 'nostalgia',
     cantidad: 1
   }} handleAddToCart={function (clickedItem: Juguete): void {
-  } }/></BrowserRouter>)
+  }} /></BrowserRouter>)
   expect(component.container).toHaveTextContent('Pikachu')
   expect(component.container).toHaveTextContent('Añadir al carrito')
   const button = component.container.querySelector('button');
   button!.click();
-}) 
+})
 
 
 test('Item is rendered', () => {
-  localStorage.setItem("isAdmin",true+"");
-  const app = render(  <QueryClientProvider client={queryClient}><App/></QueryClientProvider>)
-  const component = render(   <BrowserRouter><Item item={{
+  localStorage.setItem("isAdmin", true + "");
+  const app = render(<QueryClientProvider client={queryClient}><App /></QueryClientProvider>)
+  const component = render(<BrowserRouter><Item item={{
     id: 0,
     nombre: 'Pikachu',
     descripcion: 'juguete',
@@ -154,18 +156,18 @@ test('Item is rendered', () => {
     categoria: 'nostalgia',
     cantidad: 1
   }} handleAddToCart={function (clickedItem: Juguete): void {
-  } }/></BrowserRouter>)
+  }} /></BrowserRouter>)
   expect(component.container).toHaveTextContent('Pikachu');
   const button = component.container.querySelector('button');
   button!.click();
   const buttons = component.container.querySelectorAll('button');
   buttons[1]!.click();
   localStorage.clear();
-}) 
+})
 
 
-  test('ProcesoPago is rendered', async () => {
-    localStorage.setItem("direccion","Vicente Aleixandre Corvera");
+test('ProcesoPago is rendered', async () => {
+  localStorage.setItem("direccion", "Vicente Aleixandre Corvera");
   const component = render(<ProcesoPago cartItems={[{
     id: 0,
     nombre: 'Pikachu',
@@ -174,10 +176,10 @@ test('Item is rendered', () => {
     imagen: '',
     categoria: 'nostalgia',
     cantidad: 1
-  }]}/>)
+  }]} />)
   expect(component.container).toHaveTextContent('Envío')
 
-    fireEvent.click(screen.getByText("Guardar y continuar"));
+  fireEvent.click(screen.getByText("Guardar y continuar"));
 
   await act(async () => {
     fireEvent.click(screen.getByTestId("botonSiguiente"));
@@ -192,24 +194,24 @@ test('Item is rendered', () => {
     fireEvent.click(screen.getByTestId("botonSiguiente"));
   });
   expect(component.container).toHaveTextContent('Muchas gracias por su compra!')
- const finalizar = component.container.querySelector("a");
- finalizar!.click();
+  const finalizar = component.container.querySelector("a");
+  finalizar!.click();
   localStorage.clear();
-})  
+})
 
 test('Shipping is rendered', () => {
   const component = render(<Shipping cartItems={[]} setDeliveryCost={function (n: number): void {
-  } } deliveryCost={0} siguientePaso={function (): void {
-  } } setAddress={function (n: string): void {
-  } } />)
+  }} deliveryCost={0} siguientePaso={function (): void {
+  }} setAddress={function (n: string): void {
+  }} />)
 
   expect(component.container).toHaveTextContent('Resumen')
 })
 
 
 test('Historial pedidos is rendered', () => {
-  
-  const component = render(<QueryClientProvider client={queryClient}><HistorialPedidos  /></QueryClientProvider>)
+
+  const component = render(<QueryClientProvider client={queryClient}><HistorialPedidos /></QueryClientProvider>)
 
   expect(component.container).toHaveTextContent('pedidos')
 })
@@ -217,7 +219,7 @@ test('Historial pedidos is rendered', () => {
 
 
 test('Login form is rendered', () => {
-  const component = render(<LoginForm  />)
+  const component = render(<LoginForm />)
 
   expect(component.container).toHaveTextContent('Obtener dirección')
   const button = component.container.querySelector("#botonDireccion")
@@ -225,9 +227,37 @@ test('Login form is rendered', () => {
 })
 
 test('Logout form is rendered', () => {
-  const component = render(<LogoutForm  />)
+  const component = render(<LogoutForm />)
 
   expect(component.container).toHaveTextContent('Bienvenido')
+})
+
+test('Add product form is rendered', async () => {
+  const component = render(<AddForm />)
+  expect(component.container).toHaveTextContent('Añadir juguete')
+
+  const button = component.container.querySelector('button');
+  button!.click();
+  const buttons = component.container.querySelectorAll('button');
+  buttons[1]!.click();
+/*
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("cancelar"));
+  });
+
+  await act(async () => {
+    fireEvent.click(screen.getByTestId("guardar"));
+  });*/
+})
+
+test('Edit product form is rendered', () => {
+  const component = render(<EditForm />)
+
+  expect(component.container).toHaveTextContent('Modificar juguete')
+  const button = component.container.querySelector('button');
+  button!.click();
+  const buttons = component.container.querySelectorAll('button');
+  buttons[1]!.click();
 })
 
 
