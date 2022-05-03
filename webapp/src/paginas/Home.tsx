@@ -60,7 +60,7 @@ const Home = () => {
         
       <h1 >Bienvenido</h1>
 
-              <h2>"La alegría que un día tuvimos para los nuestros"</h2>
+              <h2 id="lema">"La alegría que un día tuvimos para los nuestros"</h2>
               </div>
 
       </body>
