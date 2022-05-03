@@ -116,3 +116,17 @@ Usuario <- Dede: Se muestra la página principal de la aplicación
 Usuario -> Dede: Presiona el botón de "Desconectarse"
 Usuario <- Dede: Se muestra la página principal de la aplicación con las funciones de un usuario normal
 ----
+
+=== Histórico de pedidos
+[plantuml,"HistóricoPedidos",png]
+----
+actor Usuario
+database BaseDeDatos as "Base de datos" #blue
+Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
+Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Usuario <- Dede: Se muestra la página principal de la aplicación
+Usuario -> Dede: Presiona el botón de "Historial Pedidos"
+Usuario <- Dede: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
+----
+
