@@ -217,7 +217,9 @@ pedidoRouter.post("/", async (req:Request,res:Response) =>{
                     juguetes: productos,
                     usuario:user._id
                 }
+                console.log(nuevoPedido);
                 let pedido = new Pedido(nuevoPedido);
+                console.log(pedido);
                 var error = pedido.validateSync();
                 if(error){
                     res.status(500).send(error);
