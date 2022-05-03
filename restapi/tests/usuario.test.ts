@@ -55,11 +55,8 @@ afterAll(async () => {
 
 describe('user ', () => {
     it("Se puede añadir un usuario", async() =>{
-        var dni:String = "7178958B";
-        var nombre:String = "nombrePrueba";
-        var apellidos:String = "apellidosPrueba";
         var email:String = "prueba@email.com";
-        const response:Response =  await request(app).post('/usuario').send({dni:dni,nombre:nombre,apellidos:apellidos,email:email});
+        const response:Response =  await request(app).post('/usuario').send({email:email});
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Usuario añadido correctamente");
     })

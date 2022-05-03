@@ -11,6 +11,8 @@ export default {
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
     
     preset: "jest-puppeteer",
+
+    watchman: false,
     
     testTimeout : 60000
     

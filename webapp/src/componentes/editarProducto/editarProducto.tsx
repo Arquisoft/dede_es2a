@@ -107,6 +107,7 @@ const EditForm = () => {
                                 // guardar en bd
                                 updateJuguete();
                                 // volver a productos
+                                //window.location.href = "/productos"; // no funciona
                                 navigate("/productos");
                                 window.location.reload();
                             }

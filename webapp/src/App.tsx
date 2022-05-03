@@ -180,7 +180,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -218,7 +218,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -255,7 +255,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor="#ffffff"  />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -274,7 +274,7 @@ const App = () => {
               </div>
             }
             />
-            <Route path="/musical" element={
+            <Route path="/musicales" element={
               <div className='page-container'>
                 <div className='content-wrap'>
                   <CategoriesBar />
@@ -292,14 +292,14 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
                   }
                   <Grid container spacing={3}>
                     {data?.map(item => {
-                      return item.categoria === "musical" ?
+                      return item.categoria === "musicales" ?
                         <Grid item key={item.id} xs={12} sm={4}>
                           <Item item={item} handleAddToCart={handleAddToCart} />
                         </Grid>
@@ -329,7 +329,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -366,7 +366,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large"htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -404,7 +404,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>
@@ -436,7 +436,7 @@ const App = () => {
                         </Drawer>
                         <StyledButton id="botonCarritoDesplegar" onClick={() => setCartOpen(true)}>
                           <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-                            <AddShoppingCartIcon fontSize="large" htmlColor='#000000' />
+                            <AddShoppingCartIcon fontSize="large" htmlColor='#ffffff' />
                           </Badge>
                         </StyledButton>
                       </div>

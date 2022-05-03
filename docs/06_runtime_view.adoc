@@ -49,64 +49,59 @@ Alice <-- Bob: another authentication Response
 === Compra de productos
 [plantuml,"ComprarProducto",png]
 ----
-actor Usuario
+actor Usuario #green
 database BaseDeDatos as "Base de datos" #blue
 database Pod as "Pod del usuario" #yellow
+database GeoCoder as "GeoCoder" #yellow
 Usuario -> DeDe: Abre el carrito
-DeDe <-- BaseDeDatos: Devuelve contenido del carrito del usuario
-Usuario <-- DeDe: Muestra lista de juguetes del carrito
-Usuario -> DeDe: Presiona botón realizar pedido
+DeDe <-- DeDe: Devuelve contenido del carrito del usuario
+Usuario <-- DeDe: Muestra pantalla de pago
+Usuario -> DeDe: Presiona botón de obtención de dirección POD
 DeDe -> Pod: Se solicita la dirección del usuario
 Usuario -> Pod: Inicia sesión en Pod y añade su dirección en la sección "notes" del mismo
 DeDe <-- Pod: Devuelve la dirección del usuario
-DeDe -> DeDe: Muestra la dirección y se calculan gastos de envío (API GeoCode)
-Usuario <-- DeDe: Muestra el precio y la dirección.
-Usuario -> DeDe: Recorre pantallas de pago hasta confirmar el pedido.
+Usuario -> DeDe: Continua con el proceso de compra
+DeDe -> GeoCoder: Solicita el calculo de los gastos de envío
+DeDe <-- GeoCoder: Se devuelven los gastos de envío.
+DeDe -> DeDe: Muestra la dirección y los gastos de envío
+Usuario -> DeDe: Continua con la revisión de compra
+DeDe -> DeDe: Muestra el resumen del pedido
+Usuario -> DeDe: Finaliza el pedido
 ----
 
 === Añadir productos
 [plantuml,"AñadirProducto",png]
 ----
-actor Admin
+actor Admin #green
 database BaseDeDatos as "Base de datos" #blue
-Admin -> Dede: Accede  a la página para añadir productos
-Admin -> Dede: Rellena la pagina
+Admin -> Dede: Accede  a la página para iniciar sesión
+Admin -> Dede: Rellena la pagina con una cuenta de administrador
+Admin <- Dede: La aplicación redirige al usuario a la página principal
+Admin -> Dede: Accede a la sección "Añadir producto" y rellena los datos
 Dede -> BaseDeDatos: Añade el nuevo producto
 BaseDeDatos -> Dede: Devuelve la nueva lista de productos
-Dede -> Admin: Muestra todos los productos
-----
-
-=== Eliminar productos
-[plantuml,"EliminarProducto",png]
-----
-actor Admin
-database BaseDeDatos as "Base de datos" #blue
-Admin -> Dede: Accede  a la página para eliminar productos
-Admin -> Dede: Escoge el producto a eliminar
-Dede -> BaseDeDatos: Elimina el producto
-BaseDeDatos -> Dede: Devuelve la lista actualizada de productos
 Dede -> Admin: Muestra todos los productos
 ----
 
 === Filtrar productos
 [plantuml,"FiltrarProducto",png]
 ----
-actor Usuario
-database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Escribe un texto en el cuadro de búsqueda y pulsa 'filtrar'
-BaseDeDatos --> Dede: Devuelve los juguetes que coincidan con la búsqueda
+actor Usuario #green
+Usuario -> Dede: Navega a la sección de juguete y presiona uno de los botones de filtrado por categorías
+Dede --> Dede: La aplicación hace un filtrado de todo el listado de los juguetes quedándose solo con la categoría especificada
 Usuario <- Dede: Muestra los juguetes encontrados con el filtro
 ----
 
 === Iniciar sesión
 [plantuml,"InicioSesion",png]
 ----
-actor Usuario
+actor Usuario #green
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Accede a la página y presiona el botón de registro
-Usuario -> Dede: Rellena el formulario de registro/inicio sesión
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente, si es nuevo, si no ya estaría
-Usuario <- Dede: Se muestra la página principal de la aplicación
+Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
+Usuario <- Dede: Se despliega un formulario de inicio de sesión aportado por la API Auth0
+Usuario -> Dede: Rellena el formulario
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Usuario <- Dede: Se muestra la página principal de la aplicación, con unas opciones u otras en función del rol del usuario (se usa el localStorage)
 ----
 
 === Cierre de sesión
@@ -114,10 +109,24 @@ Usuario <- Dede: Se muestra la página principal de la aplicación
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Accede a la página y presiona el botón de registro
-Usuario -> Dede: Rellena el formulario de registro/inicio sesión
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente si es nuevo, si no ya estaría
+Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
+Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
 Usuario <- Dede: Se muestra la página principal de la aplicación
-Usuario -> Dede: Presiona el botón de desconectarse
-Usuario <- Dede: Se muestra la página principal de la aplicación
+Usuario -> Dede: Presiona el botón de "Desconectarse"
+Usuario <- Dede: Se muestra la página principal de la aplicación con las funciones de un usuario normal
 ----
+
+=== Histórico de pedidos
+[plantuml,"HistóricoPedidos",png]
+----
+actor Usuario
+database BaseDeDatos as "Base de datos" #blue
+Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
+Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
+BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Usuario <- Dede: Se muestra la página principal de la aplicación
+Usuario -> Dede: Presiona el botón de "Historial Pedidos"
+Usuario <- Dede: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
+----
+

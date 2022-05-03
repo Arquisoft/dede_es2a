@@ -11,7 +11,7 @@ defineFeature(feature, test => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: true, slowMo: 50 });
+      : await puppeteer.launch({ headless: true, slowMo: 100 });
      // : await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -31,10 +31,14 @@ defineFeature(feature, test => {
       password = "Prueba1!";
     //Iniciamos en sesión auth0
     const registerButton =await page.$('button#registerButton');
-    await registerButton!.click();
+    await registerButton!.evaluate(a =>  {
+      if(a instanceof HTMLElement) {
+        a.click();
+      }
+    });
     await page.waitForNavigation();
 
-    await expect(page).toClick("a");
+    //await expect(page).toClick("a");
 
     await expect(page).toFill("input[name='email']", email);
     await expect(page).toFill("input[name='password']", password);
@@ -46,11 +50,18 @@ defineFeature(feature, test => {
 
     //Clickamos el primer boton añadir al carrito que encontremos
       const addToCart =await page.$('button#botonAnadirAlCarrito');
-      await addToCart!.click();
-      await addToCart!.click();
+      await addToCart!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
       //Clickamos el boton que despliega el carrito
       const botonCarrito2 =await page.$('button#botonCarritoDesplegar');
-      await botonCarrito2!.click();
+      await botonCarrito2!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
     });
 
     when('We press the order button', async () => {

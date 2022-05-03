@@ -24,6 +24,7 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
             res.send(usuario);
         } else{
             res.status(500).send("No existe ese usuario");
+            
         }
     } catch(error){
         res.status(500).send("se ha producido un error");
