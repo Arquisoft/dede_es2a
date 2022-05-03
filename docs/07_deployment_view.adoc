@@ -88,7 +88,7 @@ Lugar a través del cual el usuario se comunica con nuestro sitio web
 Elementos de almacenamiento de información privada del usuario que aumentará la seguridad del mismo en nuestra aplicación. Internamente el usuario ha de crearse una cuenta con uno de los proveedores existentes y almacenar la información que el mismo desee de manera pública o privada.
 
 ==== _Auth0_
-API que permite al usuario iniciar sesión en nuestro sitio. Nos permitirá trabajar con sus datos desde la aplicación.
+API que permite al usuario iniciar sesión en nuestro sitio. Nos permitirá trabajar con sus datos desde la aplicación. Esta API además gestionará las contraseñas de los usuarios sin necesidad de tener que introducirlas en nuestra base de datos, algo que incrementará la seguridad de la aplicación.
 
 ==== _GeoCode_
 API a la que le pasas una dirección y te devuelve ciertos datos. Para nuestro proyecto son de utilidad la latitud y longitud de la misma. Se utilizará la fórmula de Haversine para calcular la distancia en km (previamente diferencia de latitudes y longitudes) entre dos ubicaciones.

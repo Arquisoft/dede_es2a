@@ -1,11 +1,9 @@
-import { Component } from 'react';
 import { MenuItems } from "./Menitems"
 import { MenuItemsAdmin } from "./MenitemsAdmin"
 import './Navbar.css'
 import LoginButton from '../Login/LoginButton';
 import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from '../Login/LogoutButton';
-import ProfileImg from '../Login/ProfileImg';
 import ProfileName from '../Login/ProfileName';
 
 
@@ -15,20 +13,24 @@ const Navbar = () => {
     const handleClick = () => {
         state = { clicked: !state.clicked }
     }
+    localStorage.setItem("sesion",isAuthenticated+"");
+    // <h1 className="navbar-logo">DeNostalgia<i className="fab fa-react"></i></h1>
+    const urlLogo = "https://res.cloudinary.com/dypp8pt31/image/upload/v1651487254/denostalgia_mas_clarito_zcya53.png";
     return (
         <nav className="NavbarItems">
-            <h1 className="navbar-logo">DeNostalgia<i className="fab fa-react"></i></h1>
+            <img className="logo" src={urlLogo} alt="logoDeNostalgia" />
+            
             <div className="menu-icon" onClick={handleClick}>
                 <i className={state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
             {
-                localStorage.getItem("isAdmin")=="true" ? // isAdmin ?
+                localStorage.getItem("isAdmin")==="true" ? // isAdmin ?
                     <ul className={state.clicked ? 'nav-menu active' :
                         'nav-menu'}>
                         {MenuItemsAdmin.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a className={item.cName} href={item.url}>
+                                    <a className={item.cName} href={"../../"+item.url}>
                                         {item.title}
                                     </a>
                                 </li>
@@ -49,7 +51,6 @@ const Navbar = () => {
                         })}
                     </ul>
             }
-
             {
                 isAuthenticated ? <LogoutButton /> : <LoginButton />
             }

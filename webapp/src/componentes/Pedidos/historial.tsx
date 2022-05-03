@@ -3,34 +3,25 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Pedido } from '../../shared/sharedPedido';
 import PedidoItem from './PedidoItem';
 import './pedidos.css';
-
 var correo: string;
 var numero: number;
-var nombre: string;
 
 async function getPedidos(): Promise<Pedido[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
     //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    //let response = await fetch(apiEndPoint + "usuario");
     let response = await fetch(apiEndPoint + "pedido/byUser/" + correo);
     //The objects returned by the api are directly convertible to User objects
-    let j = response.json();
-    console.log(response.json());
-    return j;
+    return response.json();
+
 }
 
 const HistorialPedidos = () => {
     const { user } = useAuth0();
-    correo = user?.email == undefined || user?.email == null ? "" : user?.email;
+    correo = user?.email === undefined || user?.email == null ? "" : user?.email;
     // coger pedidos del usuario de la Base de datos
-    /*
-    /pedidos/1
-    /pedidos
-    /pedido1
-    */
     const { data } = useQuery<Pedido[]>('pedidos', getPedidos);
     numero = 0;
-    if (correo == '') {
+    if (correo === '') {
         return (
             <div>
                 <h2>Debe registrarse primero para ver su historial de pedidos</h2>

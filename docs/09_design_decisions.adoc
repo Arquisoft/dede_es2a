@@ -17,6 +17,7 @@ establecidas por los profesores de la asignatura.
 |_Auth0_| _Decisión_ | _Para hacer el registro e inicio de sesión en la aplicación. Permite hacerlo a través de Google_
 |_BootStrap_| _Decisión_ | _Para añadir estilos a los elementos_
 |_Dotenv_| _Decisión_ | _Para proteger la información privada de la aplicación (url base de datos, ubicación de la empresa...)_ 
+|_Cloudinary_|_Decisión_|_Para almacenar las imágenes que utilicemos en nuestra aplicación (juguetes, logo...) en la nube y aumentar la usabilidad y escalabilidad_
 |===
 
 [role="arc42help"]

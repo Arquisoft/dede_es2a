@@ -6,11 +6,7 @@ import { LocalStorageCache } from "@auth0/auth0-react";
 
 const LogoutForm = () => {
 
-  const navigate = useNavigate();
-  const { session } = useSession();
-  
-  
-/*
+  /*
   useEffect(() => {
     localStorage.clear();
     

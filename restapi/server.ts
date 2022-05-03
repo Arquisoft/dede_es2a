@@ -9,7 +9,7 @@ import { pedidoRouter } from "./routes/pedido.router";
 import { usuarioRouter } from "./routes/usuario.router";
 
 const app: Application = express();
-const port: number = 5000;
+const port  = process.env.PORT ||  5000;
 
 
 require('dotenv').config()
