@@ -11,9 +11,9 @@ var imagen: string;
 var stock: number;
 
 async function addJuguete(): Promise<any> {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + "juguete", {
+    //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+    let response = await fetch(apiEndPoint + "/juguete", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,6 +62,7 @@ const AddForm = () => {
                         <label>Categoría:</label>
                         <div>
                             <select id="kind" name="kind" required onChange={event => categoria = event.target.value}>
+                                <option selected></option>
                                 <option>nostalgia</option>
                                 <option>vehiculos</option>
                                 <option>musicales</option>
@@ -89,7 +90,7 @@ const AddForm = () => {
                         <button data-testid="cancelar" id="cancelar" className="cancelar" onClick={() => {
                             navigate("/productos");
                         }}>Cancelar</button>
-                        <button data-testid="guardar" id="guardar" type="submit" className="guardar" onClick={() => {
+                        <button data-testid="guardar" id="guardar" type="submit" className="guardar" onClick={async () => {
                             // validaciones de campos
                             if (nombre === "" || nombre == null || nombre === undefined) {
                                 toast.warn("El nombre no puede ser vacío", { position: toast.POSITION.TOP_CENTER });
@@ -97,15 +98,18 @@ const AddForm = () => {
                                 toast.warn("La descripción no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
                             } else if (imagen === "" || imagen == null || imagen === undefined) {
                                 toast.warn("La URL de la imagen no puede ser vacía", { position: toast.POSITION.TOP_CENTER });
+                            } else if (categoria === "" || categoria == null || categoria === undefined) {
+                                toast.warn("Se debe seleccionar una categoría.", { position: toast.POSITION.TOP_CENTER });
                             } else if (precio <= 0.0 || precio == null || precio === undefined) {
                                 toast.warn("El precio debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
                             } else if (stock <= 0 || stock == null || stock === undefined) {
                                 toast.warn("El stock debe ser superior a 0", { position: toast.POSITION.TOP_CENTER });
                             } else {
                                 // guardar en bd
-                                addJuguete();
+                                await addJuguete();
                                 // volver a productos
-                                navigate("/productos");
+                                window.location.href = ("/productos"); // no funciona
+                                //navigate("/productos");
                                 window.location.reload();
                             }
                         }}>Guardar</button>

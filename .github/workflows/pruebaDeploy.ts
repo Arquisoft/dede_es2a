@@ -1,3 +1,4 @@
+/*
 name: CI for ASW2122
 on:
   release:
@@ -41,7 +42,7 @@ jobs:
         heroku_app_name: "dede-es2a-webapp"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        appdir: "webapp"      
+        appdir: "webapp"     
   deploy-restapi:
     needs: [docker-push-restapi,docker-push-webapp]
     runs-on: ubuntu-latest
@@ -54,4 +55,5 @@ jobs:
         heroku_app_name: "dede-es2a-restapi"
         heroku_email: ${{ secrets.EMAIL }}
         usedocker: true
-        appdir: "restapi" 
+        appdir: "restapi"
+        */

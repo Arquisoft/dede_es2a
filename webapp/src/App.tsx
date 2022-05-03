@@ -29,6 +29,7 @@ import EditForm from './componentes/editarProducto/editarProducto';
 import CategoriesBar from './PayForm/CategoriesBar';
 import AddForm from './componentes/nuevoProducto/nuevoProducto';
 
+
 //Types
 export type CartItemType = {
   id: number;
@@ -52,14 +53,10 @@ export type Juguete = {
 }
 */
 
-
-
-// AÑADIDO---------------------------------------------------------------------------------------------
-// Petición para obtener todos los juguetes de la base de datos
 export async function getJuguetes(): Promise<Juguete[]> {
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-  let response = await fetch(apiEndPoint + 'juguete/withstock');
+  //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  let response = await fetch(apiEndPoint + '/juguete/withstock');
   //The objects returned by the api are directly convertible to User objects
   //console.log(response.json());
   return response.json();
@@ -80,7 +77,7 @@ const App = () => {
 
   //const {data, isLoading, error} =useQuery<CartItemType[]>('products', getProducts);
   //AÑADIDO----------------------------------------------------------------------
-  const { data, isLoading } = useQuery<Juguete[]>('juguetes', getJuguetes);
+  const { data } = useQuery<Juguete[]>('juguetes', getJuguetes);
 
 
   useEffect(() => {
@@ -153,10 +150,6 @@ const App = () => {
     ))
   };
 
-
-  //Coloca una barra de carga cuando la página está cargando
-  //if (isLoading) return <LinearProgess data-testid="cargando" />;
-  //if (error) return <div>Algo ha fallado</div>;
 
   return (
     <>
@@ -281,7 +274,7 @@ const App = () => {
               </div>
             }
             />
-            <Route path="/musical" element={
+            <Route path="/musicales" element={
               <div className='page-container'>
                 <div className='content-wrap'>
                   <CategoriesBar />
@@ -306,7 +299,7 @@ const App = () => {
                   }
                   <Grid container spacing={3}>
                     {data?.map(item => {
-                      return item.categoria === "musical" ?
+                      return item.categoria === "musicales" ?
                         <Grid item key={item.id} xs={12} sm={4}>
                           <Item item={item} handleAddToCart={handleAddToCart} />
                         </Grid>

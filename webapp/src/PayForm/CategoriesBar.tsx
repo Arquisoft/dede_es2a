@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+//import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import './categories.css';
 //import { Juguete } from '../shared/sharedJuguete';
