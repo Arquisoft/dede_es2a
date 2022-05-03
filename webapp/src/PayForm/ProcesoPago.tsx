@@ -44,7 +44,8 @@ async function finalizarPedido(precioGastosDeEnvio: string, juguetes: Juguete[],
   var price: number;
   price = calculateTotal(juguetes);
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  let response = await fetch(apiEndPoint + 'pedido', {
+  //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  let response = await fetch(apiEndPoint + '/pedido', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -60,6 +61,7 @@ async function finalizarPedido(precioGastosDeEnvio: string, juguetes: Juguete[],
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + 'pedido/gastosEnvio/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
