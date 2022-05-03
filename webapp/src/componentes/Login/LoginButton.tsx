@@ -7,6 +7,7 @@ import Item from '../../Item/Item';
 import LinearProgess from '@material-ui/core/LinearProgress';
 
 import { Juguete } from '../../shared/sharedJuguete';
+import { Refresh } from '@material-ui/icons';
 
 var email: string;
 var usuario: any;
@@ -57,7 +58,8 @@ const LoginButton = () => {
         } else {
             localStorage.setItem("user", JSON.stringify([]));
         }
-
+        window.location.reload();
+        //Refresh;
     }}>Registrarse</button>;
 }
 
