@@ -11,9 +11,9 @@ var imagen: string;
 var stock: number;
 
 async function addJuguete(): Promise<any> {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + "juguete", {
+    //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+    let response = await fetch(apiEndPoint + "/juguete", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

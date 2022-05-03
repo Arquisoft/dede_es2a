@@ -1,23 +1,27 @@
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config()
 
-/*
+var name: string = process.env.CLOUDINARY_NAME || 'name'
+var api_key:string = process.env.CLOUDINARY_API_KEY || 'key'
+var secret:string = process.env.CLOUDINARY_API_SECRET || 'secret'
+
 export function config(){
     cloudinary.config({
-        cloud_name : process.env.CLOUDINARY_NAME,
-        api_key : process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
+        cloud_name : name,
+        api_key : api_key,
+        api_secret: secret
     });
-}*/
+}
 
 
+/*
 export function config(){
     cloudinary.config({
         cloud_name : 'dypp8pt31',
         api_key : '321597164512969',
         api_secret: 'sM2uhnqaS53Sq9_HsPDLK63FS7I'
     });
-}
+}*/
 
 
 export function configTest(){
