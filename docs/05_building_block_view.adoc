@@ -94,7 +94,7 @@ Juguete se encarga de administrar a los productos que forman parte de nuestro si
 [options="header",cols="1,2"]
 |===
 |Interfaz|Descripción
-| _Cloudinary_ | _Almacén que se encargará de guardar las imágenes de los juguetes en la nube, de tal manera que tengamos un almacén seguro._ 
+| _Cloudinary_ | _Almacén que se encargará de guardar las imágenes de los juguetes en la nube, de tal manera que tengamos un almacén seguro. Es un servicio que siempre está corriendo y que nos aporta usabilidad y escalabilidad._ 
 |===
 
 === Pedido (caja negra)
@@ -128,7 +128,7 @@ according the the following black box template:
 
 
 ==== Bloque de construcción - Nivel 2
-Nosotros decidimos organizar nuestra REST API a través de modelos que definen las entidades tal y como serán en la base de datos, repositorios que serán los encargados de trabajar con la misma y por último los routes que se encargan de gestionar las peticiones.
+Nosotros decidimos organizar nuestra REST API a través de modelos que definen las entidades tal y como serán en la base de datos y los routes que se encargan de gestionar las peticiones así como el acceso a datos.
 
 [role="arc42help"]
 ****
@@ -142,16 +142,17 @@ Leave out normal, simple, boring or standardized parts of your system
 === Usuario (caja blanca)
 image:UsuarioBloqueConstruccion.png["Hierarchy of building blocks"]
 
-Modelo usuario se encarga de definir la estructura que el usuario tendrá en nuestra base de datos. Este modelo es usado por RepositorioUsuario, ya que este será necesario para acciones como pueden ser añadir a un usuario. Por último, el routeUsuario que es el que se encarga de gestionar las peticiones recibidas tendrá que comunicarse con el repositorio, ya que estas peticiones requerirán acceso a datos.
+Modelo usuario se encarga de definir la estructura que el usuario tendrá en nuestra base de datos. Este modelo es usado por el routeUsuario que es el que se encarga de gestionar las peticiones recibidas y del acceso a datos como puede ser encontrar,
+añadir un usuario, etc.
 
 === Juguete (caja blanca)
 image:JugueteBloqueConstruccion.png["Hierarchy of building blocks"]
 
-Seguimos la misma estructura que con el usuario, se define el esquema de la entidad en el ModeloJuguete, el cual es utilizado por el RepositorioJuguete que a su vez es llamado desde el routerJuguete ya que las peticiones requieren operaciones con acceso a datos (encontrar, añadir, etc).
+Seguimos la misma estructura que con el usuario, se define el esquema de la entidad en el ModeloJuguete, el cual es utilizado por el routerJuguete ya que las peticiones requieren operaciones con acceso a datos (encontrar, añadir, etc).
 En este caso el router también hace uso de la interfaz externa Cloudinary. Esta se encargará de cuando se añade un juguete, coger su imagen y guardarla en su almacén. Clodinary nos devolverá una URL propia que será el direccionamiento de la imagen que ha almacenado y que usaremos para el juguete.
 
 === Pedido (caja blanca)
 image:PedidoBloqueConstruccion.png["Hierarchy of building blocks"]
 
-Volvemos con la misma estructura, ModeloPedido define el esquema el pedido con sus atributos y restricciones que poseerá en la base de datos. Este modelo es necesario para realizar operaciones de acceso a datos, y por tanto, será requerido desde RepositorioPedido. Finalmente este es utilizado de routerPedido ya que peticiones como encontrar, añadir pedidos, etc, necesitan realizar operaciones con la base de datos. Además de a este repositorio, routerPedido hace acceso también al RepositorioJuguete y RepositorioUsuario para por ejemplo buscar los juguetes de un pedido en concreto o encontrar los pedidos de un usuario específico.
+Volvemos con la misma estructura, ModeloPedido define el esquema el pedido con sus atributos y restricciones que poseerá en la base de datos. Este modelo es necesario para realizar operaciones de acceso a datos, y por tanto, será requerido desde routerPedido ya que peticiones como encontrar, añadir pedidos, etc, necesitan realizar operaciones con la base de datos. RouterPedido hace acceso también al ModeloJuguete y ModeloUsuario para por ejemplo buscar los juguetes de un pedido en concreto o encontrar los pedidos de un usuario específico.
 En este caso el router hace acceso tambíen a una API externa que es GeoCode, import de "node-geocoder". Esta internamente recibe una dirección y puede trabajar con distintos proveedores, en nuestro caso openstreetmap. Si su base de datos encuentra la dirección especificada devolverá una serie de datos sobre la misma, como puede ser las coordenadas. Esto nos hace posible posteriormente calcular manualmente el precio por km entre dos direcciones.

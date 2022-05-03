@@ -1,15 +1,11 @@
 import * as React from "react";
-import CartItem from '../CartItem/CartItem';
-import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Paper from "@mui/material/Paper";
 import LoginForm from '../componentes/loginSOLID/LoginForm';
 //Types
-import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
 import { Typography } from "@material-ui/core";
@@ -44,6 +40,8 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
               </CardContent>
               <CardActions>
               <Button
+              id="botonSiguiente"
+              data-testid="botonSiguiente"
               onClick={siguientePaso}
               variant="contained"
               className="m-1"

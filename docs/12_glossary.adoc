@@ -37,4 +37,6 @@ Potentially more columns in case you need translations.
 | _Dotenv_    | _Usada para manejar variables de entorno y nos sirve para proteger la información privada._
 | _MongoDB_    | _Es un sistema de base de datos NoSQL orientado a documentos de código abierto._
 | _BootStrap_    | _Es un framework front-end utilizado para desarrollar aplicaciones web._
+| _Cloudinary_ | _Api que se encarga de almacenar las imágenes de los juguetes en la nube, en una cuenta creada por nosotros a través de una api key_
+| _GeoCode_ | _Api para calcular los gastos de envío, obteniendo de ella datos de una dirección específica._
 |===

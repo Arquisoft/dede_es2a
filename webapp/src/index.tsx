@@ -18,7 +18,7 @@ const client_id = 'gVZPxJXH5Lx34bGRc8XHl6siZ4lJ72E0';
 const client = new QueryClient();
 
 ReactDOM.render(
-  <QueryClientProvider client={client}>
+  <QueryClientProvider client={client}  contextSharing={true}>
     <Auth0Provider
       domain={domain}
       clientId={client_id}

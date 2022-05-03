@@ -49,19 +49,17 @@ on this list.
 ****
 
 === Persistencia
-Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará en una carpeta adjuntada
-con el proyecto. 
+Utilizaremos una base de datos de MongoDB puesto que utilizaremos la pila MERN (MongoDB, Express, React, Node). El almacenamiento de las imágenes se realizará a través de la API Cloudinary, almacenando estas en una nube que está constantemente corriendo y, por tanto, nos aportará usabilidad y escalabilidad. 
 
 === Interfaz de Usuario
 La interfaz de Usuario de _DeDe_ estará codificada utilizando TypeScript y el framework React. No ha sido una decisión propia de diseño, 
 si no que se imponía en los requisitos de alto nivel de la aplicación.
 
-=== Manejo de Sesion
-Los usuarios podrán iniciar sesión a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad.
+=== Manejo de Sesión
+Los usuarios podrán iniciar sesión para realiar su compra a través de su respectivo POD siguiendo los principios SOLID, con el que garantizamos su privacidad. De esta manera obtenemos la dirección del usuario necesaria para calcular los gastos de envío de los pedidos. Por otro lado, el inicio de sesión con la aplicación en sí será a través de la API Auth0, que se encargará de gestionar a todos los usuarios que hayan iniciado sesión en nuestro sitio. Además, almacenaremos en la base de datos los email de aquellos usuarios que se hayan registrado para poder así gestionar sus pedidos.
 
 === Seguridad y privacidad
-Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo
-los principios SOLID.
+Como ya hemos mencionado anteriormente, se garantiza la privacidad y seguridad del usuario, obteniendo cualquier tipo de información a través del pod del mismo y siguiendo los principios SOLID, ya que solo se podrán acceder a los datos que el usuario de permisos. Además, las contraseñas de inicio de sesión de los usuarios no se encontrarán almacenadas en la base de datos ni visibles (en caso de que sí se podrían llevar a cabo métodos como la encriptación de las mismas).
 
 === Internacionalización
 La web se lanzará inicialmente en castellano, no descartamos la posibilidad de traducirla al inglés.
@@ -70,7 +68,7 @@ La web se lanzará inicialmente en castellano, no descartamos la posibilidad de 
 === Gestión de desarrollo
 La web se despliega una vez se pone en marcha el servidor. 
 
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
+//image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
 
 === Modelo de Dominio
 image:modeloDominio.png["Hierarchy of building blocks"]
@@ -84,6 +82,5 @@ cada uno de ellos.
 
 === Testeable
 El sistema dispondrá de diferentes tipos de pruebas para asegurarnos de su correcto funcionamiento. Estas serán
-pruebas unitarias para probar su funcionalidad, pruebas de aceptación para hacerlo pero de manera automática y por último pruebas
-de carga para ver cuantos usuarios y peticiones es capaz de soportar nuestra aplicación.
+pruebas unitarias para probar su funcionalidad, pruebas de aceptación para hacerlo pero de manera automática por el navegador y por último pruebas de carga para ver cuantos usuarios y peticiones es capaz de soportar nuestra aplicación.
 
