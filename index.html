@@ -460,22 +460,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-building-block-view">5. Vista de bloques de construcción</a>
 <ul class="sectlevel2">
 <li><a href="#_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</a></li>
-<li><a href="#_usuario_caja_negra">5.2. Usuario (caja negra)</a></li>
-<li><a href="#_juguete_caja_negra">5.3. Juguete (caja negra)</a></li>
-<li><a href="#_pedido_caja_negra">5.4. Pedido (caja negra)</a></li>
-<li><a href="#_usuario_caja_blanca">5.5. Usuario (caja blanca)</a></li>
-<li><a href="#_juguete_caja_blanca">5.6. Juguete (caja blanca)</a></li>
-<li><a href="#_pedido_caja_blanca">5.7. Pedido (caja blanca)</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Vista de tiempo de ejecución</a>
 <ul class="sectlevel2">
 <li><a href="#_compra_de_productos">6.1. Compra de productos</a></li>
 <li><a href="#_añadir_productos">6.2. Añadir productos</a></li>
-<li><a href="#_eliminar_productos">6.3. Eliminar productos</a></li>
-<li><a href="#_filtrar_productos">6.4. Filtrar productos</a></li>
-<li><a href="#_iniciar_sesión">6.5. Iniciar sesión</a></li>
-<li><a href="#_cierre_de_sesión">6.6. Cierre de sesión</a></li>
+<li><a href="#_filtrar_productos">6.3. Filtrar productos</a></li>
+<li><a href="#_iniciar_sesión">6.4. Iniciar sesión</a></li>
+<li><a href="#_cierre_de_sesión">6.5. Cierre de sesión</a></li>
+<li><a href="#_editar_productos">6.6. Editar productos</a></li>
+<li><a href="#_histórico_de_pedidos">6.7. Histórico de pedidos</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Vista de implementación</a>
@@ -1150,10 +1145,117 @@ Thus it contains the white box description of selected building blocks of level 
 <div class="sect2">
 <h3 id="_sistema_general_de_caja_blanca">5.1. Sistema General de Caja Blanca</h3>
 <div class="paragraph">
-<p>En este apartado vamos a estudiar más a fondo la API de nuestra aplicación con un sistema de cajas negras (función de los elementos) y cajas blancas (funcionamiento interno de los elementos)
-Este sería el diagrama que indica las entidades que componen nuestra aplicación así como las interfaces que utilizan.
+<p>En este apartado vamos a estudiar más a fondo la estructura de nuestra aplicación, tanto cada uno de sus componentes como las relaciones entre ellos.
+Este sería el diagrama que muestra todos estos elementos y como se relacionan.
 <span class="image"><img src="./images/bloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
 </div>
+<div class="sect3">
+<h4 id="_nivel_1">5.1.1. Nivel 1</h4>
+<div class="paragraph">
+<p><span class="image"><img src="./images/Nivel1Construccion.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">Motivación</div>
+<p>Esquema más general de la aplicación. Vemos los componentes generales de la misma, siendo DeDe la aplicación en sí, con la que interactúa el usuario el cual ha de poseer un POD en caso de que quiera realizar compras en nuestro sitio web. Por otro lado, la aplicación tendra una base de datos asociada para almacenar la información que se considere necesaria.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Caja</th>
+<th class="tableblock halign-left valign-top">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeDe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Aplicación completa que ofrece servicios a sus usuarios, con una funcionalidad y división interna que describiremos a continuación.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_nivel_2">5.1.2. Nivel 2</h4>
+<div class="paragraph">
+<p><span class="image"><img src="./images/Nivel2Construccion.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">Motivación</div>
+<p>Aquí vamos a explicar los dos núcleos de la aplicación, Frontend y Backend.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Caja</th>
+<th class="tableblock halign-left valign-top">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>WebApp</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Interfaz gráfica de la aplicación. Es la parte con la que interactúa el usuario y que intercambia información con la restapi.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Restapi</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Capa de acceso a datos y control de las peticiones procedentes del usuario a través del webApp.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_nivel_3">5.1.3. Nivel 3</h4>
+<div class="paragraph">
+<p><span class="image"><img src="./images/Nivel3Construccion.png" alt="Hierarchy of building blocks"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">Motivación</div>
+<p>A continuación el último nivel en el que vamos a descomponer los dos componentes internos de la aplicación.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Caja</th>
+<th class="tableblock halign-left valign-top">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Home</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Página principal de la aplicación.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Juguetes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Página que muestra los productos de la aplicación. En ella se encuentra un filtro para especificar los juguetes por categoría.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Registrarse</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Botón que nos reenvía a un formulario de registro perteneciente a la API de Auth0, la cual usamos para gestionar los usuarios de nuestro sitio.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Historial Pedidos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Ventana que nos muestra los pedidos que ha realizado el usuario registrado en nuestra aplicación.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Administrar productos</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Funcionalidad para los administradores de la aplicación. Muestra todos los productos existentes y las opciones de editar los mismos o incrementar su stock en el almacén</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Añadir producto</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Otra funcionalidad para administradores. Tiene una ventana específica para realizar esta operación que consiste en rellenar un formulario con los datos del nuevo juguete que se quiere añadir.</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1229,65 +1331,6 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_usuario_caja_negra">5.2. Usuario (caja negra)</h3>
-<div class="paragraph">
-<div class="title">Intención/responsabilidad</div>
-<p>Usuario gestiona a los clientes que interactúan con nuestra aplicación. No se almacenará demasiada información de los mismos, ya que la intención de nuestro sitio es extraer únicamente los datos necesarios así como puede ser la dirección pero sin necesidad de disponer de ella en nuestro almacenamiento (BD), sino en el sistema de PODs. No utiliza ninguna interfaz (API) externa.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_juguete_caja_negra">5.3. Juguete (caja negra)</h3>
-<div class="paragraph">
-<div class="title">Intención/responsabilidad</div>
-<p>Juguete se encarga de administrar a los productos que forman parte de nuestro sitio web.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Interfaces</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Interfaz</th>
-<th class="tableblock halign-left valign-top">Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cloudinary</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Almacén que se encargará de guardar las imágenes de los juguetes en la nube, de tal manera que tengamos un almacén seguro. Es un servicio que siempre está corriendo y que nos aporta usabilidad y escalabilidad.</em></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_pedido_caja_negra">5.4. Pedido (caja negra)</h3>
-<div class="paragraph">
-<div class="title">Intención/responsabilidad</div>
-<p>Pedido sería la entidad que simula a los pedidos de nuestra aplicación, ya sea los productos que contenga, como su cantidad, los gastos de envío en función de la distancia&#8230;&#8203;</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Interfaces</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Interfaz</th>
-<th class="tableblock halign-left valign-top">Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>GeoCode</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Extrae las coordenadas de una dirección para así hacer posible el calculo de los gasto de envío respecto a las coordenadas de nuestra tienda.</em></p></td>
-</tr>
-</tbody>
-</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1318,11 +1361,6 @@ according the the following black box template:</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_bloque_de_construcción_nivel_2">5.4.1. Bloque de construcción - Nivel 2</h4>
-<div class="paragraph">
-<p>Nosotros decidimos organizar nuestra REST API a través de modelos que definen las entidades tal y como serán en la base de datos y los routes que se encargan de gestionar las peticiones así como el acceso a datos.</p>
-</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1335,38 +1373,8 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_usuario_caja_blanca">5.5. Usuario (caja blanca)</h3>
-<div class="paragraph">
-<p><span class="image"><img src="./images/UsuarioBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
-</div>
-<div class="paragraph">
-<p>Modelo usuario se encarga de definir la estructura que el usuario tendrá en nuestra base de datos. Este modelo es usado por el routeUsuario que es el que se encarga de gestionar las peticiones recibidas y del acceso a datos como puede ser encontrar,
-añadir un usuario, etc.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_juguete_caja_blanca">5.6. Juguete (caja blanca)</h3>
-<div class="paragraph">
-<p><span class="image"><img src="./images/JugueteBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
-</div>
-<div class="paragraph">
-<p>Seguimos la misma estructura que con el usuario, se define el esquema de la entidad en el ModeloJuguete, el cual es utilizado por el routerJuguete ya que las peticiones requieren operaciones con acceso a datos (encontrar, añadir, etc).
-En este caso el router también hace uso de la interfaz externa Cloudinary. Esta se encargará de cuando se añade un juguete, coger su imagen y guardarla en su almacén. Clodinary nos devolverá una URL propia que será el direccionamiento de la imagen que ha almacenado y que usaremos para el juguete.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_pedido_caja_blanca">5.7. Pedido (caja blanca)</h3>
-<div class="paragraph">
-<p><span class="image"><img src="./images/PedidoBloqueConstruccion.png" alt="Hierarchy of building blocks"></span></p>
-</div>
-<div class="paragraph">
-<p>Volvemos con la misma estructura, ModeloPedido define el esquema el pedido con sus atributos y restricciones que poseerá en la base de datos. Este modelo es necesario para realizar operaciones de acceso a datos, y por tanto, será requerido desde routerPedido ya que peticiones como encontrar, añadir pedidos, etc, necesitan realizar operaciones con la base de datos. RouterPedido hace acceso también al ModeloJuguete y ModeloUsuario para por ejemplo buscar los juguetes de un pedido en concreto o encontrar los pedidos de un usuario específico.
-En este caso el router hace acceso tambíen a una API externa que es GeoCode, import de "node-geocoder". Esta internamente recibe una dirección y puede trabajar con distintos proveedores, en nuestro caso openstreetmap. Si su base de datos encuentra la dirección especificada devolverá una serie de datos sobre la misma, como puede ser las coordenadas. Esto nos hace posible posteriormente calcular manualmente el precio por km entre dos direcciones.</p>
-</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
@@ -1443,7 +1451,7 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <h3 id="_compra_de_productos">6.1. Compra de productos</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ComprarProducto.png" alt="ComprarProducto" width="1106" height="508">
+<img src="./images/ComprarProducto.png" alt="ComprarProducto" width="1101" height="656">
 </div>
 </div>
 </div>
@@ -1451,39 +1459,47 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <h3 id="_añadir_productos">6.2. Añadir productos</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/AñadirProducto.png" alt="AñadirProducto" width="375" height="343">
+<img src="./images/AñadirProducto.png" alt="AñadirProducto" width="419" height="404">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_eliminar_productos">6.3. Eliminar productos</h3>
+<h3 id="_filtrar_productos">6.3. Filtrar productos</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/EliminarProducto.png" alt="EliminarProducto" width="408" height="343">
+<img src="./images/FiltrarProducto.png" alt="FiltrarProducto" width="1210" height="296">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_filtrar_productos">6.4. Filtrar productos</h3>
+<h3 id="_iniciar_sesión">6.4. Iniciar sesión</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/FiltrarProducto.png" alt="FiltrarProducto" width="483" height="283">
+<img src="./images/InicioSesion.png" alt="InicioSesion" width="1099" height="343">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_iniciar_sesión">6.5. Iniciar sesión</h3>
+<h3 id="_cierre_de_sesión">6.5. Cierre de sesión</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/InicioSesion.png" alt="InicioSesion" width="660" height="313">
+<img src="./images/CierreSesión.png" alt="CierreSesión" width="833" height="435">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cierre_de_sesión">6.6. Cierre de sesión</h3>
+<h3 id="_editar_productos">6.6. Editar productos</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/CierreSesión.png" alt="CierreSesión" width="656" height="374">
+<img src="./images/EditarProducto.png" alt="EditarProducto" width="816" height="526">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_histórico_de_pedidos">6.7. Histórico de pedidos</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/HistóricoPedidos.png" alt="HistóricoPedidos" width="769" height="374">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
