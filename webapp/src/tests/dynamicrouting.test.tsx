@@ -15,7 +15,7 @@ import ProcesoPago from '../PayForm/ProcesoPago';
 import Shipping from '../PayForm/Shipping';
 import Delivery from '../PayForm/Delivery';
 import Review from '../PayForm/Review';
-import FinalizedOrder from '../PayForm/FinalizedOrder';
+import FinalizedOrder from '../PayForm/FinalizedOrder'; 
 import PedidoItem from '../componentes/Pedidos/PedidoItem';
 import HistorialPedidos from '../componentes/Pedidos/historial';
 import LoginForm from '../componentes/loginSOLID/LoginForm';
@@ -44,6 +44,7 @@ test('navbar is rendered', () => {
 test('home is rendered', () => {
   localStorage.setItem("user", "ejemplo2@gmail.com")
   localStorage.setItem("sesion", "true")
+  localStorage.setItem("reload", "true")
   const component = render(<Home />)
   expect(component.container).toHaveTextContent('Bienvenido')
   localStorage.clear();

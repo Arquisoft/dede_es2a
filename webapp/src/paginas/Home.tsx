@@ -12,16 +12,17 @@ let userExists:boolean = false;
  * @returns 
  */
 export async function checkUserInBDByEmail(email:string): Promise<any> {
+    if(localStorage.getItem("reload")=="true"){
+          window.location.reload();
+          localStorage.setItem("reload","false")
+        }
     let response = await fetch('http://localhost:5000/usuario/'+email)
     .then(resp => resp.json())
     .then(usuario => {
       userExists = usuario.isAdmin;
       localStorage.setItem("isAdmin", usuario.isAdmin);
-      if(localStorage.getItem("reload")=="true"){
-        window.location.reload();
-        localStorage.setItem("reload","false")
-      }
     });
+    
 }
 
 /**
