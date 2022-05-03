@@ -43,7 +43,7 @@ async function finalizarPedido(precioGastosDeEnvio: string, juguetes: Juguete[],
     items.reduce((ack: number, item) => ack + item.cantidad * item.precio, 0);
   var price: number;
   price = calculateTotal(juguetes);
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
   //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + '/pedido', {
     method: 'POST',
