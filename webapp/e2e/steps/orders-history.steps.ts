@@ -22,14 +22,31 @@ defineFeature(feature, test => {
         })
         .catch(() => {});
     });
-    test('The cart is empty', ({given,when,then} )=> {
-    
+    test('The orders history has orders', ({given,when,then} )=> {
+      let email:string;
+      let password:string;
 
-        given('The empty Cart',async () => {
+        given('A user with some orders',async () => {
+          email = "prueba1@gmail.com";
+          password = "Prueba1!";
+        //Iniciamos en sesión auth0
+        const registerButton =await page.$('button#registerButton');
+        await registerButton!.evaluate(a =>  {
+          if(a instanceof HTMLElement) {
+            a.click();
+          }
+        });
+        await page.waitForNavigation();
     
+        //await expect(page).toClick("a");
+    
+        await expect(page).toFill("input[name='email']", email);
+        await expect(page).toFill("input[name='password']", password);
+        await expect(page).toClick("button[name='submit']");
+        await page.waitForNavigation();
         });
     
-        when('I press the add to cart item button', async () => {
+        when('I click the orders history button', async () => {
     
           //Clickamos el primer boton añadir al carrito que encontremos
     /*
@@ -58,7 +75,7 @@ defineFeature(feature, test => {
         }
       );
     
-        then('The cart should have an item', async () => {
+        then('Orders must be seen', async () => {
           //En consecuencia, debería aparecer la palabra precio.
           await expect(page).toMatch('Precio')
         });
