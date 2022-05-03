@@ -30,7 +30,7 @@ const HistorialPedidos = () => {
     } else {
         return (
             <div>
-                <h1>Mis Pedidos</h1>
+                <h1 className='mis-pedidos'>Mis Pedidos</h1>
                 <p>{data?.map(pedido => (
                     <div>
                         <h2 className='numeroPedido'>{++numero}. Precio total del pedido: <b>{(pedido.precioFinal).toFixed(2)}€</b></h2>
