@@ -42,6 +42,7 @@ _Despliegue tanto del frontend como del backend e información de la app para el
 | _POD_ | _Solicitud de datos del cliente por parte de la app._ | _Respuesta a solicitud._
 | _Base de datos_ | _Gestión de los datos a través de API rest de la aplicación_ | _respuesta a las peticiones de esa API rest (productos, usuarios, pedidos...)_
 |_Geocode_|_Petición por parte del backend de las coordenadas de una dirección de un usuario extraída a través de los POD_|_Devolución de las coordenadas_
+|_Cloudinary_|_Petición al añadir juguete que transforma la URL de la imagen en una URL de cloudinary pública que es la que se almacena en la base de datos._|_Almacenamiento en la nube de la imágen._
 |===
 
 
@@ -80,6 +81,7 @@ TABLA DEL CONTEXTO TÉCNICO
 | _MERN_ | _M-> MongoDB (persistencia) / E-> Express (peticiones) / R-> React (Front-End) / N-> Node (Back-End)._ 
 | _Auth0_ | _API que se encarga de gestionar el inicio y cierre de sesión por parte de los usuarios_
 |_Geocode_|_API que se encargará de aportar las coordenadas de una dirección concreta con el objetivo de calcular los gastos de envío posteriormente_
+|_Cloudinary_|_API que almacenará las imágenes de los productos en la nube._
 |===
 
 
