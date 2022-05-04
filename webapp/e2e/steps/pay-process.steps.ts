@@ -28,21 +28,21 @@ defineFeature(feature, test => {
     given('An item is in the cart',async () => {
       email = "prueba1@gmail.com";
       password = "Prueba1!";
-    //Iniciamos en sesión auth0
-    const registerButton =await page.$('button#registerButton');
-    await registerButton!.evaluate(a =>  {
-      if(a instanceof HTMLElement) {
-        a.click();
-      }
-    });
-    await page.waitForNavigation();
+      //Iniciamos en sesión auth0
+      const registerButton = await page.$('button#registerButton');
+      await registerButton!.evaluate(a => {
+        if (a instanceof HTMLElement) {
+          a.click();
+        }
+      });
+      await page.waitForNavigation();
 
-    await expect(page).toClick("a");
+      await expect(page).toClick("a");
 
-    await expect(page).toFill("input[name='email']", email);
-    await expect(page).toFill("input[name='password']", password);
-    await expect(page).toClick("button[name='submit']");
-    await page.waitForNavigation();
+      await expect(page).toFill("input[name='email']", email);
+      await expect(page).toFill("input[name='password']", password);
+      await expect(page).toClick("button[name='submit']");
+      await page.waitForTimeout(10000);
     //Volvemos a la pestaña de los productos
     const linkProductos =await page.$("a[href='productos']");
     await linkProductos!.evaluate(a =>  {
