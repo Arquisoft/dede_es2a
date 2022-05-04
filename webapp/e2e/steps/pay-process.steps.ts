@@ -7,11 +7,10 @@ let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
-  jest.setTimeout(100000)
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: true, slowMo: 100 });
+      : await puppeteer.launch({ headless: false, slowMo: 100 });
      // : await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -37,16 +36,20 @@ defineFeature(feature, test => {
       }
     });
     await page.waitForNavigation();
-    await page.waitForTimeout(1000);
 
-    //await expect(page).toClick("a");
+    await expect(page).toClick("a");
 
     await expect(page).toFill("input[name='email']", email);
     await expect(page).toFill("input[name='password']", password);
     await expect(page).toClick("button[name='submit']");
     await page.waitForNavigation();
     //Volvemos a la pestaña de los productos
-    await expect(page).toClick("a[href='productos']");
+    const linkProductos =await page.$("a[href='productos']");
+    await linkProductos!.evaluate(a =>  {
+      if(a instanceof HTMLElement) {
+        a.click();
+      }
+    });
     await page.waitForNavigation();
 
     //Clickamos el primer boton añadir al carrito que encontremos
@@ -66,9 +69,11 @@ defineFeature(feature, test => {
     });
 
     when('We press the order button', async () => {
+      await delay(2000);
        //Clickamos el boton de realizar pedido
-       await expect(page).toClick("a[href='confirmar-pedido']");
+       await expect(page).toClick("a[href='confirmar-pedido']",{timeout:6000});
        await page.waitForNavigation();
+       await page.waitForTimeout(10000);
     });
 
     then('The pay page appears', async () => {
@@ -82,3 +87,6 @@ defineFeature(feature, test => {
   })
 
 });
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
