@@ -1,28 +1,19 @@
 import Button from '@material-ui/core/Button';
 //Types
-//import { CartItemType } from '../App';
 //Styles
 import { Wrapper } from './Item.styles';
 
 import { Juguete } from '../shared/sharedJuguete';
 
 
-import { BrowserRouter, useNavigate } from "react-router-dom";
-import getRoleUsuario from "../componentes/Login/LoginButton"
-import { Router } from 'express';
 
-/*type Props = {
-    item: CartItemType;
-    handleAddToCart: (clickedItem: CartItemType) => void;
-}*/
 type Props = {
     item: Juguete;
     handleAddToCart: (clickedItem: Juguete) => void;
 }
 
 async function addStock(nombre: string): Promise<any> {
-    //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
     //let response = 
     await fetch(apiEndPoint + '/juguete/addStock/' + nombre, {
         method: 'POST',

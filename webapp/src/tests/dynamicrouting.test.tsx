@@ -164,7 +164,7 @@ test('Item is rendered', () => {
   localStorage.clear();
 })
 
-
+/*
 test('ProcesoPago is rendered', async () => {
   localStorage.setItem("direccion", "Vicente Aleixandre Corvera");
   const component = render(<ProcesoPago cartItems={[{
@@ -198,6 +198,7 @@ test('ProcesoPago is rendered', async () => {
  finalizar!.click();
   localStorage.clear();
 })
+*/
 
 test('Shipping is rendered', () => {
   const component = render(<Shipping cartItems={[]} setDeliveryCost={function (n: number): void {
@@ -231,6 +232,7 @@ test('Logout form is rendered', () => {
   expect(component.container).toHaveTextContent('Bienvenido')
 })
 
+/*
 test('Add product form is rendered', async () => {
   const component = render(<AddForm />)
   expect(component.container).toHaveTextContent('Añadir juguete')
@@ -239,16 +241,18 @@ test('Add product form is rendered', async () => {
   button!.click();
   const buttons = component.container.querySelectorAll('button');
   buttons[1]!.click();
-/*
+
   await act(async () => {
     fireEvent.click(screen.getByTestId("cancelar"));
   });
 
   await act(async () => {
     fireEvent.click(screen.getByTestId("guardar"));
-  });*/
+  });
 })
+*/
 
+/*
 test('Edit product form is rendered', () => {
   const component = render(<EditForm />)
 
@@ -258,7 +262,7 @@ test('Edit product form is rendered', () => {
   const buttons = component.container.querySelectorAll('button');
   buttons[1]!.click(); 
 })
-
+*/
 
 
 

@@ -1,16 +1,12 @@
 import * as React from "react";
-import CartItem from '../CartItem/CartItem';
-import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
 import { Typography } from "@material-ui/core";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Paper from "@mui/material/Paper";
-//Types
-import { CartItemType } from '../App';
 
+//Types
 import {Juguete} from '../shared/sharedJuguete';
 
 type Props = {

@@ -1,6 +1,4 @@
-import { Console } from "console";
 import express, {Request,response,Response} from "express"
-import { ObjectId } from "mongodb";
 
 export const usuarioRouter = express.Router()
 const Usuario = require('../models/Usuario')

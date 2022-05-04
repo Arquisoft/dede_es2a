@@ -7,12 +7,12 @@ let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
-
+  jest.setTimeout(100000)
   beforeAll(async () => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 50 });
+      : await puppeteer.launch({ headless: true, slowMo: 50 });
     //: await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -43,7 +43,7 @@ defineFeature(feature, test => {
       await expect(page).toFill("input[name='email']", email);
       await expect(page).toFill("input[name='password']", password);
       await expect(page).toClick("button[name='submit']");
-      await page.waitForNavigation();
+      await page.waitForTimeout(10000);
 
     });
 
@@ -57,7 +57,7 @@ defineFeature(feature, test => {
 
     then('Orders must be seen', async () => {
       //En consecuencia, debería aparecer la palabra bakugan, ya que este usuario de prueba tenia un pedido con bakugans
-      await expect(page).toMatch('Bakugan')
+      await expect(page).toMatch('Bakugan',{timeout:6000})
     });
   })
 

@@ -26,6 +26,7 @@ beforeAll(async () => {
 
     cloudinary.configTest();
     gestorBd.connectTest();
+
     await prepararBd();
 
     server = app.listen(port, ():void => {
@@ -75,20 +76,6 @@ describe('juguete ', () => {
         const response:Response = await request(app).post('/juguete').send({nombre:name,descripcion:description,precio:price,imagen:imag,categoria:category,stock:stock})
         expect(response.statusCode).toBe(200);
         expect(response.text).toEqual("Añadido nuevo juguete");
-
-        const next:Response = await request(app).get('/juguete/'+name);
-        expect(next.statusCode).toBe(200);
-        expect(next.body).toEqual({
-            id : next.body.id,
-            nombre: name,
-            descripcion: description,
-            precio: price,
-            imagen: next.body.imagen,
-            categoria: category,
-            cantidad: 0,
-            stock:stock
-        })
-
     });
 
     it("No se puede añadir un juguete que ya existe", async () => {
@@ -125,7 +112,6 @@ describe('juguete ', () => {
 
     it("Se puede eliminar un juguete", async () =>{
         const response: Response = await request(app).delete('/juguete/juguete1Prueba');
-        console.log("eliminar");
         expect(response.status).toBe(200);
         expect(response.text).toEqual("Eliminado juguete")
     });
