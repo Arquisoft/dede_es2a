@@ -12,8 +12,7 @@ var categoria: string;
 var precio: number;
 
 async function getJuguete(): Promise<Juguete> {
-    //const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    const apiEndPoint = process.env.API_URL || 'http://localhost:5000'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
     let partes = url.split('/');
     let response = await fetch(apiEndPoint + "/juguete/" + partes[partes.length - 1]);
     //The objects returned by the api are directly convertible to User objects
@@ -22,7 +21,7 @@ async function getJuguete(): Promise<Juguete> {
 }
 
 async function updateJuguete(): Promise<any> {
-    const apiEndPoint = process.env.API_URL || 'http://localhost:5000'
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
     let partes = url.split('/');
     let response = await fetch(apiEndPoint + "/juguete/update/" + partes[partes.length - 1], {
         method: 'POST',
