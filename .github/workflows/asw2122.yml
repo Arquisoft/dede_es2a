@@ -30,7 +30,8 @@ jobs:
     - run: npm test
     - uses: codecov/codecov-action@v2
   deploy-webapp:
-    needs: [unit-test-webapp,unit-test-restapi]    runs-on: ubuntu-latest
+    needs: [unit-test-webapp,unit-test-restapi]    
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Deploy webapp
