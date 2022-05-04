@@ -1,6 +1,6 @@
 # dede_es2a
 
-[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_0/actions)
+[![Actions Status](https://github.com/arquisoft/dede_0/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_es2a/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_es2a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_es2a)
 [![codecov](https://codecov.io/gh/Arquisoft/dede_es2a/branch/master/graph/badge.svg?token=QeHZrwyDn4)](https://codecov.io/gh/Arquisoft/dede_es2a)
 
@@ -42,7 +42,7 @@ npm install
 npm start
 ```
 
-You should be able to access the application in [http://localhost:3000](http://localhost:3000).
+You should be able to access the application in [https://dede-es2a-webapp.herokuapp.com/](https://dede-es2a-webapp.herokuapp.com/).
 
 ## More information
 You can get more information about the respository in the other README files:
