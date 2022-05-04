@@ -1,7 +1,5 @@
-import { Console } from "console";
 import express, { Request, response, Response } from "express"
 import cloudinary from 'cloudinary';
-import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
 const Juguete = require("../models/Juguete");
@@ -37,9 +35,7 @@ jugueteRouter.get("/withStock", async (req: Request, res: Response) => {
 jugueteRouter.get("/:nombre", async (req: Request, res: Response) => {
     try {
         let filter = { nombre: req.params.nombre }
-        //console.log(filter);
         let juguete = await Juguete.findOne(filter);
-        //console.log(juguete);
         if (juguete) {
             res.json(juguete);
         }
@@ -83,7 +79,6 @@ async function borrarImagen(imagen: String) {
  */
 jugueteRouter.post("/", async (req: Request, res: Response) => {
     try {
-        console.log("NUEVO JUGUETE");
         let nuevoJuguete = {
             nombre: req.body.nombre,
             descripcion: req.body.descripcion,
@@ -92,7 +87,6 @@ jugueteRouter.post("/", async (req: Request, res: Response) => {
             categoria: req.body.categoria,
             stock: req.body.stock
         };
-        console.log(nuevoJuguete);
         let juguete = await Juguete.findOne({ nombre: nuevoJuguete.nombre });
         if (juguete) {
             res.send("Este juguete ya existe");
@@ -136,11 +130,8 @@ jugueteRouter.post("/addStock/:nombre", async (req: Request, res: Response) => {
     try {
         const filter = { nombre: req.params.nombre }
         var juguete = await Juguete.findOne(filter);
-        //console.log(juguete.stock)
-        //console.log(req.body.stock)
         const number: Number = juguete.stock + req.body.stock
         const stock = { stock: number }
-        //console.log(stock)
         var jugueteActualizado = await Juguete.findOneAndUpdate(filter, stock, { new: true })
         res.send("Stock del juguete añadido correctamente");
 
@@ -148,26 +139,5 @@ jugueteRouter.post("/addStock/:nombre", async (req: Request, res: Response) => {
         res.status(500).send("Error al añadir stock al juguete")
     }
 });
-/*
-jugueteRouter.post("/subtock/:nombre", async (req:Request,res:Response) => {
-    try{
-        const filter = {
-            nombre: req.params.nombre,
-        }
 
-        var juguete = await JugueteRepository.findJuguete(filter); 
-
-        const stock = {stock: juguete.stock - req.body.stock}
-        
-        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,stock);
-        if(jugueteActualizado){
-            res.send("Stock del juguete restado correctamente");
-        } else{
-            res.status(500).send("No se pudo restar stock al producto")
-        }
-    }catch (error){
-        res.status(500).send("Error al restar stock al juguete")
-    }
-});
-*/
 export default jugueteRouter;

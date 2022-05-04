@@ -12,8 +12,8 @@ let userExists: boolean = false;
  * @returns 
  */
 export async function checkUserInBDByEmail(email: string): Promise<any> {
-  //let response = 
-  await fetch('http://localhost:5000/usuario/' + email)
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
+  await fetch(apiEndPoint+'/usuario/' + email)
     .then(resp => resp.json())
     .then(usuario => {
       userExists = usuario.isAdmin;
@@ -30,24 +30,15 @@ export async function checkUserInBDByEmail(email: string): Promise<any> {
  * @returns 
  */
 async function addUserToBD(email: string): Promise<any> {
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
   //let response = 
-  await fetch(apiEndPoint + 'usuario', {
+  await fetch(apiEndPoint + '/usuario', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "email": email, "isAdmin": false })
   })
 }
-/*
-  export async function checkUserInBD(): Promise<Usuario[]> {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint +"usuario");
-    //The objects returned by the api are directly convertible to User objects
-    console.log(response.json());
-    return response.json();
-}
-*/
+
 const Home = () => {
 
   const { user } = useAuth0();

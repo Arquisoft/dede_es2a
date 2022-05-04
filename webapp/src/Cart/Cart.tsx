@@ -4,9 +4,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import {Wrapper} from './Cart.styles';
 import { Typography } from "@material-ui/core";
 
-//Types
-import { CartItemType } from '../App';
-
 import {Juguete} from '../shared/sharedJuguete';
 import LoginButtonCart from '../componentes/Login/LoginButtonCart';
 

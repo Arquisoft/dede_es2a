@@ -8,7 +8,6 @@ var numero: number;
 
 async function getPedidos(): Promise<Pedido[]> {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
-    //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
     let response = await fetch(apiEndPoint + "/pedido/byUser/" + correo);
     //The objects returned by the api are directly convertible to User objects
     return response.json();
