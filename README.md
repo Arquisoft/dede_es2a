@@ -12,7 +12,8 @@
 
 
 This project is a basic example of website using **React** with **Typescript** and an endpoint using **NodeJS** with **express**.
-
+Documentación: [https://arquisoft.github.io/dede_es2a/]
+Despliegue de la aplicación: [https://dede-es2a-webapp.herokuapp.com/]
 ## Quick start guide
 <mark>In case you already have node.js and npm, make sure you update them before attempting to build the images</mark>
 
