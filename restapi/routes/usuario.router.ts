@@ -1,6 +1,4 @@
-import { Console } from "console";
 import express, {Request,response,Response} from "express"
-import { ObjectId } from "mongodb";
 
 export const usuarioRouter = express.Router()
 const Usuario = require('../models/Usuario')
@@ -23,7 +21,8 @@ usuarioRouter.get("/:email", async(req:Request,res:Response) =>{
         if(usuario){
             res.send(usuario);
         } else{
-            res.send("No existe ese usuario");
+            res.status(500).send("No existe ese usuario");
+            
         }
     } catch(error){
         res.status(500).send("se ha producido un error");

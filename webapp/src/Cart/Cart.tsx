@@ -4,9 +4,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import {Wrapper} from './Cart.styles';
 import { Typography } from "@material-ui/core";
 
-//Types
-import { CartItemType } from '../App';
-
 import {Juguete} from '../shared/sharedJuguete';
 import LoginButtonCart from '../componentes/Login/LoginButtonCart';
 
@@ -24,7 +21,7 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
     console.log(isAuthenticated)
     return (
         <Wrapper>
-            <Typography variant="h2" component="h2">Tu carrito</Typography>
+            <Typography color="textPrimary" variant="h2" component="h2">Tu carrito</Typography>
             {cartItems.length===0 ? <p>No hay juguetes en el carrito</p>: null}
             {cartItems.map(item=>(
                 <CartItem 
@@ -47,9 +44,6 @@ const Cart:React.FC<Props> = ({cartItems, addToCart, removeFromCart})=> {
                 </a>
             </div>:
               <div>
-                      <a className={'btn btn-primary btn-lg'} href={"confirmar-pedido"} id="confirmarPedido">
-                    {'Realizar pedido'}
-                </a>
              <LoginButtonCart />
               </div>
             }           

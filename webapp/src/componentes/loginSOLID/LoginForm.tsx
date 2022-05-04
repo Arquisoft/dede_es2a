@@ -1,12 +1,9 @@
-
 import { useState } from "react";
 import { LoginButton, useSession } from "@inrupt/solid-ui-react";
 import { handleIncomingRedirect,  onSessionRestore } from "@inrupt/solid-client-authn-browser";
 import { Autocomplete, Button, Container, TextField } from "@mui/material";
 import { Wrapper} from '../../App.styles';
 import { useEffect } from 'react';
-import {CombinedDataProvider, LogoutButton, Text  } from "@inrupt/solid-ui-react";
-import {  Card, CardContent, Typography } from "@material-ui/core";
 import {
     getSolidDataset,
     getThing,
@@ -14,12 +11,10 @@ import {
     Thing,
 } from "@inrupt/solid-client";
 import { FOAF, VCARD } from "@inrupt/lit-generated-vocab-common";
-import { Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [idp, setIdp] = useState("https://inrupt.net/");
   const proveedores = [{ displayName: "Broker", url: "https://broker.pod.inrupt.com/" }, { displayName: "Inrupt", url: "https://inrupt.net/" },
                     {displayName: "Solid community", url: "https://solidcommunity.net/"},
@@ -33,7 +28,7 @@ export default function LoginForm() {
 
   onSessionRestore((url) => {
     if (session.info.isLoggedIn) {
-      navigate(url);
+      window.location.href =url;
     }
   });
 
@@ -89,7 +84,7 @@ export default function LoginForm() {
             oidcIssuer={idp}
             redirectUrl={UrlActual}    
             onError={console.error}>
-                <Button  variant="contained">Obtener dirección </Button>
+                <Button  variant="contained" data-testid="botonDireccion" id="botonDireccion">Obtener dirección </Button>
           </LoginButton>
      
         </Wrapper>

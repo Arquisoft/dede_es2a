@@ -1,7 +1,5 @@
-import { Console } from "console";
-import express, {Request,response,Response} from "express"
+import express, { Request, response, Response } from "express"
 import cloudinary from 'cloudinary';
-import { ObjectId } from "mongodb";
 
 export const jugueteRouter = express.Router()
 const Juguete = require("../models/Juguete");
@@ -10,21 +8,21 @@ jugueteRouter.use(express.json());
 /**
  * Peticion que muestra todos los juguetes de la lista
  */
-jugueteRouter.get("/", async (req:Request,res:Response) =>{
+jugueteRouter.get("/", async (req: Request, res: Response) => {
     let juguetes = await Juguete.find({});
-    if(juguetes){
+    if (juguetes) {
         res.json(juguetes);
-    } else{
+    } else {
         res.status(500).send("Error al listar los juguetes");
     }
 });
 
 /**
  *  Petición que solo muestra los productos con stock
- */ 
-jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
+ */
+jugueteRouter.get("/withStock", async (req: Request, res: Response) => {
     let juguetes = await Juguete.find({ stock: { $gt: 0 } })
-    if(juguetes){
+    if (juguetes) {
         res.json(juguetes);
     } else {
         res.status(500).send("Error al listar juguetes con stock");
@@ -34,14 +32,14 @@ jugueteRouter.get("/withStock", async (req:Request,res:Response) =>{
 /**
  * Peticion que muestra el juguete con el nombre pasado por URL
  */
-jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
-    try{
-        let filter  ={nombre :  req.params.nombre}
+jugueteRouter.get("/:nombre", async (req: Request, res: Response) => {
+    try {
+        let filter = { nombre: req.params.nombre }
         let juguete = await Juguete.findOne(filter);
-        if(juguete){
+        if (juguete) {
             res.json(juguete);
         }
-        else{
+        else {
             res.status(500).send("El juguete no existe")
         }
     } catch (err) {
@@ -52,131 +50,94 @@ jugueteRouter.get("/:nombre", async (req:Request,res:Response) =>{
 /**
  * Peticion que elimina el juguete con el nombre pasado por URL
  */
-jugueteRouter.delete("/:nombre", async (req:Request,res:Response) =>{
-    try{
-        let filter = {nombre: req.params.nombre}
+jugueteRouter.delete("/:nombre", async (req: Request, res: Response) => {
+    try {
+        let filter = { nombre: req.params.nombre }
         let juguete = await Juguete.findOne(filter);
-        if(juguete){
+        if (juguete) {
             await borrarImagen(juguete.imagen);
             await Juguete.deleteOne(filter);
             res.send("Eliminado juguete");
         }
-        else{
+        else {
             res.send("No existe el juguete");
         }
-    } catch(err){
+    } catch (err) {
         res.status(500).send("Se ha producido un error");
     }
 });
 
-async function borrarImagen(imagen:String){
+async function borrarImagen(imagen: String) {
     var name = imagen.split('/');
-    var name2 = name[name.length - 1 ]
+    var name2 = name[name.length - 1]
     var finalName = name2.split('.')[0];
     await cloudinary.v2.uploader.destroy(finalName);
 }
 
 /**
  * Encuentra un juguete por la id identificativa del juguete, no por la generada por la bd
- */ 
-jugueteRouter.post("/", async (req:Request,res:Response) =>{
-    try{
+ */
+jugueteRouter.post("/", async (req: Request, res: Response) => {
+    try {
         let nuevoJuguete = {
-            nombre : req.body.nombre,
+            nombre: req.body.nombre,
             descripcion: req.body.descripcion,
             precio: req.body.precio,
             imagen: req.body.imagen,
             categoria: req.body.categoria,
             stock: req.body.stock
         };
-        let juguete = await Juguete.findOne({nombre: nuevoJuguete.nombre});
-        if(juguete){
+        let juguete = await Juguete.findOne({ nombre: nuevoJuguete.nombre });
+        if (juguete) {
             res.send("Este juguete ya existe");
-        } else{
+        } else {
             var nuevaImagen = await cloudinary.v2.uploader.upload(nuevoJuguete.imagen);
             nuevoJuguete.imagen = nuevaImagen.url;
             let jugueteFinal = new Juguete(nuevoJuguete)
             var error = jugueteFinal.validateSync();
-            if(error){
+            if (error) {
                 res.status(500).send(error)
-            }else{
+            } else {
                 jugueteFinal.save();
                 res.send("Añadido nuevo juguete")
             }
-            
         }
-        
     } catch (error) {
         res.status(500).send("Error al añadir un juguete");
     }
 })
 
 
-jugueteRouter.post("/update/:nombre", async (req:Request,res:Response) =>{
-    try{
-        const filter = { nombre : req.params.nombre }
-        const update = { nombre : req.body.nombre, descripcion : req.body.descripcion, 
-                precio : req.body.precio, imagen : req.body.imagen, categoria : req.body.categoria,
-                cantidad : req.body.cantidad, stock: req.body.stock}
-        let jugueteActualizado = await Juguete.findOneAndUpdate(filter, update, { new:true});
-        if(jugueteActualizado){
+jugueteRouter.post("/update/:nombre", async (req: Request, res: Response) => {
+    try {
+        const filter = { nombre: req.params.nombre }
+        const update = {
+            nombre: req.body.nombre, descripcion: req.body.descripcion,
+            categoria: req.body.categoria, precio: req.body.precio
+        }
+        let jugueteActualizado = await Juguete.findOneAndUpdate(filter, update, { new: true });
+        if (jugueteActualizado) {
             res.send("El juguete se ha actualizado correctamente");
-        } else{
+        } else {
             res.status(500).send("Error");
         }
-    } catch (error){
+    } catch (error) {
         res.status(500).send("Error al actualizar el juguete");
     }
 });
 
-/**
- * Petición que devuelve los juguetes de una categoría específica
- */
- jugueteRouter.get("/categoria/:categoria", async (req:Request,res:Response) =>{
-    let juguetes = await Juguete.find({ categoria: req.params.categoria })
-    if(juguetes){
-        res.json(juguetes);
-    } else {
-        res.status(500).send("Error al listar juguetes con stock");
-    }
-});
-
-jugueteRouter.post("/addStock/:nombre", async (req:Request,res:Response) => {
-    try{
-        const filter = {nombre: req.params.nombre}
+jugueteRouter.post("/addStock/:nombre", async (req: Request, res: Response) => {
+    try {
+        const filter = { nombre: req.params.nombre }
         var juguete = await Juguete.findOne(filter);
-        console.log(juguete.stock)
-        console.log(req.body.stock)
-        const number:Number = juguete.stock + req.body.stock
-        const stock = {stock: number}
-        console.log(stock)
-        var jugueteActualizado = await Juguete.findOneAndUpdate(filter, stock, { new:true})
+        const number: Number = juguete.stock + req.body.stock
+        const stock = { stock: number }
+        var jugueteActualizado = await Juguete.findOneAndUpdate(filter, stock, { new: true })
         res.send("Stock del juguete añadido correctamente");
-    
-    }catch (error){
+
+    } catch (error) {
         res.status(500).send("Error al añadir stock al juguete")
     }
 });
-/*
-jugueteRouter.post("/subtock/:nombre", async (req:Request,res:Response) => {
-    try{
-        const filter = {
-            nombre: req.params.nombre,
-        }
 
-        var juguete = await JugueteRepository.findJuguete(filter); 
-
-        const stock = {stock: juguete.stock - req.body.stock}
-        
-        var jugueteActualizado = await JugueteRepository.updateJuguete(filter,stock);
-        if(jugueteActualizado){
-            res.send("Stock del juguete restado correctamente");
-        } else{
-            res.status(500).send("No se pudo restar stock al producto")
-        }
-    }catch (error){
-        res.status(500).send("Error al restar stock al juguete")
-    }
-});
-*/
 export default jugueteRouter;

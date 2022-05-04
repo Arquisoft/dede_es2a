@@ -35,9 +35,51 @@ Thus it contains the white box description of selected building blocks of level 
 ****
 
 === Sistema General de Caja Blanca
-En este apartado vamos a estudiar más a fondo la API de nuestra aplicación con un sistema de cajas negras (función de los elementos) y cajas blancas (funcionamiento interno de los elementos)
-Este sería el diagrama que indica las entidades que componen nuestra aplicación así como las interfaces que utilizan.
+En este apartado vamos a estudiar más a fondo la estructura de nuestra aplicación, tanto cada uno de sus componentes como las relaciones entre ellos.
+Este sería el diagrama que muestra todos estos elementos y como se relacionan.
 image:bloqueConstruccion.png["Hierarchy of building blocks"]
+
+==== Nivel 1
+image:Nivel1Construccion.png["Hierarchy of building blocks"]
+
+.Motivación
+Esquema más general de la aplicación. Vemos los componentes generales de la misma, siendo DeDe la aplicación en sí, con la que interactúa el usuario el cual ha de poseer un POD en caso de que quiera realizar compras en nuestro sitio web. Por otro lado, la aplicación tendra una base de datos asociada para almacenar la información que se considere necesaria.
+
+[options="header",cols="1,2"]
+|===
+|Caja|Función
+| DeDe | _Aplicación completa que ofrece servicios a sus usuarios, con una funcionalidad y división interna que describiremos a continuación._ 
+|===
+
+==== Nivel 2
+image:Nivel2Construccion.png["Hierarchy of building blocks"]
+
+.Motivación
+Aquí vamos a explicar los dos núcleos de la aplicación, Frontend y Backend.
+
+[options="header",cols="1,2"]
+|===
+|Caja|Función
+| _WebApp_ | _Interfaz gráfica de la aplicación. Es la parte con la que interactúa el usuario y que intercambia información con la restapi._
+| _Restapi_ | _Capa de acceso a datos y control de las peticiones procedentes del usuario a través del webApp._ 
+|===
+
+==== Nivel 3
+image:Nivel3Construccion.png["Hierarchy of building blocks"]
+
+.Motivación
+A continuación el último nivel en el que vamos a descomponer los dos componentes internos de la aplicación.
+
+[options="header",cols="1,2"]
+|===
+|Caja|Función
+| _Home_ | _Página principal de la aplicación._
+| _Juguetes_ | _Página que muestra los productos de la aplicación. En ella se encuentra un filtro para especificar los juguetes por categoría._ 
+| _Registrarse_ | _Botón que nos reenvía a un formulario de registro perteneciente a la API de Auth0, la cual usamos para gestionar los usuarios de nuestro sitio._
+| _Historial Pedidos_ | _Ventana que nos muestra los pedidos que ha realizado el usuario registrado en nuestra aplicación._
+| _Administrar productos_ | _Funcionalidad para los administradores de la aplicación. Muestra todos los productos existentes y las opciones de editar los mismos o incrementar su stock en el almacén_
+| _Añadir producto_ | _Otra funcionalidad para administradores. Tiene una ventana específica para realizar esta operación que consiste en rellenar un formulario con los datos del nuevo juguete que se quiere añadir._
+|===
 
 [role="arc42help"]
 ****
@@ -81,33 +123,6 @@ If you use a list of black box descriptions then you fill in a separate black bo
 Its headline is the name of the black box.
 ****
 
-=== Usuario (caja negra)
-.Intención/responsabilidad
-Usuario gestiona a los clientes que interactúan con nuestra aplicación. No se almacenará demasiada información de los mismos, ya que la intención de nuestro sitio es extraer únicamente los datos necesarios así como puede ser la dirección pero sin necesidad de disponer de ella en nuestro almacenamiento (BD), sino en el sistema de PODs. No utiliza ninguna interfaz (API) externa.
-
-
-=== Juguete (caja negra)
-.Intención/responsabilidad
-Juguete se encarga de administrar a los productos que forman parte de nuestro sitio web.
-
-.Interfaces
-[options="header",cols="1,2"]
-|===
-|Interfaz|Descripción
-| _Cloudinary_ | _Almacén que se encargará de guardar las imágenes de los juguetes en la nube, de tal manera que tengamos un almacén seguro._ 
-|===
-
-=== Pedido (caja negra)
-.Intención/responsabilidad
-Pedido sería la entidad que simula a los pedidos de nuestra aplicación, ya sea los productos que contenga, como su cantidad, los gastos de envío en función de la distancia...
-
-.Interfaces
-[options="header",cols="1,2"]
-|===
-|Interfaz|Descripción
-| _GeoCode_ | _Extrae las coordenadas de una dirección para así hacer posible el calculo de los gasto de envío respecto a las coordenadas de nuestra tienda._ 
-|===
-
 
 
 [role="arc42help"]
@@ -124,12 +139,6 @@ according the the following black box template:
 
 ****
 
-
-
-
-==== Bloque de construcción - Nivel 2
-Nosotros decidimos organizar nuestra REST API a través de modelos que definen las entidades tal y como serán en la base de datos, repositorios que serán los encargados de trabajar con la misma y por último los routes que se encargan de gestionar las peticiones.
-
 [role="arc42help"]
 ****
 Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.
@@ -139,19 +148,3 @@ Please prefer relevance over completeness. Specify important, surprising, risky,
 Leave out normal, simple, boring or standardized parts of your system
 ****
 
-=== Usuario (caja blanca)
-image:UsuarioBloqueConstruccion.png["Hierarchy of building blocks"]
-
-Modelo usuario se encarga de definir la estructura que el usuario tendrá en nuestra base de datos. Este modelo es usado por RepositorioUsuario, ya que este será necesario para acciones como pueden ser añadir a un usuario. Por último, el routeUsuario que es el que se encarga de gestionar las peticiones recibidas tendrá que comunicarse con el repositorio, ya que estas peticiones requerirán acceso a datos.
-
-=== Juguete (caja blanca)
-image:JugueteBloqueConstruccion.png["Hierarchy of building blocks"]
-
-Seguimos la misma estructura que con el usuario, se define el esquema de la entidad en el ModeloJuguete, el cual es utilizado por el RepositorioJuguete que a su vez es llamado desde el routerJuguete ya que las peticiones requieren operaciones con acceso a datos (encontrar, añadir, etc).
-En este caso el router también hace uso de la interfaz externa Cloudinary. Esta se encargará de cuando se añade un juguete, coger su imagen y guardarla en su almacén. Clodinary nos devolverá una URL propia que será el direccionamiento de la imagen que ha almacenado y que usaremos para el juguete.
-
-=== Pedido (caja blanca)
-image:PedidoBloqueConstruccion.png["Hierarchy of building blocks"]
-
-Volvemos con la misma estructura, ModeloPedido define el esquema el pedido con sus atributos y restricciones que poseerá en la base de datos. Este modelo es necesario para realizar operaciones de acceso a datos, y por tanto, será requerido desde RepositorioPedido. Finalmente este es utilizado de routerPedido ya que peticiones como encontrar, añadir pedidos, etc, necesitan realizar operaciones con la base de datos. Además de a este repositorio, routerPedido hace acceso también al RepositorioJuguete y RepositorioUsuario para por ejemplo buscar los juguetes de un pedido en concreto o encontrar los pedidos de un usuario específico.
-En este caso el router hace acceso tambíen a una API externa que es GeoCode, import de "node-geocoder". Esta internamente recibe una dirección y puede trabajar con distintos proveedores, en nuestro caso openstreetmap. Si su base de datos encuentra la dirección especificada devolverá una serie de datos sobre la misma, como puede ser las coordenadas. Esto nos hace posible posteriormente calcular manualmente el precio por km entre dos direcciones.

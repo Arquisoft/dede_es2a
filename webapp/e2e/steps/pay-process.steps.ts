@@ -7,11 +7,10 @@ let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
 defineFeature(feature, test => {
-  
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: true, slowMo: 50 });
+      : await puppeteer.launch({ headless: false, slowMo: 100 });
      // : await puppeteer.launch({ headless: true });
     page = await browser.newPage();
 
@@ -29,34 +28,52 @@ defineFeature(feature, test => {
     given('An item is in the cart',async () => {
       email = "prueba1@gmail.com";
       password = "Prueba1!";
-    //Iniciamos en sesión auth0
-    const registerButton =await page.$('button#registerButton');
-    await registerButton!.click();
-    await page.waitForNavigation();
+      //Iniciamos en sesión auth0
+      const registerButton = await page.$('button#registerButton');
+      await registerButton!.evaluate(a => {
+        if (a instanceof HTMLElement) {
+          a.click();
+        }
+      });
+      await page.waitForNavigation();
 
-    await expect(page).toClick("a");
+      await expect(page).toClick("a");
 
-    await expect(page).toFill("input[name='email']", email);
-    await expect(page).toFill("input[name='password']", password);
-    await expect(page).toClick("button[name='submit']");
-    await page.waitForNavigation();
+      await expect(page).toFill("input[name='email']", email);
+      await expect(page).toFill("input[name='password']", password);
+      await expect(page).toClick("button[name='submit']");
+      await page.waitForTimeout(10000);
     //Volvemos a la pestaña de los productos
-    await expect(page).toClick("a[href='productos']");
+    const linkProductos =await page.$("a[href='productos']");
+    await linkProductos!.evaluate(a =>  {
+      if(a instanceof HTMLElement) {
+        a.click();
+      }
+    });
     await page.waitForNavigation();
 
     //Clickamos el primer boton añadir al carrito que encontremos
       const addToCart =await page.$('button#botonAnadirAlCarrito');
-      await addToCart!.click();
-      await addToCart!.click();
+      await addToCart!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
       //Clickamos el boton que despliega el carrito
       const botonCarrito2 =await page.$('button#botonCarritoDesplegar');
-      await botonCarrito2!.click();
+      await botonCarrito2!.evaluate(a =>  {
+        if(a instanceof HTMLElement) {
+          a.click();
+        }
+      });
     });
 
     when('We press the order button', async () => {
+      await delay(2000);
        //Clickamos el boton de realizar pedido
-       await expect(page).toClick("a[href='confirmar-pedido']");
+       await expect(page).toClick("a[href='confirmar-pedido']",{timeout:6000});
        await page.waitForNavigation();
+       await page.waitForTimeout(10000);
     });
 
     then('The pay page appears', async () => {
@@ -70,3 +87,6 @@ defineFeature(feature, test => {
   })
 
 });
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}

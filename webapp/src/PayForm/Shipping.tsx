@@ -1,15 +1,11 @@
 import * as React from "react";
-import CartItem from '../CartItem/CartItem';
-import { useAuth0 } from '@auth0/auth0-react';
 import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Paper from "@mui/material/Paper";
 import LoginForm from '../componentes/loginSOLID/LoginForm';
 //Types
-import { CartItemType } from '../App';
 
 import {Juguete} from '../shared/sharedJuguete';
 import { Typography } from "@material-ui/core";
@@ -30,12 +26,20 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
         <div>
          <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}> 
          <Typography variant="h4" component="h2">Otorgue su dirección a través de su POD</Typography>
+         <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
+         <Typography variant="h6" component="h2">¿Cómo configuro mi POD?</Typography>
+         <Typography>Configure su dirección en el apartado de <b>Notes</b> de su POD</Typography>
+         </Paper>
+         <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
           <Typography >(Se seleccionará Inrupt por defecto)</Typography>
         <LoginForm/>
+        </Paper>
+        <Paper elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }}>
         <a  href="confirmar-pedido">Click aquí para ver su dirección</a>
-        <p>{localStorage.getItem("direccion")}</p>
+        <p>Su dirección de entrega: <b>{localStorage.getItem("direccion")}</b></p>
+        </Paper>
       </Paper>
-           <Card elevation = {4} sx={{ maxWidth: 600 }} >
+           <Card elevation = {4} sx={{ my: { xs: 2, md: 4 }, p: { xs: 2, md: 3 } }} >
           <CardContent>
             <Typography variant="h2" component="h2">Resumen</Typography>
               <p>Total productos(Imp. incluidos): <b>{price.toFixed(2)}€</b></p>
@@ -44,6 +48,8 @@ const Shipping:React.FC<Props> = ({cartItems, setDeliveryCost, deliveryCost, sig
               </CardContent>
               <CardActions>
               <Button
+              id="botonSiguiente"
+              data-testid="botonSiguiente"
               onClick={siguientePaso}
               variant="contained"
               className="m-1"

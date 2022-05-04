@@ -1,9 +1,6 @@
-import CartItem from '../CartItem/CartItem';
-
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 //Styles
-import { Wrapper } from '../Cart/Cart.styles';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +10,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 
 import Container from "@mui/material/Container";
 //Types
-import { CartItemType } from '../App';
+
 
 import { Juguete } from '../shared/sharedJuguete';
 
@@ -22,7 +19,6 @@ import Delivery from './Delivery';
 import Review from './Review';
 import FinalizedOrder from './FinalizedOrder';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Email } from '@material-ui/icons';
 
 
 /*
@@ -36,7 +32,6 @@ type Props = {
 type Props = {
   cartItems: Juguete[];
 };
-let condPedido = true;
 let gastosEnvio: any;
 
 //Procesar pedido
@@ -47,8 +42,9 @@ async function finalizarPedido(precioGastosDeEnvio: string, juguetes: Juguete[],
     items.reduce((ack: number, item) => ack + item.cantidad * item.precio, 0);
   var price: number;
   price = calculateTotal(juguetes);
-  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-  let response = await fetch(apiEndPoint + 'pedido', {
+  const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
+  //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
+  let response = await fetch(apiEndPoint + '/pedido', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -64,6 +60,7 @@ async function finalizarPedido(precioGastosDeEnvio: string, juguetes: Juguete[],
 // Petición para obtener los gastos de envio
 async function getGastosEnvio(): Promise<any> {
   const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
+  //const apiEndPoint = process.env.REACT_APP_API_URI || 'https://dede-es2a-restapi.herokuapp.com/'
   let response = await fetch(apiEndPoint + 'pedido/gastosEnvio/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -93,11 +90,12 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   };
 
   const siguientePasoSiPodCalcularEnvio = async () => {
-    if (localStorage.getItem("direccion") == null || localStorage.getItem("direccion") == "") {
+    if (localStorage.getItem("direccion") == null || localStorage.getItem("direccion") === "") {
       toast.warn("Por favor, inicie sesión con su POD para que podamos obtener su dirección", { position: toast.POSITION.TOP_CENTER })
     } else {
       let variable = await getGastosEnvio();
-      if (gastosEnvio == 0.00 || localStorage.getItem("direccion") == "null") {
+      console.log(variable)
+      if (gastosEnvio === 0.00 || localStorage.getItem("direccion") === "null") {
         toast.error("Su dirección no fue encontrada, lo sentimos. Para solucionar el problema " +
           "modifique la dirección de su POD", { position: toast.POSITION.TOP_CENTER })
       } else {
@@ -107,10 +105,6 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   };
   const steps = ["Envío", "Entrega", "Resumen", "¡Pedido Finalizado!"]
 
-  const pasoAnterior = () => {
-    setPasoActual((pasoPrevio) => pasoPrevio - 1);
-  };
-
   const [deliveryCost, setDeliveryCost] = React.useState<number>(Number());
   const [address, setAddress] = React.useState("");
   const [deliveryDate, setDeliveryDate] = React.useState("");
@@ -118,7 +112,6 @@ const ProcesoPago: React.FC<Props> = ({ cartItems }) => {
   const getPaso = (stepIndex: number) => {
     switch (stepIndex) {
       case 0:
-        condPedido = true;
         return (
           <Shipping
             cartItems={cartItems}

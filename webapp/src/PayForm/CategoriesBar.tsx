@@ -1,8 +1,7 @@
-import React from 'react';
-import { Link } from '@mui/material';
+//import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import './categories.css';
-import { Juguete } from '../shared/sharedJuguete';
+//import { Juguete } from '../shared/sharedJuguete';
 const NavigationWrapper = styled.nav`
  display: flex;
  width: 70%;
@@ -23,15 +22,17 @@ const Separator = styled.div`
  background-color: #d3707c;
 `
 
+
+
 const CategoriesBar = ()=> {
-    let juguetes:Juguete[];
+    //let juguetes:Juguete[];
 
     return(
         <>
     <NavigationWrapper>
         <StyledLink className="linkCategorie" href="/nostalgia" >Nostalgia</StyledLink>
         <StyledLink className="linkCategorie" href="/vehiculo">Vehiculos</StyledLink>
-        <StyledLink className="linkCategorie" href="/musical">Musicales</StyledLink>
+        <StyledLink className="linkCategorie" href="/musicales">Musicales</StyledLink>
         <StyledLink className="linkCategorie" href="/peluche">Peluche</StyledLink>
         <StyledLink className="linkCategorie" href="/bebes">Bebés</StyledLink>
         <StyledLink className="linkCategorie" href="/otros">Otros</StyledLink>

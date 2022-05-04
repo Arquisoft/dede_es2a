@@ -3,18 +3,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Pedido } from '../../shared/sharedPedido';
 import PedidoItem from './PedidoItem';
 import './pedidos.css';
-
 var correo: string;
 var numero: number;
 
 async function getPedidos(): Promise<Pedido[]> {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/'
-    //const apiEndPoint= process.env.REACT_APP_API_URI || 'https://dede-en2a-restapi.herokuapp.com'
-    let response = await fetch(apiEndPoint + "pedido/byUser/" + correo);
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000'
+    let response = await fetch(apiEndPoint + "/pedido/byUser/" + correo);
     //The objects returned by the api are directly convertible to User objects
-    let j = response.json();
-    console.log(response.json());
-    return j;
+    return response.json();
+
 }
 
 const HistorialPedidos = () => {
@@ -32,7 +29,7 @@ const HistorialPedidos = () => {
     } else {
         return (
             <div>
-                <h1>Mis Pedidos</h1>
+                <h1 className='mis-pedidos'>Mis Pedidos</h1>
                 <p>{data?.map(pedido => (
                     <div>
                         <h2 className='numeroPedido'>{++numero}. Precio total del pedido: <b>{(pedido.precioFinal).toFixed(2)}€</b></h2>
