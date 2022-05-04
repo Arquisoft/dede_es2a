@@ -40,6 +40,9 @@ Tecnología desconocida con muy poca documentación y ejemplos.
 | _Errores de conexión_ | _Puede ocurrir que la conexión a la red sea muy débil y que en consecuencia la aplicación trabaje más lento_
 |_Usabilidad_|_Operaciones como pasar validadores o probar la aplicación con usuarios reales antes de la presentación no han sido realizadas también debido al tiempo_ 
 |Despliegue|_Todavía no hemos logrado desplegar exitosamente la aplicación_ 
+|Usabilidad|_Queda por probar la aplicación con usuarios reales así como pasar validadores._
+|Script test e2e|_Nos da error al ejecutar el comando debido a que no detecta 'jest'_
+|Testing|_Problemas con el testing de carga por Auth0, con los e2e en funcion del hardware y con los unitarios debido a uso de componentes como navigate._
 |===
 
 
