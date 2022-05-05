@@ -74,22 +74,22 @@ Usuario -> DeDe: Finaliza el pedido
 ----
 actor Admin #green
 database BaseDeDatos as "Base de datos" #blue
-Admin -> Dede: Accede  a la página para iniciar sesión
-Admin -> Dede: Rellena la pagina con una cuenta de administrador
-Admin <- Dede: La aplicación redirige al usuario a la página principal
-Admin -> Dede: Accede a la sección "Añadir producto" y rellena los datos
-Dede -> BaseDeDatos: Añade el nuevo producto
-Dede <-- BaseDeDatos: Devuelve la nueva lista de productos
-Dede -> Admin: Muestra todos los productos
+Admin -> DeDe: Accede  a la página para iniciar sesión
+Admin -> DeDe: Rellena la pagina con una cuenta de administrador
+Admin <- DeDe: La aplicación redirige al usuario a la página principal
+Admin -> DeDe: Accede a la sección "Añadir producto" y rellena los datos
+DeDe -> BaseDeDatos: Añade el nuevo producto
+DeDe <-- BaseDeDatos: Devuelve la nueva lista de productos
+DeDe -> Admin: Muestra todos los productos
 ----
 
 === Filtrar productos
 [plantuml,"FiltrarProducto",png]
 ----
 actor Usuario #green
-Usuario -> Dede: Navega a la sección de juguete y presiona uno de los botones de filtrado por categorías
-Dede --> Dede: La aplicación hace un filtrado de todo el listado de los juguetes quedándose solo con la categoría especificada
-Usuario <- Dede: Muestra los juguetes encontrados con el filtro
+Usuario -> DeDe: Navega a la sección de juguete y presiona uno de los botones de filtrado por categorías
+DeDe --> DeDe: La aplicación hace un filtrado de todo el listado de los juguetes quedándose solo con la categoría especificada
+Usuario <- DeDe: Muestra los juguetes encontrados con el filtro
 ----
 
 === Iniciar sesión
@@ -98,11 +98,11 @@ Usuario <- Dede: Muestra los juguetes encontrados con el filtro
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
 database Auth0 as "Auth0" #blue
-Usuario -> Dede: Accede  a la página y presiona "Registrarse"
+Usuario -> DeDe: Accede  a la página y presiona "Registrarse"
 DeDe -> Auth0: Redirecciona al usuario a Auth0
 Usuario -> Auth0: Rellena sus datos e inicia sesión con su cuenta
 DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
-Usuario <- Dede: Se muestra la página principal de la aplicación, con unas opciones u otras en función del rol del usuario (se usa el localStorage)
+Usuario <- DeDe: Se muestra la página principal de la aplicación, con unas opciones u otras en función del rol del usuario (se usa el localStorage)
 ----
 
 === Cierre de sesión
@@ -111,12 +111,12 @@ Usuario <- Dede: Se muestra la página principal de la aplicación, con unas opc
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
 database Auth0 as "Auth0" #blue
-Usuario -> Dede: Accede  a la página y presiona "Registrarse"
+Usuario -> DeDe: Accede  a la página y presiona "Registrarse"
 DeDe -> Auth0: Redirecciona al usuario a Auth0
 Usuario -> Auth0: Rellena sus datos e inicia sesión con una cuenta de administrador
 DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
-Dede --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
-Usuario <- Dede: Se muestra la página principal de la aplicación
+DeDe --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Usuario <- DeDe: Se muestra la página principal de la aplicación
 Usuario -> DeDe: Presiona el botón de "Desconectarse"
 Usuario <- DeDe: Se muestra la página principal de la aplicación con las funciones de un usuario normal
 ----
@@ -146,12 +146,12 @@ DeDe --> BaseDeDatos: Actualiza los cambios realizados en el producto.
 ----
 actor Usuario
 database BaseDeDatos as "Base de datos" #blue
-Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
-Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
-Dede --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
-Usuario <- Dede: Se muestra la página principal de la aplicación
-Usuario -> Dede: Presiona el botón de "Historial Pedidos"
-Usuario <- Dede: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
+Usuario -> DeDe: Accede a la página y presiona el botón "Registrarse"
+Usuario -> DeDe: Rellena el formulario de registro/inicio sesión que aporta Auth0
+DeDe --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Usuario <- DeDe: Se muestra la página principal de la aplicación
+Usuario -> DeDe: Presiona el botón de "Historial Pedidos"
+Usuario <- DeDe: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
 ----
 
 
