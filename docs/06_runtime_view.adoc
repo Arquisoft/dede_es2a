@@ -79,7 +79,7 @@ Admin -> Dede: Rellena la pagina con una cuenta de administrador
 Admin <- Dede: La aplicación redirige al usuario a la página principal
 Admin -> Dede: Accede a la sección "Añadir producto" y rellena los datos
 Dede -> BaseDeDatos: Añade el nuevo producto
-BaseDeDatos -> Dede: Devuelve la nueva lista de productos
+Dede <-- BaseDeDatos: Devuelve la nueva lista de productos
 Dede -> Admin: Muestra todos los productos
 ----
 
@@ -115,10 +115,10 @@ Usuario -> Dede: Accede  a la página y presiona "Registrarse"
 DeDe -> Auth0: Redirecciona al usuario a Auth0
 Usuario -> Auth0: Rellena sus datos e inicia sesión con una cuenta de administrador
 DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Dede --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
 Usuario <- Dede: Se muestra la página principal de la aplicación
-Usuario -> Dede: Presiona el botón de "Desconectarse"
-Usuario <- Dede: Se muestra la página principal de la aplicación con las funciones de un usuario normal
+Usuario -> DeDe: Presiona el botón de "Desconectarse"
+Usuario <- DeDe: Se muestra la página principal de la aplicación con las funciones de un usuario normal
 ----
 
 
@@ -128,17 +128,17 @@ Usuario <- Dede: Se muestra la página principal de la aplicación con las funci
 actor Admin #green
 database BaseDeDatos as "Base de datos" #blue
 database Auth0 as "Auth0" #blue
-Admin -> Dede: Accede  a la página para iniciar sesión
+Admin -> DeDe: Accede  a la página para iniciar sesión
 DeDe -> Auth0: Redirecciona al usuario a Auth0
 Admin -> Auth0: Rellena sus datos e inicia sesión con una cuenta de administrador
 DeDe <-- Auth0: La aplicación redirige al usuario a la página principal
-Admin -> Dede: Accede a la sección "Administrar productos"
-Admin -> Dede: Accede a "Editar producto"
-DeDe --> Dede: Muestra el formulario de edición del producto.
-Admin -> Dede: Accede a "Editar producto"
-Admin -> Dede: Rellena los nuevos campos del producto
-Admin -> Dede: Confirma los cambios
-BaseDeDatos <-- Dede: Actualiza los cambios realizados en el producto.
+Admin -> DeDe: Accede a la sección "Administrar productos"
+Admin -> DeDe: Accede a "Editar producto"
+DeDe --> DeDe: Muestra el formulario de edición del producto.
+Admin -> DeDe: Accede a "Editar producto"
+Admin -> DeDe: Rellena los nuevos campos del producto
+Admin -> DeDe: Confirma los cambios
+DeDe --> BaseDeDatos: Actualiza los cambios realizados en el producto.
 ----
 
 === Histórico de pedidos
@@ -148,7 +148,7 @@ actor Usuario
 database BaseDeDatos as "Base de datos" #blue
 Usuario -> Dede: Accede a la página y presiona el botón "Registrarse"
 Usuario -> Dede: Rellena el formulario de registro/inicio sesión que aporta Auth0
-BaseDeDatos <-- Dede: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
+Dede --> BaseDeDatos: Se almacena el usuario recién registrado como cliente en la base de datos (si no está ya almacenado)
 Usuario <- Dede: Se muestra la página principal de la aplicación
 Usuario -> Dede: Presiona el botón de "Historial Pedidos"
 Usuario <- Dede: Se muestra una página con un registro de los pedidos del usuario iniciado en sesión
